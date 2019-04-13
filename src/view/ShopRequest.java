@@ -1,4 +1,4 @@
 package view;
 
-public class ShopRequest {
+public class ShopRequest extends Request {
 }

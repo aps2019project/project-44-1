@@ -1,4 +1,4 @@
 package view;
 
-public class BattleRequest {
+public class BattleRequest extends Request {
 }

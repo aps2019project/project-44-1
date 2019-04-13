@@ -1,4 +1,4 @@
 package view;
 
-public class AccountRequest {
+public class AccountRequest extends Request {
 }

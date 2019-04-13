@@ -1,4 +1,4 @@
 package view;
 
-public class GameRequest {
+public class GameRequest extends Request {
 }
