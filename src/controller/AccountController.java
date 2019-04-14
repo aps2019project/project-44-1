@@ -11,7 +11,7 @@ public class AccountController {
     private Account account;
     private AccountView view = new AccountView();
 
-    private void main(Account account) {
+    public void main(Account account) {
         this.account = account;
         boolean isFinish = false;
         do {
