@@ -1,4 +1,7 @@
 package models;
 
-public class Deck {
+class Deck {
+    Item item = new Item();
+    Hero hero = new Hero();
+    Placeable[] placeables = new Placeable[20];
 }

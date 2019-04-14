@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Account {
     private String username;
@@ -9,10 +10,23 @@ public class Account {
     private Deck mainDeck = new Deck();
     private ArrayList<Deck> decks = new ArrayList<>();
     private Collection collection = new Collection();
+    private Placeable[] hand = new Placeable[5];
 
+    public void initializeHand() {
+        Random r = new Random();
+        for (int i = 0; i < 5; i++) {
+            int a = r.nextInt(20);
+            hand[i] = mainDeck.placeables[a];
+            mainDeck.placeables[a] = null;
+        }
+    }
 
     public Collection getCollection() {
         return collection;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
     }
 
     public String getUsername() {
@@ -55,8 +69,4 @@ public class Account {
         this.decks = decks;
     }
 
-    public void setCollection(Collection collection) {
-        this.collection = collection;
-    }
 }
-
