@@ -9,31 +9,33 @@ import view.GameView;
 import view.Request;
 
 public class GameController extends Controller {
-    private GameView view = new GameView();
+    private String command;
+    private Game game = new Game();
 
     @Override
     public void main() {
         boolean isFinish = false;
         do {
             GameRequest request = new GameRequest();
+            command = request.getCommand();
             switch (request.getGameRequestType()) {
                 case LOGIN:
-                    login(view, request);
+                    login();
                     break;
                 case CREATE_ACCOUNT:
-                    createAccount(request.getCommand());
+                    createAccount();
                     break;
                 case LOGOUT:
                     logout();
                     break;
                 case HELP:
-                    help(view);
+                    help();
                     break;
                 case SAVE:
                     save();
                     break;
                 case SHOW_LEADERBOARD:
-                    showLeaderboard(view);
+                    showLeaderboard();
                     break;
             }
 
@@ -41,31 +43,42 @@ public class GameController extends Controller {
         while (!isFinish);
     }
 
-    private void login(GameView view, GameRequest request) {
-        AccountController accountController = new AccountController();
-        accountController.main(Game.getAccount("username"));
+    private void login() {
+        String username = command.split("\\s")[1];
+        Account account = Game.getAccount(username);
+        if (account == null) {
+            new GameView(ErrorType.INVALID_USERNAME);
+            return;
+        }
+        GameRequest gameRequest = new GameRequest();
+        gameRequest.setNewCommand();                    //TODO need print "enter your password" ?
+        if (account.getPassword().equals(gameRequest.getCommand())) {
+            AccountController accountController = new AccountController();
+            accountController.main(account);
+        } else new GameView(ErrorType.INVALID_PASSWORD);
     }
 
-    private void createAccount(String command) {
+    private void createAccount() {
         String username = command.split("\\s")[2];
         if (duplicateUsername(username)) {
-            view.print(ErrorType.DUPLICATE_USERNAME);
+            new GameView(ErrorType.DUPLICATE_USERNAME);
             return;
         }
         Account account = new Account();
         account.setUsername(username);
         GameRequest gr = new GameRequest();
         gr.setNewCommand();
-        if (gr.getCommand().matches("\\w+"))
+        if (gr.getCommand().matches("\\w+")) {
             account.setPassword(gr.getCommand());
-        else view.print(ErrorType.INVALID_PASSWORD);
+            game.addAccount(account);
+        } else new GameView(ErrorType.INVALID_PASSWORD);
     }
 
-    private void showLeaderboard(GameView view) {
+    private void showLeaderboard() {
 
     }
 
-    private void help(GameView view) {
+    private void help() {
 
     }
 
@@ -76,10 +89,6 @@ public class GameController extends Controller {
     }
 
     private boolean duplicateUsername(String username) {
-        for (Account account : Account.getAccounts()) {
-            if (account.getUsername().equals(username))
-                return true;
-        }
-        return false;
+        return Game.getAccount(username) == null;
     }
 }

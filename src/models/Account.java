@@ -5,7 +5,6 @@ import java.util.Random;
 
 public class Account {
 
-    private static ArrayList<Account> accounts = new ArrayList<>();
     private String username;
     private String password;
     private int money;
@@ -14,14 +13,6 @@ public class Account {
     private Collection collection = new Collection();
     private Placeable[] hand = new Placeable[5];
 
-
-    public static ArrayList<Account> getAccounts() {
-        return accounts;
-    }
-
-    public static void setAccounts(ArrayList<Account> accounts) {
-        Account.accounts = accounts;
-    }
 
     public void initializeHand() {
         Random r = new Random();

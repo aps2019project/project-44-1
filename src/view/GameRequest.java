@@ -20,6 +20,8 @@ public class GameRequest extends Request {
     private GameRequestType getType(String command) {
         if (command.matches("create account \\w+"))
             return GameRequestType.CREATE_ACCOUNT;
+        else if (command.matches("login \\w+"))
+            return GameRequestType.LOGIN;
         else gameView.print(ErrorType.GENERAL_ERROR);
         return null;
     }

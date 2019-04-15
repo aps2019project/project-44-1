@@ -14,6 +14,11 @@ public class Game {
     }
 
     public static Account getAccount(String userName){
+        for (Account a:accounts
+             ) {
+            if (userName.equals(a.getUsername()))
+                return a;
+        }
         return null;
     }
 
