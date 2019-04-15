@@ -9,15 +9,28 @@ public class Game {
         return accounts;
     }
 
-    public void addAccount(Account account) {
+    private void addAccount(Account account) {
         accounts.add(account);
     }
 
-    public static Account getAccount(String userName){
+    public static Account getAccount(String userName) {
         return null;
     }
 
-    public void showLeaderboard(){
+    public void showLeaderboard() {
 
+    }
+
+    public void createAccount(String username, String password) {
+        addAccount(new Account(username, password));
+    }
+
+    public boolean isUsedUsername(String username) {
+        for (Account account : accounts) {
+            if (account.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

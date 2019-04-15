@@ -1,6 +1,8 @@
 package controller;
 
+import models.ErrorType;
 import models.Game;
+import models.RequestType;
 import view.GameRequest;
 import view.GameView;
 
@@ -14,19 +16,19 @@ public class GameController extends Controller {
         do {
             GameRequest request = new GameRequest();
             request.getNewCommand();
-            if (request.getType().equals("sign in")) {
-                login(view,request);
+            if (request.getType().equals(RequestType.SIGN_UP)) {
+                login(view, request);
             }
-            if (request.getType().equals("sign up")){
-                createAccount(view,request);
+            if (request.getType().equals(RequestType.SIGN_UP)) {
+                createAccount(view, request);
             }
-            if (request.getType().equals("help")){
+            if (request.getType().equals(RequestType.HELP)) {
                 help(view);
             }
-            if (request.getType().equals("show leaderboard")){
+            if (request.getType().equals(RequestType.SHOW_LEADERBOARD)) {
                 showLeaderboard(view);
             }
-            if (request.getType().equals("exit")){
+            if (request.getType().equals(RequestType.EXIT)) {
                 isFinish = true;
             }
 
@@ -34,20 +36,25 @@ public class GameController extends Controller {
         while (!isFinish);
     }
 
-    private void login(GameView view,GameRequest request) {
+    private void login(GameView view, GameRequest request) {
         AccountController accountController = new AccountController();
         accountController.main(Game.getAccount("username"));
     }
 
-    private void createAccount(GameView view,GameRequest request) {
+    private void createAccount(GameView view, GameRequest request) {
+        if (!game.isUsedUsername(request.getUserName())){
+            game.createAccount(request.getUserName(),request.getPassword(view));
+        }else {
+            request.setError(ErrorType.USED_BEFORE_USERNAME);
+            view.printError(request.getError());
+        }
+    }
+
+    private void showLeaderboard(GameView view) {
 
     }
 
-    private void showLeaderboard(GameView view){
-
-    }
-
-    private void help(GameView view){
+    private void help(GameView view) {
 
     }
 }
