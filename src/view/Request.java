@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public abstract class Request {
     private Scanner scanner = new Scanner(System.in);
-    private String command;
+    String command;
 
-
-    public void getNewCommand() {
+    public  String getType(){return "ok";};
+    public void setNewCommand() {
         this.command = scanner.nextLine();
     }
 
-    public String getType() {
-        return "hi";
+    public String getCommand() {
+        return command;
     }
 }

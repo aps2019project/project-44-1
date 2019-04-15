@@ -15,7 +15,7 @@ public class BattleController {
         boolean isFinish = false;
         do {
             BattleRequest request = new BattleRequest();
-            request.getNewCommand();
+            request.setNewCommand();
             if (request.getType().equals("exit")) {
                 isFinish = true;
             }
@@ -142,7 +142,7 @@ public class BattleController {
 
     private void enterGraveyard(BattleView view, BattleRequest request) {
         while (true) {
-            request.getNewCommand();
+            request.setNewCommand();
             if (request.getType().equals("show card info in graveyard")) {
                 showCardInfo(view, request);
             }
@@ -161,7 +161,7 @@ public class BattleController {
 
     private void selectCollectable(BattleView view, BattleRequest request) {
         while (true) {
-            request.getNewCommand();
+            request.setNewCommand();
             if (request.getType().equals("show item info")) {
                 showCollectableInfo(view, request);
             }

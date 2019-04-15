@@ -15,7 +15,7 @@ public class CollectionController {
         boolean isFinish = false;
         do {
             CollectionRequest request = new CollectionRequest();
-            request.getNewCommand();
+            request.setNewCommand();
             if (request.getType().equals("exit")) {
                 isFinish = true;
             }

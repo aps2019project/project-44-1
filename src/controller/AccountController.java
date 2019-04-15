@@ -16,7 +16,7 @@ public class AccountController {
         boolean isFinish = false;
         do {
             AccountRequest request = new AccountRequest();
-            request.getNewCommand();
+            request.setNewCommand();
             if (request.getType().equals("enter collection")) {
                 enterCollection();
             }
@@ -68,7 +68,7 @@ public class AccountController {
     private void enterBattle(AccountView view, AccountRequest request) {
         BattleKind battleKind;
         while (true) {
-            request.getNewCommand();
+            request.setNewCommand();
             if (request.getType().equals("multi player")) {
                 battleKind = BattleKind.MULTI_PLAYER;
                 chooseSecondPlayer(view, request, battleKind);
@@ -88,7 +88,7 @@ public class AccountController {
     private void chooseGameMode(AccountView view, AccountRequest request, Account p1, Account p2, BattleKind battleKind) {
         BattleController battleController = new BattleController();
         while (true) {
-            request.getNewCommand();
+            request.setNewCommand();
             if (request.getType().equals("death match")) {
                 battleController.main(new Battle(battleKind, p1, p2));
             }
@@ -106,34 +106,28 @@ public class AccountController {
     }
 
     private void chooseSecondPlayer(AccountView view, AccountRequest request, BattleKind battleKind) {
-        while (true) {
-            request.getNewCommand();
+        do {
+            request.setNewCommand();
             if (request.getType().equals("select player 2")) {
                 Account player2 = request.getSecondPlayer();
                 chooseGameMode(view, request, this.account, player2, battleKind);
             }
-            if (request.getType().equals("exit")) {
-                break;
-            }
-        }
+        } while (!request.getType().equals("exit"));
 
 
     }
 
     private void chooseGameKind(AccountView view, AccountRequest request, BattleKind battleKind) {
         Account ai_player;
-        while (true) {
-            request.getNewCommand();
+        do {
+            request.setNewCommand();
             if (request.getType().equals("story game")) {
 
             }
             if (request.getType().equals("multi player")) {
 
             }
-            if (request.getType().equals("exit")) {
-                break;
-            }
-        }
+        } while (!request.getType().equals("exit"));
 
     }
 

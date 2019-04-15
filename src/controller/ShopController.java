@@ -14,7 +14,7 @@ public class ShopController {
         boolean isFinish = false;
         do {
             ShopRequest request = new ShopRequest();
-            request.getNewCommand();
+            request.setNewCommand();
             if (request.getType().equals("exit")) {
                 isFinish = true;
             }
