@@ -5,7 +5,7 @@ import models.ErrorType;
 public class GameRequest extends Request {
 
     private GameRequestType gameRequestType;
-    private GameView gameView = new GameView();
+    //private GameView gameView = new GameView();
 
 
     public GameRequestType getGameRequestType() {
@@ -22,7 +22,7 @@ public class GameRequest extends Request {
             return GameRequestType.CREATE_ACCOUNT;
         else if (command.matches("login \\w+"))
             return GameRequestType.LOGIN;
-        else gameView.print(ErrorType.GENERAL_ERROR);
+        //else gameView.print(ErrorType.GENERAL_ERROR);
         return null;
     }
 }

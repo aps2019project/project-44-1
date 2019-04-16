@@ -13,16 +13,15 @@ public class Game {
         accounts.add(account);
     }
 
-    public static Account getAccount(String userName){
-        for (Account a:accounts
-             ) {
+    public static Account getAccount(String userName) {
+        for (Account a : accounts) {
             if (userName.equals(a.getUsername()))
                 return a;
         }
         return null;
     }
 
-    public void showLeaderboard(){
+    public void showLeaderboard() {
 
     }
 }
