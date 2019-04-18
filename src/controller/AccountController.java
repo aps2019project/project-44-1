@@ -4,13 +4,12 @@ import models.*;
 import view.AccountRequest;
 import view.View;
 
-
 public class AccountController {
 
     private Account account;
     private View view = new View();
 
-    void main(Account account) {
+    public void main(Account account) {
         this.account = account;
         boolean isFinish = false;
         do {

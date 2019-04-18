@@ -3,12 +3,13 @@ package models;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Account {
+public class Account implements Comparable<Account> {
 
     private String username;
     private String password;
     private int money;
     private Deck mainDeck = new Deck();
+    int wins;
     private ArrayList<Deck> decks = new ArrayList<>();
     private Collection collection = new Collection();
     private Placeable[] hand = new Placeable[5];
@@ -63,6 +64,10 @@ public class Account {
         this.mainDeck = mainDeck;
     }
 
+    public int getWins() {
+        return wins;
+    }
+
     public ArrayList<Deck> getDecks() {
         return decks;
     }
@@ -71,4 +76,9 @@ public class Account {
         this.decks = decks;
     }
 
+
+    @Override
+    public int compareTo(Account account) {
+        return this.wins - account.getWins();
+    }
 }

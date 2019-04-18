@@ -5,6 +5,7 @@ import view.GameRequest;
 import view.View;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Game {
     private static ArrayList<Account> accounts = new ArrayList<>();
@@ -38,7 +39,7 @@ public class Game {
             view.printError(ErrorType.ACCOUNT_NOT_FOUND);
         else if (!account.getPassword().equals(password))
             view.printError(ErrorType.INVALID_PASSWORD);
-        new AccountController();
+        new AccountController().main(account);
     }
 
     public void createAccount(String username, String password) {
@@ -52,16 +53,11 @@ public class Game {
     }
 
     public void showLeaderboard() {
-
+        Collections.sort(accounts);
+        view.printLeaderboard(accounts);
     }
 
-    public void help() {
-    }
-
-    public void logout() {
-    }
-
-    public void save() {
+    public void help() {    //TODO here or in View class
     }
 
 }
