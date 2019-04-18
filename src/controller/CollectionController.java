@@ -2,7 +2,6 @@ package controller;
 
 import models.Collection;
 import view.CollectionRequest;
-import view.CollectionView;
 
 
 public class CollectionController {

@@ -1,11 +1,12 @@
 package models;
 
 public enum ErrorType {
-    // TODO: 14/04/2019 these are tests
+    USED_BEFORE_USERNAME("This username is taken. Try another"),
     INVALID_USERNAME("invalid username"),
     INVALID_PASSWORD("invalid password"),
     GENERAL_ERROR("invalid command"),
-    DUPLICATE_USERNAME("this username has been registered before");
+    ERROR_WITHOUT_MESSAGE("empty command"),
+    ACCOUNT_NOT_FOUND("account not found! please register first");
 
 
     private String message;

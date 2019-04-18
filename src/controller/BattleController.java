@@ -2,7 +2,6 @@ package controller;
 
 import models.Battle;
 import view.BattleRequest;
-import view.BattleView;
 
 
 public class BattleController {

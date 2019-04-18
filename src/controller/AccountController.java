@@ -2,16 +2,15 @@ package controller;
 
 import models.*;
 import view.AccountRequest;
-import view.AccountView;
+import view.View;
 
 
 public class AccountController {
-// TODO: 10/04/2019 if this class extends Controller i can not over load main why?
 
     private Account account;
-    private AccountView view = new AccountView();
+    private View view = new View();
 
-    public void main(Account account) {
+    void main(Account account) {
         this.account = account;
         boolean isFinish = false;
         do {
@@ -24,7 +23,7 @@ public class AccountController {
                 enterShop();
             }
             if (request.getType().equals("enter battle")) {
-                enterBattle(view, request);
+                enterBattle( request);
             }
             if (request.getType().equals("exit")) {
                 isFinish = true;
@@ -65,7 +64,7 @@ public class AccountController {
         shopController.main();
     }
 
-    private void enterBattle(AccountView view, AccountRequest request) {
+    private void enterBattle(AccountRequest request) {
         BattleKind battleKind;
         while (true) {
             request.setNewCommand();
@@ -85,7 +84,7 @@ public class AccountController {
 
     }
 
-    private void chooseGameMode(AccountView view, AccountRequest request, Account p1, Account p2, BattleKind battleKind) {
+    private void chooseGameMode(View view, AccountRequest request, Account p1, Account p2, BattleKind battleKind) {
         BattleController battleController = new BattleController();
         while (true) {
             request.setNewCommand();
@@ -105,7 +104,7 @@ public class AccountController {
         }
     }
 
-    private void chooseSecondPlayer(AccountView view, AccountRequest request, BattleKind battleKind) {
+    private void chooseSecondPlayer(View view, AccountRequest request, BattleKind battleKind) {
         do {
             request.setNewCommand();
             if (request.getType().equals("select player 2")) {
@@ -117,7 +116,7 @@ public class AccountController {
 
     }
 
-    private void chooseGameKind(AccountView view, AccountRequest request, BattleKind battleKind) {
+    private void chooseGameKind(View view, AccountRequest request, BattleKind battleKind) {
         Account ai_player;
         do {
             request.setNewCommand();

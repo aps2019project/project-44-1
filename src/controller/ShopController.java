@@ -2,7 +2,6 @@ package controller;
 
 import models.Shop;
 import view.ShopRequest;
-import view.ShopView;
 
 public class ShopController {
 

@@ -1,28 +1,19 @@
 package view;
 
-import models.ErrorType;
-
 public class GameRequest extends Request {
 
-    private GameRequestType gameRequestType;
-    //private GameView gameView = new GameView();
-
-
-    public GameRequestType getGameRequestType() {
-        return gameRequestType;
-    }
-
-    public GameRequest() {
-        setNewCommand();
-        this.gameRequestType = getType(command);
-    }
-
-    private GameRequestType getType(String command) {
+    @Override
+    public ViewRequestType getType() {
         if (command.matches("create account \\w+"))
-            return GameRequestType.CREATE_ACCOUNT;
+            return ViewRequestType.CREATE_ACCOUNT;
         else if (command.matches("login \\w+"))
-            return GameRequestType.LOGIN;
-        //else gameView.print(ErrorType.GENERAL_ERROR);
+            return ViewRequestType.LOGIN;
+        else if (command.equals("show leaderboard"))
+            return ViewRequestType.SHOW_LEADERBOARD;
+        else if (command.equals("help"))
+            return ViewRequestType.HELP;
+        else if (command.equals("exit"))
+            return ViewRequestType.EXIT;
         return null;
     }
 }
