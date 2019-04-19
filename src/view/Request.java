@@ -11,6 +11,7 @@ public abstract class Request {
 
     public void setNewCommand() {
         this.command = scanner.nextLine();
+        command = command.toLowerCase();
         if (command.equals("\n"))
             view.printError(ErrorType.ERROR_WITHOUT_MESSAGE);
     }       /**  empty line command error handled here*/
@@ -19,5 +20,5 @@ public abstract class Request {
         return command;
     }
 
-    public abstract ViewRequestType getType();
+    public abstract RequestType getType();
 }

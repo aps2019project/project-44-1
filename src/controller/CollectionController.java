@@ -1,111 +1,119 @@
 package controller;
 
+import models.Account;
 import models.Collection;
 import view.CollectionRequest;
+import view.View;
 
+import java.util.Collections;
 
-public class CollectionController {
+class CollectionController {
 
     private Collection collection = new Collection();
-    private CollectionView view = new CollectionView();
+    private View view = new View();
 
-    public void main(Collection collection) {
-        this.collection = collection;
+    void main(Account account) {
+        this.collection = account.getCollection();
         boolean isFinish = false;
         do {
             CollectionRequest request = new CollectionRequest();
             request.setNewCommand();
-            if (request.getType().equals("exit")) {
-                isFinish = true;
-            }
-            if (request.getType().equals("show")) {
-                showCollection(view);
-            }
-            if (request.getType().equals("search")) {
-                searchCard(view, request);
-                // TODO: 11/04/2019
-                //  i don't know it's needed to have separate function for searching cards o items?
-            }
-            if (request.getType().equals("save")) {
-                save(view);
-            }
-            if (request.getType().equals("create deck")) {
-                createDeck(view, request);
-            }
-            if (request.getType().equals("delete deck")) {
-                deleteDeck(view, request);
-            }
-            if (request.getType().equals("add card to deck")) {
-                addCardToDeck(view, request);
-            }
-            if (request.getType().equals("remove card from deck")) {
-                removeCardFromDeck(view, request);
-            }
-            if (request.getType().equals("validate deck")) {
-                validateDeck(view, request);
-            }
-            if (request.getType().equals("select main deck")) {
-                selectMainDeck(view, request);
-            }
-            if (request.getType().equals("show all decks")) {
-                showAllDecks(view, request);
-            }
-            if (request.getType().equals("show deck by deck name")) {
-                showDeck(view, request);
-            }
-            if (request.getType().equals("help")) {
-                help(view);
+            switch (request.getType()) {
+                case EXIT:
+                    isFinish = true;
+                    break;
+                case SHOW_COLLECTION_ITEMS:
+                    collection.showCollection();
+                    break;
+                case SEARCH_DECK:
+                    searchCard();
+                    // TODO: 11/04/2019
+                    //  i don't know it's needed to have separate function for searching cards o items?
+                    break;
+                case SAVE:
+                    save();
+                    break;
+                case CREATE_DECK:
+                    createDeck();
+                    break;
+                case DELETE_DECK:
+                    deleteDeck();
+                    break;
+                case ADD_CARD_TO_DECK:
+                    addCardToDeck();
+                    break;
+                case REMOVE_CARD_FROM_DECK:
+                    removeCardFromDeck();
+                    break;
+                case VALIDATE:
+                    validateDeck();
+                    break;
+                case SELECT_DECK:
+                    selectMainDeck();
+                    break;
+                case SHOW_ALL_DECKS:
+                    showAllDecks();
+                    break;
+                case SHOW_DECK:
+                    showDeck();
+                    break;
+                case HELP:
+                    help();
+                    break;
+                case LOGOUT:
+                    isFinish = true;
+                    break;
             }
 
         }
         while (!isFinish);
     }
 
-    private void showCollection(CollectionView view) {
+    private void showCollection() {
 
     }
 
-    private void searchCard(CollectionView view, CollectionRequest request) {
+    private void searchCard() {
 
     }
 
-    private void save(CollectionView view) {
+    private void save() {
 
     }
 
-    private void createDeck(CollectionView view, CollectionRequest request) {
+    private void createDeck() {
 
     }
 
-    private void deleteDeck(CollectionView view, CollectionRequest request) {
+    private void deleteDeck() {
 
     }
 
-    private void addCardToDeck(CollectionView view, CollectionRequest request) {
+    private void addCardToDeck() {
 
     }
 
-    private void removeCardFromDeck(CollectionView view, CollectionRequest request) {
+    private void removeCardFromDeck() {
 
     }
 
-    private void validateDeck(CollectionView view, CollectionRequest request) {
+    private void validateDeck() {
 
     }
 
-    private void selectMainDeck(CollectionView view, CollectionRequest request) {
+    private void selectMainDeck() {
 
     }
 
-    private void showAllDecks(CollectionView view, CollectionRequest request) {
+    private void showAllDecks() {
 
     }
 
-    private void showDeck(CollectionView view, CollectionRequest request) {
+    private void showDeck() {
 
     }
 
-    private void help(CollectionView view) {
+    private void help() {
 
     }
 }

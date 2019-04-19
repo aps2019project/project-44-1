@@ -40,6 +40,7 @@ public class Game {
         else if (!account.getPassword().equals(password))
             view.printError(ErrorType.INVALID_PASSWORD);
         new AccountController().main(account);
+        account = null;
     }
 
     public void createAccount(String username, String password) {
@@ -56,8 +57,4 @@ public class Game {
         Collections.sort(accounts);
         view.printLeaderboard(accounts);
     }
-
-    public void help() {    //TODO here or in View class
-    }
-
 }

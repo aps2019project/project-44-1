@@ -1,0 +1,24 @@
+package view;
+
+public enum RequestType {
+    LOGIN,
+    CREATE_ACCOUNT,
+    SHOW_LEADERBOARD,
+    SAVE,
+    LOGOUT,
+    HELP,
+    EXIT,
+    SHOP,
+    BATTLE,
+    COLLECTION,
+    SHOW_COLLECTION_ITEMS,
+    SEARCH_DECK,
+    CREATE_DECK,
+    DELETE_DECK,
+    ADD_CARD_TO_DECK,
+    REMOVE_CARD_FROM_DECK,
+    VALIDATE,
+    SELECT_DECK,
+    SHOW_ALL_DECKS,
+    SHOW_DECK
+}

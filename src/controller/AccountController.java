@@ -15,47 +15,39 @@ public class AccountController {
         do {
             AccountRequest request = new AccountRequest();
             request.setNewCommand();
-            if (request.getType().equals("enter collection")) {
-                enterCollection();
-            }
-            if (request.getType().equals("enter shop")) {
-                enterShop();
-            }
-            if (request.getType().equals("enter battle")) {
-                enterBattle( request);
-            }
-            if (request.getType().equals("exit")) {
-                isFinish = true;
-            }
-            if (request.getType().equals("help")) {
-                help();
-            }
-            if (request.getType().equals("log out")) {
-                logout();
-            }
-            if (request.getType().equals("save")) {
-                save();
+            switch (request.getType()) {
+                case COLLECTION:
+                    enterCollection();
+                    break;
+                case SHOP:
+                    enterShop();
+                    break;
+                case BATTLE:
+                    enterBattle(request);
+                    break;
+                case EXIT:
+                    isFinish = true;
+                    break;
+                case HELP:
+                    view.printAccountMenuHelp();
+                    break;
+                case LOGOUT:
+                    isFinish = true;
+                    break;
+                case SAVE:
+                    save();
+                    break;
             }
         }
         while (!isFinish);
     }
 
     private void save() {
-
     }
-
-    private void logout() {
-
-    }
-
-    private void help() {
-
-    }
-
 
     private void enterCollection() {
         CollectionController collectionController = new CollectionController();
-        collectionController.main(this.account.getCollection());
+        collectionController.main(account);
     }
 
     private void enterShop() {
@@ -130,5 +122,3 @@ public class AccountController {
     }
 
 }
-
-

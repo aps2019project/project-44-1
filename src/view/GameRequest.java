@@ -3,17 +3,17 @@ package view;
 public class GameRequest extends Request {
 
     @Override
-    public ViewRequestType getType() {
+    public RequestType getType() {
         if (command.matches("create account \\w+"))
-            return ViewRequestType.CREATE_ACCOUNT;
+            return RequestType.CREATE_ACCOUNT;
         else if (command.matches("login \\w+"))
-            return ViewRequestType.LOGIN;
+            return RequestType.LOGIN;
         else if (command.equals("show leaderboard"))
-            return ViewRequestType.SHOW_LEADERBOARD;
+            return RequestType.SHOW_LEADERBOARD;
         else if (command.equals("help"))
-            return ViewRequestType.HELP;
+            return RequestType.HELP;
         else if (command.equals("exit"))
-            return ViewRequestType.EXIT;
+            return RequestType.EXIT;
         return null;
     }
 }

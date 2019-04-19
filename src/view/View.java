@@ -11,8 +11,6 @@ public class View {
         if (type == null)
             return;
         System.out.println(type.getMessage());
-        Request request = new GameRequest();
-        request.setNewCommand();
     }
 
     public void printGetPasswordCommand() {
@@ -26,4 +24,16 @@ public class View {
                     accounts.get(i - 1).getWins());
         }
     }
+
+    public void printGameMenuHelp() {
+    }       //TODO
+
+    public void printAccountMenuHelp() {
+    }        //TODO
+
+    public void printColllectionMenuHelp() {
+    }       //TODO
+
+    public void printCollectionItems() {
+    }        //TODO
 }

@@ -2,7 +2,8 @@ package models;
 
 import java.util.ArrayList;
 
-public class Collection {
+public class Collection implements Comparable<Collection> {
+    private static final int maxItems = 3;
     private ArrayList<Deck> decks = new ArrayList<>();
     // TODO: 11/04/2019
     //   after defining the logic of the game about spell , items, minions and heroes decide to how to create deck
@@ -10,7 +11,7 @@ public class Collection {
 
     public void showCollection() {
 
-    }
+    }       //TODO sort the collection and print it on view
 
     public void search(String cardName) {
         // TODO: 11/04/2019
@@ -58,4 +59,8 @@ public class Collection {
     }
 
 
+    @Override
+    public int compareTo(Collection collection) {
+        return 0;
+    }       //TODO
 }

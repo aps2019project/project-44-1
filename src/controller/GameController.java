@@ -5,14 +5,13 @@ import models.Game;
 import view.GameRequest;
 import view.View;
 
-public class GameController extends Controller {
+public class GameController {
     private String command;
     private String username;
     private String password;
     private Game game = new Game();
     private View gameView = new View();
 
-    @Override
     public void main() {
         boolean isFinish = false;
         do {
@@ -29,7 +28,7 @@ public class GameController extends Controller {
                     game.createAccount(username, password);
                     break;
                 case HELP:
-                    game.help();
+                    gameView.printGameMenuHelp();
                     break;
                 case SHOW_LEADERBOARD:
                     game.showLeaderboard();
@@ -52,5 +51,4 @@ public class GameController extends Controller {
         if (!password.matches("\\w+"))          //typically passwords are like this '_'
             gameView.printError(ErrorType.INVALID_PASSWORD);
     }
-
 }
