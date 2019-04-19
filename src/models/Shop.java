@@ -23,4 +23,7 @@ public class Shop {
     public void searchInShop(String cardName) {
 
     }
+
+    public void searchInCollection(String cardName) {
+    }
 }

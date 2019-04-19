@@ -20,5 +20,10 @@ public enum RequestType {
     VALIDATE,
     SELECT_DECK,
     SHOW_ALL_DECKS,
-    SHOW_DECK
+    SHOW_DECK,
+    SEARCH_SHOP,
+    SEARCH_COLLECTION,
+    BUY,
+    SELL,
+    SHOW_SHOP_ITEMS,
 }

@@ -44,10 +44,10 @@ public class GameController {
     }
 
     private void loginOrCreate(GameRequest request, int index) {        //set username and password from input String
-        username = command.split("\\s")[index];
+        username = command.split("\\s")[index].trim();
         gameView.printGetPasswordCommand();
         request.setNewCommand();
-        password = request.getCommand();
+        password = request.getCommand().trim();
         if (!password.matches("\\w+"))          //typically passwords are like this '_'
             gameView.printError(ErrorType.INVALID_PASSWORD);
     }

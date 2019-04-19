@@ -1,7 +1,9 @@
 package view;
 
 import models.Account;
+import models.Collection;
 import models.ErrorType;
+import models.Shop;
 
 import java.util.ArrayList;
 
@@ -31,9 +33,15 @@ public class View {
     public void printAccountMenuHelp() {
     }        //TODO
 
-    public void printColllectionMenuHelp() {
+    public void printCollectionMenuHelp() {
     }       //TODO
 
     public void printCollectionItems() {
     }        //TODO
+
+    public void printShopMenuHelp() {
+    }       //TODO
+
+    public void printShopItems(Shop shop) {
+    }      //TODO
 }

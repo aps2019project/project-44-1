@@ -6,11 +6,10 @@ import view.View;
 
 public class AccountController {
 
-    private Account account;
+    private Account account = Account.getMyAccount();
     private View view = new View();
 
-    public void main(Account account) {
-        this.account = account;
+    public void main() {
         boolean isFinish = false;
         do {
             AccountRequest request = new AccountRequest();
@@ -35,19 +34,16 @@ public class AccountController {
                     isFinish = true;
                     break;
                 case SAVE:
-                    save();
+                    account.save();
                     break;
             }
         }
         while (!isFinish);
     }
 
-    private void save() {
-    }
-
     private void enterCollection() {
         CollectionController collectionController = new CollectionController();
-        collectionController.main(account);
+        collectionController.main();
     }
 
     private void enterShop() {

@@ -1,7 +1,6 @@
 package models;
 
 import controller.AccountController;
-import view.GameRequest;
 import view.View;
 
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ import java.util.Collections;
 public class Game {
     private static ArrayList<Account> accounts = new ArrayList<>();
     private View view = new View();
-    private Account account = new Account();
+    private Account account;
 
     private ArrayList<Account> getAccounts() {
         return accounts;
@@ -39,7 +38,8 @@ public class Game {
             view.printError(ErrorType.ACCOUNT_NOT_FOUND);
         else if (!account.getPassword().equals(password))
             view.printError(ErrorType.INVALID_PASSWORD);
-        new AccountController().main(account);
+        Account.setMyAccount(account);
+        new AccountController().main();
         account = null;
     }
 
@@ -51,6 +51,8 @@ public class Game {
         account.setUsername(username);
         account.setPassword(password);
         accounts.add(account);
+        Account.setMyAccount(account);
+        new AccountController().main();
     }
 
     public void showLeaderboard() {

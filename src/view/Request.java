@@ -21,4 +21,13 @@ public abstract class Request {
     }
 
     public abstract RequestType getType();
+
+    public String getName(int index) {
+        return command.split("\\s")[index].trim();
+    }
+
+    public int getID(int index) {
+        return Integer.parseInt(command.split("\\s")[index].trim());
+    }
+
 }

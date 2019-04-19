@@ -1,21 +1,20 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Collection implements Comparable<Collection> {
     private static final int maxItems = 3;
     private ArrayList<Deck> decks = new ArrayList<>();
-    // TODO: 11/04/2019
-    //   after defining the logic of the game about spell , items, minions and heroes decide to how to create deck
-    //   is it needed to have the main deck in collection ?
+    private HashMap<Integer,Card> cardHashMap = new HashMap<>();
+    private HashMap<Integer,Item> itemHashMap = new HashMap<>();
+
 
     public void showCollection() {
-
     }       //TODO sort the collection and print it on view
 
     public void search(String cardName) {
-        // TODO: 11/04/2019
-        //  is it needed to have separate function for itemName ?
+
     }
 
     public void save() {
@@ -43,7 +42,7 @@ public class Collection implements Comparable<Collection> {
     }
 
     public void selectMainDeck(String deckName) {
-        // maybe its need that function get an account
+
     }
 
     public void showAllDecks() {
@@ -53,11 +52,6 @@ public class Collection implements Comparable<Collection> {
     public void showDeck(String deckName) {
 
     }
-
-    public void help() {
-
-    }
-
 
     @Override
     public int compareTo(Collection collection) {

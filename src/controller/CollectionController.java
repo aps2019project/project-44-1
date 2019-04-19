@@ -5,15 +5,12 @@ import models.Collection;
 import view.CollectionRequest;
 import view.View;
 
-import java.util.Collections;
-
 class CollectionController {
 
-    private Collection collection = new Collection();
     private View view = new View();
 
-    void main(Account account) {
-        this.collection = account.getCollection();
+    void main() {
+        Collection collection = Account.getMyAccount().getCollection();
         boolean isFinish = false;
         do {
             CollectionRequest request = new CollectionRequest();
@@ -26,39 +23,37 @@ class CollectionController {
                     collection.showCollection();
                     break;
                 case SEARCH_DECK:
-                    searchCard();
-                    // TODO: 11/04/2019
-                    //  i don't know it's needed to have separate function for searching cards o items?
+                    collection.search(request.getName(1));
                     break;
                 case SAVE:
-                    save();
+                    collection.save();
                     break;
                 case CREATE_DECK:
-                    createDeck();
+                    collection.createDeck(request.getName(2));
                     break;
                 case DELETE_DECK:
-                    deleteDeck();
+                    collection.deleteDeck(request.getName(2));
                     break;
                 case ADD_CARD_TO_DECK:
-                    addCardToDeck();
+                    collection.addToDeck(request.getID(1), request.getName(4));
                     break;
                 case REMOVE_CARD_FROM_DECK:
-                    removeCardFromDeck();
+                    collection.removeFromDeck(request.getID(1), request.getName(4));
                     break;
                 case VALIDATE:
-                    validateDeck();
+                    collection.validateDeck(request.getName(2));
                     break;
                 case SELECT_DECK:
-                    selectMainDeck();
+                    collection.selectMainDeck(request.getName(2));
                     break;
                 case SHOW_ALL_DECKS:
-                    showAllDecks();
+                    collection.showAllDecks();
                     break;
                 case SHOW_DECK:
-                    showDeck();
+                    collection.showDeck(request.getName(2));
                     break;
                 case HELP:
-                    help();
+                    view.printCollectionMenuHelp();
                     break;
                 case LOGOUT:
                     isFinish = true;
@@ -67,53 +62,5 @@ class CollectionController {
 
         }
         while (!isFinish);
-    }
-
-    private void showCollection() {
-
-    }
-
-    private void searchCard() {
-
-    }
-
-    private void save() {
-
-    }
-
-    private void createDeck() {
-
-    }
-
-    private void deleteDeck() {
-
-    }
-
-    private void addCardToDeck() {
-
-    }
-
-    private void removeCardFromDeck() {
-
-    }
-
-    private void validateDeck() {
-
-    }
-
-    private void selectMainDeck() {
-
-    }
-
-    private void showAllDecks() {
-
-    }
-
-    private void showDeck() {
-
-    }
-
-    private void help() {
-
     }
 }

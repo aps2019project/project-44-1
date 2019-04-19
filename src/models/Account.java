@@ -9,11 +9,25 @@ public class Account implements Comparable<Account> {
     private String password;
     private int money;
     private Deck mainDeck = new Deck();
-    int wins;
+    private int wins;
     private ArrayList<Deck> decks = new ArrayList<>();
     private Collection collection = new Collection();
     private Placeable[] hand = new Placeable[5];
+    private static Account myAccount = new Account();
 
+    private Account() {
+    }
+
+    public static Account getMyAccount() {
+        return myAccount;
+    }
+
+    public void save() {
+    }
+
+    public static void setMyAccount(Account account) {
+        myAccount = account;
+    }
 
     public void initializeHand() {
         Random r = new Random();
