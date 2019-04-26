@@ -1,7 +1,6 @@
 package view;
 
 import models.Account;
-import models.Collection;
 import models.ErrorType;
 import models.Shop;
 
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 
 public class View {
 
-    public void printError(ErrorType type) {        //after each error get new command
+    public void printError(ErrorType type) {
         if (type == null)
             return;
         System.out.println(type.getMessage());
@@ -37,6 +36,7 @@ public class View {
     }       //TODO
 
     public void printCollectionItems() {
+
     }        //TODO
 
     public void printShopMenuHelp() {
@@ -44,4 +44,8 @@ public class View {
 
     public void printShopItems(Shop shop) {
     }      //TODO
+
+    public void sout(Object o){
+        System.out.println(o);
+    }
 }

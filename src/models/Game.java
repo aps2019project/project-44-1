@@ -10,6 +10,7 @@ public class Game {
     private static ArrayList<Account> accounts = new ArrayList<>();
     private View view = new View();
     private Account account;
+    private static int ID = 0;
 
     private ArrayList<Account> getAccounts() {
         return accounts;
@@ -58,5 +59,13 @@ public class Game {
     public void showLeaderboard() {
         Collections.sort(accounts);
         view.printLeaderboard(accounts);
+    }
+
+    /**
+     * a good way to create unique IDs
+     */
+    public static int IDCreator() {
+        ID++;
+        return ID;
     }
 }

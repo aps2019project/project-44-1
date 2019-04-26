@@ -26,7 +26,7 @@ class CollectionController {
                     collection.search(request.getName(1));
                     break;
                 case SAVE:
-                    collection.save();
+                    Account.getMyAccount().save();
                     break;
                 case CREATE_DECK:
                     collection.createDeck(request.getName(2));
@@ -54,9 +54,6 @@ class CollectionController {
                     break;
                 case HELP:
                     view.printCollectionMenuHelp();
-                    break;
-                case LOGOUT:
-                    isFinish = true;
                     break;
             }
 
