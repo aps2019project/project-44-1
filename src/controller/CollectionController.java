@@ -5,16 +5,18 @@ import models.Collection;
 import view.CollectionRequest;
 import view.View;
 
+
 class CollectionController {
 
+    private Collection collection;
     private View view = new View();
 
-    void main() {
-        Collection collection = Account.getMyAccount().getCollection();
+    void main(Collection collection) {
+        this.collection = collection;
         boolean isFinish = false;
         do {
             CollectionRequest request = new CollectionRequest();
-            request.setNewCommand();
+            request.getNewCommand();
             switch (request.getType()) {
                 case EXIT:
                     isFinish = true;
@@ -26,7 +28,7 @@ class CollectionController {
                     collection.search(request.getName(1));
                     break;
                 case SAVE:
-                    Account.getMyAccount().save();
+                    // TODO: 28/04/2019 save
                     break;
                 case CREATE_DECK:
                     collection.createDeck(request.getName(2));

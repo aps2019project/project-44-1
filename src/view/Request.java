@@ -8,8 +8,11 @@ public abstract class Request {
     private Scanner scanner = new Scanner(System.in);
     String command;
     private View view = new View();
+    protected static final String EXIT = "Exit";
+    protected static final String HELP = "Help";
+    protected ErrorType error = null;
 
-    public void setNewCommand() {
+    public void getNewCommand() {
         this.command = scanner.nextLine();
         command = command.toLowerCase();
         if (command.equals("\n"))
@@ -29,5 +32,14 @@ public abstract class Request {
     public int getID(int index) {
         return Integer.parseInt(command.split("\\s")[index].trim());
     }
+
+    public ErrorType getError() {
+        return error;
+    }
+
+    public void setError(ErrorType error) {
+        this.error = error;
+    }
+
 
 }

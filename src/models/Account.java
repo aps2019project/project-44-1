@@ -12,29 +12,21 @@ public class Account implements Comparable<Account> {
     private int wins;
     private ArrayList<Deck> decks = new ArrayList<>();
     private Collection collection = new Collection();
-    private Placeable[] hand = new Placeable[5];
-    private static Account myAccount = new Account();
 
-    private Account() {
+    public Account(String username, String password) {
+        this.username = username;
+        this.password = password;
+        money = 15000;
     }
 
-    public static Account getMyAccount() {
-        return myAccount;
-    }
 
     public void save() {
-    }
-
-    public static void setMyAccount(Account account) {
-        myAccount = account;
     }
 
     public void initializeHand() {
         Random r = new Random();
         for (int i = 0; i < 5; i++) {
             int a = r.nextInt(20);
-            hand[i] = mainDeck.placeables[a];
-            mainDeck.placeables[a] = null;
         }
     }
 

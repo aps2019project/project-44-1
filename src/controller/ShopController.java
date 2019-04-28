@@ -13,7 +13,7 @@ class ShopController {
         boolean isFinish = false;
         do {
             ShopRequest request = new ShopRequest();
-            request.setNewCommand();
+            request.getNewCommand();
             switch (request.getType()) {
                 case EXIT:
                     isFinish = true;

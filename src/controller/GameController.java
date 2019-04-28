@@ -1,54 +1,76 @@
 package controller;
 
+import models.Account;
 import models.ErrorType;
 import models.Game;
 import view.GameRequest;
 import view.View;
 
 public class GameController {
-    private String command;
-    private String username;
-    private String password;
     private Game game = new Game();
-    private View gameView = new View();
+    private View view = new View();
 
     public void main() {
+        GameRequest request;
         boolean isFinish = false;
         do {
-            GameRequest request = new GameRequest();
-            request.setNewCommand();
-            command = request.getCommand();
+            view.printStartMenu();/**show menu*/
+            request = new GameRequest();
+            request.getNewCommand();
             switch (request.getType()) {
                 case LOGIN:
-                    loginOrCreate(request, 1);
-                    game.login(username, password);
+                    login(request);
                     break;
                 case CREATE_ACCOUNT:
-                    loginOrCreate(request, 2);
-                    game.createAccount(username, password);
+                    createAccount(request);
                     break;
                 case HELP:
-                    gameView.printGameMenuHelp();
+                    help();
                     break;
                 case SHOW_LEADERBOARD:
-                    game.showLeaderboard();
+                    showLeaderboard();
                     break;
                 case EXIT:
                     isFinish = true;
                     break;
-                default:
-                    gameView.printError(ErrorType.GENERAL_ERROR);
             }
         }
         while (!isFinish);
     }
 
-    private void loginOrCreate(GameRequest request, int index) {        //set username and password from input String
-        username = command.split("\\s")[index].trim();
-        gameView.printGetPasswordCommand();
-        request.setNewCommand();
-        password = request.getCommand().trim();
-        if (!password.matches("\\w+"))          //typically passwords are like this '_'
-            gameView.printError(ErrorType.INVALID_PASSWORD);
+    private void login(GameRequest request) {
+        AccountController accountController = new AccountController();
+        Account account = Game.getAccount(request.getUserName());
+        String password = request.getPassword(view);
+        if (account != null) {
+            if (game.isValidPassword(account, password)) {
+                accountController.main(account);
+            } else {
+                request.setError(ErrorType.INVALID_PASSWORD);
+                view.printError(request.getError());
+            }
+        } else {
+            request.setError(ErrorType.INVALID_USERNAME);
+            view.printError(request.getError());
+        }
+
+
+    }
+
+    private void createAccount(GameRequest request) {
+        if (!game.isUsedUsername(request.getUserName())) {
+            game.createAccount(request.getUserName(), request.getPassword(view));
+        } else {
+            request.setError(ErrorType.USED_BEFORE_USERNAME);
+            view.printError(request.getError());
+        }
+    }
+
+    private void showLeaderboard() {
+
+    }
+
+    private void help() {
+
     }
 }

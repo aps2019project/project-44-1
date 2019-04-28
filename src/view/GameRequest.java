@@ -1,27 +1,43 @@
 package view;
 
-import models.ErrorType;
-
 public class GameRequest extends Request {
+    private static final String SIGN_IN = "login \\w+";
+    private static final String SIGN_UP = "create account \\w+";
+    private static final String SHOW_LEADERBOARD = "Show leaderboard";
 
     @Override
     public RequestType getType() {
-        View view = new View();
-        if (command.matches("create account \\w+"))
-            return RequestType.CREATE_ACCOUNT;
-        else if (command.matches("login \\w+"))
+        if (command.matches(SIGN_IN)) {
             return RequestType.LOGIN;
-        else {
-            switch (command) {
-                case "show leaderboard":
-                    return RequestType.SHOW_LEADERBOARD;
-                case "help":
-                    return RequestType.HELP;
-                case "exit":
-                    return RequestType.EXIT;
-                default:view.printError(ErrorType.GENERAL_ERROR);
-            }
+        } else if (command.matches(SIGN_UP)) {
+            return RequestType.CREATE_ACCOUNT;
+        } else if (command.matches(SHOW_LEADERBOARD)) {
+            return RequestType.SHOW_LEADERBOARD;
+        } else if (command.equals(HELP)) {
+            return RequestType.HELP;
+        } else if (command.equals(EXIT)) {
+            return RequestType.EXIT;
+        } else {
+            /** INVALID_COMMAND can be converted to null*/
+            return RequestType.INVALID_COMMAND;
         }
-        return null;
+    }
+
+    public String getUserName() {
+        switch (getType()) {
+            case LOGIN:
+                return command.split("\\s")[1];
+            case CREATE_ACCOUNT:
+                return command.split("\\s")[2];
+            default:
+                // TODO: 15/04/2019 what to do?
+                return null;
+        }
+    }
+
+    public String getPassword(View view) {
+        view.printGetPasswordCommand();
+        getNewCommand();
+        return command.trim();
     }
 }
