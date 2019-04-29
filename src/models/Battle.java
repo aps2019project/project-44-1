@@ -10,9 +10,11 @@ public class Battle {
         this.battleKind = battleKind;
         this.player1 = player1;
         this.player2 = player2;
+        relater(getPlayer1().getMainDeck().getHero(),getMap().getCells()[2][0]);
+        relater(getPlayer2().getMainDeck().getHero(),getMap().getCells()[2][8]);
     }
 
-    public Account getPlayer2() {
+    private Account getPlayer2() {
         return player2;
     }
 
@@ -28,7 +30,7 @@ public class Battle {
         this.battleKind = battleKind;
     }
 
-    public Account getPlayer1() {
+    private Account getPlayer1() {
         return player1;
     }
 
@@ -36,11 +38,16 @@ public class Battle {
         this.player1 = player1;
     }
 
-    public Map getMap() {
+    private Map getMap() {
         return map;
     }
 
     public void setMap(Map map) {
         this.map = map;
+    }
+
+    private void relater(Card card, Cell cell) {
+        card.setCell(cell);
+        cell.setPlaceable(card);
     }
 }

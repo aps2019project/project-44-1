@@ -1,0 +1,5 @@
+{
+    "minions":[
+        {"name":"KamandarFars","cost":300,"neededMana":2,"HP":6,"AP":4,"attackType":"ranged","attackRange":7,"specialPower":"NONE","specialPowerCoolDown":-1}
+    ]
+}

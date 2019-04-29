@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class Account implements Comparable<Account> {
 
+    private static final int startMoney = 15000;
     private String username;
     private String password;
     private int money;
@@ -14,8 +15,10 @@ public class Account implements Comparable<Account> {
     private Collection collection = new Collection();
     private Placeable[] hand = new Placeable[5];
     private static Account myAccount = new Account();
+    ArrayList<MatchHistory> histories = new ArrayList<>();
 
     private Account() {
+        setMoney(startMoney);
     }
 
     public static Account getMyAccount() {
@@ -25,7 +28,7 @@ public class Account implements Comparable<Account> {
     public void save() {
     }
 
-    public static void setMyAccount(Account account) {
+    static void setMyAccount(Account account) {
         myAccount = account;
     }
 
@@ -33,8 +36,8 @@ public class Account implements Comparable<Account> {
         Random r = new Random();
         for (int i = 0; i < 5; i++) {
             int a = r.nextInt(20);
-            hand[i] = mainDeck.placeables[a];
-            mainDeck.placeables[a] = null;
+            hand[i] = mainDeck.getPlaceables().get(a);
+            mainDeck.getPlaceables().remove(a);
         }
     }
 

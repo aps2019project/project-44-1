@@ -1,6 +1,7 @@
 package models;
 
-public class Spell extends Placeable {
+class Spell extends Placeable {
+
     void effect(Cell... cells) {
     }
 
