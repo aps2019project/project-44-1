@@ -5,6 +5,7 @@ abstract class Placeable {
     private int neededMana;
     private int id;
     String name;
+    int cost;
 
     public Cell getCell() {
         return cell;

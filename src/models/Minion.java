@@ -1,4 +1,6 @@
 package models;
 
-public class Minion extends Card{
+class Minion extends Card {
+    AttackType attackType;
+
 }
