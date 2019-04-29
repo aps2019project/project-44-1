@@ -17,8 +17,8 @@ public class Game {
     }
 
     public static Account getAccount(String userName) {
-        for (Account account:accounts){
-            if (account.getUsername().equals(userName)){
+        for (Account account : accounts) {
+            if (account.getUsername().equals(userName)) {
                 return account;
             }
         }
@@ -78,6 +78,7 @@ public class Game {
         ID++;
         return ID;
     }
+
     public boolean isUsedUsername(String username) {
         for (Account account : accounts) {
             if (account.getUsername().equals(username)) {
@@ -87,10 +88,10 @@ public class Game {
         return false;
     }
 
-    public boolean isValidPassword(Account account,String password){
-        if (account.getPassword().equals(password)){
+    public boolean isValidPassword(Account account, String password) {
+        if (account.getPassword().equals(password)) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }

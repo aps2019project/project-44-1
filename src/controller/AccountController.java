@@ -39,7 +39,9 @@ public class AccountController {
                 case SAVE:
                     save();
                     break;
-                case LOGIN:
+                default:
+
+
             }
         }
         while (!isFinish);

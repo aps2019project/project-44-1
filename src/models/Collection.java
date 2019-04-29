@@ -2,17 +2,20 @@ package models;
 
 import view.View;
 
-import java.util.HashMap;
+import java.util.*;
+import java.util.Map;
 
-public class Collection implements Comparable<Collection> {
+public class Collection implements Comparable<Placeable> {
     private static final int maxItems = 3;
     private HashMap<String, Deck> decks = new HashMap<>();
     private HashMap<Integer, Placeable> cardHashMap = new HashMap<>();
     private View view = new View();
 
 
-    public void showCollection() {
-
+    public ArrayList<Placeable> getCollectionCards() {
+        ArrayList<Placeable> tempList = new ArrayList<>(cardHashMap.values());
+        sortCollection(tempList);
+        return tempList;
     }       //TODO sort the collection and print it on view
 
     public void search(String cardName) {
@@ -81,8 +84,12 @@ public class Collection implements Comparable<Collection> {
 
     }
 
+    private void sortCollection(ArrayList<Placeable> tempList) {
+        Collections.sort(tempList);
+    }
+
     @Override
-    public int compareTo(Collection collection) {
+    public int compareTo(Placeable o) {
         return 0;
-    }       //TODO
+    }
 }

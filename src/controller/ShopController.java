@@ -36,8 +36,8 @@ class ShopController {
                 case SEARCH_SHOP:
                     shop.searchInShop(request.getName(1));
                     break;
-                case SHOW_COLLECTION_ITEMS:
-                    view.printCollectionItems();
+                case SHOW_COLLECTION_ITEMS_AND_CARDS:
+                    view.printCollectionItems(null);
                     break;
             }
 

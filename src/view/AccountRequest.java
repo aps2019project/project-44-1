@@ -1,5 +1,6 @@
 package view;
 
+import com.sun.jdi.IntegerValue;
 import models.Account;
 import models.ErrorType;
 
@@ -13,32 +14,24 @@ public class AccountRequest extends Request {
     }
 
     public RequestType getType() {
-        if (getCommand().contains("enter")) {
-            switch (getCommand().split("\\s")[1]) {
-                case "battle":
-                    return RequestType.BATTLE;
-                case "collection":
-                    return RequestType.COLLECTION;
-                case "shop":
-                    return RequestType.SHOP;
-                default:
-                    view.printError(ErrorType.GENERAL_ERROR);
-                    return null;
-            }
-        } else {
-            switch (getCommand()) {
-                case "help":
-                    return RequestType.HELP;
-                case "exit":
-                    return RequestType.EXIT;
-                case "save":
-                    return RequestType.SAVE;
-                case "logout":
-                    return RequestType.LOGOUT;
-                default:
-                    view.printError(ErrorType.GENERAL_ERROR);
-                    return null;
-            }
+        switch (command) {
+            case "enter battle":
+                return RequestType.ENTER_BATTLE;
+            case "enter collection":
+                return RequestType.ENTER_COLLECTION;
+            case "enter shop":
+                return RequestType.ENTER_SHOP;
+            case "help":
+                return RequestType.HELP;
+            case "exit":
+                return RequestType.EXIT;
+            case "save":
+                return RequestType.SAVE;
+            case "logout":
+                return RequestType.LOGOUT;
+            default:
+                view.printError(ErrorType.GENERAL_ERROR);
+                return RequestType.INVALID_COMMAND;
         }
     }
 }

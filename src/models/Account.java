@@ -5,32 +5,26 @@ import java.util.Random;
 
 public class Account implements Comparable<Account> {
 
-    private static final int startMoney = 15000;
+    private static final int START_MONEY = 15000;
     private String username;
     private String password;
-    private int money;
+    private int money = START_MONEY;
     private Deck mainDeck = new Deck();
     private int wins;
     private ArrayList<Deck> decks = new ArrayList<>();
     private Collection collection = new Collection();
     private Placeable[] hand = new Placeable[5];
-    private static Account myAccount = new Account();
     ArrayList<MatchHistory> histories = new ArrayList<>();
 
-    private Account() {
-        setMoney(startMoney);
+    public Account(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public static Account getMyAccount() {
-        return myAccount;
-    }
 
     public void save() {
     }
 
-    static void setMyAccount(Account account) {
-        myAccount = account;
-    }
 
     public void initializeHand() {
         Random r = new Random();

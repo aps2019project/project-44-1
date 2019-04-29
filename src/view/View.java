@@ -2,6 +2,7 @@ package view;
 
 import models.Account;
 import models.ErrorType;
+import models.Placeable;
 import models.Shop;
 
 import java.util.ArrayList;
@@ -31,9 +32,8 @@ public class View {
     public void printCollectionMenuHelp() {
     }       //TODO
 
-    public void printCollectionItems() {
-
-    }        //TODO
+    public void printCollectionItems(ArrayList<Placeable> list) {
+    }
 
     public void printShopMenuHelp() {
     }       //TODO

@@ -1,6 +1,5 @@
 package controller;
 
-import models.Account;
 import models.Collection;
 import view.CollectionRequest;
 import view.View;
@@ -21,8 +20,8 @@ class CollectionController {
                 case EXIT:
                     isFinish = true;
                     break;
-                case SHOW_COLLECTION_ITEMS:
-                    collection.showCollection();
+                case SHOW_COLLECTION_ITEMS_AND_CARDS:
+                    showCollectionItemsAndCards();
                     break;
                 case SEARCH_DECK:
                     collection.search(request.getName(1));
@@ -61,5 +60,9 @@ class CollectionController {
 
         }
         while (!isFinish);
+    }
+
+    public void showCollectionItemsAndCards(){
+        view.printCollectionItems(collection.getCollectionCards());
     }
 }
