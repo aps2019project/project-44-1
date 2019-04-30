@@ -4,13 +4,18 @@ import view.View;
 
 import java.util.ArrayList;
 
-class Deck {
+public class Deck {
     private static final int maxCardNumber = 20;
     private Item item = new Item();
     private Hero hero = new Hero();
     private ArrayList<Placeable> placeables = new ArrayList<>();
     private String name;
     private View view = new View();
+
+
+    public Deck(String deckName) {
+        this.name = deckName;
+    }
 
 
     public Item getItem() {
@@ -50,25 +55,75 @@ class Deck {
     }
 
     public boolean isFull() {
-        for (Placeable p : placeables) {
-            if (p == null)
-                return false;
+        if (placeables.size() == 20) {
+            return true;
+        } else {
+            return false;
         }
-        return true;
+    }
+
+    public boolean isSpecifiedHero() {
+        if (hero == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean isSpecifiedItem() {
+        if (item == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public void addToDeck(Placeable placeable) {
         if (placeable instanceof Hero) {
-            if (this.hero == null)
-                setHero((Hero) placeable);
-            else view.printError(ErrorType.HERO_SET_BEFORE);
+            setHero((Hero) placeable);
+        } else if (placeable instanceof Item) {
+            setItem((Item) placeable);
+        } else {
+            placeables.add(placeable);
         }
-        else if (placeable instanceof Item) {
-            if (this.item == null)
-                setItem((Item) placeable);
-            else view.printError(ErrorType.ITEM_SET_BEFORE);
+    }
+
+    public void removeFromDeck(Placeable placeable) {
+        if (placeable instanceof Hero) {
+            hero = null;
+        } else if (placeable instanceof Item) {
+            item = null;
+        } else {
+            placeables.remove(placeable);
         }
-        else if (placeable instanceof Minion){
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public void setView(View view) {
+        this.view = view;
+    }
+
+    public boolean contains(int cardID) {
+        if (getHero() != null && getHero().getID() == cardID) {
+            return true;
+        } else if (getItem() != null && getItem().getID() == cardID) {
+            return true;
+        } else if (isInDeckCards(cardID)) {
+            return true;
+        } else {
+            return false;
         }
+    }
+
+    private boolean isInDeckCards(int cardID) {
+        for (Placeable placeable : placeables) {
+            if (placeable.getID() == cardID) {
+                return true;
+            }
+        }
+        return false;
     }
 }

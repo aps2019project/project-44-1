@@ -1,6 +1,6 @@
 package controller;
 
-import models.Collection;
+import models.*;
 import view.CollectionRequest;
 import view.View;
 
@@ -11,10 +11,11 @@ class CollectionController {
     private View view = new View();
 
     void main(Collection collection) {
+        CollectionRequest request;
         this.collection = collection;
         boolean isFinish = false;
         do {
-            CollectionRequest request = new CollectionRequest();
+            request = new CollectionRequest();
             request.getNewCommand();
             switch (request.getType()) {
                 case EXIT:
@@ -24,22 +25,22 @@ class CollectionController {
                     showCollectionItemsAndCards();
                     break;
                 case SEARCH_DECK:
-                    collection.search(request.getName(1));
+                    search(request);
                     break;
                 case SAVE:
                     // TODO: 28/04/2019 save
                     break;
                 case CREATE_DECK:
-                    collection.createDeck(request.getName(2));
+                    createDeck(request);
                     break;
                 case DELETE_DECK:
-                    collection.deleteDeck(request.getName(2));
+                    deleteDeck(request);
                     break;
                 case ADD_CARD_TO_DECK:
-                    collection.addToDeck(request.getID(1), request.getName(4));
+                    addCardToDeck(request);
                     break;
                 case REMOVE_CARD_FROM_DECK:
-                    collection.removeFromDeck(request.getID(1), request.getName(4));
+                    removeCardFromDeck(request);
                     break;
                 case VALIDATE:
                     collection.validateDeck(request.getName(2));
@@ -62,7 +63,74 @@ class CollectionController {
         while (!isFinish);
     }
 
-    public void showCollectionItemsAndCards(){
+    public void showCollectionItemsAndCards() {
         view.printCollectionItems(collection.getCollectionCards());
+    }
+
+    public void search(CollectionRequest request) {
+        String cardName = request.getName(1);
+        if (collection.isInCollection(cardName)) {
+            view.sout(collection.getCollectionID(cardName));
+        } else {
+            view.printError(ErrorType.CARD_NOT_FOUND_IN_COLLECTION);
+        }
+    }
+
+    public void createDeck(CollectionRequest request) {
+        String deckName = request.getName(2);
+        if (!collection.isUsedDeckName(deckName)) {
+            collection.createDeck(deckName);
+        } else {
+            view.printError(ErrorType.DUPLICATE_DECK);
+        }
+    }
+
+    public void deleteDeck(CollectionRequest request) {
+        String deckName = request.getName(2);
+        if (collection.isUsedDeckName(deckName)) {
+            collection.deleteDeck(deckName);
+        } else {
+            view.printError(ErrorType.DECK_NOT_FOUND);
+        }
+    }
+
+    public void addCardToDeck(CollectionRequest request) {
+        int cardID = request.getID(1);
+        String deckName = request.getName(4);
+        Deck deck = collection.getDeck(deckName);
+
+        if (collection.getCard(cardID) == null) {
+            view.printError(ErrorType.CARD_NOT_FOUND_IN_COLLECTION);
+            return;
+        } else if (deck == null) {
+            view.printError(ErrorType.DECK_NOT_FOUND);
+            return;
+        } else if (!collection.canAddCardToDeck(deck, cardID)) {
+            view.printError(ErrorType.FULL_DECK);
+            return;
+        } else if (collection.getCard(cardID) instanceof Hero && !collection.canAddHero(deck)) {
+            view.printError(ErrorType.HERO_SET_BEFORE);
+            return;
+        } else if (collection.getCard(cardID) instanceof Item && !collection.canAddItem(deck)) {
+            view.printError(ErrorType.ITEM_SET_BEFORE);
+            return;
+        }
+        collection.addToDeck(cardID, deckName);
+    }
+
+    public void removeCardFromDeck(CollectionRequest request) {
+        int cardID = request.getID(1);
+        String deckName = request.getName(4);
+        Deck deck = collection.getDeck(deckName);
+        if (deck == null) {
+            view.printError(ErrorType.DECK_NOT_FOUND);
+            return;
+        }
+        if (!deck.contains(cardID)) {
+            view.printError(ErrorType.CARD_NOT_FOUND_IN_DECK);
+            return;
+        }
+        collection.removeFromDeck(cardID, deckName);
+
     }
 }

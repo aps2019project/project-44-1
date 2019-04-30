@@ -3,7 +3,7 @@ package models;
 public abstract class Placeable implements Comparable<Placeable> {
     private Cell cell;
     private int neededMana;
-    private int id;
+    private int ID;
     String name;
     int cost;
 
@@ -23,12 +23,12 @@ public abstract class Placeable implements Comparable<Placeable> {
         this.neededMana = neededMana;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getName() {

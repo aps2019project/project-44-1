@@ -7,13 +7,16 @@ public enum ErrorType {
     GENERAL_ERROR("invalid command!!!"),
     ERROR_WITHOUT_MESSAGE("empty command"),
     ACCOUNT_NOT_FOUND("account not found! please register first"),
-    CARD_NOT_FOUND("card not found in collection"),
+    CARD_NOT_FOUND_IN_COLLECTION("card not found in collection"),
     DUPLICATE_DECK("creation failed, this deck already exists"),
     DECK_NOT_FOUND("deck not found in collection"),
     DUPLICATE_CARD("card already exists in deck"),
     FULL_DECK("deck is full"),
     HERO_SET_BEFORE("hero has been set before"),
-    ITEM_SET_BEFORE("item has been before");
+    ITEM_SET_BEFORE("item has been before"),
+    CARD_NOT_FOUND_IN_DECK("there is no card with this ID in deck !!!");
+
+
 
 
     private String message;

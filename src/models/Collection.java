@@ -3,7 +3,6 @@ package models;
 import view.View;
 
 import java.util.*;
-import java.util.Map;
 
 public class Collection implements Comparable<Placeable> {
     private static final int maxItems = 3;
@@ -16,56 +15,68 @@ public class Collection implements Comparable<Placeable> {
         ArrayList<Placeable> tempList = new ArrayList<>(cardHashMap.values());
         sortCollection(tempList);
         return tempList;
-    }       //TODO sort the collection and print it on view
+    }
 
-    public void search(String cardName) {
+    public int getCollectionID(String cardName) {
         for (HashMap.Entry<Integer, Placeable> entry : cardHashMap.entrySet()) {
             if (entry.getValue().name.equals(cardName)) {
-                view.sout(entry.getKey());
-                return;
+                return entry.getValue().getID();
             }
         }
-        view.printError(ErrorType.CARD_NOT_FOUND);
+        return -1;
+    }
+
+    public boolean isInCollection(String cardName) {
+        for (HashMap.Entry<Integer, Placeable> entry : cardHashMap.entrySet()) {
+            if (entry.getValue().name.equals(cardName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isUsedDeckName(String deckName) {
+        return decks.get(deckName) != null;
     }
 
     public void createDeck(String deckName) {
-        if (decks.get(deckName) != null) {
-            view.printError(ErrorType.DUPLICATE_DECK);
-            return;
-        }
-        Deck deck = new Deck();
-        deck.setName(deckName);
-        decks.put(deckName, deck);
+        decks.put(deckName, new Deck(deckName));
     }
 
     public void deleteDeck(String deckName) {
-        if (decks.remove(deckName) == null)
-            view.printError(ErrorType.DECK_NOT_FOUND);
+        decks.remove(deckName);
     }
 
     public void addToDeck(int cardID, String deckName) {
-        if (cardHashMap.get(cardID) == null) {
-            view.printError(ErrorType.CARD_NOT_FOUND);
-            return;
-        } else if (decks.get(deckName) == null) {
-            view.printError(ErrorType.DECK_NOT_FOUND);
-            return;
+        getDeck(deckName).addToDeck(cardHashMap.get(cardID));
+    }
+
+    public Placeable getCard(int cardID) {
+        return cardHashMap.get(cardID);
+    }
+
+    public Deck getDeck(String deckName) {
+        return decks.get(deckName);
+    }
+
+    public boolean canAddHero(Deck deck) {
+        return !deck.isSpecifiedHero();
+    }
+
+    public boolean canAddItem(Deck deck) {
+        return !deck.isSpecifiedItem();
+    }
+
+    public boolean canAddCardToDeck(Deck deck, int cardID) {
+        if (!(getCard(cardID) instanceof Hero) && !(getCard(cardID) instanceof Item)) {
+            return !deck.isFull();
+        } else {
+            return true;
         }
-        for (Placeable p : decks.get(deckName).getPlaceables()) {
-            if (p.getId() == cardID) {
-                view.printError(ErrorType.DUPLICATE_CARD);
-                return;
-            }
-        }
-        if (decks.get(deckName).isFull()) {
-            view.printError(ErrorType.FULL_DECK);
-            return;
-        }
-        decks.get(deckName).addToDeck(cardHashMap.get(cardID));
     }
 
     public void removeFromDeck(int cardID, String deckName) {
-
+        getDeck(deckName).removeFromDeck(cardHashMap.get(cardID));
     }
 
     public void validateDeck(String deckName) {
