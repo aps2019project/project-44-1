@@ -5,6 +5,7 @@ import java.util.ArrayList;
 class Map {
     private Cell[][] cells = new Cell[5][9];
 
+
     Cell[][] getCells() {
         return cells;
     }
@@ -21,7 +22,7 @@ class Map {
             flag.setCell(c);
             flag.itemType = ItemType.FLAG;
             flag.setNeededMana(0);
-            flag.setID(flags.size()+1);
+            flag.setID(flags.size() + 1);
             flag.setCost(0);
             flags.add(flag);
         }

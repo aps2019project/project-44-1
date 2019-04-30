@@ -25,7 +25,7 @@ public class Account implements Comparable<Account> {
         this.mana = mana;
     }
 
-    public Account(String username, String password) {
+    Account(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -60,7 +60,7 @@ public class Account implements Comparable<Account> {
         this.username = username;
     }
 
-    public String getPassword() {
+    String getPassword() {
         return password;
     }
 
@@ -76,7 +76,7 @@ public class Account implements Comparable<Account> {
         this.money = money;
     }
 
-    public Deck getMainDeck() {
+    Deck getMainDeck() {
         return mainDeck;
     }
 
@@ -95,7 +95,6 @@ public class Account implements Comparable<Account> {
     public void setDecks(ArrayList<Deck> decks) {
         this.decks = decks;
     }
-
 
     @Override
     public int compareTo(Account account) {

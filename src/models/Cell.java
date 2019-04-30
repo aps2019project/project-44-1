@@ -4,9 +4,10 @@ class Cell {
     int x;
     int y;
     boolean free = true;
-    Item item;
+    private Item item;
     private CellEffect cellEffect;
     private Card card;
+
 
     private CellEffect getCellEffect() {
         return cellEffect;
@@ -14,6 +15,14 @@ class Cell {
 
     void setPlaceable(Card card) {
         this.card = card;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public Placeable getCard() {

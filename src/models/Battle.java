@@ -1,24 +1,15 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Battle {
     private BattleKind battleKind;
     private Account player1;
     private Account player2;
     private Map map = new Map();
-
-    BattleMode getBattleMode() {
-        return battleMode;
-    }
-
-    private BattleMode battleMode;
-
-    public static int getFlagNum() {
-        return flagNum;
-    }
-
     private static int flagNum;
+    private BattleMode battleMode;
 
     public Battle(BattleKind battleKind, BattleMode battleMode, Account player1, Account player2) {
         this.battleKind = battleKind;
@@ -27,6 +18,14 @@ public class Battle {
         this.player2 = player2;
         relater(getPlayer1().getMainDeck().getHero(), getMap().getCells()[2][0]);
         relater(getPlayer2().getMainDeck().getHero(), getMap().getCells()[2][8]);
+    }
+
+    private BattleMode getBattleMode() {
+        return battleMode;
+    }
+
+    public static int getFlagNum() {
+        return flagNum;
     }
 
     private Account getPlayer2() {
@@ -61,9 +60,20 @@ public class Battle {
         this.map = map;
     }
 
-    private void relater(Card card, Cell cell) {
+    private static void relater(Placeable card, Cell cell) {
         card.setCell(cell);
-        cell.setPlaceable(card);
+        if (card instanceof Card)
+            cell.setPlaceable((Card) card);
+        else cell.setItem((Item) card);
+    }
+
+    void captureFlag1Handlere() {
+        int turnCounter;
+        boolean flagCaptured;
+        Random random = new Random();
+        relater(getMap().getFlags().get(0),
+                getMap().getCells()[random.nextInt(5)][random.nextInt(9)]);
+
     }
 
     @Override
@@ -81,6 +91,5 @@ public class Battle {
             getMap().getFlags().forEach(f -> f.getCarrier());       //type3
         return "";
     }       //#TODO
-
 
 }
