@@ -16,3 +16,8 @@ public enum AttackType {
     }
 
 }
+
+enum BattleCommands{
+    GAME_INFO,
+
+}

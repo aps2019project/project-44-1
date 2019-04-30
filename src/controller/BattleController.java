@@ -2,11 +2,13 @@ package controller;
 
 import models.Battle;
 import view.BattleRequest;
+import view.View;
 
 
 public class BattleController {
 
     private Battle battle;
+    private View view = new View();
 
     public void main(Battle battle) {
         this.battle = battle;

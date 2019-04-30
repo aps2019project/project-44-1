@@ -15,6 +15,15 @@ public class Account implements Comparable<Account> {
     private Collection collection = new Collection();
     private Placeable[] hand = new Placeable[5];
     ArrayList<MatchHistory> histories = new ArrayList<>();
+    private int mana;
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
 
     public Account(String username, String password) {
         this.username = username;
