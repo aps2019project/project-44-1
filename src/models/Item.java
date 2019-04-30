@@ -1,9 +1,16 @@
 package models;
 
 public class Item extends Placeable{
-    Cell cell;
     ItemType itemType;
     Card carrier = new Card();
+
+    public Card getCarrier() {
+        return carrier;
+    }
+
+    public void setCarrier(Card carrier) {
+        this.carrier = carrier;
+    }
 
     @Override
     public String toString() {

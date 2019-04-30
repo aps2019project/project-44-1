@@ -5,37 +5,41 @@ public abstract class Placeable implements Comparable<Placeable> {
     private int neededMana;
     private int ID;
     String name;
-    int cost;
+    private int cost;
 
-    public Cell getCell() {
+     void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    Cell getCell() {
         return cell;
     }
 
-    public void setCell(Cell cell) {
+     void setCell(Cell cell) {
         this.cell = cell;
     }
 
-    public int getNeededMana() {
+     int getNeededMana() {
         return neededMana;
     }
 
-    public void setNeededMana(int neededMana) {
+    void setNeededMana(int neededMana) {
         this.neededMana = neededMana;
     }
 
-    public int getID() {
+    int getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    void setID(int ID) {
         this.ID = ID;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    void setName(String name) {
         this.name = name;
     }
 

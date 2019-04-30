@@ -1,5 +1,8 @@
 {
     "minions":[
         {"name":"KamandarFars","cost":300,"neededMana":2,"HP":6,"AP":4,"attackType":"ranged","attackRange":7,"specialPower":"NONE","specialPowerCoolDown":-1}
+    ],
+    "Descs": [
+        {"name":"HolyBuff","desc": "increase hp 3 points"}
     ]
 }

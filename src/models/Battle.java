@@ -8,7 +8,7 @@ public class Battle {
     private Account player2;
     private Map map = new Map();
 
-    public BattleMode getBattleMode() {
+    BattleMode getBattleMode() {
         return battleMode;
     }
 
@@ -71,13 +71,14 @@ public class Battle {
         int HP1 = getPlayer1().getMainDeck().getHero().getHP();     //type1
         int HP2 = getPlayer2().getMainDeck().getHero().getHP();
 
-        ArrayList<Cell> cells = new ArrayList<>();
-        for (Item f : getMap().getFlags())
-            cells.add(f.getCell());
-        if (cells.size() == 1 && getBattleMode() == BattleMode.CAPTURE_FLAG_1)
-            ;       //type2
+        ArrayList<Cell> cells = new ArrayList<>();      //^_^
+        Card card;
+        getMap().getFlags().forEach(f -> cells.add(f.getCell()));
+        if (cells.size() == 1 && getBattleMode() == BattleMode.CAPTURE_FLAG_1) {
+            card = getMap().getFlags().get(0).getCarrier();       //type2
+        }
         if (cells.size() > 1 && getBattleMode() == BattleMode.CAPTURE_FLAG_2)
-            ;       //type3
+            getMap().getFlags().forEach(f -> f.getCarrier());       //type3
         return "";
     }       //#TODO
 

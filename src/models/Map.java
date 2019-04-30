@@ -11,16 +11,20 @@ class Map {
 
     private ArrayList<Item> flags = new ArrayList<>();
 
-    public ArrayList<Item> getFlags() {
+    ArrayList<Item> getFlags() {
         return flags;
     }
 
-    Map(Cell... flagCell) {
+    void setFlags(Cell... flagCell) {
         for (Cell c : flagCell) {
             Item flag = new Item();
             flag.setCell(c);
             flag.itemType = ItemType.FLAG;
+            flag.setNeededMana(0);
+            flag.setID(flags.size()+1);
+            flag.setCost(0);
             flags.add(flag);
         }
     }
+
 }
