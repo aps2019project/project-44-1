@@ -63,19 +63,11 @@ public class Deck {
     }
 
     public boolean isSpecifiedHero() {
-        if (hero == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return hero != null;
     }
 
     public boolean isSpecifiedItem() {
-        if (item == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return item != null;
     }
 
     public void addToDeck(Placeable placeable) {
@@ -111,19 +103,19 @@ public class Deck {
             return true;
         } else if (getItem() != null && getItem().getID() == cardID) {
             return true;
-        } else if (isInDeckCards(cardID)) {
-            return true;
-        } else {
-            return false;
-        }
+        } else return isInDeckCards(cardID);
     }
 
-    private boolean isInDeckCards(int cardID) {
+    public boolean isInDeckCards(int cardID) {
         for (Placeable placeable : placeables) {
             if (placeable.getID() == cardID) {
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean isValidated() {
+        return this.isFull() && this.isSpecifiedHero();
     }
 }

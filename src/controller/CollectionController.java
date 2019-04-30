@@ -4,7 +4,6 @@ import models.*;
 import view.CollectionRequest;
 import view.View;
 
-
 class CollectionController {
 
     private Collection collection;
@@ -43,10 +42,10 @@ class CollectionController {
                     removeCardFromDeck(request);
                     break;
                 case VALIDATE:
-                    collection.validateDeck(request.getName(2));
+                    validateDeck(request);
                     break;
                 case SELECT_DECK:
-                    collection.selectMainDeck(request.getName(2));
+                    selectMainDeck(request);
                     break;
                 case SHOW_ALL_DECKS:
                     collection.showAllDecks();
@@ -121,16 +120,38 @@ class CollectionController {
     public void removeCardFromDeck(CollectionRequest request) {
         int cardID = request.getID(1);
         String deckName = request.getName(4);
-        Deck deck = collection.getDeck(deckName);
-        if (deck == null) {
-            view.printError(ErrorType.DECK_NOT_FOUND);
-            return;
-        }
-        if (!deck.contains(cardID)) {
+        if (checkDeck(deckName)) return;
+        if (!collection.getDeck(deckName).contains(cardID)) {
             view.printError(ErrorType.CARD_NOT_FOUND_IN_DECK);
             return;
         }
         collection.removeFromDeck(cardID, deckName);
+    }
 
+    public void validateDeck(CollectionRequest request) {
+        String deckName = request.getName(2);
+        if (checkDeck(deckName)) return;
+        if (collection.validateDeck(deckName)) {
+            view.printValidatedMessage();
+        } else {
+            view.printNotValidate();
+        }
+    }
+
+
+    public void selectMainDeck(CollectionRequest request) {
+        String deckName = request.getName(2);
+        if (checkDeck(deckName)) return;
+        collection.selectMainDeck(deckName);
+
+    }
+
+    private boolean checkDeck(String deckName) {
+        Deck deck = collection.getDeck(deckName);
+        if (deck == null) {
+            view.printError(ErrorType.DECK_NOT_FOUND);
+            return true;
+        }
+        return false;
     }
 }

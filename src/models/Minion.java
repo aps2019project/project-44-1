@@ -1,9 +1,9 @@
 package models;
 
-class Minion extends Card {
+public class Minion extends Card {
 
-    public Minion(String name,int neededMana,int HP,int AP,AttackType attackType,
-                  int range, Spell specialPower, SpecialPowerActivation specialPowerActivation){
+    public Minion(String name, int neededMana, int HP, int AP, AttackType attackType,
+                  int range, Spell specialPower, SpecialPowerActivation specialPowerActivation) {
         this.setName(name);
         this.setNeededMana(neededMana);
         this.setHP(HP);

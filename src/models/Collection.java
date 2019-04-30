@@ -9,6 +9,7 @@ public class Collection implements Comparable<Placeable> {
     private HashMap<String, Deck> decks = new HashMap<>();
     private HashMap<Integer, Placeable> cardHashMap = new HashMap<>();
     private View view = new View();
+    private Deck mainDeck;
 
 
     public ArrayList<Placeable> getCollectionCards() {
@@ -79,12 +80,12 @@ public class Collection implements Comparable<Placeable> {
         getDeck(deckName).removeFromDeck(cardHashMap.get(cardID));
     }
 
-    public void validateDeck(String deckName) {
-
+    public boolean validateDeck(String deckName) {
+        return getDeck(deckName).isValidated();
     }
 
     public void selectMainDeck(String deckName) {
-
+        setMainDeck(this.getDeck(deckName));
     }
 
     public void showAllDecks() {
@@ -102,5 +103,13 @@ public class Collection implements Comparable<Placeable> {
     @Override
     public int compareTo(Placeable o) {
         return 0;
+    }
+
+    public Deck getMainDeck() {
+        return mainDeck;
+    }
+
+    public void setMainDeck(Deck mainDeck) {
+        this.mainDeck = mainDeck;
     }
 }

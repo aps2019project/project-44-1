@@ -58,7 +58,7 @@ public class AccountController {
         while (true) {
             request.getNewCommand();
             if (request.getType().equals("death match")) {
-                battleController.main(new Battle(battleKind, p1, p2));
+//                battleController.main(new Battle(battleKind, p1, p2));
             }
             if (request.getType().equals("capture flag 1")) {
                 battleController.main(new CaptureFlag1(battleKind, p1, p2));

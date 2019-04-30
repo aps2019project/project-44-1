@@ -9,13 +9,13 @@ public class Account implements Comparable<Account> {
     private String username;
     private String password;
     private int money = START_MONEY;
-    private Deck mainDeck = new Deck();
     private int wins;
     private ArrayList<Deck> decks = new ArrayList<>();
     private Collection collection = new Collection();
     private Placeable[] hand = new Placeable[5];
     ArrayList<MatchHistory> histories = new ArrayList<>();
     private int mana;
+    private Deck mainDeck = collection.getMainDeck();
 
     public int getMana() {
         return mana;
@@ -101,4 +101,6 @@ public class Account implements Comparable<Account> {
     public int compareTo(Account account) {
         return this.wins - account.getWins();
     }
+
+
 }

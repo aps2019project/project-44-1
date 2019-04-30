@@ -108,4 +108,12 @@ public class View {
             }
         }
     }
+
+    public void printValidatedMessage() {
+        System.out.println("deck is validate");
+    }
+
+    public void printNotValidate() {
+        System.out.println("deck is not validated");
+    }
 }
