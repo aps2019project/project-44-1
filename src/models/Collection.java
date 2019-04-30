@@ -88,9 +88,6 @@ public class Collection implements Comparable<Placeable> {
         setMainDeck(this.getDeck(deckName));
     }
 
-    public void showAllDecks() {
-
-    }
 
     public void showDeck(String deckName) {
 
@@ -111,5 +108,37 @@ public class Collection implements Comparable<Placeable> {
 
     public void setMainDeck(Deck mainDeck) {
         this.mainDeck = mainDeck;
+    }
+
+    public ArrayList<Deck> getSortedDecks() {
+        Deck temp = null;
+        ArrayList<Deck> sortedDecks = new ArrayList<>();
+        for (Deck deck : decks.values()) {
+            if (mainDeck == deck) {
+                temp = deck;
+                continue;
+            }
+            sortedDecks.add(deck);
+        }
+        if (temp != null)
+            sortedDecks.add(0, temp);
+        return sortedDecks;
+    }
+
+    @Override
+    public String toString() {
+        return "1.show\n" +
+                "2.search [card name | item name]\n" +
+                "3.create deck [deck name]\n" +
+                "4.delete deck [deck nAme]\n" +
+                "5.add [card id | card id | hero id] to deck [deck name]\n" +
+                "6.remove [card id | card id| hero id] from deck [deck name]\n" +
+                "7.validate deck [deck name]\n" +
+                "8.select deck [deck name]\n" +
+                "9.show all decks\n" +
+                "10.show deck [deck name]\n" +
+                "11.save\n" +
+                "12.help\n" +
+                "13.exit";
     }
 }

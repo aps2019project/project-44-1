@@ -118,4 +118,13 @@ public class Deck {
     public boolean isValidated() {
         return this.isFull() && this.isSpecifiedHero();
     }
+
+    public ArrayList<Placeable> getDeckCards(){
+        ArrayList<Placeable> cards = new ArrayList<>();
+        cards.add(hero);
+        cards.add(item);
+        cards.addAll(placeables);
+        return cards;
+    }
+
 }

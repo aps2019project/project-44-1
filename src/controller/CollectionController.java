@@ -48,13 +48,13 @@ class CollectionController {
                     selectMainDeck(request);
                     break;
                 case SHOW_ALL_DECKS:
-                    collection.showAllDecks();
+                    showAllDecks();
                     break;
                 case SHOW_DECK:
-                    collection.showDeck(request.getName(2));
+                    showDeck(request);
                     break;
                 case HELP:
-                    view.printCollectionMenuHelp();
+                    help();
                     break;
             }
 
@@ -153,5 +153,18 @@ class CollectionController {
             return true;
         }
         return false;
+    }
+
+    public void showAllDecks() {
+        view.printDecksInFormat(collection.getSortedDecks());
+    }
+
+    public void showDeck(CollectionRequest request) {
+        String deckName = request.getName(2);
+        view.printCardsInFormat(collection.getDeck(deckName).getDeckCards());
+    }
+
+    public void help() {
+        view.printCollectionMenuHelp(collection.toString());
     }
 }

@@ -26,11 +26,12 @@ public class View {
     public void printAccountMenuHelp() {
     }        //TODO
 
-    public void printCollectionMenuHelp() {
-    }       //TODO
+    public void printCollectionMenuHelp(String string) {
+        System.out.println(string);
+    }
 
     public void printCollectionItems(ArrayList<Placeable> list) {
-        printCardsInForamat(list);
+        printCardsInFormat(list);
     }
 
     public void printShopMenuHelp() {
@@ -67,12 +68,10 @@ public class View {
                 "5.exit");
     }
 
-    private void printCardsInForamat(ArrayList<Placeable> cards) {
+    public void printCardsInFormat(ArrayList<Placeable> cards) {
         printHeroesInFormat(cards);
         printItemsInFormat(cards);
         printSpellsAndMinionsInFormat(cards);
-
-
     }
 
     private void printHeroesInFormat(ArrayList<Placeable> cards) {
@@ -115,5 +114,13 @@ public class View {
 
     public void printNotValidate() {
         System.out.println("deck is not validated");
+    }
+
+    public void printDecksInFormat(ArrayList<Deck> decks) {
+        int index = 1;
+        for (Deck deck : decks) {
+            System.out.println(index + " : " + deck.getName() + " :");
+            printCardsInFormat(deck.getDeckCards());
+        }
     }
 }
