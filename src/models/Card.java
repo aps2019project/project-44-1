@@ -1,24 +1,40 @@
 package models;
 
-public abstract class Card extends Placeable {
-    int AP;
+public class Card extends Placeable implements Fight {
+    private int AP;
     int HP;
-    Spell specialPower;
+    private Spell specialPower;
 
+    public AttackType getAttackType() {
+        return attackType;
+    }
 
-    public int getHP() {
+    private AttackType attackType;
+    private int range;
+    private SpecialPowerActivation specialPowerActivation;
+
+    void setSpecialPowerActivation(SpecialPowerActivation specialPowerActivation) {
+        this.specialPowerActivation = specialPowerActivation;
+    }
+
+    void setRange(int range) {
+        this.range = range;
+    }
+
+    int getHP() {
         return HP;
     }
 
-    public void setHP(int HP) {
+
+    void setHP(int HP) {
         this.HP = HP;
     }
 
-    public int getAP() {
+    int getAP() {
         return AP;
     }
 
-    public void setAP(int AP) {
+    void setAP(int AP) {
         this.AP = AP;
     }
 
@@ -26,7 +42,12 @@ public abstract class Card extends Placeable {
         return specialPower;
     }
 
-    public void setSpecialPower(Spell specialPower) {
+    void setSpecialPower(Spell specialPower) {
         this.specialPower = specialPower;
     }
+
+    public void setAttackType(AttackType attackType) {
+        this.attackType = attackType;
+    }
+
 }

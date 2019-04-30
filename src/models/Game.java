@@ -56,11 +56,7 @@ public class Game {
     }
 
     public boolean isValidPassword(Account account, String password) {
-        if (account.getPassword().equals(password)) {
-            return true;
-        } else {
-            return false;
-        }
+        return account.getPassword().equals(password);
     }
 
 
