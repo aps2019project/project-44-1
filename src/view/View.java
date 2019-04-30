@@ -1,9 +1,6 @@
 package view;
 
-import models.Account;
-import models.ErrorType;
-import models.Placeable;
-import models.Shop;
+import models.*;
 
 import java.util.ArrayList;
 
@@ -33,6 +30,7 @@ public class View {
     }       //TODO
 
     public void printCollectionItems(ArrayList<Placeable> list) {
+        printCardsInForamat(list);
     }
 
     public void printShopMenuHelp() {
@@ -68,4 +66,47 @@ public class View {
                 "4.help\n" +
                 "5.exit");
     }
+
+    private void printCardsInForamat(ArrayList<Placeable> cards) {
+        printHeroesInFormat(cards);
+        printItemsInFormat(cards);
+        printSpellsAndMinionsInFormat(cards);
+
+
+    }
+
+    private void printHeroesInFormat(ArrayList<Placeable> cards) {
+        System.out.println("Heroes :");
+        int index = 1;
+        for (Placeable card : cards) {
+            if (card instanceof Hero) {
+                System.out.println("        " + index + card.toString());
+                index++;
+            }
+        }
+    }
+
+    private void printItemsInFormat(ArrayList<Placeable> cards) {
+        System.out.println("Items :");
+        int index = 1;
+        for (Placeable card : cards) {
+            if (card instanceof Item) {
+                System.out.println("        " + index + card.toString());
+                index++;
+            }
+        }
+
+    }
+
+    private void printSpellsAndMinionsInFormat(ArrayList<Placeable> cards) {
+        System.out.println("Cards :");
+        int index = 1;
+        for (Placeable card : cards) {
+            if (card instanceof Minion || card instanceof Spell) {
+                System.out.println("        " + index + card.toString());
+                index++;
+            }
+        }
+    }
+
 }

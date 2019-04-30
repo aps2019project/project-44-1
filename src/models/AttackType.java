@@ -3,5 +3,16 @@ package models;
 public enum AttackType {
     MELEE,
     RANGED,
-    HYBRID
+    HYBRID;
+
+    public String getNameType() {
+        if (this == MELEE) {
+            return "Melee";
+        } else if (this == HYBRID) {
+            return "Hybrid";
+        } else {
+            return "Ranged";
+        }
+    }
+
 }

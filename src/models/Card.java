@@ -14,4 +14,19 @@ public abstract class Card extends Placeable {
         this.HP = HP;
     }
 
+    public int getAP() {
+        return AP;
+    }
+
+    public void setAP(int AP) {
+        this.AP = AP;
+    }
+
+    public Spell getSpecialPower() {
+        return specialPower;
+    }
+
+    public void setSpecialPower(Spell specialPower) {
+        this.specialPower = specialPower;
+    }
 }
