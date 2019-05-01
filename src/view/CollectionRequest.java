@@ -8,7 +8,7 @@ public class CollectionRequest extends Request {
     @Override
     public RequestType getType() {
         if (command.matches("search \\w+"))
-            return RequestType.SEARCH_DECK;
+            return RequestType.SEARCH_CARD_IN_COLLECTION;
         else if (command.matches("create deck \\w+"))
             return RequestType.CREATE_DECK;
         else if (command.matches("delete deck \\w+"))
@@ -38,4 +38,47 @@ public class CollectionRequest extends Request {
             return RequestType.INVALID_COMMAND;
         }
     }
+
+    public String getDeckName() {
+        switch (getType()) {
+            case CREATE_DECK:
+                return command.split(" ")[2];
+            case DELETE_DECK:
+                return command.split(" ")[2];
+            case ADD_CARD_TO_DECK:
+                return command.split(" ")[4];
+            case REMOVE_CARD_FROM_DECK:
+                return command.split(" ")[4];
+            case SELECT_DECK:
+                return command.split(" ")[2];
+            case SHOW_DECK:
+                return command.split(" ")[2];
+            case VALIDATE:
+                return command.split(" ")[2];
+            default:
+                return null;
+            /** return null when ... */
+        }
+    }
+
+    public int getCardID() {
+        switch (getType()) {
+            case ADD_CARD_TO_DECK:
+                return Integer.parseInt(command.split(" ")[1]);
+            case REMOVE_CARD_FROM_DECK:
+                return Integer.parseInt(command.split(" ")[1]);
+            default:
+                return -1;
+            /** return -1 when ... */
+        }
+    }
+
+    public String getCardName() {
+        if (getType() == RequestType.SEARCH_COLLECTION) {
+            return command.split(" ")[1];
+        }
+        return null;
+        /** return null when ... */
+    }
+
 }

@@ -67,10 +67,10 @@ public class GameController {
     }
 
     private void showLeaderboard() {
-
+        view.printLeaderboard(game.getSortedAccounts());
     }
 
     private void help() {
-
+        view.printGameMenuHelp(game.toString());
     }
 }

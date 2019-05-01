@@ -3,7 +3,7 @@ package view;
 public class GameRequest extends Request {
     private static final String SIGN_IN = "login \\w+";
     private static final String SIGN_UP = "create account \\w+";
-    private static final String SHOW_LEADERBOARD = "Show leaderboard";
+    private static final String SHOW_LEADERBOARD = "show leaderboard";
 
     @Override
     public RequestType getType() {

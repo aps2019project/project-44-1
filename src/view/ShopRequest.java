@@ -22,13 +22,36 @@ public class ShopRequest extends Request {
                 case "exit":
                     return RequestType.EXIT;
                 case "show":
-                    return RequestType.SHOW_SHOP_ITEMS;
+                    return RequestType.SHOW_SHOP_CARDS;
                 default:
                     view.printError(ErrorType.GENERAL_ERROR);
             }
 
         }
         return null;
+    }
+
+    public String getCardName() {
+        switch (getType()) {
+            case SEARCH_CARD_IN_COLLECTION:
+                return command.split(" ")[2];
+            case SEARCH_SHOP:
+                return command.split(" ")[1];
+            case BUY:
+                return command.split(" ")[1];
+            default:
+                return null;
+            /** return null when ... */
+        }
+    }
+
+    public int getCardID() {
+        if (getType() == RequestType.SELL) {
+            return Integer.parseInt(command.split(" ")[1]);
+        }
+        return -1;
+        /** return -1 when ... */
+
     }
 
 }

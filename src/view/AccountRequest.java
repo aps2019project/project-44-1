@@ -1,6 +1,5 @@
 package view;
 
-import com.sun.jdi.IntegerValue;
 import models.Account;
 import models.ErrorType;
 

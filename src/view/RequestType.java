@@ -12,7 +12,7 @@ public enum RequestType {
     BATTLE,
     COLLECTION,
     SHOW_COLLECTION_ITEMS_AND_CARDS,
-    SEARCH_DECK,
+    SEARCH_CARD_IN_COLLECTION,
     CREATE_DECK,
     DELETE_DECK,
     ADD_CARD_TO_DECK,
@@ -25,7 +25,7 @@ public enum RequestType {
     SEARCH_COLLECTION,
     BUY,
     SELL,
-    SHOW_SHOP_ITEMS,
+    SHOW_SHOP_CARDS,
     INVALID_COMMAND,
     ENTER_COLLECTION,
     ENTER_SHOP,
@@ -37,7 +37,6 @@ public enum RequestType {
     CAPTURE_FLAG2,
     SELECT_SECOND_PLAYER,
     STORY_GAME,
-
 
 
 }

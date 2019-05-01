@@ -25,14 +25,6 @@ public abstract class Request {
 
     public abstract RequestType getType();
 
-    public String getName(int index) {
-        return command.split("\\s")[index].trim();
-    }
-
-    public int getID(int index) {
-        return Integer.parseInt(command.split(" ")[index].trim());
-    }
-
     public ErrorType getError() {
         return error;
     }

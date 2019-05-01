@@ -101,5 +101,12 @@ public class Account implements Comparable<Account> {
         return this.wins - account.getWins();
     }
 
-
+    @Override
+    public String toString() {
+        return "1.enter collection\n" +
+                "2.enter shop\n" +
+                "3.enter battle\n" +
+                "4.help\n" +
+                "5.exit";
+    }
 }

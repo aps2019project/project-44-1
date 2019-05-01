@@ -11,6 +11,7 @@ public class Game {
     private Account account;
     private static int ID = 0;
 
+
     private ArrayList<Account> getAccounts() {
         return accounts;
     }
@@ -33,9 +34,9 @@ public class Game {
     }
 
 
-    public void showLeaderboard() {
+    public ArrayList<Account> getSortedAccounts() {
         Collections.sort(accounts);
-        view.printLeaderboard(accounts);
+        return accounts;
     }
 
     /**
@@ -59,5 +60,12 @@ public class Game {
         return account.getPassword().equals(password);
     }
 
-
+    @Override
+    public String toString() {
+        return "1.login\n" +
+                "2.creat account\n" +
+                "3.show leaderboard\n" +
+                "4.help\n" +
+                "5.exit";
+    }
 }

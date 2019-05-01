@@ -20,11 +20,14 @@ public class View {
         }
     }
 
-    public void printGameMenuHelp() {
-    }       //TODO
+    public void printGameMenuHelp(String string) {
+        System.out.println(string);
+    }
 
-    public void printAccountMenuHelp() {
-    }        //TODO
+    public void printAccountMenuHelp(String string) {
+        System.out.println(string);
+
+    }
 
     public void printCollectionMenuHelp(String string) {
         System.out.println(string);
@@ -34,11 +37,13 @@ public class View {
         printCardsInFormat(list);
     }
 
-    public void printShopMenuHelp() {
-    }       //TODO
+    public void printShopMenuHelp(String string) {
+        sout(string);
+    }
 
-    public void printShopItems(Shop shop) {
-    }      //TODO
+    public void printShopCards(ArrayList<Placeable> cards) {
+        printCardsInFormat(cards);
+    }
 
     public void sout(Object o) {
         System.out.println(o);

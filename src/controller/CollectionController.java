@@ -23,7 +23,7 @@ class CollectionController {
                 case SHOW_COLLECTION_ITEMS_AND_CARDS:
                     showCollectionItemsAndCards();
                     break;
-                case SEARCH_DECK:
+                case SEARCH_CARD_IN_COLLECTION:
                     search(request);
                     break;
                 case SAVE:
@@ -67,7 +67,7 @@ class CollectionController {
     }
 
     public void search(CollectionRequest request) {
-        String cardName = request.getName(1);
+        String cardName = request.getCardName();
         if (collection.isInCollection(cardName)) {
             view.sout(collection.getCollectionID(cardName));
         } else {
@@ -76,7 +76,7 @@ class CollectionController {
     }
 
     public void createDeck(CollectionRequest request) {
-        String deckName = request.getName(2);
+        String deckName = request.getDeckName();
         if (!collection.isUsedDeckName(deckName)) {
             collection.createDeck(deckName);
         } else {
@@ -85,7 +85,7 @@ class CollectionController {
     }
 
     public void deleteDeck(CollectionRequest request) {
-        String deckName = request.getName(2);
+        String deckName = request.getDeckName();
         if (collection.isUsedDeckName(deckName)) {
             collection.deleteDeck(deckName);
         } else {
@@ -94,8 +94,8 @@ class CollectionController {
     }
 
     public void addCardToDeck(CollectionRequest request) {
-        int cardID = request.getID(1);
-        String deckName = request.getName(4);
+        int cardID = request.getCardID();
+        String deckName = request.getDeckName();
         Deck deck = collection.getDeck(deckName);
 
         if (collection.getCard(cardID) == null) {
@@ -118,8 +118,8 @@ class CollectionController {
     }
 
     public void removeCardFromDeck(CollectionRequest request) {
-        int cardID = request.getID(1);
-        String deckName = request.getName(4);
+        int cardID = request.getCardID();
+        String deckName = request.getDeckName();
         if (checkDeck(deckName)) return;
         if (!collection.getDeck(deckName).contains(cardID)) {
             view.printError(ErrorType.CARD_NOT_FOUND_IN_DECK);
@@ -129,7 +129,7 @@ class CollectionController {
     }
 
     public void validateDeck(CollectionRequest request) {
-        String deckName = request.getName(2);
+        String deckName = request.getDeckName();
         if (checkDeck(deckName)) return;
         if (collection.validateDeck(deckName)) {
             view.printValidatedMessage();
@@ -140,7 +140,7 @@ class CollectionController {
 
 
     public void selectMainDeck(CollectionRequest request) {
-        String deckName = request.getName(2);
+        String deckName = request.getDeckName();
         if (checkDeck(deckName)) return;
         collection.selectMainDeck(deckName);
 
@@ -160,7 +160,7 @@ class CollectionController {
     }
 
     public void showDeck(CollectionRequest request) {
-        String deckName = request.getName(2);
+        String deckName = request.getDeckName();
         view.printCardsInFormat(collection.getDeck(deckName).getDeckCards());
     }
 
