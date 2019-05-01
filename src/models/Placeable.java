@@ -58,4 +58,8 @@ public abstract class Placeable implements Comparable<Placeable> {
             return -1;
         }
     }
+
+    public int getCost() {
+        return cost;
+    }
 }

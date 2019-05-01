@@ -1,14 +1,11 @@
 package models;
 
-import view.View;
-
 import java.util.*;
 
 public class Collection implements Comparable<Placeable> {
     private static final int maxItems = 3;
     private HashMap<String, Deck> decks = new HashMap<>();
     private HashMap<Integer, Placeable> cardHashMap = new HashMap<>();
-    private View view = new View();
     private Deck mainDeck;
 
 
@@ -140,5 +137,20 @@ public class Collection implements Comparable<Placeable> {
                 "11.save\n" +
                 "12.help\n" +
                 "13.exit";
+    }
+
+    public void deleteCardFromCollection(int cardID) {
+        Placeable card = getCard(cardID);
+        cardHashMap.remove(cardID);
+        deleteCardFromDeck(card);
+
+    }
+
+    private void deleteCardFromDeck(Placeable card) {
+        for (Deck deck : decks.values()) {
+            if (deck.contains(card.getID())) {
+                deck.removeFromDeck(card);
+            }
+        }
     }
 }

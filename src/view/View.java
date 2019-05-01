@@ -128,4 +128,14 @@ public class View {
             printCardsInFormat(deck.getDeckCards());
         }
     }
+
+    public void successfullSellMessage() {
+        System.out.println("the card sold successfully !!!");
+    }
+
+    public void unSuccessfullSellMessage(){
+        System.out.println("some errors occured when selling cards !!!\n" +
+                "make sure you have entered card ID truly !!!");
+    }
+
 }

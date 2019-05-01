@@ -47,7 +47,7 @@ public class AccountController {
 
     private void enterShop() {
         ShopController shopController = new ShopController();
-        shopController.main();
+        shopController.main(account);
     }
 
     private void chooseGameKind(AccountRequest request, BattleKind battleKind) {

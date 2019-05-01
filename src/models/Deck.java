@@ -98,6 +98,9 @@ public class Deck {
         this.view = view;
     }
 
+    /**
+     * for checking that a deck contain a card with specific ID first use below method then use removeFromDeck() method
+     */
     public boolean contains(int cardID) {
         if (getHero() != null && getHero().getID() == cardID) {
             return true;
@@ -119,12 +122,13 @@ public class Deck {
         return this.isFull() && this.isSpecifiedHero();
     }
 
-    public ArrayList<Placeable> getDeckCards(){
+    public ArrayList<Placeable> getDeckCards() {
         ArrayList<Placeable> cards = new ArrayList<>();
         cards.add(hero);
         cards.add(item);
         cards.addAll(placeables);
         return cards;
     }
+
 
 }

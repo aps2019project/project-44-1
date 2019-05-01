@@ -1,15 +1,18 @@
 package controller;
 
+import models.Account;
+import models.Collection;
 import models.Shop;
 import view.ShopRequest;
 import view.View;
 
 class ShopController {
 
-    private Shop shop = new Shop();
+    private Shop shop = Shop.getInstance();
     private View view = new View();
 
-    void main() {
+    void main(Account account) {
+        shop.setAccount(account);/** may make execption*/
         boolean isFinish = false;
         do {
             ShopRequest request = new ShopRequest();
@@ -55,7 +58,12 @@ class ShopController {
 
     public void sellCard(ShopRequest request) {
         int cardID = request.getCardID();
-        shop.sell(cardID);
+        boolean isDone = shop.sell(cardID);
+        if (isDone) {
+            view.successfullSellMessage();
+        } else {
+            view.unSuccessfullSellMessage();
+        }
     }
 
     public void buyCard(ShopRequest request) {

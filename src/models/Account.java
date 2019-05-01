@@ -109,4 +109,12 @@ public class Account implements Comparable<Account> {
                 "4.help\n" +
                 "5.exit";
     }
+
+    public void increaseMoney(int addedMoney) {
+        this.money += addedMoney;
+    }
+
+    public void decreaseMoney(int decreasedMoney) {
+        this.money -= decreasedMoney;
+    }
 }
