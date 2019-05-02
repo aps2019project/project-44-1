@@ -1,5 +1,9 @@
 package models;
 
+import controller.AttackType;
+import models.Enums.BattleKind;
+import models.Enums.BattleMode;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,6 +22,10 @@ public class Battle {
         this.player2 = player2;
         relater(getPlayer1().getMainDeck().getHero(), getMap().getCells()[2][0]);
         relater(getPlayer2().getMainDeck().getHero(), getMap().getCells()[2][8]);
+        player1.getMainDeck().removeFromDeck(player1.getMainDeck().getHero());
+        player2.getMainDeck().removeFromDeck(player2.getMainDeck().getHero());
+        player1.initializeHand();
+        player2.initializeHand();
     }
 
     private BattleMode getBattleMode() {

@@ -1,7 +1,7 @@
 package controller;
 
 import models.Account;
-import models.ErrorType;
+import models.Enums.ErrorType;
 import models.Game;
 import view.GameRequest;
 import view.View;

@@ -5,10 +5,9 @@ import java.util.Random;
 
 public class Account implements Comparable<Account> {
 
-    private static final int START_MONEY = 15000;
     private String username;
     private String password;
-    private int money = START_MONEY;
+    private int money = 15000;
     private int wins;
     private ArrayList<Deck> decks = new ArrayList<>();
     private Collection collection = new Collection();
@@ -30,17 +29,12 @@ public class Account implements Comparable<Account> {
         this.password = password;
     }
 
-
-    public void save() {
-    }
-
-
     public void initializeHand() {
         Random r = new Random();
         for (int i = 0; i < 5; i++) {
             int a = r.nextInt(20);
-            hand[i] = mainDeck.getPlaceables().get(a);
-            mainDeck.getPlaceables().remove(a);
+            hand[i] = mainDeck.getMinions().get(a);
+            mainDeck.getMinions().remove(a);
         }
     }
 

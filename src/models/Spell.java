@@ -2,9 +2,6 @@ package models;
 
 public class Spell extends Placeable {
 
-
-
-
     void effect(Cell... cells) {
     }
 

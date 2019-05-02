@@ -1,5 +1,7 @@
 package models;
 
+import models.Enums.ItemType;
+
 public class Item extends Placeable{
     ItemType itemType;
     Card carrier = new Card();

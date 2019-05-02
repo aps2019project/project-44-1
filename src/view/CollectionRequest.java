@@ -1,6 +1,6 @@
 package view;
 
-import models.ErrorType;
+import models.Enums.ErrorType;
 
 public class CollectionRequest extends Request {
     private View view = new View();

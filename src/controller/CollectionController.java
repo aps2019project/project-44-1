@@ -1,6 +1,7 @@
 package controller;
 
 import models.*;
+import models.Enums.ErrorType;
 import view.CollectionRequest;
 import view.View;
 

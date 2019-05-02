@@ -1,5 +1,8 @@
 package models;
 
+import controller.AttackType;
+import models.Enums.SpecialPowerActivation;
+
 public class Card extends Placeable implements Fight {
     private int AP;
     int HP;

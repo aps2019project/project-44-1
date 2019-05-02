@@ -1,4 +1,4 @@
-package models;
+package models.Enums;
 
 public enum ErrorType {
     USED_BEFORE_USERNAME("This username is taken. Try another"),

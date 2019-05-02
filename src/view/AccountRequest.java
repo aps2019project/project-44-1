@@ -1,7 +1,7 @@
 package view;
 
 import models.Account;
-import models.ErrorType;
+import models.Enums.ErrorType;
 
 public class AccountRequest extends Request {
 
