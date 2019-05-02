@@ -1,5 +1,8 @@
 package models;
 
+import controller.AttackType;
+import models.Enums.SpecialPowerActivation;
+
 public class Minion extends Card {
 
     public Minion(String name, int neededMana, int HP, int AP, AttackType attackType,
@@ -25,6 +28,5 @@ public class Minion extends Card {
                 " - Special power: ";
         // TODO: 30/04/2019 get special power in string
     }
-
 
 }

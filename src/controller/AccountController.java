@@ -1,16 +1,18 @@
 package controller;
 
 import models.*;
+import models.Enums.BattleKind;
+import models.Enums.BattleMode;
 import view.AccountRequest;
 import view.RequestType;
 import view.View;
 
-public class AccountController {
+class AccountController {
 
     private Account account;
     private View view = new View();
 
-    public void main(Account account) {
+    void main(Account account) {
         this.account = account;
         boolean isFinish = false;
         do {

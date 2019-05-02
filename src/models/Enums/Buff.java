@@ -1,4 +1,4 @@
-package models;
+package models.Enums;
 
 public enum Buff {
     HOLY_BUFF,
@@ -8,3 +8,4 @@ public enum Buff {
     POWER_BUFF,
     POISION_BUFF
 }
+

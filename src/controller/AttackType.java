@@ -1,4 +1,4 @@
-package models;
+package controller;
 
 public enum AttackType {
     MELEE,
@@ -14,10 +14,4 @@ public enum AttackType {
             return "Ranged";
         }
     }
-
-}
-
-enum BattleCommands{
-    GAME_INFO,
-
 }

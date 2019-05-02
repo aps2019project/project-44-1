@@ -1,6 +1,6 @@
 package view;
 
-import models.ErrorType;
+import models.Enums.ErrorType;
 
 import java.util.Scanner;
 
@@ -10,7 +10,7 @@ public abstract class Request {
     private View view = new View();
     protected static final String EXIT = "Exit";
     protected static final String HELP = "Help";
-    protected ErrorType error = null;
+    private ErrorType error = null;
 
     public void getNewCommand() {
         this.command = scanner.nextLine();

@@ -1,5 +1,7 @@
 package models;
 
+import models.Enums.ItemType;
+
 import java.util.ArrayList;
 
 class Map {

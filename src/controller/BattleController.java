@@ -4,7 +4,6 @@ import models.Battle;
 import view.BattleRequest;
 import view.View;
 
-
 public class BattleController {
 
     private Battle battle;

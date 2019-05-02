@@ -1,5 +1,7 @@
 package models;
 
+import controller.AttackType;
+
 public class Hero extends Card {
     private AttackType attackType;
 

@@ -1,6 +1,7 @@
 package view;
 
 import models.*;
+import models.Enums.ErrorType;
 
 import java.util.ArrayList;
 

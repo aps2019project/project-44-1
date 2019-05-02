@@ -1,5 +1,7 @@
 package models;
 
+import models.Enums.CellEffect;
+
 class Cell {
     int x;
     int y;

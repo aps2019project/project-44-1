@@ -8,7 +8,7 @@ public class Deck {
     private static final int maxCardNumber = 20;
     private Item item = new Item();
     private Hero hero = new Hero();
-    private ArrayList<Placeable> placeables = new ArrayList<>();
+    private ArrayList<Minion> minions = new ArrayList<>();
     private String name;
     private View view = new View();
 
@@ -34,12 +34,12 @@ public class Deck {
         this.hero = hero;
     }
 
-    public ArrayList<Placeable> getPlaceables() {
-        return placeables;
+    public ArrayList<Minion> getMinions() {
+        return minions;
     }
 
-    public void setPlaceables(ArrayList<Placeable> placeables) {
-        this.placeables = placeables;
+    public void setMinions(ArrayList<Minion> minions) {
+        this.minions = minions;
     }
 
     public String getName() {
@@ -55,11 +55,7 @@ public class Deck {
     }
 
     public boolean isFull() {
-        if (placeables.size() == 20) {
-            return true;
-        } else {
-            return false;
-        }
+        return minions.size() == 20;
     }
 
     public boolean isSpecifiedHero() {
@@ -76,7 +72,7 @@ public class Deck {
         } else if (placeable instanceof Item) {
             setItem((Item) placeable);
         } else {
-            placeables.add(placeable);
+            minions.add((Minion) placeable);
         }
     }
 
@@ -86,7 +82,7 @@ public class Deck {
         } else if (placeable instanceof Item) {
             item = null;
         } else {
-            placeables.remove(placeable);
+            minions.remove(placeable);
         }
     }
 
@@ -110,7 +106,7 @@ public class Deck {
     }
 
     public boolean isInDeckCards(int cardID) {
-        for (Placeable placeable : placeables) {
+        for (Placeable placeable : minions) {
             if (placeable.getID() == cardID) {
                 return true;
             }
@@ -126,7 +122,7 @@ public class Deck {
         ArrayList<Placeable> cards = new ArrayList<>();
         cards.add(hero);
         cards.add(item);
-        cards.addAll(placeables);
+        cards.addAll(minions);
         return cards;
     }
 

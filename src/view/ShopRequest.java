@@ -1,6 +1,6 @@
 package view;
 
-import models.ErrorType;
+import models.Enums.ErrorType;
 
 public class ShopRequest extends Request {
 
