@@ -41,7 +41,28 @@
         {"name": "shahghol" , "cost" : 600 , "neededMana" : 5 , "HP" : 10 , "AP" : 4 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : "combo"},
         {"name": "arjhanghdiv" , "cost" : 600 , "neededMana" : 3 , "HP" : 6 , "AP" : 6 , "attackType" : "melee" , "attackRang" : 3 , "specialPower" : "" , "specialPowerCoolDown" : "combo"}
     ],
-    "Descs": [
+  "Spell": [
+    {"name": "Total Disarm" , "cost": 1000 ,"neededMana": 0 ,"target": "" , "affect": ""},
+    {"name": "Area Dispel" , "cost": 1500 ,"neededMana": 2 ,"target": "" , "affect": ""},
+    {"name": "Empower" , "cost": 250 ,"neededMana": 1 ,"target": "" , "affect": ""},
+    {"name": "Fireball" , "cost": 400 ,"neededMana": 1 ,"target": "" , "affect": ""},
+    {"name": "Hellfire" , "cost": 600 ,"neededMana": 3 ,"target": "" , "affect": ""},
+    {"name": "Lighting Bolt" , "cost": 1250 ,"neededMana": 2 ,"target": "" , "affect": ""},
+    {"name": "Poison Lake" , "cost": 900 ,"neededMana": 5 ,"target": "" , "affect": ""},
+    {"name": "Madness" , "cost": 650 ,"neededMana": 0 ,"target": "" , "affect": ""},
+    {"name": "All Disarm" , "cost": 2000 ,"neededMana": 9 ,"target": "" , "affect": ""},
+    {"name": "All Poison" , "cost": 1500 ,"neededMana": 8 ,"target": "" , "affect": ""},
+    {"name": "Dispel" , "cost": 2100 ,"neededMana": 0 ,"target": "" , "affect": ""},
+    {"name": "Health With profit" , "cost": 2250 ,"neededMana": 0 ,"target": "" , "affect": ""},
+    {"name": "Ghaza bokhor joon begiri" , "cost": 2500 ,"neededMana": 2 ,"target": "" , "affect": ""},
+    {"name": "All Power" , "cost": 2000 ,"neededMana": 4 ,"target": "" , "affect": ""},
+    {"name": "All Attack" , "cost": 1500 ,"neededMana": 4 ,"target": "" , "affect": ""},
+    {"name": "Weakening" , "cost": 1000 ,"neededMana": 1 ,"target": "" , "affect": ""},
+    {"name": "Sacrifice" , "cost": 1600 ,"neededMana": 3 ,"target": "", "affect": ""},
+    {"name": "Kings Guard" , "cost": 1750 ,"neededMana": 3 ,"target": "", "affect": ""},
+    {"name": "Shock" , "cost": 1200 ,"neededMana": 1 ,"target": "", "affect": ""}
+  ],
+    "Desc": [
         {"name":"HolyBuff","desc": "increase hp 3 points"}
     ]
 }
