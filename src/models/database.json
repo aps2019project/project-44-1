@@ -62,6 +62,18 @@
     {"name": "Kings Guard" , "cost": 1750 ,"neededMana": 3 ,"target": "", "affect": ""},
     {"name": "Shock" , "cost": 1200 ,"neededMana": 1 ,"target": "", "affect": ""}
   ],
+  "Hero": [
+    {"name": "divsefid" , "cost": 8000 ,"HP": 50 ,"AP": 4 , "attackType": "melee" ,"attackRang": -1 ,"spell": "" ,"Mp": 1 ,"coolDown": 2},
+    {"name": "simorgh" , "cost": 9000 ,"HP": 50 ,"AP": 4 , "attackType": "melee" ,"attackRang": -1 ,"spell": "" ,"Mp": 3 ,"cool down": 8},
+    {"name": "ejhdeha" , "cost": 8000 ,"HP": 50 ,"AP": 4 , "attackType": "melee" ,"attackRang": -1 ,"spell": "" ,"Mp": 0 ,"cool down": 1},
+    {"name": "rakhsh" , "cost": 8000 ,"HP": 50 ,"AP": 4 , "attackType": "melee" ,"attackRang": -1 ,"spell": "" ,"Mp": 1 ,"cool down": 2},
+    {"name": "zahhak" , "cost": 10000,"HP": 50 ,"AP": 4 , "attackType": "melee" ,"attackRang": -1 ,"spell": "" ,"Mp": 1 ,"cool down": 3},
+    {"name": "kave" , "cost": 8000 ,"HP": 50 ,"AP": 4 , "attackType": "melee" ,"attackRang": -1 ,"spell": "" ,"Mp": 1 ,"cool down": 3},
+    {"name": "arash" , "cost": 10000 ,"HP": 30 ,"AP": 2 , "attackType": "ranged" ,"attackRang": 6 ,"spell": "" ,"Mp": 2 ,"cool down": 2},
+    {"name": "afsane" , "cost": 11000 ,"HP": 40 ,"AP": 3 , "attackType": "ranged" ,"attackRang": 3 ,"spell": "" ,"Mp": 1 ,"cool down": 2},
+    {"name": "esfandiar" , "cost": 12000 ,"HP": 35 ,"AP": 3 , "attackType": "hybrid" ,"attackRang": 3 ,"spell": "" ,"Mp": 0 ,"cool down": 1},
+    {"name": "rostam" , "cost": 8000 ,"HP": 55 ,"AP": 7 , "attackType": "hybrid" ,"attackRang": 4 ,"spell": "" ,"Mp": -1 ,"cool down": -1}
+  ],
     "Desc": [
         {"name":"HolyBuff","desc": "increase hp 3 points"}
     ]
