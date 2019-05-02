@@ -74,6 +74,28 @@
     {"name": "esfandiar" , "cost": 12000 ,"HP": 35 ,"AP": 3 , "attackType": "hybrid" ,"attackRang": 3 ,"spell": "" ,"Mp": 0 ,"cool down": 1},
     {"name": "rostam" , "cost": 8000 ,"HP": 55 ,"AP": 7 , "attackType": "hybrid" ,"attackRang": 4 ,"spell": "" ,"Mp": -1 ,"cool down": -1}
   ],
+  "Items": [
+    {"name": "tajdanaei" , "cost": 300 , "affect": ""},
+    {"name": "namossepar" , "cost": 4000 , "affect": ""},
+    {"name": "kamandamol" , "cost": 3000 , "affect": ""},
+    {"name": "joonbaw" , "cost": -1 , "affect": ""},
+    {"name": "tir3shakh" , "cost": -1 , "affect": ""},
+    {"name": "parsimorgh" , "cost": 3500 , "affect": ""},
+    {"name": "exir" , "cost": -1 , "affect": ""},
+    {"name": "majonmana" , "cost": -1 , "affect": ""},
+    {"name": "majonroeintani" , "cost": -1 , "affect": ""},
+    {"name": "nefrinmargh" , "cost": -1 , "affect": ""},
+    {"name": "random damage" , "cost": -1 , "affect": ""},
+    {"name": "terror hood" , "cost": 20000 , "affect": ""},
+    {"name": "blades of agility" , "cost": -1 , "affect": ""},
+    {"name": "king killer" , "cost": 9000 , "affect": ""},
+    {"name": "assassination dagger" , "cost": 5000 , "affect": ""},
+    {"name": "poisonous dagger" , "cost": 7000 , "affect": ""},
+    {"name": "shock hammer" , "cost": 15000 , "affect": ""},
+    {"name": "soul eater" , "cost": 25000 , "affect": ""},
+    {"name": "ghosltamid" , "cost": 20000 , "affect": ""},
+    {"name": "shamshirchini" , "cost": -1 , "affect": ""}
+  ],
     "Desc": [
         {"name":"HolyBuff","desc": "increase hp 3 points"}
     ]
