@@ -3,6 +3,7 @@ package view;
 import models.*;
 import models.Enums.ErrorType;
 
+import java.sql.DataTruncation;
 import java.util.ArrayList;
 
 public class View {
@@ -130,13 +131,25 @@ public class View {
         }
     }
 
-    public void successfullSellMessage() {
+    public void successfulSellMessage() {
         System.out.println("the card sold successfully !!!");
     }
 
-    public void unSuccessfullSellMessage(){
+    public void unSuccessfulSellMessage() {
         System.out.println("some errors occured when selling cards !!!\n" +
                 "make sure you have entered card ID truly !!!");
+    }
+
+    public void successfulBuyMessage() {
+        System.out.println("you have successfully buy the card .");
+    }
+
+    public void printNoCardWithThisName(String cardName) {
+        System.out.println("no card found with name : " + cardName);
+    }
+
+    public void printCardInCollection(String cardName, int cardID) {
+        System.out.println("card" + cardName + "found in collection with ID : " + cardID);
     }
 
 }

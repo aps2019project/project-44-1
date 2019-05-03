@@ -153,4 +153,50 @@ public class Collection implements Comparable<Placeable> {
             }
         }
     }
+
+    private int getNumberOfItemsInCollection() {
+        int numberOfItems = 0;
+        for (Placeable card : cardHashMap.values()) {
+            if (card instanceof Item) {
+                numberOfItems++;
+            }
+        }
+        return numberOfItems;
+    }
+
+    public boolean canBuyItem() {
+        return maxItems - this.getNumberOfItemsInCollection() > 0;
+    }
+
+    // TODO: 03/05/2019 decide to use CollectionIDGenerator or ID field in card
+    public void addCardToCollection(Placeable card) {
+        cardHashMap.put(collectionIDGenerator(), card);
+    }
+
+    private int collectionIDGenerator() {
+        for (int i = 1; i < 100000; i++) {
+            if (cardHashMap.get(i) == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int searchInCollection(String cardName) {
+        for (Placeable card : cardHashMap.values()) {
+            if (card.getName().equals(cardName)) {
+                return getCardIDInCollection(cardName);
+            }
+        }
+        return -1;
+    }
+
+    public int getCardIDInCollection(String cardName) {
+        for (int i = 0; i < 100000; i++) {
+            if (cardHashMap.get(i).getName().equals(cardName)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }

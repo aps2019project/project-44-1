@@ -14,9 +14,11 @@ public enum ErrorType {
     FULL_DECK("deck is full"),
     HERO_SET_BEFORE("hero has been set before"),
     ITEM_SET_BEFORE("item has been before"),
-    CARD_NOT_FOUND_IN_DECK("there is no card with this ID in deck !!!");
-
-
+    CARD_NOT_FOUND_IN_DECK("there is no card with this ID in deck !!!"),
+    CARD_NOT_FOUND_IN_SHOP("there is no card with tish name in shop !!!"),
+    NOT_ENOUGH_MONEY_TO_BUY_CARD("you don't have enough money to buy this card !!!"),
+    MAX_ITEMS_IN_COLLECTION_REACHED("you can not buy this card because you have 3 items in your collection !!!"),
+    NO_ERROR("NO error");
 
 
     private String message;
