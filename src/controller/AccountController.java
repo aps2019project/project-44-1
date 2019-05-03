@@ -3,6 +3,7 @@ package controller;
 import models.*;
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
+import models.Enums.ErrorType;
 import view.AccountRequest;
 import view.RequestType;
 import view.View;
@@ -87,6 +88,11 @@ class AccountController {
 
     private void enterBattle(AccountRequest request) {
         BattleKind battleKind;
+        if (!account.isReadyToPlay()) {
+            view.printError(ErrorType.MAIN_DECK_IS_NOT_VALID);
+            return;
+        }
+        view.printSelectSingleOrMulti();
         do {
             request.getNewCommand();
             if (request.getType().equals(RequestType.MULTI_PLAYER)) {
@@ -128,8 +134,6 @@ class AccountController {
                 chooseGameMode(request, this.account, player2, battleKind);
             }
         } while (!request.getType().equals(RequestType.EXIT));
-
-
     }
 
 

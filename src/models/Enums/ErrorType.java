@@ -18,7 +18,8 @@ public enum ErrorType {
     CARD_NOT_FOUND_IN_SHOP("there is no card with tish name in shop !!!"),
     NOT_ENOUGH_MONEY_TO_BUY_CARD("you don't have enough money to buy this card !!!"),
     MAX_ITEMS_IN_COLLECTION_REACHED("you can not buy this card because you have 3 items in your collection !!!"),
-    NO_ERROR("NO error");
+    NO_ERROR("NO error"),
+    MAIN_DECK_IS_NOT_VALID("selected deck is invalid");
 
 
     private String message;

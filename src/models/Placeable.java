@@ -4,7 +4,7 @@ public abstract class Placeable implements Comparable<Placeable> {
     private Cell cell;
     private int neededMana;
     private int ID;
-    String name;
+    private String name;
     private int cost;
 
      void setCost(int cost) {
@@ -35,13 +35,7 @@ public abstract class Placeable implements Comparable<Placeable> {
         this.ID = ID;
     }
 
-    String getName() {
-        return name;
-    }
 
-    void setName(String name) {
-        this.name = name;
-    }
 
     @Override
     public int compareTo(Placeable o) {
@@ -61,5 +55,13 @@ public abstract class Placeable implements Comparable<Placeable> {
 
     public int getCost() {
         return cost;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

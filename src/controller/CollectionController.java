@@ -162,7 +162,13 @@ class CollectionController {
 
     public void showDeck(CollectionRequest request) {
         String deckName = request.getDeckName();
-        view.printCardsInFormat(collection.getDeck(deckName).getDeckCards());
+        Deck deck = collection.getDeck(deckName);
+        if (deck == null) {
+            view.printError(ErrorType.DECK_NOT_FOUND);
+            return;
+        }
+        view.printCardsInFormat(deck.getDeckCards());
+
     }
 
     public void help() {

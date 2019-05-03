@@ -111,4 +111,8 @@ public class Account implements Comparable<Account> {
     public void decreaseMoney(int decreasedMoney) {
         this.money -= decreasedMoney;
     }
+
+    public boolean isReadyToPlay(){
+        return collection.validateDeck(mainDeck.getName());
+    }
 }

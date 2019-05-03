@@ -85,7 +85,7 @@ public class View {
         System.out.println("Heroes :");
         int index = 1;
         for (Placeable card : cards) {
-            if (card instanceof Hero) {
+            if (card instanceof Hero && card.getName()!= null) {
                 System.out.println("        " + index + card.toString());
                 index++;
             }
@@ -96,7 +96,7 @@ public class View {
         System.out.println("Items :");
         int index = 1;
         for (Placeable card : cards) {
-            if (card instanceof Item) {
+            if (card instanceof Item && card.getName()!= null) {
                 System.out.println("        " + index + card.toString());
                 index++;
             }
@@ -108,7 +108,7 @@ public class View {
         System.out.println("Cards :");
         int index = 1;
         for (Placeable card : cards) {
-            if (card instanceof Minion || card instanceof Spell) {
+            if (card instanceof Minion || card instanceof Spell && card.getName()!= null) {
                 System.out.println("        " + index + card.toString());
                 index++;
             }
@@ -150,6 +150,12 @@ public class View {
 
     public void printCardInCollection(String cardName, int cardID) {
         System.out.println("card" + cardName + "found in collection with ID : " + cardID);
+    }
+
+    public void printSelectSingleOrMulti(){
+        System.out.println("select how do you want ot play:\n" +
+                "1.Single player\n" +
+                "2.Multi player");
     }
 
 }

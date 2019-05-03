@@ -19,7 +19,7 @@ public class Hero extends Card {
         return " : Name : " + this.getName() +
                 " - AP : " + this.getAP() +
                 " - HP : " + this.getHP() +
-                " - Class : " + this.getAttackType().getNameType() +
+//                " - Class : " + this.getAttackType().getNameType() +
                 " - Special power: ";
         // TODO: 30/04/2019 get special power in string
     }

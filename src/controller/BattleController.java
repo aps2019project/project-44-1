@@ -21,7 +21,6 @@ public class BattleController {
             if (request.getType().equals("help")) {
                 helpInBattle();
             }
-
             if (request.getType().equals("show game info")) {
                 showGameInfo();
             }
@@ -73,12 +72,9 @@ public class BattleController {
             if (request.getType().equals("select a collectable item")) {
                 selectCollectable(request);
             }
-
-
         }
         while (!isFinish);
     }
-
     private void showGameInfo() {
 
     }
