@@ -9,7 +9,7 @@ public class Account implements Comparable<Account> {
     private String username;
     private String password;
     private int money = 15000;
-    private int wins;                                       //
+    private int wins = 0;
     private ArrayList<Deck> decks = new ArrayList<>();
     private Collection collection = new Collection();
     ArrayList<MatchHistory> histories = new ArrayList<>();  //
@@ -18,6 +18,10 @@ public class Account implements Comparable<Account> {
     Account(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public void increaseWins() {
+        wins++;
     }
 
     public Collection getCollection() {
@@ -82,8 +86,8 @@ public class Account implements Comparable<Account> {
         this.money -= decreasedMoney;
     }
 
-    public boolean isReadyToPlay(){
-        if (collection.getMainDeck() == null){
+    public boolean isReadyToPlay() {
+        if (collection.getMainDeck() == null) {
             return false;
         }
         return collection.validateDeck(mainDeck.getName());
@@ -121,5 +125,6 @@ class Player {
             }
         }
     }
+
 
 }
