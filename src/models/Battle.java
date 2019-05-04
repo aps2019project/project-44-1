@@ -53,7 +53,7 @@ public class Battle implements Goal{
         this.battleKind = battleKind;
     }
 
-    private Account getPlayer1() {
+    public Account getPlayer1() {
         return player1;
     }
 

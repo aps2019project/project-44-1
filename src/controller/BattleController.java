@@ -1,6 +1,8 @@
 package controller;
 
+import models.Account;
 import models.Battle;
+import models.MatchHistory;
 import view.BattleRequest;
 import view.View;
 
@@ -76,6 +78,7 @@ class BattleController {
         }
         while (!isFinish);
     }
+
     private void showGameInfo() {
 
     }
@@ -196,6 +199,16 @@ class BattleController {
 
     private void useCollectable(BattleRequest request) {
 
+    }
+
+    public void addThisBattleToBattleHistory(Account winner) {
+        if (battle.getPlayer2().equals(winner)) {
+            battle.getPlayer2().addMatchHistory(new MatchHistory(battle.getPlayer1().getUsername(), true));
+            battle.getPlayer1().addMatchHistory(new MatchHistory(battle.getPlayer2().getUsername(), false));
+        } else {
+            battle.getPlayer2().addMatchHistory(new MatchHistory(battle.getPlayer1().getUsername(), false));
+            battle.getPlayer1().addMatchHistory(new MatchHistory(battle.getPlayer2().getUsername(), true));
+        }
     }
 
 

@@ -5,9 +5,10 @@ public class MatchHistory {
     boolean hasWon;
     private long startDate;
 
-    public MatchHistory(String opponent) {
+    public MatchHistory(String opponent,boolean hasWon) {
         this.opponent = opponent;
         startDate = System.currentTimeMillis();
+        this.hasWon = hasWon;
     }
 
     private long getElapsedTimeInSec() {
@@ -22,9 +23,5 @@ public class MatchHistory {
         } else {
             return Long.toString(elapsedTimeInMinute / 60);
         }
-    }
-
-    public void setHasWon(boolean hasWon) {
-        this.hasWon = hasWon;
     }
 }

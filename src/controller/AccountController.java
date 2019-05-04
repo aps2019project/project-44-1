@@ -59,7 +59,7 @@ class AccountController {
             view.printGameKinds();
             request.getNewCommand();
             if (request.getType().equals(RequestType.STORY_GAME)) {
-                chooseStoryGame(AccountRequest request, BattleKind battleKind);
+                chooseStoryGame(request,battleKind);
                 // TODO: 04/05/2019 list story game haro chejoori namayesh beadam? 
             }
             if (request.getType().equals(RequestType.CUSTOM_GAME)) {

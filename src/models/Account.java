@@ -12,12 +12,16 @@ public class Account implements Comparable<Account> {
     private int wins = 0;
     private ArrayList<Deck> decks = new ArrayList<>();
     private Collection collection = new Collection();
-    ArrayList<MatchHistory> histories = new ArrayList<>();  //
+    private ArrayList<MatchHistory> histories = new ArrayList<>();
     private Deck mainDeck = collection.getMainDeck();
 
     Account(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public void addMatchHistory(MatchHistory matchHistory){
+        this.histories.add(matchHistory);
     }
 
     public void increaseWins() {
@@ -125,6 +129,9 @@ class Player {
             }
         }
     }
+
+
+
 
 
 }
