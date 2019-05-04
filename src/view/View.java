@@ -85,7 +85,7 @@ public class View {
         System.out.println("Heroes :");
         int index = 1;
         for (Placeable card : cards) {
-            if (card instanceof Hero && card.getName()!= null) {
+            if (card instanceof Hero && card.getName() != null) {
                 System.out.println("        " + index + card.toString());
                 index++;
             }
@@ -96,7 +96,7 @@ public class View {
         System.out.println("Items :");
         int index = 1;
         for (Placeable card : cards) {
-            if (card instanceof Item && card.getName()!= null) {
+            if (card instanceof Item && card.getName() != null) {
                 System.out.println("        " + index + card.toString());
                 index++;
             }
@@ -108,7 +108,7 @@ public class View {
         System.out.println("Cards :");
         int index = 1;
         for (Placeable card : cards) {
-            if (card instanceof Minion || card instanceof Spell && card.getName()!= null) {
+            if (card instanceof Minion || card instanceof Spell && card.getName() != null) {
                 System.out.println("        " + index + card.toString());
                 index++;
             }
@@ -152,10 +152,36 @@ public class View {
         System.out.println("card" + cardName + "found in collection with ID : " + cardID);
     }
 
-    public void printSelectSingleOrMulti(){
+    public void printSelectSingleOrMulti() {
         System.out.println("select how do you want ot play:\n" +
                 "1.Single player\n" +
                 "2.Multi player");
+    }
+
+    public void printPlayersList(ArrayList<Account> accounts, Account firstPlayer) {
+        int index = 1;
+        for (Account secondPlayer : accounts) {
+            if (secondPlayer.equals(firstPlayer)) {
+                continue;
+            }
+            System.out.println(index + "." + secondPlayer.getUsername());
+            index++;
+        }
+    }
+
+    public void showGameModes() {
+        System.out.println("1.death match\n" +
+                "2.capture flag 1\n" +
+                "3.capture flag 2");
+    }
+
+    public void printSecondPlayerIsNotReady() {
+        System.out.println("selected deck for second player is invalid !!!");
+    }
+
+    public void printGameKinds() {
+        System.out.println("1.story\n" +
+                "2.custom game");
     }
 
 }

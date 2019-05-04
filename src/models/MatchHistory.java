@@ -14,6 +14,7 @@ public class MatchHistory {
         return (System.currentTimeMillis() - startDate) / 1000;
     }
 
+
     public String getElapsedTimeFormatted() {
         long elapsedTimeInMinute = getElapsedTimeInSec() / 60;
         if (elapsedTimeInMinute < 60) {

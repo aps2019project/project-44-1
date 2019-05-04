@@ -37,6 +37,7 @@ public enum RequestType {
     CAPTURE_FLAG2,
     SELECT_SECOND_PLAYER,
     STORY_GAME,
+    CUSTOM_GAME,
 
 
 }

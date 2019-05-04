@@ -12,7 +12,7 @@ public class Game {
     private static int ID = 0;
 
 
-    private ArrayList<Account> getAccounts() {
+    public static ArrayList<Account> getAccounts() {
         return accounts;
     }
 
@@ -68,4 +68,6 @@ public class Game {
                 "4.help\n" +
                 "5.exit";
     }
+
+
 }
