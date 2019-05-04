@@ -1,7 +1,7 @@
 package models.Enums;
 
 public enum CellEffect {
-    POISION,
+    POISON,
     FIRE,
     HOLLY
 }

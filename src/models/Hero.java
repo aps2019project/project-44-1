@@ -1,6 +1,6 @@
 package models;
 
-import controller.AttackType;
+import models.Enums.AttackType;
 
 public class Hero extends Card {
     private AttackType attackType;

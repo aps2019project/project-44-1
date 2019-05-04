@@ -33,7 +33,7 @@ class Cell {
 
     void effecting() {
         switch (getCellEffect()) {
-            case POISION:
+            case POISON:
                 decreaseHP(card, 1);
                 break;
             case FIRE:

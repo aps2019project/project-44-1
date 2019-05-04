@@ -108,18 +108,22 @@ class AccountController {
 
     }
 
-    private void chooseGameMode(AccountRequest request, Account p1, Account p2, BattleKind battleKind) {
+    private void chooseGameMode(AccountRequest request, Player p1, Player p2,
+                                BattleKind battleKind) {
         BattleController battleController = new BattleController();
         do {
             request.getNewCommand();
             if (request.getType().equals(RequestType.DEATH_MATCH)) {
-                battleController.main(new Battle(battleKind, BattleMode.DEATH_MATCH, p1, p2));
+                battleController.main(new Battle(battleKind, BattleMode.DEATH_MATCH,
+                        p1, p2, 0));
             }
             if (request.getType().equals(RequestType.CAPTURE_FLAG1)) {
-                battleController.main(new CaptureFlag1(battleKind, p1, p2));
+                battleController.main(new Battle(battleKind, BattleMode.CAPTURE_FLAG_1,
+                        p1, p2, 1));
             }
             if (request.getType().equals(RequestType.CAPTURE_FLAG2)) {
-                battleController.main(new CaptureFlag2(battleKind, p1, p2, 4));
+                battleController.main(new Battle(battleKind, BattleMode.CAPTURE_FLAG_2,
+                        p1, p2, 4));
                 // TODO: 11/04/2019 problem in this case about transfering number of flags
             }
         } while (!request.getType().equals(RequestType.EXIT));
@@ -131,7 +135,8 @@ class AccountController {
             request.getNewCommand();
             if (request.getType().equals(RequestType.SELECT_SECOND_PLAYER)) {
                 Account player2 = request.getSecondPlayer();
-                chooseGameMode(request, this.account, player2, battleKind);
+                chooseGameMode(request, new Player(account.getMainDeck()),
+                        new Player(player2.getMainDeck()), battleKind);
             }
         } while (!request.getType().equals(RequestType.EXIT));
     }

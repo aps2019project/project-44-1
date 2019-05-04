@@ -1,4 +1,4 @@
-package controller;
+package models.Enums;
 
 public enum AttackType {
     MELEE,

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 class Map {
     private Cell[][] cells = new Cell[5][9];
-    private int turn = 1;
 
     Cell[][] getCells() {
         return cells;
@@ -30,11 +29,4 @@ class Map {
         }
     }
 
-    void addTurn(){
-        turn++;
     }
-
-    public boolean whosTurn() {
-        return turn % 2 == 1;
-    }
-}

@@ -16,7 +16,7 @@ class BattleController {
             BattleRequest request = new BattleRequest();
             request.getNewCommand();
             if (request.getType().equals("exit")) {
-                battle.getWinner().increaseMoney(1000);        //#TODO exceptions
+                //battle.getWinner().increaseMoney(1000);        //#TODO exceptions
                 isFinish = true;
             }
             if (request.getType().equals("help")) {         //#TODO eazzz
@@ -76,6 +76,7 @@ class BattleController {
         }
         while (!isFinish);
     }
+
     private void showGameInfo() {
 
     }
@@ -121,7 +122,8 @@ class BattleController {
     }
 
     private void endTurn() {
-
+        if (battle.turnHandler())
+            endGame();
     }
 
     private void showCollectables() {

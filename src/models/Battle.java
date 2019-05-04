@@ -4,69 +4,47 @@ import models.Enums.BattleKind;
 import models.Enums.BattleMode;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
 
-public class Battle implements Goal{
+public class Battle implements Goal {
     private BattleKind battleKind;
     private Player player1;
     private Player player2;
     private Map map = new Map();
     private BattleMode battleMode;
+    private int turn = 1;
+    private int flagNumber = 0;
 
-    public Battle(BattleKind battleKind, BattleMode battleMode, Account player1, Account player2) {
+    public Battle(BattleKind battleKind, BattleMode battleMode, Player player1, Player player2, int flagNumber) {
         this.battleKind = battleKind;
         this.battleMode = battleMode;
         this.player1 = player1;
         this.player2 = player2;
-        relater(getPlayer1().getMainDeck().getHero(), getMap().getCells()[2][0]);
-        relater(getPlayer2().getMainDeck().getHero(), getMap().getCells()[2][8]);
-        player1.getMainDeck().removeFromDeck(player1.getMainDeck().getHero());
-        player2.getMainDeck().removeFromDeck(player2.getMainDeck().getHero());
-        player1.initializeHand();
-        player2.initializeHand();
-        Collections.shuffle(player1.getMainDeck().getDeckCards());
-        Collections.shuffle(player2.getMainDeck().getDeckCards());
+        this.flagNumber = flagNumber;
+        relater(getPlayer1().getDeck().getHero(), getMap().getCells()[2][0]);
+        relater(getPlayer2().getDeck().getHero(), getMap().getCells()[2][8]);
+        player1.getDeck().removeFromDeck(player1.getDeck().getHero());
+        player2.getDeck().removeFromDeck(player2.getDeck().getHero());
     }
 
     private BattleMode getBattleMode() {
         return battleMode;
     }
 
-    public static int getFlagNum() {
-        return flagNum;
-    }
-
-    public Account getPlayer2() {
+    public Player getPlayer2() {
         return player2;
-    }
-
-    public void setPlayer2(Account player2) {
-        this.player2 = player2;
     }
 
     public BattleKind getBattleKind() {
         return battleKind;
     }
 
-    public void setBattleKind(BattleKind battleKind) {
-        this.battleKind = battleKind;
-    }
 
-    private Account getPlayer1() {
+    private Player getPlayer1() {
         return player1;
-    }
-
-    public void setPlayer1(Account player1) {
-        this.player1 = player1;
     }
 
     private Map getMap() {
         return map;
-    }
-
-    public void setMap(Map map) {
-        this.map = map;
     }
 
     private static void relater(Placeable card, Cell cell) {
@@ -76,19 +54,10 @@ public class Battle implements Goal{
         else cell.setItem((Item) card);
     }
 
-    void captureFlag1Handlere() {
-        int turnCounter;
-        boolean flagCaptured;
-        Random random = new Random();
-        relater(getMap().getFlags().get(0),
-                getMap().getCells()[random.nextInt(5)][random.nextInt(9)]);
-
-    }
-
     @Override
     public String toString() {
-        int HP1 = getPlayer1().getMainDeck().getHero().getHP();     //type1
-        int HP2 = getPlayer2().getMainDeck().getHero().getHP();
+        int HP1 = getPlayer1().getDeck().getHero().getHP();     //type1
+        int HP2 = getPlayer2().getDeck().getHero().getHP();
 
         ArrayList<Cell> cells = new ArrayList<>();      //^_^
         Card card;
@@ -101,11 +70,13 @@ public class Battle implements Goal{
         return "";
     }       //#TODO
 
-    public Account getWinner(){
-        return winner;
+    public boolean whosTurn() {
+        return turn % 2 == 1;
     }
 
-    public void setWinner(Account winner) {
-        this.winner = winner;
+    public boolean turnHandler() {       //method to handle all actions must occur at end of turn
+        turn++;
+        return main(battleMode, player1.getDeck().getHero(), player2.getDeck().getHero());
     }
+
 }

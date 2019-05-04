@@ -1,6 +1,6 @@
 package models;
 
-import controller.AttackType;
+import models.Enums.AttackType;
 import models.Enums.SpecialPowerActivation;
 
 public class Minion extends Card {

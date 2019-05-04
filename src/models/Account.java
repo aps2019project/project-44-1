@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -12,7 +13,7 @@ public class Account implements Comparable<Account> {
     private int wins = 0;
     private ArrayList<Deck> decks = new ArrayList<>();
     private Collection collection = new Collection();
-    ArrayList<MatchHistory> histories = new ArrayList<>();  //
+    private ArrayList<MatchHistory> histories = new ArrayList<>();  //
     private Deck mainDeck = collection.getMainDeck();
 
     Account(String username, String password) {
@@ -44,7 +45,7 @@ public class Account implements Comparable<Account> {
         return money;
     }
 
-    Deck getMainDeck() {
+    public Deck getMainDeck() {
         return mainDeck;
     }
 
@@ -92,39 +93,5 @@ public class Account implements Comparable<Account> {
         }
         return collection.validateDeck(mainDeck.getName());
     }
-
-}
-
-class Player {
-    private Placeable[] hand = new Placeable[5];
-    private int mana;
-    private Deck deck;
-
-    Player(Deck deck) {
-        this.deck = deck;
-        initializeHand();
-    }
-
-    public int getMana() {
-        return mana;
-    }
-
-    public void setMana(int mana) {
-        this.mana = mana;
-    }
-
-    private void initializeHand() {
-        Random r = new Random();
-        Iterator<Minion> iterator = deck.getMinions().iterator();
-        for (int i = 0; i < 5; i++) {
-            int a = r.nextInt(20);
-            hand[i] = deck.getMinions().get(a);
-            while (iterator.hasNext()) {
-                if (iterator.next().equals(hand[i]))
-                    iterator.remove();
-            }
-        }
-    }
-
 
 }
