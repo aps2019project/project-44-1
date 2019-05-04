@@ -97,6 +97,11 @@
     {"name": "shamshirchini" , "cost": -1 , "affect": ""}
   ],
     "Desc": [
-        {"name":"HolyBuff","desc": "increase hp 3 points"}
+      {"name":"HolyBuff","desc": "increase hp 3 points"},
+      {"name": "PowerBuff" , "desc": "increase hp or ap"},
+      {"name": "PoisonBuff" , "desc": "decrease hp 1 point"},
+      {"name": "WeaknessBuff" , "desc": "decrease hp or ap 1 point"},
+      {"name": "StunBuff" , "desc": "freeze a card one turn"},
+      {"name": "DisarmBuff" , "desc": "deactivate counter attack"}
     ]
 }
