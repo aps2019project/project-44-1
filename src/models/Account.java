@@ -1,9 +1,6 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Random;
 
 public class Account implements Comparable<Account> {
 
@@ -13,12 +10,16 @@ public class Account implements Comparable<Account> {
     private int wins = 0;
     private ArrayList<Deck> decks = new ArrayList<>();
     private Collection collection = new Collection();
-    private ArrayList<MatchHistory> histories = new ArrayList<>();  //
+    private ArrayList<MatchHistory> histories = new ArrayList<>();
     private Deck mainDeck = collection.getMainDeck();
 
     Account(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public void addMatchHistory(MatchHistory matchHistory){
+        this.histories.add(matchHistory);
     }
 
     public void increaseWins() {

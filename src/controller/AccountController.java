@@ -56,12 +56,14 @@ class AccountController {
     private void chooseGameKind(AccountRequest request, BattleKind battleKind) {
         Account ai_player;
         do {
+            view.printGameKinds();
             request.getNewCommand();
             if (request.getType().equals(RequestType.STORY_GAME)) {
-
+                chooseStoryGame(request,battleKind);
+                // TODO: 04/05/2019 list story game haro chejoori namayesh beadam?
             }
-            if (request.getType().equals(RequestType.MULTI_PLAYER)) {
-
+            if (request.getType().equals(RequestType.CUSTOM_GAME)) {
+                // TODO: 04/05/2019
             }
         } while (!request.getType().equals(RequestType.EXIT));
 
@@ -110,6 +112,7 @@ class AccountController {
 
     private void chooseGameMode(AccountRequest request, Player p1, Player p2,
                                 BattleKind battleKind) {
+        view.showGameModes();
         BattleController battleController = new BattleController();
         do {
             request.getNewCommand();
@@ -123,7 +126,7 @@ class AccountController {
             }
             if (request.getType().equals(RequestType.CAPTURE_FLAG2)) {
                 battleController.main(new Battle(battleKind, BattleMode.CAPTURE_FLAG_2,
-                        p1, p2, 4));
+                        p1, p2, request.getNumberOfFlags()));
                 // TODO: 11/04/2019 problem in this case about transfering number of flags
             }
         } while (!request.getType().equals(RequestType.EXIT));
@@ -133,12 +136,22 @@ class AccountController {
     private void chooseSecondPlayer(AccountRequest request, BattleKind battleKind) {
         do {
             request.getNewCommand();
+            view.printPlayersList(Game.getAccounts(), account);
             if (request.getType().equals(RequestType.SELECT_SECOND_PLAYER)) {
                 Account player2 = request.getSecondPlayer();
                 chooseGameMode(request, new Player(account.getMainDeck()),
                         new Player(player2.getMainDeck()), battleKind);
+                Account secondPlayer = Game.getAccount(request.getSecondPlayerUsername());
+                if (secondPlayer.isReadyToPlay()) {
+                    chooseGameMode(request, this.account, secondPlayer, battleKind);
+                } else {
+                    view.printSecondPlayerIsNotReady();
+                }
             }
         } while (!request.getType().equals(RequestType.EXIT));
+    }
+
+    public void chooseStoryGame(AccountRequest request, BattleKind battleKind) {
     }
 
 
