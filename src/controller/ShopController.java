@@ -1,10 +1,13 @@
 package controller;
 
 import models.Account;
-import models.Collection;
+import models.Enums.ErrorType;
 import models.Shop;
 import view.ShopRequest;
 import view.View;
+
+import static models.Enums.ErrorType.CARD_NOT_FOUND_IN_SHOP;
+import static models.Enums.ErrorType.NO_ERROR;
 
 class ShopController {
 
@@ -42,6 +45,8 @@ class ShopController {
                 case SHOW_COLLECTION_ITEMS_AND_CARDS:
                     showCollectionCards();
                     break;
+                case INVALID_COMMAND:
+                    view.printError(ErrorType.INVALID_COMMAND);
             }
 
         }
@@ -60,26 +65,45 @@ class ShopController {
         int cardID = request.getCardID();
         boolean isDone = shop.sell(cardID);
         if (isDone) {
-            view.successfullSellMessage();
+            view.successfulSellMessage();
         } else {
-            view.unSuccessfullSellMessage();
+            view.unSuccessfulSellMessage();
         }
     }
 
     public void buyCard(ShopRequest request) {
+        ErrorType error;
+        String cardName = request.getCardName();
+        if (shop.getCard(cardName) != null) {
+            error = shop.buy(cardName);
+        } else {
+            error = CARD_NOT_FOUND_IN_SHOP;
+        }
+        if (error != NO_ERROR) {
+            view.printError(error);
+        } else {
+            view.successfulBuyMessage();
+        }
 
     }
 
     public void searchInShop(ShopRequest request) {
+        // TODO: 03/05/2019 which ID should be passed
 
     }
 
     public void searchInCollection(ShopRequest request) {
-
+        String cardName = request.getCardName();
+        int state = shop.searchInCollection(cardName);
+        if (state != -1) {
+            view.printCardInCollection(cardName, state);
+        } else {
+            view.printNoCardWithThisName(cardName);
+        }
     }
 
     public void showCollectionCards() {
-
+        // TODO: 03/05/2019 working on print formatting
     }
 
 

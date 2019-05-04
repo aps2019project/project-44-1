@@ -1,12 +1,9 @@
 package view;
 
-import models.Enums.ErrorType;
-
 public class ShopRequest extends Request {
 
     @Override
     public RequestType getType() {
-        View view = new View();
         if (command.matches("search\\s\\w+"))
             return RequestType.SEARCH_SHOP;
         else if (command.matches("search collection\\s\\w+"))
@@ -15,20 +12,15 @@ public class ShopRequest extends Request {
             return RequestType.BUY;
         else if (command.matches("sell\\s\\w+"))
             return RequestType.SELL;
+        else if (command.matches("help"))
+            return RequestType.HELP;
+        else if (command.matches("exit"))
+            return RequestType.EXIT;
+        else if (command.matches("show"))
+            return RequestType.SHOW_SHOP_CARDS;
         else {
-            switch (command) {
-                case "help":
-                    return RequestType.HELP;
-                case "exit":
-                    return RequestType.EXIT;
-                case "show":
-                    return RequestType.SHOW_SHOP_CARDS;
-                default:
-                    view.printError(ErrorType.GENERAL_ERROR);
-            }
-
+            return RequestType.INVALID_COMMAND;
         }
-        return null;
     }
 
     public String getCardName() {

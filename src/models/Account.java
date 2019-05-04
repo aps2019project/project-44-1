@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class Account implements Comparable<Account> {
@@ -8,34 +9,19 @@ public class Account implements Comparable<Account> {
     private String username;
     private String password;
     private int money = 15000;
-    private int wins;
+    private int wins = 0;
     private ArrayList<Deck> decks = new ArrayList<>();
     private Collection collection = new Collection();
-    private Placeable[] hand = new Placeable[5];
-    ArrayList<MatchHistory> histories = new ArrayList<>();
-    private int mana;
+    ArrayList<MatchHistory> histories = new ArrayList<>();  //
     private Deck mainDeck = collection.getMainDeck();
-
-    public int getMana() {
-        return mana;
-    }
-
-    public void setMana(int mana) {
-        this.mana = mana;
-    }
 
     Account(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public void initializeHand() {
-        Random r = new Random();
-        for (int i = 0; i < 5; i++) {
-            int a = r.nextInt(20);
-            hand[i] = mainDeck.getMinions().get(a);
-            mainDeck.getMinions().remove(a);
-        }
+    public void increaseWins() {
+        wins++;
     }
 
     public Collection getCollection() {
@@ -50,24 +36,12 @@ public class Account implements Comparable<Account> {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public int getMoney() {
         return money;
-    }
-
-    public void setMoney(int money) {
-        this.money = money;
     }
 
     Deck getMainDeck() {
@@ -111,4 +85,46 @@ public class Account implements Comparable<Account> {
     public void decreaseMoney(int decreasedMoney) {
         this.money -= decreasedMoney;
     }
+
+    public boolean isReadyToPlay() {
+        if (collection.getMainDeck() == null) {
+            return false;
+        }
+        return collection.validateDeck(mainDeck.getName());
+    }
+
+}
+
+class Player {
+    private Placeable[] hand = new Placeable[5];
+    private int mana;
+    private Deck deck;
+
+    Player(Deck deck) {
+        this.deck = deck;
+        initializeHand();
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    private void initializeHand() {
+        Random r = new Random();
+        Iterator<Minion> iterator = deck.getMinions().iterator();
+        for (int i = 0; i < 5; i++) {
+            int a = r.nextInt(20);
+            hand[i] = deck.getMinions().get(a);
+            while (iterator.hasNext()) {
+                if (iterator.next().equals(hand[i]))
+                    iterator.remove();
+            }
+        }
+    }
+
+
 }

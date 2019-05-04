@@ -5,5 +5,4 @@ public interface Goal {
         return h1.getHP() <= 0 || h2.getHP() <= 0;
     }
 
-    boolean finishByFlag();
 }
