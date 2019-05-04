@@ -59,7 +59,7 @@ class AccountController {
             view.printGameKinds();
             request.getNewCommand();
             if (request.getType().equals(RequestType.STORY_GAME)) {
-                chooseStoryGame(request,battleKind);
+                chooseStoryGame(request, battleKind);
                 // TODO: 04/05/2019 list story game haro chejoori namayesh beadam?
             }
             if (request.getType().equals(RequestType.CUSTOM_GAME)) {
@@ -143,7 +143,8 @@ class AccountController {
                         new Player(player2.getMainDeck()), battleKind);
                 Account secondPlayer = Game.getAccount(request.getSecondPlayerUsername());
                 if (secondPlayer.isReadyToPlay()) {
-                    chooseGameMode(request, this.account, secondPlayer, battleKind);
+                    chooseGameMode(request, new Player(this.account.getMainDeck()),
+                            new Player(secondPlayer.getMainDeck()), battleKind);
                 } else {
                     view.printSecondPlayerIsNotReady();
                 }
