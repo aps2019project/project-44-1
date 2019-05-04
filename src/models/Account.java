@@ -82,7 +82,10 @@ public class Account implements Comparable<Account> {
         this.money -= decreasedMoney;
     }
 
-    public boolean isReadyToPlay() {
+    public boolean isReadyToPlay(){
+        if (collection.getMainDeck() == null){
+            return false;
+        }
         return collection.validateDeck(mainDeck.getName());
     }
 

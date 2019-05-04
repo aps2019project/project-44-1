@@ -29,7 +29,7 @@ public class AccountRequest extends Request {
             case "logout":
                 return RequestType.LOGOUT;
             default:
-                view.printError(ErrorType.GENERAL_ERROR);
+                view.printError(ErrorType.INVALID_COMMAND);
                 return RequestType.INVALID_COMMAND;
         }
     }
