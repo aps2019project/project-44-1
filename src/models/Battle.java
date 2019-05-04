@@ -1,18 +1,17 @@
 package models;
 
-import controller.AttackType;
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
-public class Battle {
+public class Battle implements Goal{
     private BattleKind battleKind;
-    private Account player1;
-    private Account player2;
+    private Player player1;
+    private Player player2;
     private Map map = new Map();
-    private static int flagNum;
     private BattleMode battleMode;
 
     public Battle(BattleKind battleKind, BattleMode battleMode, Account player1, Account player2) {
@@ -26,6 +25,8 @@ public class Battle {
         player2.getMainDeck().removeFromDeck(player2.getMainDeck().getHero());
         player1.initializeHand();
         player2.initializeHand();
+        Collections.shuffle(player1.getMainDeck().getDeckCards());
+        Collections.shuffle(player2.getMainDeck().getDeckCards());
     }
 
     private BattleMode getBattleMode() {
@@ -36,7 +37,7 @@ public class Battle {
         return flagNum;
     }
 
-    private Account getPlayer2() {
+    public Account getPlayer2() {
         return player2;
     }
 
@@ -100,4 +101,11 @@ public class Battle {
         return "";
     }       //#TODO
 
+    public Account getWinner(){
+        return winner;
+    }
+
+    public void setWinner(Account winner) {
+        this.winner = winner;
+    }
 }

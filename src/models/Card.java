@@ -7,17 +7,16 @@ public class Card extends Placeable implements Fight {
     private int AP;
     int HP;
     private Spell specialPower;
-
-    public AttackType getAttackType() {
-        return attackType;
-    }
-
+    private String inGameID;
     private AttackType attackType;
     private int range;
     private SpecialPowerActivation specialPowerActivation;
 
     void setSpecialPowerActivation(SpecialPowerActivation specialPowerActivation) {
         this.specialPowerActivation = specialPowerActivation;
+    }
+    public AttackType getAttackType() {
+        return attackType;
     }
 
     void setRange(int range) {
@@ -53,4 +52,12 @@ public class Card extends Placeable implements Fight {
         this.attackType = attackType;
     }
 
+    public String getInGameID() {
+        StringBuilder sb = new StringBuilder();
+        return sb.toString();
+    }
+
+    public void setInGameID(String inGameID) {
+        this.inGameID = inGameID;
+    }
 }

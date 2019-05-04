@@ -58,6 +58,10 @@ public class Shop {
         }
     }
 
+    public void setCards(ArrayList<Placeable> cards) {
+
+    }
+
     public void searchInShop(String cardName) {
     }
 

@@ -4,24 +4,25 @@ import models.Battle;
 import view.BattleRequest;
 import view.View;
 
-public class BattleController {
+class BattleController {
 
     private Battle battle;
     private View view = new View();
 
-    public void main(Battle battle) {
+    void main(Battle battle) {
         this.battle = battle;
         boolean isFinish = false;
         do {
             BattleRequest request = new BattleRequest();
             request.getNewCommand();
             if (request.getType().equals("exit")) {
+                battle.getWinner().increaseMoney(1000);        //#TODO exceptions
                 isFinish = true;
             }
-            if (request.getType().equals("help")) {
+            if (request.getType().equals("help")) {         //#TODO eazzz
                 helpInBattle();
             }
-            if (request.getType().equals("show game info")) {
+            if (request.getType().equals("show game info")) {        //#TODO eazzz
                 showGameInfo();
             }
             if (request.getType().equals("show my minions")) {
@@ -175,7 +176,7 @@ public class BattleController {
 
     private void helpInBattle() {
 
-    }
+    }       //#TODO
 
     private void showMenuInGraveyard() {
 
