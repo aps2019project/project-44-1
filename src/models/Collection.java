@@ -17,7 +17,7 @@ public class Collection implements Comparable<Placeable> {
 
     public int getCollectionID(String cardName) {
         for (HashMap.Entry<Integer, Placeable> entry : cardHashMap.entrySet()) {
-            if (entry.getValue().name.equals(cardName)) {
+            if (entry.getValue().getName().equals(cardName)) {
                 return entry.getValue().getID();
             }
         }
@@ -26,7 +26,7 @@ public class Collection implements Comparable<Placeable> {
 
     public boolean isInCollection(String cardName) {
         for (HashMap.Entry<Integer, Placeable> entry : cardHashMap.entrySet()) {
-            if (entry.getValue().name.equals(cardName)) {
+            if (entry.getValue().getName().equals(cardName)) {
                 return true;
             }
         }

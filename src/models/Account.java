@@ -113,6 +113,9 @@ public class Account implements Comparable<Account> {
     }
 
     public boolean isReadyToPlay(){
+        if (collection.getMainDeck() == null){
+            return false;
+        }
         return collection.validateDeck(mainDeck.getName());
     }
 }
