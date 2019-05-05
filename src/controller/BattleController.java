@@ -1,7 +1,7 @@
 package controller;
 
-import models.Account;
 import models.Battle;
+import models.Game;
 import models.MatchHistory;
 import view.BattleRequest;
 import view.View;
@@ -202,13 +202,17 @@ class BattleController {
 
     }
 
-    public void addThisBattleToBattleHistory(Account winner) {
-        if (battle.getPlayer2().equals(winner)) {
-            battle.getPlayer2().addMatchHistory(new MatchHistory(battle.getPlayer1().getUsername(), true));
-            battle.getPlayer1().addMatchHistory(new MatchHistory(battle.getPlayer2().getUsername(), false));
+    public void addThisBattleToBattleHistory() {
+        if (battle.isPlayer1Won()) {
+            Game.getInstance().getAccount1().addMatchHistory(new MatchHistory
+                    (Game.getInstance().getAccount1().getUsername(), true));
+            Game.getInstance().getAccount2().addMatchHistory(new MatchHistory
+                    (Game.getInstance().getAccount2().getUsername(), false));
         } else {
-            battle.getPlayer2().addMatchHistory(new MatchHistory(battle.getPlayer1().getUsername(), false));
-            battle.getPlayer1().addMatchHistory(new MatchHistory(battle.getPlayer2().getUsername(), true));
+            Game.getInstance().getAccount1().addMatchHistory(new MatchHistory
+                    (Game.getInstance().getAccount1().getUsername(), false));
+            Game.getInstance().getAccount2().addMatchHistory(new MatchHistory
+                    (Game.getInstance().getAccount2().getUsername(), true));
         }
     }
 

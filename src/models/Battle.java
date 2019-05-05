@@ -5,14 +5,15 @@ import models.Enums.BattleMode;
 
 import java.util.ArrayList;
 
-public class Battle implements Goal {
+public class Battle implements Goal, Fight {
     private BattleKind battleKind;
     private Player player1;
     private Player player2;
     private Map map = new Map();
     private BattleMode battleMode;
     private int turn = 1;
-    private int flagNumber = 0;
+    private int flagNumber;
+    private boolean player1Won;
 
     public Battle(BattleKind battleKind, BattleMode battleMode, Player player1, Player player2, int flagNumber) {
         this.battleKind = battleKind;
@@ -38,8 +39,7 @@ public class Battle implements Goal {
         return battleKind;
     }
 
-
-    private Player getPlayer1() {
+    public Player getPlayer1() {
         return player1;
     }
 
@@ -79,4 +79,7 @@ public class Battle implements Goal {
         return main(battleMode, player1.getDeck().getHero(), player2.getDeck().getHero());
     }
 
+    public boolean isPlayer1Won() {
+        return player1Won;
+    }
 }

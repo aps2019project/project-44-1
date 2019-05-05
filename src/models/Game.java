@@ -1,16 +1,29 @@
 package models;
 
-import view.View;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Game {
     private static ArrayList<Account> accounts = new ArrayList<>();
-    private View view = new View();
-    private Account account;
+    private Account account1;
+    private Account account2;
     private static int ID = 0;
+    private static Game game = new Game();
 
+    private Game() {
+    }
+
+    public Account getAccount1() {
+        return account1;
+    }
+
+    public Account getAccount2() {
+        return account2;
+    }
+
+    public static Game getInstance() {
+        return game;
+    }
 
     public static ArrayList<Account> getAccounts() {
         return accounts;
@@ -29,10 +42,17 @@ public class Game {
         addAccount(new Account(username, password));
     }
 
+    public void setAccount1(Account account1) {
+        this.account1 = account1;
+    }
+
+    public void setAccount2(Account account2) {
+        this.account2 = account2;
+    }
+
     private void addAccount(Account account) {
         accounts.add(account);
     }
-
 
     public ArrayList<Account> getSortedAccounts() {
         Collections.sort(accounts);
@@ -68,6 +88,5 @@ public class Game {
                 "4.help\n" +
                 "5.exit";
     }
-
 
 }

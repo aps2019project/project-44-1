@@ -7,14 +7,14 @@ import view.GameRequest;
 import view.View;
 
 public class GameController {
-    private Game game = new Game();
+    private Game game = Game.getInstance();
     private View view = new View();
 
     public void main() {
         GameRequest request;
         boolean isFinish = false;
         do {
-            view.printStartMenu();/**show menu*/
+            view.printStartMenu();          /*show menu*/
             request = new GameRequest();
             request.getNewCommand();
             switch (request.getType()) {
@@ -44,6 +44,7 @@ public class GameController {
         String password = request.getPassword(view);
         if (account != null) {
             if (game.isValidPassword(account, password)) {
+                game.setAccount1(account);
                 accountController.main(account);
             } else {
                 request.setError(ErrorType.INVALID_PASSWORD);
