@@ -60,4 +60,13 @@ public class Card extends Placeable implements Fight {
     public void setInGameID(String inGameID) {
         this.inGameID = inGameID;
     }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Card card = (Card) super.clone();
+        card.attackType = this.attackType;
+        card.specialPower = this.specialPower;
+        card.specialPowerActivation = this.specialPowerActivation;
+        return card;
+    }
 }

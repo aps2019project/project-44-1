@@ -1,107 +1,819 @@
 {
-    "minions":[
-        {"name":"KamandarFars","cost":300,"neededMana":2,"HP":6,"AP":4,"attackType":"ranged","attackRange":7,"specialPower":"NONE","specialPowerCoolDown":-1},
-        {"name": "ShamshirzanFars" , "cost": 400 ,"neededMana": 2 , "HP" : 6 , "AP": 4 , "attackType" : "melee" , "attackRange": -1 , "specialPower" : "" , "specialPowerCoolDown" : "passive"},
-        {"name": "neyzedarfars" , "cost" : 500 , "neededMana" : 1 , "HP" : 5 , "AP" : 3 , "attackType" : "hybrid" , "attackRang" : 3 , "specialPower" : "" , "specialPowerCoolDown" : -1},
-        {"name": "asbsavarfars" , "cost" : 200 , "neededMana" : 4 , "HP" : 10 , "AP" : 6 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : -1},
-        {"name": "pahlavanfars" , "cost" : 600 , "neededMana" : 9 , "HP" : 24 , "AP" : 6 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : "On attack"},
-        {"name": "sepahsalarfars" , "cost" : 800 , "neededMana" : 7 , "HP" : 12 , "AP" : 4 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : "combo"},
-        {"name": "kamandartorani" , "cost" : 500 , "neededMana" : 1 , "HP" : 3 , "AP" : 4 , "attackType" : "ranged" , "attackRang" : 5 , "specialPower" : "" , "specialPowerCoolDown" : -1},
-        {"name": "ghollabsangdartorani" , "cost" : 600 , "neededMana" : 1 , "HP" : 5 , "AP" : 2 , "attackType" : "ranged" , "attackRang" : 7 , "specialPower" : "" , "specialPowerCoolDown" : -1},
-        {"name": "neyzedartorani" , "cost" : 600 , "neededMana" : 1 , "HP" : 4 , "AP" : 4 , "attackType" : "hybrid" , "attackRang" : 3 , "specialPower" : "" , "specialPowerCoolDown" : -1},
-        {"name": "jasostorani" , "cost" : 700 , "neededMana" : 4 , "HP" : 6 , "AP" : 6 , "attackType" : "melee" , "attackRang" : 3 , "specialPower" : "" , "specialPowerCoolDown" : "On attack"},
-        {"name": "ghorzdartorani" , "cost" : 450 , "neededMana" : 2 , "HP" : 3 , "AP" : 10 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : -1},
-        {"name": "shahzadetorani" , "cost" : 800 , "neededMana" : 6 , "HP" : 6 , "AP" : 10 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : "combo"},
-        {"name": "divsiah" , "cost" : 300 , "neededMana" : 9 , "HP" : 14 , "AP" : 10 , "attackType" : "hybrid" , "attackRang" : 7 , "specialPower" : "" , "specialPowerCoolDown" : -1},
-        {"name": "gholsangandaz" , "cost" : 300 , "neededMana" : 9 , "HP" : 12 , "AP" : 12 , "attackType" : "ranged" , "attackRang" : 7 , "specialPower" : "" , "specialPowerCoolDown" : -1},
-        {"name": "oghab" , "cost" : 200 , "neededMana" : 2 , "HP" : 0 , "AP" : 2 , "attackType" : "ranged" , "attackRang" : 3 , "specialPower" : "" , "specialPowerCoolDown" : "passive"},
-        {"name": "divghorazsavar" , "cost" : 300 , "neededMana" : 6 , "HP" : 16 , "AP" : 8 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : -1},
-        {"name": "ghlebozorg" , "cost" : 500 , "neededMana" : 7 , "HP" : 12 , "AP" : 11 , "attackType" : "hybrid" , "attackRang" : 3 , "specialPower" : "" , "specialPowerCoolDown" : "On Death"},
-        {"name": "marsammi" , "cost" : 300 , "neededMana" : 4 , "HP" : 5 , "AP" : 6 , "attackType" : "ranged" , "attackRang" : 4 , "specialPower" : "" , "specialPowerCoolDown" : "On attack"},
-        {"name": "ejhdehaatashandaz" , "cost" : 250 , "neededMana" : 5 , "HP" : 9 , "AP" : 5 , "attackType" : "ranged" , "attackRang" : 4 , "specialPower" : "" , "specialPowerCoolDown" : -1},
-        {"name": "shirdarande" , "cost" : 600 , "neededMana" : 2 , "HP" : 1 , "AP" : 8 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : "On attack"},
-        {"name": "margholpeykar" , "cost" : 500 , "neededMana" : 8 , "HP" : 14 , "AP" : 7 , "attackType" : "ranged" , "attackRang" : 5 , "specialPower" : "" , "specialPowerCoolDown" : "On Spawn"},
-        {"name": "ghorghsefid" , "cost" : 400 , "neededMana" : 5 , "HP" : 8 , "AP" : 2 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : "On attack"},
-        {"name": "palang" , "cost" : 400 , "neededMana" : 4 , "HP" : 6 , "AP" : 2 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : "On attack"},
-        {"name": "ghorgh" , "cost" : 400 , "neededMana" : 3 , "HP" : 6 , "AP" : 1 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : "On attack"},
-        {"name": "jadoghar" , "cost" : 550 , "neededMana" : 4 , "HP" : 5 , "AP" : 4 , "attackType" : "ranged" , "attackRang" : 3 , "specialPower" : "" , "specialPowerCoolDown" : "passive"},
-        {"name": "jadogharaazam" , "cost" : 550 , "neededMana" : 6 , "HP" : 6 , "AP" : 6 , "attackType" : "ranged" , "attackRang" : 5 , "specialPower" : "" , "specialPowerCoolDown" : "passive"},
-        {"name": "jen" , "cost" : 500 , "neededMana" : 5 , "HP" : 10 , "AP" : 4 , "attackType" : "ranged" , "attackRang" : 4 , "specialPower" : "" , "specialPowerCoolDown" : "passive"},
-        {"name": "ghorazvahshi" , "cost" : 500 , "neededMana" : 6 , "HP" : 10 , "AP" : 14 , "attackType" : "melee" , "attackRang" : 3 , "specialPower" : "" , "specialPowerCoolDown" : "On defend"},
-        {"name": "piran" , "cost" : 400 , "neededMana" : 8 , "HP" : 20 , "AP" : 12 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : "On defend"},
-        {"name": "giv" , "cost" : 450 , "neededMana" : 4 , "HP" : 5 , "AP" : 7 , "attackType" : "ranged" , "attackRang" : 5 , "specialPower" : "" , "specialPowerCoolDown" : "On defend"},
-        {"name": "bahman" , "cost" : 450 , "neededMana" : 8 , "HP" : 16 , "AP" : 9 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : "On respawn"},
-        {"name": "ashkbos" , "cost" : 400 , "neededMana" : 7 , "HP" : 14 , "AP" : 8 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : "On defend"},
-        {"name": "eeraj" , "cost" : 500 , "neededMana" : 4 , "HP" : 6 , "AP" : 20 , "attackType" : "ranged" , "attackRang" : 3 , "specialPower" : "" , "specialPowerCoolDown" : -1},
-        {"name": "gholbozorg" , "cost" : 500 , "neededMana" : 9 , "HP" : 30 , "AP" : 8 , "attackType" : "hybrid" , "attackRang" : 2 , "specialPower" : "" , "specialPowerCoolDown" : -1},
-        {"name": "ghol2sar" , "cost" : 550 , "neededMana" : 4 , "HP" : 10 , "AP" : 4 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : "passive"},
-        {"name": "nanesarma" , "cost" : 500 , "neededMana" : 3 , "HP" : 3 , "AP" : 4 , "attackType" : "ranged" , "attackRang" : 5 , "specialPower" : "" , "specialPowerCoolDown" : "On respawn"},
-        {"name": "foladzereh" , "cost" : 650 , "neededMana" : 3 , "HP" : 1 , "AP" : 1 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : "On respawn"},
-        {"name": "siavash" , "cost" : 350 , "neededMana" : 4 , "HP" : 8 , "AP" : 5 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : "On death"},
-        {"name": "shahghol" , "cost" : 600 , "neededMana" : 5 , "HP" : 10 , "AP" : 4 , "attackType" : "melee" , "attackRang" : -1 , "specialPower" : "" , "specialPowerCoolDown" : "combo"},
-        {"name": "arjhanghdiv" , "cost" : 600 , "neededMana" : 3 , "HP" : 6 , "AP" : 6 , "attackType" : "melee" , "attackRang" : 3 , "specialPower" : "" , "specialPowerCoolDown" : "combo"}
-    ],
+  "minions": [
+    {
+      "name": "KamandarFars",
+      "cost": 300,
+      "neededMana": 2,
+      "HP": 6,
+      "AP": 4,
+      "attackType": "ranged",
+      "attackRange": 7,
+      "specialPower": "NONE",
+      "specialPowerCoolDown": -1
+    },
+    {
+      "name": "ShamshirzanFars",
+      "cost": 400,
+      "neededMana": 2,
+      "HP": 6,
+      "AP": 4,
+      "attackType": "melee",
+      "attackRange": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": "passive"
+    },
+    {
+      "name": "neyzedarfars",
+      "cost": 500,
+      "neededMana": 1,
+      "HP": 5,
+      "AP": 3,
+      "attackType": "hybrid",
+      "attackRang": 3,
+      "specialPower": "",
+      "specialPowerCoolDown": -1
+    },
+    {
+      "name": "asbsavarfars",
+      "cost": 200,
+      "neededMana": 4,
+      "HP": 10,
+      "AP": 6,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": -1
+    },
+    {
+      "name": "pahlavanfars",
+      "cost": 600,
+      "neededMana": 9,
+      "HP": 24,
+      "AP": 6,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": "On attack"
+    },
+    {
+      "name": "sepahsalarfars",
+      "cost": 800,
+      "neededMana": 7,
+      "HP": 12,
+      "AP": 4,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": "combo"
+    },
+    {
+      "name": "kamandartorani",
+      "cost": 500,
+      "neededMana": 1,
+      "HP": 3,
+      "AP": 4,
+      "attackType": "ranged",
+      "attackRang": 5,
+      "specialPower": "",
+      "specialPowerCoolDown": -1
+    },
+    {
+      "name": "ghollabsangdartorani",
+      "cost": 600,
+      "neededMana": 1,
+      "HP": 5,
+      "AP": 2,
+      "attackType": "ranged",
+      "attackRang": 7,
+      "specialPower": "",
+      "specialPowerCoolDown": -1
+    },
+    {
+      "name": "neyzedartorani",
+      "cost": 600,
+      "neededMana": 1,
+      "HP": 4,
+      "AP": 4,
+      "attackType": "hybrid",
+      "attackRang": 3,
+      "specialPower": "",
+      "specialPowerCoolDown": -1
+    },
+    {
+      "name": "jasostorani",
+      "cost": 700,
+      "neededMana": 4,
+      "HP": 6,
+      "AP": 6,
+      "attackType": "melee",
+      "attackRang": 3,
+      "specialPower": "",
+      "specialPowerCoolDown": "On attack"
+    },
+    {
+      "name": "ghorzdartorani",
+      "cost": 450,
+      "neededMana": 2,
+      "HP": 3,
+      "AP": 10,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": -1
+    },
+    {
+      "name": "shahzadetorani",
+      "cost": 800,
+      "neededMana": 6,
+      "HP": 6,
+      "AP": 10,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": "combo"
+    },
+    {
+      "name": "divsiah",
+      "cost": 300,
+      "neededMana": 9,
+      "HP": 14,
+      "AP": 10,
+      "attackType": "hybrid",
+      "attackRang": 7,
+      "specialPower": "",
+      "specialPowerCoolDown": -1
+    },
+    {
+      "name": "gholsangandaz",
+      "cost": 300,
+      "neededMana": 9,
+      "HP": 12,
+      "AP": 12,
+      "attackType": "ranged",
+      "attackRang": 7,
+      "specialPower": "",
+      "specialPowerCoolDown": -1
+    },
+    {
+      "name": "oghab",
+      "cost": 200,
+      "neededMana": 2,
+      "HP": 0,
+      "AP": 2,
+      "attackType": "ranged",
+      "attackRang": 3,
+      "specialPower": "",
+      "specialPowerCoolDown": "passive"
+    },
+    {
+      "name": "divghorazsavar",
+      "cost": 300,
+      "neededMana": 6,
+      "HP": 16,
+      "AP": 8,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": -1
+    },
+    {
+      "name": "ghlebozorg",
+      "cost": 500,
+      "neededMana": 7,
+      "HP": 12,
+      "AP": 11,
+      "attackType": "hybrid",
+      "attackRang": 3,
+      "specialPower": "",
+      "specialPowerCoolDown": "On Death"
+    },
+    {
+      "name": "marsammi",
+      "cost": 300,
+      "neededMana": 4,
+      "HP": 5,
+      "AP": 6,
+      "attackType": "ranged",
+      "attackRang": 4,
+      "specialPower": "",
+      "specialPowerCoolDown": "On attack"
+    },
+    {
+      "name": "ejhdehaatashandaz",
+      "cost": 250,
+      "neededMana": 5,
+      "HP": 9,
+      "AP": 5,
+      "attackType": "ranged",
+      "attackRang": 4,
+      "specialPower": "",
+      "specialPowerCoolDown": -1
+    },
+    {
+      "name": "shirdarande",
+      "cost": 600,
+      "neededMana": 2,
+      "HP": 1,
+      "AP": 8,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": "On attack"
+    },
+    {
+      "name": "margholpeykar",
+      "cost": 500,
+      "neededMana": 8,
+      "HP": 14,
+      "AP": 7,
+      "attackType": "ranged",
+      "attackRang": 5,
+      "specialPower": "",
+      "specialPowerCoolDown": "On Spawn"
+    },
+    {
+      "name": "ghorghsefid",
+      "cost": 400,
+      "neededMana": 5,
+      "HP": 8,
+      "AP": 2,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": "On attack"
+    },
+    {
+      "name": "palang",
+      "cost": 400,
+      "neededMana": 4,
+      "HP": 6,
+      "AP": 2,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": "On attack"
+    },
+    {
+      "name": "ghorgh",
+      "cost": 400,
+      "neededMana": 3,
+      "HP": 6,
+      "AP": 1,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": "On attack"
+    },
+    {
+      "name": "jadoghar",
+      "cost": 550,
+      "neededMana": 4,
+      "HP": 5,
+      "AP": 4,
+      "attackType": "ranged",
+      "attackRang": 3,
+      "specialPower": "",
+      "specialPowerCoolDown": "passive"
+    },
+    {
+      "name": "jadogharaazam",
+      "cost": 550,
+      "neededMana": 6,
+      "HP": 6,
+      "AP": 6,
+      "attackType": "ranged",
+      "attackRang": 5,
+      "specialPower": "",
+      "specialPowerCoolDown": "passive"
+    },
+    {
+      "name": "jen",
+      "cost": 500,
+      "neededMana": 5,
+      "HP": 10,
+      "AP": 4,
+      "attackType": "ranged",
+      "attackRang": 4,
+      "specialPower": "",
+      "specialPowerCoolDown": "passive"
+    },
+    {
+      "name": "ghorazvahshi",
+      "cost": 500,
+      "neededMana": 6,
+      "HP": 10,
+      "AP": 14,
+      "attackType": "melee",
+      "attackRang": 3,
+      "specialPower": "",
+      "specialPowerCoolDown": "On defend"
+    },
+    {
+      "name": "piran",
+      "cost": 400,
+      "neededMana": 8,
+      "HP": 20,
+      "AP": 12,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": "On defend"
+    },
+    {
+      "name": "giv",
+      "cost": 450,
+      "neededMana": 4,
+      "HP": 5,
+      "AP": 7,
+      "attackType": "ranged",
+      "attackRang": 5,
+      "specialPower": "",
+      "specialPowerCoolDown": "On defend"
+    },
+    {
+      "name": "bahman",
+      "cost": 450,
+      "neededMana": 8,
+      "HP": 16,
+      "AP": 9,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": "On respawn"
+    },
+    {
+      "name": "ashkbos",
+      "cost": 400,
+      "neededMana": 7,
+      "HP": 14,
+      "AP": 8,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": "On defend"
+    },
+    {
+      "name": "eeraj",
+      "cost": 500,
+      "neededMana": 4,
+      "HP": 6,
+      "AP": 20,
+      "attackType": "ranged",
+      "attackRang": 3,
+      "specialPower": "",
+      "specialPowerCoolDown": -1
+    },
+    {
+      "name": "gholbozorg",
+      "cost": 500,
+      "neededMana": 9,
+      "HP": 30,
+      "AP": 8,
+      "attackType": "hybrid",
+      "attackRang": 2,
+      "specialPower": "",
+      "specialPowerCoolDown": -1
+    },
+    {
+      "name": "ghol2sar",
+      "cost": 550,
+      "neededMana": 4,
+      "HP": 10,
+      "AP": 4,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": "passive"
+    },
+    {
+      "name": "nanesarma",
+      "cost": 500,
+      "neededMana": 3,
+      "HP": 3,
+      "AP": 4,
+      "attackType": "ranged",
+      "attackRang": 5,
+      "specialPower": "",
+      "specialPowerCoolDown": "On respawn"
+    },
+    {
+      "name": "foladzereh",
+      "cost": 650,
+      "neededMana": 3,
+      "HP": 1,
+      "AP": 1,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": "On respawn"
+    },
+    {
+      "name": "siavash",
+      "cost": 350,
+      "neededMana": 4,
+      "HP": 8,
+      "AP": 5,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": "On death"
+    },
+    {
+      "name": "shahghol",
+      "cost": 600,
+      "neededMana": 5,
+      "HP": 10,
+      "AP": 4,
+      "attackType": "melee",
+      "attackRang": -1,
+      "specialPower": "",
+      "specialPowerCoolDown": "combo"
+    },
+    {
+      "name": "arjhanghdiv",
+      "cost": 600,
+      "neededMana": 3,
+      "HP": 6,
+      "AP": 6,
+      "attackType": "melee",
+      "attackRang": 3,
+      "specialPower": "",
+      "specialPowerCoolDown": "combo"
+    }
+  ],
   "Spell": [
-    {"name": "Total Disarm" , "cost": 1000 ,"neededMana": 0 ,"target": "" , "affect": ""},
-    {"name": "Area Dispel" , "cost": 1500 ,"neededMana": 2 ,"target": "" , "affect": ""},
-    {"name": "Empower" , "cost": 250 ,"neededMana": 1 ,"target": "" , "affect": ""},
-    {"name": "Fireball" , "cost": 400 ,"neededMana": 1 ,"target": "" , "affect": ""},
-    {"name": "Hellfire" , "cost": 600 ,"neededMana": 3 ,"target": "" , "affect": ""},
-    {"name": "Lighting Bolt" , "cost": 1250 ,"neededMana": 2 ,"target": "" , "affect": ""},
-    {"name": "Poison Lake" , "cost": 900 ,"neededMana": 5 ,"target": "" , "affect": ""},
-    {"name": "Madness" , "cost": 650 ,"neededMana": 0 ,"target": "" , "affect": ""},
-    {"name": "All Disarm" , "cost": 2000 ,"neededMana": 9 ,"target": "" , "affect": ""},
-    {"name": "All Poison" , "cost": 1500 ,"neededMana": 8 ,"target": "" , "affect": ""},
-    {"name": "Dispel" , "cost": 2100 ,"neededMana": 0 ,"target": "" , "affect": ""},
-    {"name": "Health With profit" , "cost": 2250 ,"neededMana": 0 ,"target": "" , "affect": ""},
-    {"name": "Ghaza bokhor joon begiri" , "cost": 2500 ,"neededMana": 2 ,"target": "" , "affect": ""},
-    {"name": "All Power" , "cost": 2000 ,"neededMana": 4 ,"target": "" , "affect": ""},
-    {"name": "All Attack" , "cost": 1500 ,"neededMana": 4 ,"target": "" , "affect": ""},
-    {"name": "Weakening" , "cost": 1000 ,"neededMana": 1 ,"target": "" , "affect": ""},
-    {"name": "Sacrifice" , "cost": 1600 ,"neededMana": 3 ,"target": "", "affect": ""},
-    {"name": "Kings Guard" , "cost": 1750 ,"neededMana": 3 ,"target": "", "affect": ""},
-    {"name": "Shock" , "cost": 1200 ,"neededMana": 1 ,"target": "", "affect": ""}
+    {
+      "name": "Total Disarm",
+      "cost": 1000,
+      "neededMana": 0,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "Area Dispel",
+      "cost": 1500,
+      "neededMana": 2,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "Empower",
+      "cost": 250,
+      "neededMana": 1,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "Fireball",
+      "cost": 400,
+      "neededMana": 1,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "Hellfire",
+      "cost": 600,
+      "neededMana": 3,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "Lighting Bolt",
+      "cost": 1250,
+      "neededMana": 2,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "Poison Lake",
+      "cost": 900,
+      "neededMana": 5,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "Madness",
+      "cost": 650,
+      "neededMana": 0,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "All Disarm",
+      "cost": 2000,
+      "neededMana": 9,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "All Poison",
+      "cost": 1500,
+      "neededMana": 8,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "Dispel",
+      "cost": 2100,
+      "neededMana": 0,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "Health With profit",
+      "cost": 2250,
+      "neededMana": 0,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "Ghaza bokhor joon begiri",
+      "cost": 2500,
+      "neededMana": 2,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "All Power",
+      "cost": 2000,
+      "neededMana": 4,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "All Attack",
+      "cost": 1500,
+      "neededMana": 4,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "Weakening",
+      "cost": 1000,
+      "neededMana": 1,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "Sacrifice",
+      "cost": 1600,
+      "neededMana": 3,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "Kings Guard",
+      "cost": 1750,
+      "neededMana": 3,
+      "target": "",
+      "effect": ""
+    },
+    {
+      "name": "Shock",
+      "cost": 1200,
+      "neededMana": 1,
+      "target": "",
+      "effect": ""
+    }
   ],
   "Hero": [
-    {"name": "divsefid" , "cost": 8000 ,"HP": 50 ,"AP": 4 , "attackType": "melee" ,"attackRang": -1 ,"spell": "" ,"Mp": 1 ,"coolDown": 2},
-    {"name": "simorgh" , "cost": 9000 ,"HP": 50 ,"AP": 4 , "attackType": "melee" ,"attackRang": -1 ,"spell": "" ,"Mp": 3 ,"cool down": 8},
-    {"name": "ejhdeha" , "cost": 8000 ,"HP": 50 ,"AP": 4 , "attackType": "melee" ,"attackRang": -1 ,"spell": "" ,"Mp": 0 ,"cool down": 1},
-    {"name": "rakhsh" , "cost": 8000 ,"HP": 50 ,"AP": 4 , "attackType": "melee" ,"attackRang": -1 ,"spell": "" ,"Mp": 1 ,"cool down": 2},
-    {"name": "zahhak" , "cost": 10000,"HP": 50 ,"AP": 4 , "attackType": "melee" ,"attackRang": -1 ,"spell": "" ,"Mp": 1 ,"cool down": 3},
-    {"name": "kave" , "cost": 8000 ,"HP": 50 ,"AP": 4 , "attackType": "melee" ,"attackRang": -1 ,"spell": "" ,"Mp": 1 ,"cool down": 3},
-    {"name": "arash" , "cost": 10000 ,"HP": 30 ,"AP": 2 , "attackType": "ranged" ,"attackRang": 6 ,"spell": "" ,"Mp": 2 ,"cool down": 2},
-    {"name": "afsane" , "cost": 11000 ,"HP": 40 ,"AP": 3 , "attackType": "ranged" ,"attackRang": 3 ,"spell": "" ,"Mp": 1 ,"cool down": 2},
-    {"name": "esfandiar" , "cost": 12000 ,"HP": 35 ,"AP": 3 , "attackType": "hybrid" ,"attackRang": 3 ,"spell": "" ,"Mp": 0 ,"cool down": 1},
-    {"name": "rostam" , "cost": 8000 ,"HP": 55 ,"AP": 7 , "attackType": "hybrid" ,"attackRang": 4 ,"spell": "" ,"Mp": -1 ,"cool down": -1}
+    {
+      "name": "divsefid",
+      "cost": 8000,
+      "HP": 50,
+      "AP": 4,
+      "attackType": "melee",
+      "attackRang": -1,
+      "spell": "",
+      "Mp": 1,
+      "coolDown": 2
+    },
+    {
+      "name": "simorgh",
+      "cost": 9000,
+      "HP": 50,
+      "AP": 4,
+      "attackType": "melee",
+      "attackRang": -1,
+      "spell": "",
+      "Mp": 3,
+      "cool down": 8
+    },
+    {
+      "name": "ejhdeha",
+      "cost": 8000,
+      "HP": 50,
+      "AP": 4,
+      "attackType": "melee",
+      "attackRang": -1,
+      "spell": "",
+      "Mp": 0,
+      "cool down": 1
+    },
+    {
+      "name": "rakhsh",
+      "cost": 8000,
+      "HP": 50,
+      "AP": 4,
+      "attackType": "melee",
+      "attackRang": -1,
+      "spell": "",
+      "Mp": 1,
+      "cool down": 2
+    },
+    {
+      "name": "zahhak",
+      "cost": 10000,
+      "HP": 50,
+      "AP": 4,
+      "attackType": "melee",
+      "attackRang": -1,
+      "spell": "",
+      "Mp": 1,
+      "cool down": 3
+    },
+    {
+      "name": "kave",
+      "cost": 8000,
+      "HP": 50,
+      "AP": 4,
+      "attackType": "melee",
+      "attackRang": -1,
+      "spell": "",
+      "Mp": 1,
+      "cool down": 3
+    },
+    {
+      "name": "arash",
+      "cost": 10000,
+      "HP": 30,
+      "AP": 2,
+      "attackType": "ranged",
+      "attackRang": 6,
+      "spell": "",
+      "Mp": 2,
+      "cool down": 2
+    },
+    {
+      "name": "afsane",
+      "cost": 11000,
+      "HP": 40,
+      "AP": 3,
+      "attackType": "ranged",
+      "attackRang": 3,
+      "spell": "",
+      "Mp": 1,
+      "cool down": 2
+    },
+    {
+      "name": "esfandiar",
+      "cost": 12000,
+      "HP": 35,
+      "AP": 3,
+      "attackType": "hybrid",
+      "attackRang": 3,
+      "spell": "",
+      "Mp": 0,
+      "cool down": 1
+    },
+    {
+      "name": "rostam",
+      "cost": 8000,
+      "HP": 55,
+      "AP": 7,
+      "attackType": "hybrid",
+      "attackRang": 4,
+      "spell": "",
+      "Mp": -1,
+      "cool down": -1
+    }
   ],
   "Items": [
-    {"name": "tajdanaei" , "cost": 300 , "affect": ""},
-    {"name": "namossepar" , "cost": 4000 , "affect": ""},
-    {"name": "kamandamol" , "cost": 3000 , "affect": ""},
-    {"name": "joonbaw" , "cost": -1 , "affect": ""},
-    {"name": "tir3shakh" , "cost": -1 , "affect": ""},
-    {"name": "parsimorgh" , "cost": 3500 , "affect": ""},
-    {"name": "exir" , "cost": -1 , "affect": ""},
-    {"name": "majonmana" , "cost": -1 , "affect": ""},
-    {"name": "majonroeintani" , "cost": -1 , "affect": ""},
-    {"name": "nefrinmargh" , "cost": -1 , "affect": ""},
-    {"name": "random damage" , "cost": -1 , "affect": ""},
-    {"name": "terror hood" , "cost": 20000 , "affect": ""},
-    {"name": "blades of agility" , "cost": -1 , "affect": ""},
-    {"name": "king killer" , "cost": 9000 , "affect": ""},
-    {"name": "assassination dagger" , "cost": 5000 , "affect": ""},
-    {"name": "poisonous dagger" , "cost": 7000 , "affect": ""},
-    {"name": "shock hammer" , "cost": 15000 , "affect": ""},
-    {"name": "soul eater" , "cost": 25000 , "affect": ""},
-    {"name": "ghosltamid" , "cost": 20000 , "affect": ""},
-    {"name": "shamshirchini" , "cost": -1 , "affect": ""}
+    {
+      "name": "tajdanaei",
+      "cost": 300,
+      "effect": ""
+    },
+    {
+      "name": "namossepar",
+      "cost": 4000,
+      "effect": ""
+    },
+    {
+      "name": "kamandamol",
+      "cost": 3000,
+      "effect": ""
+    },
+    {
+      "name": "joonbaw",
+      "cost": -1,
+      "effect": ""
+    },
+    {
+      "name": "tir3shakh",
+      "cost": -1,
+      "effect": ""
+    },
+    {
+      "name": "parsimorgh",
+      "cost": 3500,
+      "effect": ""
+    },
+    {
+      "name": "exir",
+      "cost": -1,
+      "effect": ""
+    },
+    {
+      "name": "majonmana",
+      "cost": -1,
+      "effect": ""
+    },
+    {
+      "name": "majonroeintani",
+      "cost": -1,
+      "effect": ""
+    },
+    {
+      "name": "nefrinmarg",
+      "cost": -1,
+      "effect": ""
+    },
+    {
+      "name": "random damage",
+      "cost": -1,
+      "effect": ""
+    },
+    {
+      "name": "terror hood",
+      "cost": 20000,
+      "effect": ""
+    },
+    {
+      "name": "blades of agility",
+      "cost": -1,
+      "effect": ""
+    },
+    {
+      "name": "king killer",
+      "cost": 9000,
+      "effect": ""
+    },
+    {
+      "name": "assassination dagger",
+      "cost": 5000,
+      "effect": ""
+    },
+    {
+      "name": "poisonous dagger",
+      "cost": 7000,
+      "effect": ""
+    },
+    {
+      "name": "shock hammer",
+      "cost": 15000,
+      "effect": ""
+    },
+    {
+      "name": "soul eater",
+      "cost": 25000,
+      "effect": ""
+    },
+    {
+      "name": "ghosltamid",
+      "cost": 20000,
+      "effect": ""
+    },
+    {
+      "name": "shamshirchini",
+      "cost": -1,
+      "effect": ""
+    }
   ],
-    "Desc": [
-      {"name":"HolyBuff","desc": "increase hp 3 points"},
-      {"name": "PowerBuff" , "desc": "increase hp or ap"},
-      {"name": "PoisonBuff" , "desc": "decrease hp 1 point"},
-      {"name": "WeaknessBuff" , "desc": "decrease hp or ap 1 point"},
-      {"name": "StunBuff" , "desc": "freeze a card one turn"},
-      {"name": "DisarmBuff" , "desc": "deactivate counter attack"}
-    ]
+  "Desc": [
+    {
+      "name": "HolyBuff",
+      "desc": "increase hp 3 points"
+    },
+    {
+      "name": "PowerBuff",
+      "desc": "increase hp or ap"
+    },
+    {
+      "name": "PoisonBuff",
+      "desc": "decrease hp 1 point"
+    },
+    {
+      "name": "WeaknessBuff",
+      "desc": "decrease hp or ap 1 point"
+    },
+    {
+      "name": "StunBuff",
+      "desc": "freeze a card one turn"
+    },
+    {
+      "name": "DisarmBuff",
+      "desc": "deactivate counter attack"
+    }
+  ]
 }

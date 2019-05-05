@@ -10,6 +10,7 @@ public class Player {
     private Deck deck;
     private int turnsFlagSaved;
     private int flagsCaptured;
+    public static final int[] turnBeginMana = {2, 3, 4, 5, 6, 7, 8, 9};
 
     public Player(Deck deck) {
         this.deck = deck;

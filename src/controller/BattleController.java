@@ -76,7 +76,7 @@ class BattleController {
                 selectCollectable(request);
             }
         }
-        while (!isFinish);
+        while (!isFinish && battle.finishChecker(battle));
     }
 
     private void showGameInfo() {
@@ -124,8 +124,7 @@ class BattleController {
     }
 
     private void endTurn() {
-        if (battle.turnHandler())
-            endGame();
+        battle.turnHandler();
     }
 
     private void showCollectables() {
@@ -137,7 +136,7 @@ class BattleController {
     }
 
     private void endGame() {
-
+        addThisBattleToBattleHistory();
     }
 
     private void enterGraveyard(BattleRequest request) {
@@ -202,7 +201,7 @@ class BattleController {
 
     }
 
-    public void addThisBattleToBattleHistory() {
+    private void addThisBattleToBattleHistory() {
         if (battle.isPlayer1Won()) {
             Game.getInstance().getAccount1().addMatchHistory(new MatchHistory
                     (Game.getInstance().getAccount1().getUsername(), true));

@@ -74,9 +74,8 @@ public class Battle implements Goal, Fight {
         return turn % 2 == 1;
     }
 
-    public boolean turnHandler() {       //method to handle all actions must occur at end of turn
+    public void turnHandler() {       //method to handle all actions must occur at end of turn
         turn++;
-        return finishChecker(this);
     }
 
     public int getFlagNumber() {

@@ -82,7 +82,6 @@ class AccountController {
         view.printAccountMenuHelp(account.toString());
     }
 
-
     private void enterCollection() {
         CollectionController collectionController = new CollectionController();
         collectionController.main(this.account.getCollection());
@@ -99,14 +98,17 @@ class AccountController {
             request.getNewCommand();
             if (request.getType().equals(RequestType.MULTI_PLAYER)) {
                 battleKind = BattleKind.MULTI_PLAYER;
-                chooseSecondPlayer(request, battleKind);
+                try {
+                    chooseSecondPlayer(request, battleKind);
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();    // TODO: 5/5/2019 error in view printing
+                }
             }
             if (request.getType().equals(RequestType.SINGLE_PLAYER)) {
                 battleKind = BattleKind.SINGLE_PLAYER;
                 chooseGameKind(request, battleKind);
             }
         } while (!request.getType().equals(RequestType.EXIT));
-
 
     }
 
@@ -133,14 +135,14 @@ class AccountController {
     }
 
 
-    private void chooseSecondPlayer(AccountRequest request, BattleKind battleKind) {
+    private void chooseSecondPlayer(AccountRequest request, BattleKind battleKind) throws CloneNotSupportedException {
         do {
             request.getNewCommand();
             view.printPlayersList(Game.getAccounts(), account);
             if (request.getType().equals(RequestType.SELECT_SECOND_PLAYER)) {
                 Account player2 = request.getSecondPlayer();
-                chooseGameMode(request, new Player(account.getMainDeck()),
-                        new Player(player2.getMainDeck()), battleKind);
+                chooseGameMode(request, new Player( account.getMainDeck().clone()),
+                        new Player(player2.getMainDeck().clone()), battleKind);
                 Account secondPlayer = Game.getAccount(request.getSecondPlayerUsername());
                 if (secondPlayer.isReadyToPlay()) {
                     chooseGameMode(request, new Player(this.account.getMainDeck()),

@@ -127,4 +127,12 @@ public class Deck {
     }
 
 
+    @Override
+    public Deck clone() throws CloneNotSupportedException {
+        Deck deck = (Deck) super.clone();
+        deck.item = (Item) this.item.clone();
+        deck.hero = (Hero) this.hero.clone();
+        deck.minions = (ArrayList<Minion>) this.minions.clone();
+        return deck;
+    }
 }
