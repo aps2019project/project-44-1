@@ -18,7 +18,7 @@ public class Account implements Comparable<Account> {
         this.password = password;
     }
 
-    public void addMatchHistory(MatchHistory matchHistory){
+    public void addMatchHistory(MatchHistory matchHistory) {
         this.histories.add(matchHistory);
     }
 
