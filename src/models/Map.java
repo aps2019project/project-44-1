@@ -29,4 +29,12 @@ class Map {
         }
     }
 
+    public int getManhatanDistance(Cell start, Cell end) {
+        return Math.abs(start.getX() - end.getX() + start.getY() - end.getY());
+    }
+
+    public int getManhatanDistance(int startX, int startY, int endX, int endY) {
+        return Math.abs(startX - endX + startY - endY);
+    }
+
 }

@@ -56,8 +56,14 @@ public class Battle implements Goal, Fight {
 
     @Override
     public String toString() {
-        int HP1 = getPlayer1().getDeck().getHero().getHP();     //type1
-        int HP2 = getPlayer2().getDeck().getHero().getHP();
+        if (this.getBattleMode() == BattleMode.DEATH_MATCH) {
+            int HP1 = getPlayer1().getDeck().getHero().getHP();     //type1
+            int HP2 = getPlayer2().getDeck().getHero().getHP();
+            return "HP of first player Hero is " + HP1 + "\n" +
+                    "HP of second player Hero is " + HP2;
+        }else if (this.battleMode == BattleMode.CAPTURE_FLAG_1){
+
+        }
 
         ArrayList<Cell> cells = new ArrayList<>();      //^_^
         Card card;
