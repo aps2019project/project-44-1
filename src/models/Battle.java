@@ -27,7 +27,7 @@ public class Battle implements Goal, Fight {
         player2.getDeck().removeFromDeck(player2.getDeck().getHero());
     }
 
-    private BattleMode getBattleMode() {
+    BattleMode getBattleMode() {
         return battleMode;
     }
 
@@ -76,10 +76,18 @@ public class Battle implements Goal, Fight {
 
     public boolean turnHandler() {       //method to handle all actions must occur at end of turn
         turn++;
-        return main(battleMode, player1.getDeck().getHero(), player2.getDeck().getHero());
+        return finishChecker(this);
+    }
+
+    public int getFlagNumber() {
+        return flagNumber;
     }
 
     public boolean isPlayer1Won() {
         return player1Won;
+    }
+
+    public void setPlayer1Won(boolean player1Won) {
+        this.player1Won = player1Won;
     }
 }

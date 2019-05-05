@@ -8,11 +8,25 @@ public class Player {
     private Placeable[] hand = new Placeable[5];
     private int mana;
     private Deck deck;
+    private int turnsFlagSaved;
+    private int flagsCaptured;
 
     public Player(Deck deck) {
         this.deck = deck;
         initializeHand();
         Collections.shuffle(deck.getDeckCards());
+    }
+
+    public Placeable[] getHand() {
+        return hand;
+    }
+
+    public int getTurnsFlagSaved() {
+        return turnsFlagSaved;
+    }
+
+    public int getFlagsCaptured() {
+        return flagsCaptured;
     }
 
     public int getMana() {
