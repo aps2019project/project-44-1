@@ -88,7 +88,8 @@ class ShopController {
     }
 
     public void searchInShop(ShopRequest request) {
-        // TODO: 03/05/2019 which ID should be passed
+        String cardName = request.getCardName();
+        shop.searchInShop(cardName);
 
     }
 
@@ -103,7 +104,7 @@ class ShopController {
     }
 
     public void showCollectionCards() {
-        // TODO: 03/05/2019 working on print formatting
+        view.printCollectionItems(shop.getCards(),true);
     }
 
 

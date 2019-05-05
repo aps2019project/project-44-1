@@ -15,6 +15,7 @@ public class Card extends Placeable implements Fight {
     void setSpecialPowerActivation(SpecialPowerActivation specialPowerActivation) {
         this.specialPowerActivation = specialPowerActivation;
     }
+
     public AttackType getAttackType() {
         return attackType;
     }

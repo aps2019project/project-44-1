@@ -4,6 +4,7 @@ import models.Battle;
 import models.Game;
 import models.MatchHistory;
 import view.BattleRequest;
+import view.RequestType;
 import view.View;
 
 class BattleController {
@@ -17,62 +18,62 @@ class BattleController {
         do {
             BattleRequest request = new BattleRequest();
             request.getNewCommand();
-            if (request.getType().equals("exit")) {
+            if (request.getType() == RequestType.EXIT) {
                 //battle.getWinner().increaseMoney(1000);        //#TODO exceptions
                 isFinish = true;
             }
-            if (request.getType().equals("help")) {         //#TODO eazzz
+            if (request.getType() == RequestType.HELP) {         //#TODO eazzz
                 helpInBattle();
             }
-            if (request.getType().equals("show game info")) {        //#TODO eazzz
+            if (request.getType() == RequestType.SHOW_GAME_INFO) {        //#TODO eazzz
                 showGameInfo();
             }
-            if (request.getType().equals("show my minions")) {
+            if (request.getType() == RequestType.SHOW_MY_MINIONS) {
                 showMyMinions();
             }
-            if (request.getType().equals("show opponent minions")) {
+            if (request.getType() == RequestType.SHOW_OPPONENT_MINIONS) {
                 showOpponentMinions();
             }
-            if (request.getType().equals("show card info")) {
+            if (request.getType() == RequestType.SHOW_CARD_INFO) {
                 showCardInfo(request);
             }
-            if (request.getType().equals("select card")) {
+            if (request.getType() == RequestType.SELECT_CARD) {
                 selectCard(request);
             }
-            if (request.getType().equals("move card")) {
+            if (request.getType() == RequestType.MOVE_CARD) {
                 moveCard(request);
             }
-            if (request.getType().equals("ordinary attack")) {
+            if (request.getType() == RequestType.ATTACK_TO_OPPONENT) {
                 ordinaryAttack(request);
             }
-            if (request.getType().equals("combo attack")) {
+            if (request.getType() == RequestType.COMBO_ATTACK) {
                 comboAttack(request);
             }
-            if (request.getType().equals("use special power")) {
+            if (request.getType() == RequestType.USE_SPECIAL_POWER) {
                 useSpecialPower(request);
             }
-            if (request.getType().equals("show hand")) {
+            if (request.getType() == RequestType.SHOW_MY_HAND) {
                 showHand(request);
             }
-            if (request.getType().equals("insert card")) {
+            if (request.getType() == RequestType.INSERT_CARD_FROM_HAND_TO_MAP) {
                 insertCard(request);
             }
-            if (request.getType().equals("end turn")) {
+            if (request.getType() == RequestType.END_TURN) {
                 endTurn();
             }
-            if (request.getType().equals("show collectable items")) {
+            if (request.getType() == RequestType.SHOW_COLLECTABLES) {
                 showCollectables();
             }
-            if (request.getType().equals("show next card")) {
+            if (request.getType() == RequestType.SHOW_NEXT_CARD) {
                 showNextCard();
             }
-            if (request.getType().equals("enter graveyard")) {
+            if (request.getType() == RequestType.ENTER_GRAVEYARD) {
                 enterGraveyard(request);
             }
-            if (request.getType().equals("end game")) {
+            if (request.getType() == RequestType.END_GAME) {
                 endGame();
             }
-            if (request.getType().equals("select a collectable item")) {
+            if (request.getType() == RequestType.SELECT_COLECTABLE) {
                 selectCollectable(request);
             }
         }

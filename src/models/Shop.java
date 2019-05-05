@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Shop {
     private static Shop shop = new Shop();
-    ArrayList<String> cardNames = new ArrayList<>();
+    private ArrayList<String> cardNames = new ArrayList<>();
     private ArrayList<Placeable> cards = new ArrayList<>();
     private Account account;
 
@@ -22,10 +22,6 @@ public class Shop {
 
     public void help() {
     }
-
-    public void showShopCards() {
-    }
-
 
     /**
      * sell() returns true when the selling is done completely and return false in the other case
@@ -63,6 +59,7 @@ public class Shop {
     }
 
     public void searchInShop(String cardName) {
+
     }
 
     public int searchInCollection(String cardName) {
@@ -111,6 +108,5 @@ public class Shop {
     public boolean canBuyItem() {
         return account.getCollection().canBuyItem();
     }
-
 
 }

@@ -31,13 +31,13 @@ class AccountController {
                     enterBattle(request);
                     break;
                 case EXIT:
-                    isFinish = true;
+                    System.exit(0);
                     break;
                 case HELP:
                     help();
                     break;
                 case LOGOUT:
-                    logout();
+                    isFinish = true;
                     break;
                 case SAVE:
                     save();
@@ -59,8 +59,9 @@ class AccountController {
             view.printGameKinds();
             request.getNewCommand();
             if (request.getType().equals(RequestType.STORY_GAME)) {
-                chooseStoryGame(request, battleKind);
-                // TODO: 04/05/2019 list story game haro chejoori namayesh beadam?
+                int level = chooseStoryGame(request, battleKind);
+                /* level will be -1 if player don't choose any of story games and come back here*/
+
             }
             if (request.getType().equals(RequestType.CUSTOM_GAME)) {
                 // TODO: 04/05/2019
@@ -75,6 +76,7 @@ class AccountController {
     }
 
     private void logout() {
+
 
     }
 
@@ -101,7 +103,7 @@ class AccountController {
                 try {
                     chooseSecondPlayer(request, battleKind);
                 } catch (CloneNotSupportedException e) {
-                    e.printStackTrace();    // TODO: 5/5/2019 error in view printing
+                    e.printStackTrace();
                 }
             }
             if (request.getType().equals(RequestType.SINGLE_PLAYER)) {
@@ -129,7 +131,6 @@ class AccountController {
             if (request.getType().equals(RequestType.CAPTURE_FLAG2)) {
                 battleController.main(new Battle(battleKind, BattleMode.CAPTURE_FLAG_2,
                         p1, p2, request.getNumberOfFlags()));
-                // TODO: 11/04/2019 problem in this case about transfering number of flags
             }
         } while (!request.getType().equals(RequestType.EXIT));
     }
@@ -141,7 +142,7 @@ class AccountController {
             view.printPlayersList(Game.getAccounts(), account);
             if (request.getType().equals(RequestType.SELECT_SECOND_PLAYER)) {
                 Account player2 = request.getSecondPlayer();
-                chooseGameMode(request, new Player( account.getMainDeck().clone()),
+                chooseGameMode(request, new Player(account.getMainDeck().clone()),
                         new Player(player2.getMainDeck().clone()), battleKind);
                 Account secondPlayer = Game.getAccount(request.getSecondPlayerUsername());
                 if (secondPlayer.isReadyToPlay()) {
@@ -154,7 +155,19 @@ class AccountController {
         } while (!request.getType().equals(RequestType.EXIT));
     }
 
-    public void chooseStoryGame(AccountRequest request, BattleKind battleKind) {
+    public int chooseStoryGame(AccountRequest request, BattleKind battleKind) {
+        boolean isFinish = false;
+        do {
+            view.showStoryGameKinds();
+            request.getNewCommand();
+            if (request.getStoryModeLevel() != -1)
+                return request.getStoryModeLevel();
+            if (request.getType() == RequestType.EXIT) {
+                isFinish = true;
+            }
+        }
+        while (!isFinish);
+        return -1;
     }
 
 

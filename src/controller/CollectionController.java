@@ -28,7 +28,7 @@ class CollectionController {
                     search(request);
                     break;
                 case SAVE:
-                    // TODO: 28/04/2019 save
+
                     break;
                 case CREATE_DECK:
                     createDeck(request);
@@ -64,7 +64,7 @@ class CollectionController {
     }
 
     public void showCollectionItemsAndCards() {
-        view.printCollectionItems(collection.getCollectionCards());
+        view.printCollectionItems(collection.getCollectionCards(),false);
     }
 
     public void search(CollectionRequest request) {
@@ -167,7 +167,7 @@ class CollectionController {
             view.printError(ErrorType.DECK_NOT_FOUND);
             return;
         }
-        view.printCardsInFormat(deck.getDeckCards());
+        view.printCardsInFormat(deck.getDeckCards(),false);
 
     }
 

@@ -35,8 +35,8 @@ public class View {
         System.out.println(string);
     }
 
-    public void printCollectionItems(ArrayList<Placeable> list) {
-        printCardsInFormat(list);
+    public void printCollectionItems(ArrayList<Placeable> list, boolean neadToShowCost) {
+        printCardsInFormat(list, neadToShowCost);
     }
 
     public void printShopMenuHelp(String string) {
@@ -44,7 +44,7 @@ public class View {
     }
 
     public void printShopCards(ArrayList<Placeable> cards) {
-        printCardsInFormat(cards);
+        printCardsInFormat(cards, true);
     }
 
     public void sout(Object o) {
@@ -75,41 +75,44 @@ public class View {
                 "5.exit");
     }
 
-    public void printCardsInFormat(ArrayList<Placeable> cards) {
-        printHeroesInFormat(cards);
-        printItemsInFormat(cards);
-        printSpellsAndMinionsInFormat(cards);
+    public void printCardsInFormat(ArrayList<Placeable> cards, boolean neadToShowCost) {
+        printHeroesInFormat(cards, neadToShowCost);
+        printItemsInFormat(cards, neadToShowCost);
+        printSpellsAndMinionsInFormat(cards, neadToShowCost);
     }
 
-    private void printHeroesInFormat(ArrayList<Placeable> cards) {
+    private void printHeroesInFormat(ArrayList<Placeable> cards, boolean neadToShowCost) {
         System.out.println("Heroes :");
         int index = 1;
         for (Placeable card : cards) {
             if (card instanceof Hero && card.getName() != null) {
-                System.out.println("        " + index + card.toString());
+                System.out.print("        " + index + card.toString());
+                showCardCost(card, neadToShowCost);
                 index++;
             }
         }
     }
 
-    private void printItemsInFormat(ArrayList<Placeable> cards) {
+    private void printItemsInFormat(ArrayList<Placeable> cards, boolean neadToShowCost) {
         System.out.println("Items :");
         int index = 1;
         for (Placeable card : cards) {
             if (card instanceof Item && card.getName() != null) {
-                System.out.println("        " + index + card.toString());
+                System.out.print("        " + index + card.toString());
+                showCardCost(card, neadToShowCost);
                 index++;
             }
         }
 
     }
 
-    private void printSpellsAndMinionsInFormat(ArrayList<Placeable> cards) {
+    private void printSpellsAndMinionsInFormat(ArrayList<Placeable> cards, boolean neadToShowCost) {
         System.out.println("Cards :");
         int index = 1;
         for (Placeable card : cards) {
             if (card instanceof Minion || card instanceof Spell && card.getName() != null) {
-                System.out.println("        " + index + card.toString());
+                System.out.print("        " + index + card.toString());
+                showCardCost(card, neadToShowCost);
                 index++;
             }
         }
@@ -127,7 +130,7 @@ public class View {
         int index = 1;
         for (Deck deck : decks) {
             System.out.println(index + " : " + deck.getName() + " :");
-            printCardsInFormat(deck.getDeckCards());
+            printCardsInFormat(deck.getDeckCards(), false);
         }
     }
 
@@ -182,6 +185,19 @@ public class View {
     public void printGameKinds() {
         System.out.println("1.story\n" +
                 "2.custom game");
+    }
+
+    private void showCardCost(Placeable card, boolean neadToShowCost) {
+        if (neadToShowCost) {
+            System.out.println(" - Buy Cost : " + card.getCost());
+        } else {
+            System.out.println();
+        }
+    }
+
+    public void showStoryGameKinds(){
+        System.out.println();
+        // TODO: 05/05/2019 after adding datas from json
     }
 
 }

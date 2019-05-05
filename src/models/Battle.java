@@ -89,4 +89,6 @@ public class Battle implements Goal, Fight {
     public void setPlayer1Won(boolean player1Won) {
         this.player1Won = player1Won;
     }
+
+
 }

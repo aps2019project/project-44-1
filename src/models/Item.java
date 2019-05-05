@@ -2,7 +2,7 @@ package models;
 
 import models.Enums.ItemType;
 
-public class Item extends Placeable{
+public class Item extends Placeable {
     ItemType itemType;
     private Card carrier = new Card();
 

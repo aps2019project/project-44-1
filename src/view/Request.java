@@ -17,7 +17,11 @@ public abstract class Request {
         command = command.toLowerCase();
         if (command.equals("\n"))
             view.printError(ErrorType.ERROR_WITHOUT_MESSAGE);
-    }       /**  empty line command error handled here*/
+    }
+
+    /**
+     * empty line command error handled here
+     */
 
     public String getCommand() {
         return command;

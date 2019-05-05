@@ -5,7 +5,7 @@ public class MatchHistory {
     boolean hasWon;
     private long startDate;
 
-    public MatchHistory(String opponent,boolean hasWon) {
+    public MatchHistory(String opponent, boolean hasWon) {
         this.opponent = opponent;
         startDate = System.currentTimeMillis();
         this.hasWon = hasWon;

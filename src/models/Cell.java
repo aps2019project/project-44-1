@@ -37,7 +37,7 @@ class Cell {
                 decreaseHP(card, 1);
                 break;
             case FIRE:
-                decreaseHP(card,2);
+                decreaseHP(card, 2);
             case HOLLY:
         }
 
