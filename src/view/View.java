@@ -200,4 +200,8 @@ public class View {
         // TODO: 05/05/2019 after adding datas from json
     }
 
+    public void showMyMinions(ArrayList<Card> cards){
+
+    }
+
 }

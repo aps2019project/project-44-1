@@ -19,41 +19,41 @@ public interface Goal {
     }
 
     private int finishByCaptureFlag(Battle battle) {
-        if (battle.getPlayer1().getFlagsCaptured() >= battle.getFlagNumber() / 2 + 1)
+        if (battle.getFirstPlayer().getFlagsCaptured() >= battle.getFlagNumber() / 2 + 1)
             return 1;
-        else if (battle.getPlayer2().getFlagsCaptured() >= battle.getFlagNumber() / 2 + 1)
+        else if (battle.getSecondPlayer().getFlagsCaptured() >= battle.getFlagNumber() / 2 + 1)
             return 2;
         else return -1;
     }
 
     default boolean finishChecker(Battle battle) {
-        switch (finishByDeath(battle.getPlayer1().getDeck().getHero(),
-                battle.getPlayer2().getDeck().getHero())) {
+        switch (finishByDeath(battle.getFirstPlayer().getDeck().getHero(),
+                battle.getSecondPlayer().getDeck().getHero())) {
             case 1:
-                battle.setPlayer1Won(false);
+                battle.setFirstPlayerWon(false);
                 return true;
             case 2:
-                battle.setPlayer1Won(true);
+                battle.setFirstPlayerWon(true);
                 return true;
         }
         switch (battle.getBattleMode()) {
             case CAPTURE_FLAG_1:
-                switch (finishBySaveFlag(battle.getPlayer1(), battle.getPlayer2())) {
+                switch (finishBySaveFlag(battle.getFirstPlayer(), battle.getSecondPlayer())) {
                     case 1:
-                        battle.setPlayer1Won(true);
+                        battle.setFirstPlayerWon(true);
                         return true;
                     case 2:
-                        battle.setPlayer1Won(false);
+                        battle.setFirstPlayerWon(false);
                         return true;
                 }
                 break;
             case CAPTURE_FLAG_2:
                 switch (finishByCaptureFlag(battle)) {
                     case 1:
-                        battle.setPlayer1Won(true);
+                        battle.setFirstPlayerWon(true);
                         return true;
                     case 2:
-                        battle.setPlayer1Won(false);
+                        battle.setFirstPlayerWon(false);
                         return true;
                 }
         }

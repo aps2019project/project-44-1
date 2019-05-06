@@ -2,6 +2,7 @@ package models;
 
 import models.Enums.ItemType;
 
+import java.lang.management.PlatformLoggingMXBean;
 import java.util.ArrayList;
 
 class Map {
@@ -49,4 +50,17 @@ class Map {
         }
         return counter;
     }
+    public ArrayList<Card> getAllCardsInMap() {
+        ArrayList<Card> cards = new ArrayList<>();
+        for (int row = 0; row < 5; row++) {
+            for (int column = 0; column < 9; column++) {
+                if (!cells[row][column].isFree() && cells[row][column].getCard() instanceof Hero
+                        || cells[row][column].getCard() instanceof Minion) {
+                    cards.add(cells[row][column].getCard());
+                }
+            }
+        }
+        return cards;
+    }
+
 }

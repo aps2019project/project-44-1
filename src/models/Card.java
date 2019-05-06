@@ -73,4 +73,16 @@ public class Card extends Placeable implements Fight {
         card.specialPowerActivation = this.specialPowerActivation;
         return card;
     }
+
+    public int getRange() {
+        return range;
+    }
+
+    public SpecialPowerActivation getSpecialPowerActivation() {
+        return specialPowerActivation;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
 }

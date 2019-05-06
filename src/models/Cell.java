@@ -27,7 +27,7 @@ class Cell {
         this.item = item;
     }
 
-    public Placeable getCard() {
+    public Card getCard() {
         return card;
     }
 

@@ -7,42 +7,42 @@ import java.util.ArrayList;
 
 public class Battle implements Goal, Fight {
     private BattleKind battleKind;
-    private Player player1;
-    private Player player2;
+    private Player firstPlayer;
+    private Player secondPlayer;
     private Map map = new Map();
     private BattleMode battleMode;
     private int turn = 1;
     private int flagNumber;
-    private boolean player1Won;
+    private boolean firstPlayerWon;
 
-    public Battle(BattleKind battleKind, BattleMode battleMode, Player player1, Player player2, int flagNumber) {
+    public Battle(BattleKind battleKind, BattleMode battleMode, Player firstPlayer, Player secondPlayer, int flagNumber) {
         this.battleKind = battleKind;
         this.battleMode = battleMode;
-        this.player1 = player1;
-        player1.setMyMap(map);
-        this.player2 = player2;
-        player2.setMyMap(map);
+        this.firstPlayer = firstPlayer;
+        firstPlayer.setMyMap(map);
+        this.secondPlayer = secondPlayer;
+        secondPlayer.setMyMap(map);
         this.flagNumber = flagNumber;
-        relater(getPlayer1().getDeck().getHero(), getMap().getCells()[2][0]);
-        relater(getPlayer2().getDeck().getHero(), getMap().getCells()[2][8]);
-        player1.getDeck().removeFromDeck(player1.getDeck().getHero());
-        player2.getDeck().removeFromDeck(player2.getDeck().getHero());
+        relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[2][0]);
+        relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[2][8]);
+        firstPlayer.getDeck().removeFromDeck(firstPlayer.getDeck().getHero());
+        secondPlayer.getDeck().removeFromDeck(secondPlayer.getDeck().getHero());
     }
 
     BattleMode getBattleMode() {
         return battleMode;
     }
 
-    Player getPlayer2() {
-        return player2;
+    Player getSecondPlayer() {
+        return secondPlayer;
     }
 
     public BattleKind getBattleKind() {
         return battleKind;
     }
 
-    Player getPlayer1() {
-        return player1;
+    Player getFirstPlayer() {
+        return firstPlayer;
     }
 
     private Map getMap() {
@@ -59,8 +59,8 @@ public class Battle implements Goal, Fight {
     @Override
     public String toString() {
         if (this.getBattleMode() == BattleMode.DEATH_MATCH) {
-            int HP1 = getPlayer1().getDeck().getHero().getHP();     //type1
-            int HP2 = getPlayer2().getDeck().getHero().getHP();
+            int HP1 = getFirstPlayer().getDeck().getHero().getHP();     //type1
+            int HP2 = getSecondPlayer().getDeck().getHero().getHP();
             return "HP of first player Hero is " + HP1 + "\n" +
                     "HP of second player Hero is " + HP2;
         } else if (this.battleMode == BattleMode.CAPTURE_FLAG_1) {
@@ -90,12 +90,34 @@ public class Battle implements Goal, Fight {
         return flagNumber;
     }
 
-    public boolean isPlayer1Won() {
-        return player1Won;
+    public boolean isFirstPlayerWon() {
+        return firstPlayerWon;
     }
 
-    void setPlayer1Won(boolean player1Won) {
-        this.player1Won = player1Won;
+    void setFirstPlayerWon(boolean firstPlayerWon) {
+        this.firstPlayerWon = firstPlayerWon;
+    }
+
+    public Player getCurrentPlayer() {
+        if (turn % 2 == 1) {
+            return firstPlayer;
+        } else {
+            return secondPlayer;
+        }
+    }
+
+//    public Player getCardOwner(Placeable placeable){
+//         get card owner by using username of card
+//    }
+    public ArrayList<Card> getMyCardsInMap(Player player) {
+        ArrayList<Card> cards = new ArrayList<>();
+        for (Card card : map.getAllCardsInMap()) {
+            if (card instanceof Card && card.getOwner().equals(getCurrentPlayer())){
+                cards.add(card);
+
+            }
+        }
+        return cards;
     }
 
 }

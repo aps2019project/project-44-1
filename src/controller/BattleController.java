@@ -86,7 +86,7 @@ class BattleController {
     }
 
     private void showMyMinions() {
-
+        view.showMyMinions(battle.getMyCardsInMap(battle.getCurrentPlayer()));
     }
 
     private void showOpponentMinions() {
@@ -204,7 +204,7 @@ class BattleController {
     }
 
     private void addThisBattleToBattleHistory() {
-        if (battle.isPlayer1Won()) {
+        if (battle.isFirstPlayerWon()) {
             Game.getInstance().getAccount1().addMatchHistory(new MatchHistory
                     (Game.getInstance().getAccount1().getUsername(), true));
             Game.getInstance().getAccount2().addMatchHistory(new MatchHistory
