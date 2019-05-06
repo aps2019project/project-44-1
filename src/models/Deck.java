@@ -8,7 +8,7 @@ public class Deck {
     private static final int maxCardNumber = 20;
     private Item item = new Item();
     private Hero hero = new Hero();
-    private ArrayList<Minion> minions = new ArrayList<>();
+    private ArrayList<Card> cards = new ArrayList<>();
     private String name;
     private View view = new View();
 
@@ -33,12 +33,12 @@ public class Deck {
         this.hero = hero;
     }
 
-    public ArrayList<Minion> getMinions() {
-        return minions;
+    public ArrayList<Card> getCards() {
+        return cards;
     }
 
-    public void setMinions(ArrayList<Minion> minions) {
-        this.minions = minions;
+    public void setCards(ArrayList<Card> cards) {
+        this.cards = cards;
     }
 
     public String getName() {
@@ -54,7 +54,7 @@ public class Deck {
     }
 
     public boolean isFull() {
-        return minions.size() == 20;
+        return cards.size() == 20;
     }
 
     public boolean isSpecifiedHero() {
@@ -71,7 +71,7 @@ public class Deck {
         } else if (placeable instanceof Item) {
             setItem((Item) placeable);
         } else {
-            minions.add((Minion) placeable);
+            cards.add((Minion) placeable);
         }
     }
 
@@ -81,7 +81,7 @@ public class Deck {
         } else if (placeable instanceof Item) {
             item = null;
         } else {
-            minions.remove(placeable);
+            cards.remove(placeable);
         }
     }
 
@@ -105,7 +105,7 @@ public class Deck {
     }
 
     public boolean isInDeckCards(int cardID) {
-        for (Placeable placeable : minions) {
+        for (Placeable placeable : cards) {
             if (placeable.getID() == cardID) {
                 return true;
             }
@@ -121,21 +121,21 @@ public class Deck {
         ArrayList<Placeable> cards = new ArrayList<>();
         cards.add(hero);
         cards.add(item);
-        cards.addAll(minions);
+        cards.addAll(this.cards);
         return cards;
     }
 
 
-    private ArrayList<Minion> cloner() {
-        ArrayList<Minion> minions = new ArrayList<>();
-        for (Minion m : this.minions) {
+    private ArrayList<Card> cloner() {
+        ArrayList<Card> cards = new ArrayList<>();
+        for (Card c : this.cards) {
             try {
-                minions.add((Minion) m.clone());
+                cards.add(c.clone());
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
             }
         }
-        return minions;
+        return cards;
     }
 
     @Override
@@ -143,7 +143,7 @@ public class Deck {
         Deck deck = (Deck) super.clone();
         deck.item = (Item) this.item.clone();
         deck.hero = (Hero) this.hero.clone();
-        deck.minions = cloner();
+        deck.cards = cloner();
         return deck;
     }
 }

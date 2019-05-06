@@ -2,7 +2,6 @@ package models;
 
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.Random;
 
 public class Player {
     private Placeable[] hand = new Placeable[5];
@@ -18,7 +17,7 @@ public class Player {
     public Player(Deck deck, String name) {
         this.deck = deck;
         this.name = name;
-        for (Minion minion : deck.getMinions()) {
+        for (Minion minion : deck.getCards()) {
             minion.setOwner(this);
         }
         deck.getHero().setOwner(this);
@@ -63,14 +62,14 @@ public class Player {
     }
 
     private void initializeHand() {
-        Iterator<Minion> iterator = deck.getMinions().iterator();
+        Iterator<Minion> iterator = deck.getCards().iterator();
         int i = 0;
         while (i < 5) {
             hand[i] = iterator.next();
             i++;
             iterator.remove();
         }
-        nextMinionInHand = deck.getMinions().get(5);
+        nextMinionInHand = deck.getCards().get(5);
     }
 
     private String IDGenerator(String cardName) {

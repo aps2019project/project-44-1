@@ -15,7 +15,7 @@ class ShopController {
     private View view = new View();
 
     void main(Account account) {
-        shop.setAccount(account);/** may make execption*/
+        shop.setAccount(account);/* may make exception*/
         boolean isFinish = false;
         do {
             ShopRequest request = new ShopRequest();
