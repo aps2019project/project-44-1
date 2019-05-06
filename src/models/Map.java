@@ -5,6 +5,7 @@ import models.Enums.ItemType;
 import java.util.ArrayList;
 
 class Map {
+
     private Cell[][] cells = new Cell[5][9];
 
     Cell[][] getCells() {
@@ -37,4 +38,15 @@ class Map {
         return Math.abs(startX - endX + startY - endY);
     }
 
+    int timesCardUsed(String cardName) {
+        int counter = 0;
+        for (Cell[] c : cells) {
+            for (Cell cell : c) {
+                if (cell.getCard().getName().equals(cardName)) {
+                    counter++;
+                }
+            }
+        }
+        return counter;
+    }
 }

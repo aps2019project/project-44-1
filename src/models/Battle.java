@@ -19,7 +19,9 @@ public class Battle implements Goal, Fight {
         this.battleKind = battleKind;
         this.battleMode = battleMode;
         this.player1 = player1;
+        player1.setMyMap(map);
         this.player2 = player2;
+        player2.setMyMap(map);
         this.flagNumber = flagNumber;
         relater(getPlayer1().getDeck().getHero(), getMap().getCells()[2][0]);
         relater(getPlayer2().getDeck().getHero(), getMap().getCells()[2][8]);

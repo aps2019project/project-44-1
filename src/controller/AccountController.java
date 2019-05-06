@@ -135,8 +135,10 @@ class AccountController {
                 Account secondPlayer = Game.getAccount(request.getSecondPlayerUsername());
                 if (secondPlayer != null && secondPlayer.isReadyToPlay()) {
                     Game.getInstance().setAccount2(secondPlayer);
-                chooseGameMode(request, new Player(account.getMainDeck().clone()),
-                        new Player(secondPlayer.getMainDeck().clone()), battleKind);
+                    chooseGameMode(request, new Player(account.getMainDeck().clone(),
+                                    account.getUsername()),
+                            new Player(secondPlayer.getMainDeck().clone(),
+                                    secondPlayer.getUsername()), battleKind);
                 } else {
                     view.printSecondPlayerIsNotReady();
                 }

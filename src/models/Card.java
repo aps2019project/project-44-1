@@ -11,6 +11,11 @@ public class Card extends Placeable implements Fight {
     private AttackType attackType;
     private int range;
     private SpecialPowerActivation specialPowerActivation;
+    private Player owner;
+
+    void setOwner(Player owner) {
+        this.owner = owner;
+    }
 
     void setSpecialPowerActivation(SpecialPowerActivation specialPowerActivation) {
         this.specialPowerActivation = specialPowerActivation;
@@ -27,7 +32,6 @@ public class Card extends Placeable implements Fight {
     int getHP() {
         return HP;
     }
-
 
     void setHP(int HP) {
         this.HP = HP;
@@ -54,8 +58,7 @@ public class Card extends Placeable implements Fight {
     }
 
     public String getInGameID() {
-        StringBuilder sb = new StringBuilder();
-        return sb.toString();
+        return inGameID;
     }
 
     public void setInGameID(String inGameID) {
@@ -63,7 +66,7 @@ public class Card extends Placeable implements Fight {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    protected Card clone() throws CloneNotSupportedException {
         Card card = (Card) super.clone();
         card.attackType = this.attackType;
         card.specialPower = this.specialPower;

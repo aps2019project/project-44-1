@@ -13,10 +13,9 @@ public class Deck {
     private View view = new View();
 
 
-    public Deck(String deckName) {
+    Deck(String deckName) {
         this.name = deckName;
     }
-
 
     public Item getItem() {
         return item;

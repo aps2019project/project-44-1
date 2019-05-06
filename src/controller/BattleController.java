@@ -4,7 +4,6 @@ import models.Battle;
 import models.Game;
 import models.MatchHistory;
 import view.BattleRequest;
-import view.RequestType;
 import view.View;
 
 class BattleController {
