@@ -41,12 +41,10 @@ class AccountController {
                     break;
                 case SAVE:
                     save();
-                    break;
             }
         }
         while (!isFinish);
     }
-
 
     private void enterShop() {
         ShopController shopController = new ShopController();
@@ -70,13 +68,7 @@ class AccountController {
 
     }
 
-
     private void save() {
-
-    }
-
-    private void logout() {
-
 
     }
 
@@ -135,19 +127,16 @@ class AccountController {
         } while (!request.getType().equals(RequestType.EXIT));
     }
 
-
     private void chooseSecondPlayer(AccountRequest request, BattleKind battleKind) throws CloneNotSupportedException {
         do {
             request.getNewCommand();
             view.printPlayersList(Game.getAccounts(), account);
             if (request.getType().equals(RequestType.SELECT_SECOND_PLAYER)) {
-                Account player2 = request.getSecondPlayer();
-                chooseGameMode(request, new Player(account.getMainDeck().clone()),
-                        new Player(player2.getMainDeck().clone()), battleKind);
                 Account secondPlayer = Game.getAccount(request.getSecondPlayerUsername());
-                if (secondPlayer.isReadyToPlay()) {
-                    chooseGameMode(request, new Player(this.account.getMainDeck()),
-                            new Player(secondPlayer.getMainDeck()), battleKind);
+                if (secondPlayer != null && secondPlayer.isReadyToPlay()) {
+                    Game.getInstance().setAccount2(secondPlayer);
+                chooseGameMode(request, new Player(account.getMainDeck().clone()),
+                        new Player(secondPlayer.getMainDeck().clone()), battleKind);
                 } else {
                     view.printSecondPlayerIsNotReady();
                 }
@@ -155,7 +144,7 @@ class AccountController {
         } while (!request.getType().equals(RequestType.EXIT));
     }
 
-    public int chooseStoryGame(AccountRequest request, BattleKind battleKind) {
+    private int chooseStoryGame(AccountRequest request, BattleKind battleKind) {
         boolean isFinish = false;
         do {
             view.showStoryGameKinds();
@@ -169,6 +158,5 @@ class AccountController {
         while (!isFinish);
         return -1;
     }
-
 
 }

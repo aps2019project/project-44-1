@@ -127,12 +127,24 @@ public class Deck {
     }
 
 
+    private ArrayList<Minion> cloner(){
+        ArrayList<Minion> minions = new ArrayList<>();
+        for (Minion m:this.minions) {
+            try {
+                minions.add((Minion) m.clone());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+        }
+        return minions;
+    }
+
     @Override
     public Deck clone() throws CloneNotSupportedException {
         Deck deck = (Deck) super.clone();
         deck.item = (Item) this.item.clone();
         deck.hero = (Hero) this.hero.clone();
-        deck.minions = (ArrayList<Minion>) this.minions.clone();
+        deck.minions = cloner();
         return deck;
     }
 }

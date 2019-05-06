@@ -3,6 +3,8 @@ package models;
 import models.Enums.AttackType;
 import models.Enums.SpecialPowerActivation;
 
+import java.util.ArrayList;
+
 public class Minion extends Card {
 
     public Minion(String name, int neededMana, int HP, int AP, AttackType attackType,
