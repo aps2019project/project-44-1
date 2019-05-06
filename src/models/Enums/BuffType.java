@@ -1,6 +1,6 @@
 package models.Enums;
 
-public enum Buff {
+public enum BuffType {
     HOLY_BUFF,
     WEAKNESS_BUFF,
     STUN_BUFF,

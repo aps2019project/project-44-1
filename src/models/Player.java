@@ -12,13 +12,14 @@ public class Player {
     public static final int[] turnBeginMana = {2, 3, 4, 5, 6, 7, 8, 9};
     private String name;
     private Map myMap;
-    private Minion nextMinionInHand;
+    private Card nextMinionInHand;
 
     public Player(Deck deck, String name) {
         this.deck = deck;
         this.name = name;
-        for (Minion minion : deck.getCards()) {
-            minion.setOwner(this);
+        for (Card card : deck.getCards()) {
+            if (card instanceof Minion)
+                card.setOwner(this);
         }
         deck.getHero().setOwner(this);
         Collections.shuffle(deck.getDeckCards());
@@ -62,7 +63,7 @@ public class Player {
     }
 
     private void initializeHand() {
-        Iterator<Minion> iterator = deck.getCards().iterator();
+        Iterator<Card> iterator = deck.getCards().iterator();
         int i = 0;
         while (i < 5) {
             hand[i] = iterator.next();
