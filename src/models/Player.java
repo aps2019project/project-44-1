@@ -79,9 +79,9 @@ public class Player {
                 (myMap.timesCardUsed(cardName) + 1);
     }
 
-    public void insert(String cardName){        //need more edit
-        for (int i = 0;i<5;i++){
-            if (hand[i].getName().equals(cardName)){
+    public void insert(String cardName) {        //need more edit
+        for (int i = 0; i < 5; i++) {
+            if (hand[i].getName().equals(cardName)) {
                 IDGenerator(cardName);
                 return;
             }

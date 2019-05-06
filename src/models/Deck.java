@@ -126,9 +126,9 @@ public class Deck {
     }
 
 
-    private ArrayList<Minion> cloner(){
+    private ArrayList<Minion> cloner() {
         ArrayList<Minion> minions = new ArrayList<>();
-        for (Minion m:this.minions) {
+        for (Minion m : this.minions) {
             try {
                 minions.add((Minion) m.clone());
             } catch (CloneNotSupportedException e) {
