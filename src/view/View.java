@@ -3,7 +3,6 @@ package view;
 import models.*;
 import models.Enums.ErrorType;
 
-import java.sql.DataTruncation;
 import java.util.ArrayList;
 
 public class View {
@@ -201,10 +200,23 @@ public class View {
     }
 
     public void showMyMinions(ArrayList<Card> cards) {
+        showMinionsInBattleFormatted(cards);
+    }
+
+    public void showOpponentMinions(ArrayList<Card> cards){
+        showMinionsInBattleFormatted(cards);
+    }
+
+    public void showMinionsInBattleFormatted(ArrayList<Card> cards) {
         for (Card card : cards) {
             System.out.println(card.getInGameID() + " : " + card.getName() + ", health : " + card.getHP() + ", location : (" +
                     card.getCell().getX() + ", " + card.getCell().getY() + "), power : " + card.getAP());
         }
     }
+
+    public void showCardInfo(String string){
+        System.out.println();
+    }
+
 
 }

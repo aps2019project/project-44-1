@@ -3,8 +3,6 @@ package models;
 import models.Enums.AttackType;
 import models.Enums.SpecialPowerActivation;
 
-import java.util.ArrayList;
-
 public class Minion extends Card {
 
     public Minion(String name, int neededMana, int HP, int AP, AttackType attackType,
@@ -29,6 +27,16 @@ public class Minion extends Card {
                 " - MP : " + this.getNeededMana() +
                 " - Special power: ";
         // TODO: 30/04/2019 get special power in string
+    }
+
+    public String getMinionInfoInBattle() {
+        return "Minion:\n" +
+                "Name : " + this.getName() + "\n" +
+                "HP : " + this.getHP() + "\n" + "AP : " + this.getAP() + "\n" + "MP : " + this.getNeededMana() + "\n" +
+                "Range:" +// TODO: 06/05/2019
+                "Combo-ability:" +// TODO: 06/05/2019
+                "Cost : " + this.getCost() + "\n" +
+                "Desc : ";// TODO: 06/05/2019 getdesc for hero
     }
 
 }
