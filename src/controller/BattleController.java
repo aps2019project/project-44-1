@@ -22,10 +22,10 @@ class BattleController {
                 //battle.getWinner().increaseMoney(1000);        //#TODO exceptions
                 isFinish = true;
             }
-            if (request.getType() == RequestType.HELP) {         //#TODO eazzz
+            if (request.getType() == RequestType.HELP) {
                 helpInBattle();
             }
-            if (request.getType() == RequestType.SHOW_GAME_INFO) {        //#TODO eazzz
+            if (request.getType() == RequestType.SHOW_GAME_INFO) {
                 showGameInfo();
             }
             if (request.getType() == RequestType.SHOW_MY_MINIONS) {
@@ -97,7 +97,7 @@ class BattleController {
     }
 
     private void selectCard(BattleRequest request) {
-
+        String cardID = request.getCardID();
     }
 
     private void moveCard(BattleRequest request) {

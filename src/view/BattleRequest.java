@@ -13,7 +13,7 @@ public class BattleRequest extends Request {
             return RequestType.SHOW_OPPONENT_MINIONS;
         else if (command.matches("show card info \\d+"))
             return RequestType.SHOW_CARD_INFO;
-        else if (command.matches("select \\d+"))
+        else if (command.matches("select \\w+"))
         /** this condition is checked for selecting normal cards and items*/
             return RequestType.SELECT_CARD;
         else if (command.matches("move to \\(\\[\\d+],\\[\\d+]\\)"))
@@ -57,20 +57,20 @@ public class BattleRequest extends Request {
         }
     }
 
-    public int getCardID() {
+    public String getCardID() {
         switch (getType()) {
             case SHOW_CARD_INFO:
-                return Integer.parseInt(command.split(" ")[3]);
+                return command.split(" ")[3];
             case SELECT_CARD:
-                return Integer.parseInt(command.split(" ")[1]);
+                return command.split(" ")[1];
             case ATTACK_TO_OPPONENT:
-                return Integer.parseInt(command.split("")[1]);
+                return command.split("")[1];
             case COMBO_ATTACK:
                 // TODO: 05/05/2019
             case SHOW_CARD_INFO_IN_GRAVEYARD:
-                return Integer.parseInt(command.split(" ")[2]);
+                return command.split(" ")[2];
             default:
-                return -1;
+                return "";
         }
     }
 
