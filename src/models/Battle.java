@@ -31,7 +31,7 @@ public class Battle implements Goal, Fight {
         return battleMode;
     }
 
-    public Player getPlayer2() {
+    Player getPlayer2() {
         return player2;
     }
 
@@ -39,7 +39,7 @@ public class Battle implements Goal, Fight {
         return battleKind;
     }
 
-    public Player getPlayer1() {
+    Player getPlayer1() {
         return player1;
     }
 
@@ -61,7 +61,7 @@ public class Battle implements Goal, Fight {
             int HP2 = getPlayer2().getDeck().getHero().getHP();
             return "HP of first player Hero is " + HP1 + "\n" +
                     "HP of second player Hero is " + HP2;
-        }else if (this.battleMode == BattleMode.CAPTURE_FLAG_1){
+        } else if (this.battleMode == BattleMode.CAPTURE_FLAG_1) {
 
         }
 
@@ -72,7 +72,7 @@ public class Battle implements Goal, Fight {
             card = getMap().getFlags().get(0).getCarrier();       //type2
         }
         if (cells.size() > 1 && getBattleMode() == BattleMode.CAPTURE_FLAG_2)
-            getMap().getFlags().forEach(f -> f.getCarrier());       //type3
+            getMap().getFlags().forEach(Item::getCarrier);       //type3
         return "";
     }       //#TODO
 
@@ -84,7 +84,7 @@ public class Battle implements Goal, Fight {
         turn++;
     }
 
-    public int getFlagNumber() {
+    int getFlagNumber() {
         return flagNumber;
     }
 
@@ -92,9 +92,8 @@ public class Battle implements Goal, Fight {
         return player1Won;
     }
 
-    public void setPlayer1Won(boolean player1Won) {
+    void setPlayer1Won(boolean player1Won) {
         this.player1Won = player1Won;
     }
-
 
 }

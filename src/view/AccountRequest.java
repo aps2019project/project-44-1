@@ -1,16 +1,10 @@
 package view;
 
-import models.Account;
 import models.Enums.ErrorType;
 
 public class AccountRequest extends Request {
 
-    private Account secondPlayer;
     private View view = new View();
-
-    public Account getSecondPlayer() {
-        return secondPlayer;
-    }
 
     public RequestType getType() {
         if (command.matches("select user \\w+")) {
@@ -51,8 +45,8 @@ public class AccountRequest extends Request {
         return Integer.parseInt(command.split(" ")[4]);
     }
 
-    public int getStoryModeLevel(){
-        switch (command){
+    public int getStoryModeLevel() {
+        switch (command) {
             case "1":
                 return 1;
             case "2":

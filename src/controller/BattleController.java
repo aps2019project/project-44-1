@@ -18,63 +18,65 @@ class BattleController {
         do {
             BattleRequest request = new BattleRequest();
             request.getNewCommand();
-            if (request.getType() == RequestType.EXIT) {
-                //battle.getWinner().increaseMoney(1000);        //#TODO exceptions
-                isFinish = true;
-            }
-            if (request.getType() == RequestType.HELP) {
-                helpInBattle();
-            }
-            if (request.getType() == RequestType.SHOW_GAME_INFO) {
-                showGameInfo();
-            }
-            if (request.getType() == RequestType.SHOW_MY_MINIONS) {
-                showMyMinions();
-            }
-            if (request.getType() == RequestType.SHOW_OPPONENT_MINIONS) {
-                showOpponentMinions();
-            }
-            if (request.getType() == RequestType.SHOW_CARD_INFO) {
-                showCardInfo(request);
-            }
-            if (request.getType() == RequestType.SELECT_CARD) {
-                selectCard(request);
-            }
-            if (request.getType() == RequestType.MOVE_CARD) {
-                moveCard(request);
-            }
-            if (request.getType() == RequestType.ATTACK_TO_OPPONENT) {
-                ordinaryAttack(request);
-            }
-            if (request.getType() == RequestType.COMBO_ATTACK) {
-                comboAttack(request);
-            }
-            if (request.getType() == RequestType.USE_SPECIAL_POWER) {
-                useSpecialPower(request);
-            }
-            if (request.getType() == RequestType.SHOW_MY_HAND) {
-                showHand(request);
-            }
-            if (request.getType() == RequestType.INSERT_CARD_FROM_HAND_TO_MAP) {
-                insertCard(request);
-            }
-            if (request.getType() == RequestType.END_TURN) {
-                endTurn();
-            }
-            if (request.getType() == RequestType.SHOW_COLLECTABLES) {
-                showCollectables();
-            }
-            if (request.getType() == RequestType.SHOW_NEXT_CARD) {
-                showNextCard();
-            }
-            if (request.getType() == RequestType.ENTER_GRAVEYARD) {
-                enterGraveyard(request);
-            }
-            if (request.getType() == RequestType.END_GAME) {
-                endGame();
-            }
-            if (request.getType() == RequestType.SELECT_COLECTABLE) {
-                selectCollectable(request);
+            switch (request.getType()) {
+                case EXIT:
+                    //battle.getWinner().increaseMoney(1000);        //#TODO exceptions
+                    isFinish = true;
+                    break;
+                case HELP:          //#TODO eazzz
+                    helpInBattle();
+                    break;
+                case SHOW_GAME_INFO:         //#TODO eazzz
+                    showGameInfo();
+                    break;
+                case SHOW_MY_MINIONS:
+                    showMyMinions();
+                    break;
+                case SHOW_OPPONENT_MINIONS:
+                    showOpponentMinions();
+                    break;
+                case SHOW_CARD_INFO:
+                    showCardInfo(request);
+                    break;
+                case SELECT_CARD:
+                    selectCard(request);
+                    break;
+                case MOVE_CARD:
+                    moveCard(request);
+                    break;
+                case ATTACK_TO_OPPONENT:
+                    ordinaryAttack(request);
+                    break;
+                case COMBO_ATTACK:
+                    comboAttack(request);
+                    break;
+                case USE_SPECIAL_POWER:
+                    useSpecialPower(request);
+                    break;
+                case SHOW_MY_HAND:
+                    showHand(request);
+                    break;
+                case INSERT_CARD_FROM_HAND_TO_MAP:
+                    insertCard(request);
+                    break;
+                case END_TURN:
+                    endTurn();
+                    break;
+                case SHOW_COLLECTABLES:
+                    showCollectables();
+                    break;
+                case SHOW_NEXT_CARD:
+                    showNextCard();
+                    break;
+                case ENTER_GRAVEYARD:
+                    enterGraveyard(request);
+                    break;
+                case END_GAME:
+                    endGame();
+                    break;
+                case SELECT_COLECTABLE:
+                    selectCollectable(request);
+                    break;
             }
         }
         while (!isFinish && battle.finishChecker(battle));
@@ -97,7 +99,7 @@ class BattleController {
     }
 
     private void selectCard(BattleRequest request) {
-        String cardID = request.getCardID();
+
     }
 
     private void moveCard(BattleRequest request) {

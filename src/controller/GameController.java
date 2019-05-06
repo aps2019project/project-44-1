@@ -55,7 +55,6 @@ public class GameController {
             view.printError(request.getError());
         }
 
-
     }
 
     private void createAccount(GameRequest request) {
@@ -74,4 +73,5 @@ public class GameController {
     private void help() {
         view.printGameMenuHelp(game.toString());
     }
+
 }

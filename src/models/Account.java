@@ -62,10 +62,6 @@ public class Account implements Comparable<Account> {
         return decks;
     }
 
-    public void setDecks(ArrayList<Deck> decks) {
-        this.decks = decks;
-    }
-
     @Override
     public int compareTo(Account account) {
         return this.wins - account.getWins();
@@ -89,9 +85,8 @@ public class Account implements Comparable<Account> {
     }
 
     public boolean isReadyToPlay() {
-        if (collection.getMainDeck() == null) {
+        if (collection.getMainDeck() == null)
             return false;
-        }
         return collection.validateDeck(mainDeck.getName());
     }
 
