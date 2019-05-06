@@ -2,7 +2,7 @@ package models;
 
 import models.Enums.CellEffect;
 
-class Cell {
+public class Cell {
     private int x;
     private int y;
     private boolean free = true;
@@ -44,7 +44,7 @@ class Cell {
     }
 
     private void decreaseHP(Card card, int amount) {
-        card.HP -= amount;
+        card.setHP(card.getHP() - amount);
     }
 
     public int getX() {

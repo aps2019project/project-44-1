@@ -195,13 +195,16 @@ public class View {
         }
     }
 
-    public void showStoryGameKinds(){
+    public void showStoryGameKinds() {
         System.out.println();
         // TODO: 05/05/2019 after adding datas from json
     }
 
-    public void showMyMinions(ArrayList<Card> cards){
-
+    public void showMyMinions(ArrayList<Card> cards) {
+        for (Card card : cards) {
+            System.out.println(card.getInGameID() + " : " + card.getName() + ", health : " + card.getHP() + ", location : (" +
+                    card.getCell().getX() + ", " + card.getCell().getY() + "), power : " + card.getAP());
+        }
     }
 
 }

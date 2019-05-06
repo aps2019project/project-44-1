@@ -106,13 +106,13 @@ public class Battle implements Goal, Fight {
         }
     }
 
-//    public Player getCardOwner(Placeable placeable){
+    //    public Player getCardOwner(Placeable placeable){
 //         get card owner by using username of card
 //    }
     public ArrayList<Card> getMyCardsInMap(Player player) {
         ArrayList<Card> cards = new ArrayList<>();
         for (Card card : map.getAllCardsInMap()) {
-            if (card instanceof Card && card.getOwner().equals(getCurrentPlayer())){
+            if (card.getOwner().equals(getCurrentPlayer())) {
                 cards.add(card);
 
             }

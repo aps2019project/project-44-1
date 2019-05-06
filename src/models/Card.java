@@ -5,7 +5,7 @@ import models.Enums.SpecialPowerActivation;
 
 public class Card extends Placeable implements Fight {
     private int AP;
-    int HP;
+    private int HP;
     private Spell specialPower;
     private String inGameID;
     private AttackType attackType;
@@ -17,6 +17,8 @@ public class Card extends Placeable implements Fight {
         this.owner = owner;
     }
 
+
+
     void setSpecialPowerActivation(SpecialPowerActivation specialPowerActivation) {
         this.specialPowerActivation = specialPowerActivation;
     }
@@ -25,19 +27,19 @@ public class Card extends Placeable implements Fight {
         return attackType;
     }
 
-    void setRange(int range) {
+    public void setRange(int range) {
         this.range = range;
     }
 
-    int getHP() {
+    public int getHP() {
         return HP;
     }
 
-    void setHP(int HP) {
+    public void setHP(int HP) {
         this.HP = HP;
     }
 
-    int getAP() {
+    public int getAP() {
         return AP;
     }
 
@@ -85,4 +87,6 @@ public class Card extends Placeable implements Fight {
     public Player getOwner() {
         return owner;
     }
+
+
 }
