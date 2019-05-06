@@ -87,11 +87,13 @@ class BattleController {
     }
 
     private void showMyMinions() {
-        view.showMyMinions(battle.getMyCardsInMap());
+        view.showMyMinions(battle.getMap().getPlayerCardsInMap(
+                battle.getPlayerName(battle.getTurn())));
     }
 
     private void showOpponentMinions() {
-        view.showOpponentMinions(battle.getOpponentCardsInMap());
+        view.showOpponentMinions(battle.getMap().getPlayerCardsInMap(
+                battle.getPlayerName(battle.getTurn() + 1)));
     }
 
     private void showCardInfo(BattleRequest request) {
@@ -123,12 +125,12 @@ class BattleController {
     }
 
     private void insertCard(BattleRequest request) {
-
+        battle.getCurrentPlayer().insert(request.getCardName(), request.getLocationX(), request.getLocationY());
     }
 
     private void showHand(BattleRequest request) {
-        String cardID = request.getCardID();
-    }
+
+    }   // TODO: 5/6/2019 ready
 
     private void endTurn() {
         battle.turnHandler();

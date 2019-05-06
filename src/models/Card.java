@@ -17,8 +17,6 @@ public class Card extends Placeable implements Fight {
         this.owner = owner;
     }
 
-
-
     void setSpecialPowerActivation(SpecialPowerActivation specialPowerActivation) {
         this.specialPowerActivation = specialPowerActivation;
     }
@@ -87,6 +85,5 @@ public class Card extends Placeable implements Fight {
     public Player getOwner() {
         return owner;
     }
-
 
 }

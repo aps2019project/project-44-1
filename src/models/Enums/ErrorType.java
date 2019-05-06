@@ -20,7 +20,10 @@ public enum ErrorType {
     MAX_ITEMS_IN_COLLECTION_REACHED("you can not buy this card because you have 3 items in your collection !!!"),
     NO_ERROR("NO error"),
     MAIN_DECK_IS_NOT_VALID("selected deck is invalid"),
-    CARD_NOT_FOUND_IN_BATTLE("there is no card with tish name in game map !!!");
+    CARD_NOT_FOUND_IN_BATTLE("there is no card with tish name in game map !!!"),
+    INVALID_CARD_NAME("Invalid card name"),
+    NO_ENOUGH_MANA("you don't have enough mana"),
+    INVALID_TARGET("invalid target");
 
 
     private String message;

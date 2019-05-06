@@ -5,7 +5,7 @@ import models.Enums.ItemType;
 import java.lang.management.PlatformLoggingMXBean;
 import java.util.ArrayList;
 
-class Map {
+public class Map {
 
     private Cell[][] cells = new Cell[5][9];
     private ArrayList<Item> flags = new ArrayList<>();
@@ -30,11 +30,11 @@ class Map {
         }
     }
 
-    public int getManhatanDistance(Cell start, Cell end) {
+    public static int getManhatanDistance(Cell start, Cell end) {
         return Math.abs(start.getX() - end.getX() + start.getY() - end.getY());
     }
 
-    public int getManhatanDistance(int startX, int startY, int endX, int endY) {
+    public static int getManhatanDistance(int startX, int startY, int endX, int endY) {
         return Math.abs(startX - endX + startY - endY);
     }
 
@@ -59,6 +59,15 @@ class Map {
                     cards.add(cells[row][column].getCard());
                 }
             }
+        }
+        return cards;
+    }
+
+    public ArrayList<Card> getPlayerCardsInMap(String playerName) {
+        ArrayList<Card> cards = new ArrayList<>();
+        for (Card card : this.getAllCardsInMap()) {
+            if (card.getOwner().getName().equals(playerName))
+                cards.add(card);
         }
         return cards;
     }
