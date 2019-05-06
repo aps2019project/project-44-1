@@ -3,7 +3,6 @@ package models;
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 
 public class Battle implements Goal, Fight {
@@ -14,15 +13,13 @@ public class Battle implements Goal, Fight {
     private BattleMode battleMode;
     private int turn = 1;
     private int flagNumber;
-    private boolean firstPlayerWon;
+    private boolean player1Won;
 
     public Battle(BattleKind battleKind, BattleMode battleMode, Player firstPlayer, Player secondPlayer, int flagNumber) {
         this.battleKind = battleKind;
         this.battleMode = battleMode;
         this.firstPlayer = firstPlayer;
-        firstPlayer.setMyMap(map);
         this.secondPlayer = secondPlayer;
-        secondPlayer.setMyMap(map);
         this.flagNumber = flagNumber;
         relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[2][0]);
         relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[2][8]);
@@ -79,6 +76,10 @@ public class Battle implements Goal, Fight {
         return "";
     }       //#TODO
 
+    public boolean whosTurn() {
+        return turn % 2 == 1;
+    }
+
     public void turnHandler() {       //method to handle all actions must occur at end of turn
         turn++;
     }
@@ -88,14 +89,14 @@ public class Battle implements Goal, Fight {
     }
 
     public boolean isFirstPlayerWon() {
-        return firstPlayerWon;
+        return player1Won;
     }
 
-    void setFirstPlayerWon(boolean firstPlayerWon) {
-        this.firstPlayerWon = firstPlayerWon;
+    void setFirstPlayerWon(boolean player1Won) {
+        this.player1Won = player1Won;
     }
 
-    private Player getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         if (turn % 2 == 1) {
             return firstPlayer;
         } else {
@@ -103,40 +104,14 @@ public class Battle implements Goal, Fight {
         }
     }
 
-    public ArrayList<Card> getMyCardsInMap() {
-        ArrayList<Card> cards = new ArrayList<>();
-        for (Card card : map.getAllCardsInMap()) {
-            if (card.getOwner().getName().equals(getCurrentPlayer().getName()))
-                cards.add(card);
+    public Player getCardOwner(Placeable placeable){
+
+    }
+    public ArrayList<Placeable> getMyCardsInMap(Player player) {
+        ArrayList<Placeable> cards = new ArrayList<>();
+        for (Placeable card : cards) {
+
         }
-        return cards;
     }
 
-    public ArrayList<Card> getOpponentCardsInMap() {
-        ArrayList<Card> cards = new ArrayList<>();
-        for (Card card : map.getAllCardsInMap()) {
-            if (!card.getOwner().equals(getCurrentPlayer()))
-                cards.add(card);
-        }
-        return cards;
-    }
-
-    public Placeable getCard(String cardID) {
-        for (Card card : map.getAllCardsInMap()) {
-            if (card.getInGameID().equals(cardID))
-                return card;
-        }
-        return null;
-    }
-
-    public String getCardInfo(String cardID) {
-        Placeable card = getCard(cardID);
-        if (card instanceof Hero)
-            return ((Hero) card).getHeroInfoInBattle();
-        else if (card instanceof Minion)
-            return ((Minion) card).getMinionInfoInBattle();
-        else if (card instanceof Spell)
-            return ((Spell) card).getSpellInfoInBattle();
-        return null;
-    }
 }

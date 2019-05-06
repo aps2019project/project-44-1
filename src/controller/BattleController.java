@@ -1,7 +1,6 @@
 package controller;
 
 import models.Battle;
-import models.Enums.ErrorType;
 import models.Game;
 import models.MatchHistory;
 import view.BattleRequest;
@@ -87,19 +86,15 @@ class BattleController {
     }
 
     private void showMyMinions() {
-        view.showMyMinions(battle.getMyCardsInMap());
+        view.showMyMinions(battle.getMyCardsInMap(battle.getCurrentPlayer()));
     }
 
     private void showOpponentMinions() {
-        view.showOpponentMinions(battle.getOpponentCardsInMap());
+
     }
 
     private void showCardInfo(BattleRequest request) {
-        String cardID = request.getCardID();
-        if (battle.getCard(cardID) != null)
-            view.showCardInfo(battle.getCardInfo(cardID));
-        else
-            view.printError(ErrorType.CARD_NOT_FOUND_IN_BATTLE);
+
     }
 
     private void selectCard(BattleRequest request) {
@@ -127,7 +122,7 @@ class BattleController {
     }
 
     private void showHand(BattleRequest request) {
-        String cardID = request.getCardID();
+
     }
 
     private void endTurn() {
