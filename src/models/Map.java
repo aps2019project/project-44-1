@@ -8,15 +8,14 @@ import java.util.ArrayList;
 class Map {
 
     private Cell[][] cells = new Cell[5][9];
-
-    Cell[][] getCells() {
-        return cells;
-    }
-
     private ArrayList<Item> flags = new ArrayList<>();
 
     ArrayList<Item> getFlags() {
         return flags;
+    }
+
+    Cell[][] getCells() {
+        return cells;
     }
 
     void setFlags(Cell... flagCell) {
@@ -50,7 +49,8 @@ class Map {
         }
         return counter;
     }
-    public ArrayList<Card> getAllCardsInMap() {
+
+    ArrayList<Card> getAllCardsInMap() {
         ArrayList<Card> cards = new ArrayList<>();
         for (int row = 0; row < 5; row++) {
             for (int column = 0; column < 9; column++) {

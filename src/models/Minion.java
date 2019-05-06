@@ -29,7 +29,7 @@ public class Minion extends Card {
         // TODO: 30/04/2019 get special power in string
     }
 
-    public String getMinionInfoInBattle() {
+    String getMinionInfoInBattle() {
         return "Minion:\n" +
                 "Name : " + this.getName() + "\n" +
                 "HP : " + this.getHP() + "\n" + "AP : " + this.getAP() + "\n" + "MP : " + this.getNeededMana() + "\n" +

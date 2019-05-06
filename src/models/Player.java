@@ -13,6 +13,7 @@ public class Player {
     public static final int[] turnBeginMana = {2, 3, 4, 5, 6, 7, 8, 9};
     private String name;
     private Map myMap;
+    private Minion nextMinionInHand;
 
     public Player(Deck deck, String name) {
         this.deck = deck;
@@ -21,8 +22,8 @@ public class Player {
             minion.setOwner(this);
         }
         deck.getHero().setOwner(this);
-        initializeHand();
         Collections.shuffle(deck.getDeckCards());
+        initializeHand();
     }
 
     void setMyMap(Map myMap) {
@@ -41,11 +42,11 @@ public class Player {
         return hand;
     }
 
-    public int getTurnsFlagSaved() {
+    int getTurnsFlagSaved() {
         return turnsFlagSaved;
     }
 
-    public int getFlagsCaptured() {
+    int getFlagsCaptured() {
         return flagsCaptured;
     }
 
@@ -57,21 +58,19 @@ public class Player {
         this.mana = mana;
     }
 
-    public Deck getDeck() {
+    Deck getDeck() {
         return deck;
     }
 
     private void initializeHand() {
-        Random r = new Random();
         Iterator<Minion> iterator = deck.getMinions().iterator();
-        for (int i = 0; i < 5; i++) {
-            int a = r.nextInt(20);
-            hand[i] = deck.getMinions().get(a);
-            while (iterator.hasNext()) {
-                if (iterator.next().equals(hand[i]))
-                    iterator.remove();
-            }
+        int i = 0;
+        while (i < 5) {
+            hand[i] = iterator.next();
+            i++;
+            iterator.remove();
         }
+        nextMinionInHand = deck.getMinions().get(5);
     }
 
     private String IDGenerator(String cardName) {
@@ -79,7 +78,7 @@ public class Player {
                 (myMap.timesCardUsed(cardName) + 1);
     }
 
-    public void insert(String cardName) {        //need more edit
+    private void insert(String cardName, int x, int y) {        //need more edit
         for (int i = 0; i < 5; i++) {
             if (hand[i].getName().equals(cardName)) {
                 IDGenerator(cardName);

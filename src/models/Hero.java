@@ -51,7 +51,7 @@ public class Hero extends Card {
         }
     }
 
-    public String getHeroInfoInBattle() {
+    String getHeroInfoInBattle() {
         return "Hero:\n" +
                 "Name : " + this.getName() + "\n" +
                 "Cost : " + this.getCost() + "\n" +

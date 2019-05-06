@@ -79,10 +79,6 @@ public class Battle implements Goal, Fight {
         return "";
     }       //#TODO
 
-    public boolean whosTurn() {
-        return turn % 2 == 1;
-    }
-
     public void turnHandler() {       //method to handle all actions must occur at end of turn
         turn++;
     }
@@ -99,7 +95,7 @@ public class Battle implements Goal, Fight {
         this.firstPlayerWon = firstPlayerWon;
     }
 
-    public Player getCurrentPlayer() {
+    private Player getCurrentPlayer() {
         if (turn % 2 == 1) {
             return firstPlayer;
         } else {
@@ -107,50 +103,40 @@ public class Battle implements Goal, Fight {
         }
     }
 
-    //    public Player getCardOwner(Placeable placeable){
-//         get card owner by using username of card
-//    }
     public ArrayList<Card> getMyCardsInMap() {
         ArrayList<Card> cards = new ArrayList<>();
         for (Card card : map.getAllCardsInMap()) {
-            if (card.getOwner().equals(getCurrentPlayer())) {
+            if (card.getOwner().getName().equals(getCurrentPlayer().getName()))
                 cards.add(card);
-
-            }
         }
         return cards;
     }
-    // this 2 function can be convert to a function
 
     public ArrayList<Card> getOpponentCardsInMap() {
         ArrayList<Card> cards = new ArrayList<>();
         for (Card card : map.getAllCardsInMap()) {
-            if (!card.getOwner().equals(getCurrentPlayer())) {
+            if (!card.getOwner().equals(getCurrentPlayer()))
                 cards.add(card);
-
-            }
         }
         return cards;
     }
 
     public Placeable getCard(String cardID) {
         for (Card card : map.getAllCardsInMap()) {
-            if (card.getInGameID().equals(cardID)) {
+            if (card.getInGameID().equals(cardID))
                 return card;
-            }
         }
         return null;
     }
 
     public String getCardInfo(String cardID) {
         Placeable card = getCard(cardID);
-        if (card instanceof Hero) {
+        if (card instanceof Hero)
             return ((Hero) card).getHeroInfoInBattle();
-        } else if (card instanceof Minion) {
+        else if (card instanceof Minion)
             return ((Minion) card).getMinionInfoInBattle();
-        } else if (card instanceof Spell) {
+        else if (card instanceof Spell)
             return ((Spell) card).getSpellInfoInBattle();
-        }
         return null;
     }
 }

@@ -20,7 +20,7 @@ public class Spell extends Placeable {
         // TODO: 30/04/2019 get Desc in string
     }
 
-    public String getSpellInfoInBattle() {
+    String getSpellInfoInBattle() {
         return "Spell:\n" +
                 "Name : " + this.getName() + "\n" +
                 "MP :" + this.getNeededMana() + "\n" +

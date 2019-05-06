@@ -1,6 +1,5 @@
 package view;
 
-
 public class BattleRequest extends Request {
 
     @Override
@@ -14,7 +13,7 @@ public class BattleRequest extends Request {
         else if (command.matches("show card info \\d+"))
             return RequestType.SHOW_CARD_INFO;
         else if (command.matches("select \\w+"))
-        /** this condition is checked for selecting normal cards and items*/
+            /* this condition is checked for selecting normal cards and items*/
             return RequestType.SELECT_CARD;
         else if (command.matches("move to \\(\\[\\d+],\\[\\d+]\\)"))
             return RequestType.MOVE_CARD;
