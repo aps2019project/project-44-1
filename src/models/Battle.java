@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class Battle implements Goal, Fight {
     private BattleKind battleKind;
+    private Account first;
+    private Account second;
     private Player firstPlayer;
     private Player secondPlayer;
     private Map map = new Map();
@@ -16,18 +18,21 @@ public class Battle implements Goal, Fight {
     private int flagNumber;
     private boolean firstPlayerWon;
 
-    public Battle(BattleKind battleKind, BattleMode battleMode, Player firstPlayer, Player secondPlayer, int flagNumber) {
+    public Battle(BattleKind battleKind, BattleMode battleMode, Account firstPlayer, Account secondPlayer, int flagNumber) {
         this.battleKind = battleKind;
         this.battleMode = battleMode;
-        this.firstPlayer = firstPlayer;
-        firstPlayer.setMyMap(map);
-        this.secondPlayer = secondPlayer;
-        secondPlayer.setMyMap(map);
+        this.first = firstPlayer;
+        this.second = secondPlayer;
         this.flagNumber = flagNumber;
-        relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[2][0]);
-        relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[2][8]);
+    }
+
+    {
+        firstPlayer.setMyMap(map);
+        secondPlayer.setMyMap(map);
         firstPlayer.getDeck().removeFromDeck(firstPlayer.getDeck().getHero());
         secondPlayer.getDeck().removeFromDeck(secondPlayer.getDeck().getHero());
+        relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[2][0]);
+        relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[2][8]);
     }
 
     BattleMode getBattleMode() {

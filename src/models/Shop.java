@@ -1,5 +1,6 @@
 package models;
 
+import com.google.gson.stream.JsonReader;
 import models.Enums.ErrorType;
 import com.google.gson.*;
 
@@ -10,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Shop {
     private static Shop shop = new Shop();
@@ -17,17 +19,33 @@ public class Shop {
     private ArrayList<Placeable> cards = new ArrayList<>();
     private Account account;
 
-
     private Shop() {
 
     }
 
-    public static Shop getInstance() {
-        return shop;
+    {   //alrz1999 json
+        Gson gson = new Gson();
+        JsonReader reader = null;
+        try {
+            reader = new JsonReader(new FileReader("D:\\project-44-1\\src\\models\\database.json"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        JsonObject obj = gson.fromJson(reader, JsonObject.class);
+        Hero[] heroes = gson.fromJson(obj.get("Hero"), Hero[].class);
+        Minion[] minions = gson.fromJson(obj.get("minions"), Minion[].class);
+        Item[] items = gson.fromJson(obj.get("Items"), Item[].class);
+        Spell[] spells = gson.fromJson(obj.get("Spell"), Spell[].class);
+        ArrayList<Placeable> cards = new ArrayList<>();
+        cards.addAll(Arrays.asList(heroes));
+        cards.addAll(Arrays.asList(minions));
+        cards.addAll(Arrays.asList(items));
+        cards.addAll(Arrays.asList(spells));
+        this.cards = cards;
     }
 
-
-    public void help() {
+    public static Shop getInstance() {
+        return shop;
     }
 
     /**
@@ -65,8 +83,13 @@ public class Shop {
 
     }
 
-    public void searchInShop(String cardName) {
-
+    public boolean searchInShop(String cardName) {
+        for (Placeable card: cards){
+            if (card.getName().equals(cardName)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public int searchInCollection(String cardName) {
@@ -100,8 +123,9 @@ public class Shop {
     }
 
     public Placeable getCard(String cardName) {
+        // alireza rahmani json
         Gson gson = new Gson();
-        File jsonFile = Paths.get("/Users/username/projects/workspace/foo/src/test/resources/file.json").toFile();
+        File jsonFile = Paths.get("D:\\project-44-1\\src\\models\\database.json").toFile();
         JsonObject jsonObject = null;
         try {
             jsonObject = gson.fromJson(new FileReader(jsonFile), JsonObject.class);

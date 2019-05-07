@@ -58,18 +58,17 @@ class AccountController {
         ShopController.getInstance().main(account);
     }
 
-    private void chooseGameKind(AccountRequest request, BattleKind battleKind) {
+    private void chooseGameKind(AccountRequest request) {
         Account ai_player;
         do {
             view.printGameKinds();
             request.getNewCommand();
             if (request.getType().equals(RequestType.STORY_GAME)) {
-                int level = chooseStoryGame(request, battleKind);
-                /* level will be -1 if player don't choose any of story games and come back here*/
+                int level = chooseStoryGame(request);
 
             }
             if (request.getType().equals(RequestType.CUSTOM_GAME)) {
-                // TODO: 04/05/2019
+                /*custom game menu*/
             }
         } while (!request.getType().equals(RequestType.EXIT));
 
@@ -88,7 +87,6 @@ class AccountController {
     }
 
     private void enterBattle(AccountRequest request) {
-        BattleKind battleKind;
         if (!account.isReadyToPlay()) {
             view.printError(ErrorType.MAIN_DECK_IS_NOT_VALID);
             return;
@@ -97,53 +95,41 @@ class AccountController {
         do {
             request.getNewCommand();
             if (request.getType().equals(RequestType.MULTI_PLAYER)) {
-                battleKind = BattleKind.MULTI_PLAYER;
-                try {
-                    chooseSecondPlayer(request, battleKind);
-                } catch (CloneNotSupportedException e) {
-                    e.printStackTrace();
-                }
+                chooseSecondPlayer(request);
             }
             if (request.getType().equals(RequestType.SINGLE_PLAYER)) {
-                battleKind = BattleKind.SINGLE_PLAYER;
-                chooseGameKind(request, battleKind);
+                chooseGameKind(request);
             }
         } while (!request.getType().equals(RequestType.EXIT));
-
     }
 
-    private void chooseGameMode(AccountRequest request, Player p1, Player p2,
-                                BattleKind battleKind) {
+    private void chooseGameMode(AccountRequest request, Account p1, Account p2) {
         view.showGameModes();
         do {
             request.getNewCommand();
             if (request.getType().equals(RequestType.DEATH_MATCH)) {
-                BattleController.getInstance().main(new Battle(battleKind, BattleMode.DEATH_MATCH,
+                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER, BattleMode.DEATH_MATCH,
                         p1, p2, 0));
             }
             if (request.getType().equals(RequestType.CAPTURE_FLAG1)) {
-                BattleController.getInstance().main(new Battle(battleKind, BattleMode.CAPTURE_FLAG_1,
+                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER, BattleMode.CAPTURE_FLAG_1,
                         p1, p2, 1));
             }
             if (request.getType().equals(RequestType.CAPTURE_FLAG2)) {
-                BattleController.getInstance().main(new Battle(battleKind, BattleMode.CAPTURE_FLAG_2,
+                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER, BattleMode.CAPTURE_FLAG_2,
                         p1, p2, request.getNumberOfFlags()));
             }
         } while (!request.getType().equals(RequestType.EXIT));
     }
 
-    private void chooseSecondPlayer(AccountRequest request, BattleKind battleKind) throws CloneNotSupportedException {
+    private void chooseSecondPlayer(AccountRequest request) {
         do {
-            request.getNewCommand();
             view.printPlayersList(Game.getAccounts(), account);
+            request.getNewCommand();
             if (request.getType().equals(RequestType.SELECT_SECOND_PLAYER)) {
                 Account secondPlayer = Game.getAccount(request.getSecondPlayerUsername());
                 if (secondPlayer != null && secondPlayer.isReadyToPlay()) {
-//                    Game.getInstance().setAccount2(secondPlayer);
-                    chooseGameMode(request, new Player(account.getMainDeck().clone(),
-                                    account.getUsername()),
-                            new Player(secondPlayer.getMainDeck().clone(),
-                                    secondPlayer.getUsername()), battleKind);
+                    chooseGameMode(request, account, secondPlayer);
                 } else {
                     view.printSecondPlayerIsNotReady();
                 }
@@ -151,7 +137,7 @@ class AccountController {
         } while (!request.getType().equals(RequestType.EXIT));
     }
 
-    private int chooseStoryGame(AccountRequest request, BattleKind battleKind) {
+    private int chooseStoryGame(AccountRequest request) {
         boolean isFinish = false;
         do {
             view.showStoryGameKinds();
