@@ -124,30 +124,37 @@ public class Shop {
 
     public Placeable getCard(String cardName) {
         // alireza rahmani json
-        Gson gson = new Gson();
-        File jsonFile = Paths.get("D:\\project-44-1\\src\\models\\database.json").toFile();
-        JsonObject jsonObject = null;
-        try {
-            jsonObject = gson.fromJson(new FileReader(jsonFile), JsonObject.class);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        JsonArray minionArray = jsonObject.getAsJsonArray("minion");
-        for (JsonElement minion : minionArray) {
-            if (minion.getAsJsonObject().get("name").getAsString().equals(cardName)){
-                Card card = new Card();
-                card.setName(minion.getAsJsonObject().get("name").getAsString());
-                card.setHP(minion.getAsJsonObject().get("HP").getAsInt());
-                card.setAP(minion.getAsJsonObject().get("AP").getAsInt());
-                card.setRange(minion.getAsJsonObject().get("attackRange").getAsInt());
-                card.setCost(minion.getAsJsonObject().get("cost").getAsInt());
-                minion.getAsJsonObject().get("attackType").getAsString();
-                minion.getAsJsonObject().get("neededMana").getAsInt();
-                minion.getAsJsonObject().get("specialPowerCoolDown").getAsString();
-                minion.getAsJsonObject().get("specialPower").getAsString();
+//        Gson gson = new Gson();
+//        File jsonFile = Paths.get("D:\\project-44-1\\src\\models\\database.json").toFile();
+//        JsonObject jsonObject = null;
+//        try {
+//            jsonObject = gson.fromJson(new FileReader(jsonFile), JsonObject.class);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        JsonArray minionArray = jsonObject.getAsJsonArray("minion");
+//        for (JsonElement minion : minionArray) {
+//            if (minion.getAsJsonObject().get("name").getAsString().equals(cardName)){
+//                Card card = new Card();
+//                card.setName(minion.getAsJsonObject().get("name").getAsString());
+//                card.setHP(minion.getAsJsonObject().get("HP").getAsInt());
+//                card.setAP(minion.getAsJsonObject().get("AP").getAsInt());
+//                card.setRange(minion.getAsJsonObject().get("attackRange").getAsInt());
+//                card.setCost(minion.getAsJsonObject().get("cost").getAsInt());
+//                minion.getAsJsonObject().get("attackType").getAsString();
+//                minion.getAsJsonObject().get("neededMana").getAsInt();
+//                minion.getAsJsonObject().get("specialPowerCoolDown").getAsString();
+//                minion.getAsJsonObject().get("specialPower").getAsString();
+//                return card;
+//                }
+//            }
+//        return null;
+
+        for (Placeable card : cards) {
+            if (card.getName().equals(cardName)) {
                 return card;
-                }
             }
+        }
         return null;
     }
 

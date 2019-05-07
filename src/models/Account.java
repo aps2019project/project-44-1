@@ -11,7 +11,7 @@ public class Account implements Comparable<Account> {
     private ArrayList<Deck> decks = new ArrayList<>();
     private Collection collection = new Collection();
     private ArrayList<MatchHistory> histories = new ArrayList<>();
-    private Deck mainDeck = collection.getMainDeck();
+//    private Deck mainDeck = collection.getMainDeck();
 
     Account(String username, String password) {
         this.username = username;
@@ -30,10 +30,6 @@ public class Account implements Comparable<Account> {
         return collection;
     }
 
-    public void setCollection(Collection collection) {
-        this.collection = collection;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -46,13 +42,13 @@ public class Account implements Comparable<Account> {
         return money;
     }
 
-    public Deck getMainDeck() {
-        return mainDeck;
-    }
+//    public Deck getMainDeck() {
+//        return mainDeck;
+//    }
 
-    public void setMainDeck(Deck mainDeck) {
-        this.mainDeck = mainDeck;
-    }
+//    public void setMainDeck(Deck mainDeck) {
+//        this.mainDeck = mainDeck;
+//    }
 
     public int getWins() {
         return wins;
@@ -87,7 +83,9 @@ public class Account implements Comparable<Account> {
     public boolean isReadyToPlay() {
         if (collection.getMainDeck() == null)
             return false;
-        return collection.validateDeck(mainDeck.getName());
+        return collection.validateDeck(collection.getMainDeck().getName());
     }
+
+
 
 }
