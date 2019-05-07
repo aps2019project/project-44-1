@@ -118,6 +118,24 @@ public class Battle implements Goal, Fight {
         }
     }
 
+    public ArrayList<Card> getMyCardsInMap() {
+        ArrayList<Card> cards = new ArrayList<>();
+        for (Card card : map.getAllCardsInMap()) {
+            if (card.getOwner().getName().equals(getCurrentPlayer().getName()))
+                cards.add(card);
+        }
+        return cards;
+    }
+
+    public ArrayList<Card> getOpponentCardsInMap() {
+        ArrayList<Card> cards = new ArrayList<>();
+        for (Card card : map.getAllCardsInMap()) {
+            if (!card.getOwner().equals(getCurrentPlayer()))
+                cards.add(card);
+        }
+        return cards;
+    }
+
     public Placeable getCard(String cardID) {
         for (Card card : map.getAllCardsInMap()) {
             if (card.getInGameID().equals(cardID))
@@ -137,7 +155,27 @@ public class Battle implements Goal, Fight {
         return null;
     }
 
+    public Placeable selectCard(String cardID) {
+        return map.getCard(cardID);
+    }
+
     public int getTurn() {
         return turn;
+    }
+
+    public Account getFirst() {
+        return first;
+    }
+
+    public void setFirst(Account first) {
+        this.first = first;
+    }
+
+    public Account getSecond() {
+        return second;
+    }
+
+    public void setSecond(Account second) {
+        this.second = second;
     }
 }

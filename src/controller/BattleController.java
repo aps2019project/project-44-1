@@ -1,9 +1,7 @@
 package controller;
 
-import models.Battle;
+import models.*;
 import models.Enums.ErrorType;
-import models.Game;
-import models.MatchHistory;
 import view.BattleRequest;
 import view.View;
 
@@ -49,18 +47,6 @@ class BattleController {
                 case SELECT_CARD:
                     selectCard(request);
                     break;
-                case MOVE_CARD:
-                    moveCard(request);
-                    break;
-                case ATTACK_TO_OPPONENT:
-                    ordinaryAttack(request);
-                    break;
-                case COMBO_ATTACK:
-                    comboAttack(request);
-                    break;
-                case USE_SPECIAL_POWER:
-                    useSpecialPower(request);
-                    break;
                 case SHOW_MY_HAND:
                     showHand(request);
                     break;
@@ -82,9 +68,6 @@ class BattleController {
                 case END_GAME:
                     endGame();
                     break;
-                case SELECT_COLECTABLE:
-                    selectCollectable(request);
-                    break;
             }
         }
         while (!isFinish && battle.finishChecker(battle));
@@ -95,13 +78,11 @@ class BattleController {
     }
 
     private void showMyMinions() {
-        view.showMyMinions(battle.getMap().getPlayerCardsInMap(
-                battle.getPlayerName(battle.getTurn())));
+        view.showMyMinions(battle.getMyCardsInMap());
     }
 
     private void showOpponentMinions() {
-        view.showOpponentMinions(battle.getMap().getPlayerCardsInMap(
-                battle.getPlayerName(battle.getTurn() + 1)));
+        view.showOpponentMinions(battle.getOpponentCardsInMap());
     }
 
     private void showCardInfo(BattleRequest request) {
@@ -113,6 +94,18 @@ class BattleController {
     }
 
     private void selectCard(BattleRequest request) {
+        String cardID = request.getCardID();
+        Placeable selectedCard = battle.getCard(cardID);
+        if (selectedCard == null) {
+            view.printError(ErrorType.INVALID_CARD_ID);
+            return;
+        }
+        if (selectedCard instanceof Card) {
+            controlSoldier(request, (Card) selectedCard);
+        }
+        if (selectedCard instanceof Item) {
+
+        }
         if (battle.getCurrentPlayer().select(request.getCardID()))
             view.printError(ErrorType.INVALID_CARD_ID);
     }
@@ -223,18 +216,45 @@ class BattleController {
 
     }
 
-//    private void addThisBattleToBattleHistory() {
-//        if (battle.isFirstPlayerWon()) {
-//            Game.getInstance().getAccount1().addMatchHistory(new MatchHistory
-//                    (Game.getInstance().getAccount1().getUsername(), true));
-//            Game.getInstance().getAccount2().addMatchHistory(new MatchHistory
-//                    (Game.getInstance().getAccount2().getUsername(), false));
-//        } else {
-//            Game.getInstance().getAccount1().addMatchHistory(new MatchHistory
-//                    (Game.getInstance().getAccount1().getUsername(), false));
-//            Game.getInstance().getAccount2().addMatchHistory(new MatchHistory
-//                    (Game.getInstance().getAccount2().getUsername(), true));
-//        }
-//    }
+    private void addThisBattleToBattleHistory() {
+        if (battle.isFirstPlayerWon()) {
+            battle.getFirst().addMatchHistory(new MatchHistory
+                    (battle.getFirst().getUsername(), true));
+            battle.getSecond().addMatchHistory(new MatchHistory
+                    (battle.getSecond().getUsername(), false));
+        } else {
+            battle.getFirst().addMatchHistory(new MatchHistory
+                    (battle.getFirst().getUsername(), false));
+            battle.getSecond().addMatchHistory(new MatchHistory
+                    (battle.getSecond().getUsername(), true));
+        }
+    }
+
+    private void controlSoldier(BattleRequest request, Card soldier) {
+        boolean isFinish = false;
+        do {
+            request.getNewCommand();
+            switch (request.getType()) {
+                case MOVE_CARD:
+                    // fek konam be function mocecard() soldier ro bedi behtare
+                    battle.getCurrentPlayer().select(request.getCardID());
+                    moveCard(request);
+                    break;
+                case ATTACK_TO_OPPONENT:
+                    ordinaryAttack(request);
+                    break;
+                case COMBO_ATTACK:
+                    comboAttack(request);
+                    break;
+                case USE_SPECIAL_POWER:
+                    useSpecialPower(request);
+                    break;
+                case EXIT:
+                    isFinish = true;
+
+            }
+        }
+        while (!isFinish && battle.finishChecker(battle));
+    }
 
 }

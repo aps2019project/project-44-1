@@ -80,6 +80,22 @@ public class Map {
         return cards;
     }
 
-
+    public Placeable getCard(String cardID) {
+        for (int row = 0; row < 5; row++) {
+            for (int column = 0; column < 9; column++) {
+                if (!cells[row][column].isFree()) {
+                    if (cells[row][column].getCard() != null
+                            && cells[row][column].getCard().getInGameID().equals(cardID)) {
+                        return cells[row][column].getCard();
+                    }
+                    if (cells[row][column].getItem() != null
+                            && cells[row][column].getItem().getInGameID().equals(cardID)) {
+                        return cells[row][column].getItem();
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
 }

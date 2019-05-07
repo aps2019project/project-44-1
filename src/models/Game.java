@@ -5,21 +5,11 @@ import java.util.Collections;
 
 public class Game {
     private static ArrayList<Account> accounts = new ArrayList<>();
-    //    private Account account1;
-//    private Account account2;
-//    private static int ID = 0;
+
     private static Game game = new Game();
 
     private Game() {
     }
-
-//    public Account getAccount1() {
-//        return account1;
-//    }
-//
-//    public Account getAccount2() {
-//        return account2;
-//    }
 
     public static Game getInstance() {
         return game;
@@ -41,14 +31,6 @@ public class Game {
     public void createAccount(String username, String password) {
         addAccount(new Account(username, password));
     }
-//
-//    public void setAccount1(Account account1) {
-//        this.account1 = account1;
-//    }
-
-//    public void setAccount2(Account account2) {
-//        this.account2 = account2;
-//    }
 
     private void addAccount(Account account) {
         accounts.add(account);
@@ -59,13 +41,6 @@ public class Game {
         return accounts;
     }
 
-    /**
-     * a good way to create unique IDs
-     */
-//    public static int IDCreator() {
-//        ID++;
-//        return ID;
-//    }
     public boolean isUsedUsername(String username) {
         for (Account account : accounts) {
             if (account.getUsername().equals(username)) {
@@ -89,7 +64,7 @@ public class Game {
     }
 
     {
-        Account test = new Account("test","1234");
+        Account test = new Account("test", "1234");
         test.getCollection().addCardToCollection(Shop.getInstance().getCard("divsefid"));
         test.getCollection().addCardToCollection(Shop.getInstance().getCard("simorgh"));
         test.getCollection().addCardToCollection(Shop.getInstance().getCard("ejhdeha"));
@@ -99,22 +74,22 @@ public class Game {
         test.getCollection().addCardToCollection(Shop.getInstance().getCard("Madness"));
         Game.getAccounts().add(test);
         test.getCollection().createDeck("test");
-        test.getCollection().addToDeck(1,"test");
-        test.getCollection().addToDeck(7,"test");
-        test.getCollection().addToDeck(7,"test");
-        test.getCollection().addToDeck(7,"test");
-        test.getCollection().addToDeck(7,"test");
-        test.getCollection().addToDeck(7,"test");
-        test.getCollection().addToDeck(7,"test");
-        test.getCollection().addToDeck(7,"test");
-        test.getCollection().addToDeck(7,"test");
-        test.getCollection().addToDeck(7,"test");
-        test.getCollection().addToDeck(7,"test");
-        test.getCollection().addToDeck(7,"test");
-        test.getCollection().addToDeck(7,"test");
-        test.getCollection().addToDeck(7,"test");
-        test.getCollection().addToDeck(7,"test");
-        test.getCollection().addToDeck(7,"test");
+        test.getCollection().addToDeck(1, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
 
 
     }
