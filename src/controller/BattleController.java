@@ -8,9 +8,17 @@ import view.BattleRequest;
 import view.View;
 
 class BattleController {
-
+    private static BattleController battleController = new BattleController();
     private Battle battle;
     private View view = new View();
+
+    private BattleController() {
+
+    }
+
+    public static BattleController getInstance() {
+        return battleController;
+    }
 
     void main(Battle battle) {
         this.battle = battle;

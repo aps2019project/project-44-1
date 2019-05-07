@@ -6,9 +6,17 @@ import view.CollectionRequest;
 import view.View;
 
 class CollectionController {
-
+    private static CollectionController collectionController = new CollectionController();
     private Collection collection;
     private View view = new View();
+
+    private CollectionController(){
+
+    }
+
+    public static CollectionController getInstance() {
+        return collectionController;
+    }
 
     void main(Collection collection) {
         CollectionRequest request;

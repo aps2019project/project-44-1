@@ -10,9 +10,17 @@ import static models.Enums.ErrorType.CARD_NOT_FOUND_IN_SHOP;
 import static models.Enums.ErrorType.NO_ERROR;
 
 class ShopController {
-
+    private static ShopController shopController = new ShopController();
     private Shop shop = Shop.getInstance();
     private View view = new View();
+
+    private ShopController(){
+
+    }
+
+    public static ShopController getInstance() {
+        return shopController;
+    }
 
     void main(Account account) {
         shop.setAccount(account);/* may make exception*/

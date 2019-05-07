@@ -7,8 +7,17 @@ import view.GameRequest;
 import view.View;
 
 public class GameController {
+    private static GameController gameController = new GameController();
     private Game game = Game.getInstance();
     private View view = new View();
+
+    private GameController() {
+
+    }
+
+    public static GameController getInstance() {
+        return gameController;
+    }
 
     public void main() {
         GameRequest request;
@@ -39,22 +48,18 @@ public class GameController {
     }
 
     private void login(GameRequest request) {
-        AccountController accountController = new AccountController();
         Account account = Game.getAccount(request.getUserName());
         String password = request.getPassword(view);
         if (account != null) {
             if (game.isValidPassword(account, password)) {
-                game.setAccount1(account);
-                accountController.main(account);
+//                game.setAccount1(account);
+                AccountController.getInstance().main(account);
             } else {
-                request.setError(ErrorType.INVALID_PASSWORD);
-                view.printError(request.getError());
+                view.printError(ErrorType.INVALID_PASSWORD);
             }
         } else {
-            request.setError(ErrorType.INVALID_USERNAME);
-            view.printError(request.getError());
+            view.printError(ErrorType.INVALID_USERNAME);
         }
-
     }
 
     private void createAccount(GameRequest request) {

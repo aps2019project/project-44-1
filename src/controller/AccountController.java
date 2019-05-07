@@ -9,16 +9,25 @@ import view.RequestType;
 import view.View;
 
 class AccountController {
-
+    private static AccountController accountController = new AccountController();
     private Account account;
     private View view = new View();
 
+    private AccountController() {
+
+    }
+
+    public static AccountController getInstance() {
+        return accountController;
+    }
+
     void main(Account account) {
+        AccountRequest request;
         this.account = account;
         boolean isFinish = false;
         do {
             view.showMainMenu();
-            AccountRequest request = new AccountRequest();
+            request = new AccountRequest();
             request.getNewCommand();
             switch (request.getType()) {
                 case ENTER_COLLECTION:
@@ -47,8 +56,7 @@ class AccountController {
     }
 
     private void enterShop() {
-        ShopController shopController = new ShopController();
-        shopController.main(account);
+        ShopController.getInstance().main(account);
     }
 
     private void chooseGameKind(AccountRequest request, BattleKind battleKind) {
@@ -77,8 +85,7 @@ class AccountController {
     }
 
     private void enterCollection() {
-        CollectionController collectionController = new CollectionController();
-        collectionController.main(this.account.getCollection());
+        CollectionController.getInstance().main(this.account.getCollection());
     }
 
     private void enterBattle(AccountRequest request) {
@@ -134,7 +141,7 @@ class AccountController {
             if (request.getType().equals(RequestType.SELECT_SECOND_PLAYER)) {
                 Account secondPlayer = Game.getAccount(request.getSecondPlayerUsername());
                 if (secondPlayer != null && secondPlayer.isReadyToPlay()) {
-                    Game.getInstance().setAccount2(secondPlayer);
+//                    Game.getInstance().setAccount2(secondPlayer);
                     chooseGameMode(request, new Player(account.getMainDeck().clone(),
                                     account.getUsername()),
                             new Player(secondPlayer.getMainDeck().clone(),
