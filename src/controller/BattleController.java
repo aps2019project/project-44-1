@@ -80,7 +80,7 @@ class BattleController {
                     enterGraveyard(request);
                     break;
                 case END_GAME:
-//                    endGame();
+                    endGame();
                     break;
                 case SELECT_COLECTABLE:
                     selectCollectable(request);
@@ -95,11 +95,13 @@ class BattleController {
     }
 
     private void showMyMinions() {
-        view.showMyMinions(battle.getMyCardsInMap());
+        view.showMyMinions(battle.getMap().getPlayerCardsInMap(
+                battle.getPlayerName(battle.getTurn())));
     }
 
     private void showOpponentMinions() {
-        view.showOpponentMinions(battle.getOpponentCardsInMap());
+        view.showOpponentMinions(battle.getMap().getPlayerCardsInMap(
+                battle.getPlayerName(battle.getTurn() + 1)));
     }
 
     private void showCardInfo(BattleRequest request) {
@@ -111,11 +113,15 @@ class BattleController {
     }
 
     private void selectCard(BattleRequest request) {
-
+        if (battle.getCurrentPlayer().select(request.getCardID()))
+            view.printError(ErrorType.INVALID_CARD_ID);
     }
 
     private void moveCard(BattleRequest request) {
-
+        if (battle.getCurrentPlayer().getSelectedCard() == null)
+            view.printError(ErrorType.NO_CARD_SELECTED);
+        else view.sout(battle.getCurrentPlayer().move(request.getLocationX(),
+                request.getLocationY()));
     }
 
     private void ordinaryAttack(BattleRequest request) {
@@ -131,7 +137,8 @@ class BattleController {
     }
 
     private void insertCard(BattleRequest request) {
-
+        battle.getCurrentPlayer().insert(request.getCardName(),
+                request.getLocationX(), request.getLocationY());
     }
 
     private void showHand(BattleRequest request) {
@@ -150,9 +157,9 @@ class BattleController {
 
     }
 
-//    private void endGame() {
-//        addThisBattleToBattleHistory();
-//    }
+    private void endGame() {
+        addThisBattleToBattleHistory();
+    }
 
     private void enterGraveyard(BattleRequest request) {
         while (true) {

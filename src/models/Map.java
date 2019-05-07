@@ -10,6 +10,14 @@ public class Map {
     private Cell[][] cells = new Cell[5][9];
     private ArrayList<Item> flags = new ArrayList<>();
 
+    Map() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
+                cells[i][j].setXandY(i, j);
+            }
+        }
+    }
+
     ArrayList<Item> getFlags() {
         return flags;
     }
@@ -30,7 +38,7 @@ public class Map {
         }
     }
 
-    public static int getManhatanDistance(Cell start, Cell end) {
+    static int getManhatanDistance(Cell start, Cell end) {
         return Math.abs(start.getX() - end.getX() + start.getY() - end.getY());
     }
 
@@ -71,5 +79,7 @@ public class Map {
         }
         return cards;
     }
+
+
 
 }

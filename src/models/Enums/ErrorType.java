@@ -23,7 +23,9 @@ public enum ErrorType {
     CARD_NOT_FOUND_IN_BATTLE("there is no card with tish name in game map !!!"),
     INVALID_CARD_NAME("Invalid card name"),
     NO_ENOUGH_MANA("you don't have enough mana"),
-    INVALID_TARGET("invalid target");
+    INVALID_TARGET("invalid target"),
+    INVALID_CARD_ID("invalid card ID"),
+    NO_CARD_SELECTED("no card has been selected");
 
 
     private String message;
