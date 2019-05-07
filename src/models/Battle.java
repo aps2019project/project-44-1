@@ -3,6 +3,7 @@ package models;
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 
 public class Battle implements Goal, Fight {
@@ -13,13 +14,15 @@ public class Battle implements Goal, Fight {
     private BattleMode battleMode;
     private int turn = 1;
     private int flagNumber;
-    private boolean player1Won;
+    private boolean firstPlayerWon;
 
     public Battle(BattleKind battleKind, BattleMode battleMode, Player firstPlayer, Player secondPlayer, int flagNumber) {
         this.battleKind = battleKind;
         this.battleMode = battleMode;
         this.firstPlayer = firstPlayer;
+        firstPlayer.setMyMap(map);
         this.secondPlayer = secondPlayer;
+        secondPlayer.setMyMap(map);
         this.flagNumber = flagNumber;
         relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[2][0]);
         relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[2][8]);
@@ -43,11 +46,11 @@ public class Battle implements Goal, Fight {
         return firstPlayer;
     }
 
-    private Map getMap() {
-        return map;
+    public Map getMap() {
+        return this.map;
     }
 
-    private static void relater(Placeable card, Cell cell) {
+    static void relater(Placeable card, Cell cell) {
         card.setCell(cell);
         if (card instanceof Card)
             cell.setPlaceable((Card) card);
@@ -76,10 +79,6 @@ public class Battle implements Goal, Fight {
         return "";
     }       //#TODO
 
-    public boolean whosTurn() {
-        return turn % 2 == 1;
-    }
-
     public void turnHandler() {       //method to handle all actions must occur at end of turn
         turn++;
     }
@@ -89,11 +88,19 @@ public class Battle implements Goal, Fight {
     }
 
     public boolean isFirstPlayerWon() {
-        return player1Won;
+        return firstPlayerWon;
     }
 
-    void setFirstPlayerWon(boolean player1Won) {
-        this.player1Won = player1Won;
+    void setFirstPlayerWon(boolean firstPlayerWon) {
+        this.firstPlayerWon = firstPlayerWon;
+    }
+
+    public String getPlayerName(int turn) {
+        if (turn % 2 == 1) {
+            return firstPlayer.getName();
+        } else {
+            return secondPlayer.getName();
+        }
     }
 
     public Player getCurrentPlayer() {
@@ -104,14 +111,26 @@ public class Battle implements Goal, Fight {
         }
     }
 
-    public Player getCardOwner(Placeable placeable){
-
-    }
-    public ArrayList<Placeable> getMyCardsInMap(Player player) {
-        ArrayList<Placeable> cards = new ArrayList<>();
-        for (Placeable card : cards) {
-
+    public Placeable getCard(String cardID) {
+        for (Card card : map.getAllCardsInMap()) {
+            if (card.getInGameID().equals(cardID))
+                return card;
         }
+        return null;
     }
 
+    public String getCardInfo(String cardID) {
+        Placeable card = getCard(cardID);
+        if (card instanceof Hero)
+            return ((Hero) card).getHeroInfoInBattle();
+        else if (card instanceof Minion)
+            return ((Minion) card).getMinionInfoInBattle();
+        else if (card instanceof Spell)
+            return ((Spell) card).getSpellInfoInBattle();
+        return null;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
 }

@@ -1,10 +1,13 @@
 package models;
 
+import models.Enums.ErrorType;
+import view.View;
+
 import java.util.Collections;
 import java.util.Iterator;
 
 public class Player {
-    private Placeable[] hand = new Placeable[5];
+    private Card[] hand = new Card[5];
     private int mana;
     private Deck deck;
     private int turnsFlagSaved;
@@ -12,13 +15,14 @@ public class Player {
     public static final int[] turnBeginMana = {2, 3, 4, 5, 6, 7, 8, 9};
     private String name;
     private Map myMap;
-    private Minion nextMinionInHand;
+    private Card nextMinionInHand;
 
     public Player(Deck deck, String name) {
         this.deck = deck;
         this.name = name;
-        for (Minion minion : deck.getCards()) {
-            minion.setOwner(this);
+        for (Card card : deck.getCards()) {
+            if (card instanceof Minion)
+                card.setOwner(this);
         }
         deck.getHero().setOwner(this);
         Collections.shuffle(deck.getDeckCards());
@@ -37,7 +41,7 @@ public class Player {
         return name;
     }
 
-    public Placeable[] getHand() {
+    public Card[] getHand() {
         return hand;
     }
 
@@ -62,14 +66,14 @@ public class Player {
     }
 
     private void initializeHand() {
-        Iterator<Minion> iterator = deck.getCards().iterator();
+        Iterator<Card> iterator = deck.getCards().iterator();
         int i = 0;
         while (i < 5) {
             hand[i] = iterator.next();
             i++;
             iterator.remove();
         }
-        nextMinionInHand = deck.getCards().get(5);
+        nextMinionInHand = deck.getCards().get(0);
     }
 
     private String IDGenerator(String cardName) {
@@ -77,14 +81,37 @@ public class Player {
                 (myMap.timesCardUsed(cardName) + 1);
     }
 
-    private void insert(String cardName, int x, int y) {        //need more edit
-        for (int i = 0; i < 5; i++) {
+    public void insert(String cardName, int x, int y) {
+        Card c = null;
+        int i;
+        View view = new View();
+        for (i = 0; i < 5; i++) {
             if (hand[i].getName().equals(cardName)) {
-                IDGenerator(cardName);
-                return;
+                c = hand[i];
+                break;
             }
         }
-        // TODO: 5/6/2019 error "it's not in hand"
+        if (c == null)
+            view.printError(ErrorType.INVALID_CARD_NAME);
+        else if (c.getNeededMana() > mana)
+            view.printError(ErrorType.NO_ENOUGH_MANA);
+        else if (!validCoordination(x, y))
+            view.printError(ErrorType.INVALID_TARGET);
+        else {
+            c.setInGameID(IDGenerator(cardName));
+            Battle.relater(c, myMap.getCells()[x - 1][y - 1]);
+            hand[i] = nextMinionInHand;
+            nextMinionInHand = deck.getCards().get(0);
+            view.sout(cardName + " with " + c.getInGameID() + " inserted to (" + x + "; " + y + ")");
+        }
+    }       // TODO: 5/7/2019 must handle for spells
+
+    private boolean validCoordination(int x, int y) {
+        for (Card c : myMap.getPlayerCardsInMap(this.name)) {
+            if (Map.getManhatanDistance(c.getCell(), myMap.getCells()[x - 1][y]) == 1)
+                return true;
+        }
+        return false;
     }
 
 }
