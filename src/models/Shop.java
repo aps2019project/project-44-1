@@ -1,14 +1,41 @@
 package models;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonReader;
 import models.Enums.ErrorType;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Shop {
     private static Shop shop = new Shop();
     private ArrayList<String> cardNames = new ArrayList<>();
     private ArrayList<Placeable> cards = new ArrayList<>();
     private Account account;
+
+    {
+        Gson gson = new Gson();
+        JsonReader reader = null;
+        try {
+            reader = new JsonReader(new FileReader("D:\\project-44-1\\src\\models\\database.json"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        JsonObject obj = gson.fromJson(reader, JsonObject.class);
+        Hero[] heroes = gson.fromJson(obj.get("Hero"), Hero[].class);
+        Minion[] minions = gson.fromJson(obj.get("minions"), Minion[].class);
+        Item[] items = gson.fromJson(obj.get("Items"), Item[].class);
+        Spell[] spells = gson.fromJson(obj.get("Spell"), Spell[].class);
+        ArrayList<Placeable> cards = new ArrayList<>();
+        cards.addAll(Arrays.asList(heroes));
+        cards.addAll(Arrays.asList(minions));
+        cards.addAll(Arrays.asList(items));
+        cards.addAll(Arrays.asList(spells));
+        this.cards = cards;
+    }
 
 
     private Shop() {
@@ -91,6 +118,7 @@ public class Shop {
     public void setAccount(Account account) {
         this.account = account;
     }
+
 
     public Placeable getCard(String cardName) {
         for (Placeable card : cards) {
