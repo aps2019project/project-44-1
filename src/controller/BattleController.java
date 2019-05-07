@@ -8,13 +8,12 @@ import view.View;
 class BattleController {
     private static BattleController battleController = new BattleController();
     private Battle battle;
-    private View view = new View();
+    private View view = View.getInstance();
 
     private BattleController() {
-
     }
 
-    public static BattleController getInstance() {
+    static BattleController getInstance() {
         return battleController;
     }
 
@@ -74,7 +73,6 @@ class BattleController {
     }
 
     private void showGameInfo() {
-
     }
 
     private void showMyMinions() {

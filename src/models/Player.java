@@ -174,7 +174,6 @@ public class Player {
                     return invalidCoordination(x - 1, y, 1);
             }
         } //else if () ;
-        return false;
-    }
+        return false; }
 
 }

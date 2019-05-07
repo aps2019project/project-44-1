@@ -3,7 +3,6 @@ package models;
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 
 public class Battle implements Goal, Fight {

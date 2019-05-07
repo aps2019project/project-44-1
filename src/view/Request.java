@@ -7,7 +7,7 @@ import java.util.Scanner;
 public abstract class Request {
     private Scanner scanner = new Scanner(System.in);
     String command;
-    private View view = new View();
+    private View view = View.getInstance();
     protected static final String EXIT = "Exit";
     protected static final String HELP = "Help";
     private ErrorType error = null;

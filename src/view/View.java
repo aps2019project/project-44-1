@@ -7,6 +7,15 @@ import java.util.ArrayList;
 
 public class View {
 
+    private static View view = new View();
+
+    private View() {
+    }
+
+    public static View getInstance() {
+        return view;
+    }
+
     public void printError(ErrorType type) {
         if (type == null)
             return;
@@ -60,7 +69,7 @@ public class View {
                 "5.Help");
     }
 
-    public void printGetPasswordCommand() {
+    void printGetPasswordCommand() {
         System.out.println("Enter your password:");
     }
 
@@ -71,7 +80,7 @@ public class View {
                 "2.create account\n" +
                 "3.show leaderboard\n" +
                 "4.Help\n" +
-                "5.Exit");
+                "5.Exit\n");
     }
 
     public void printCardsInFormat(ArrayList<Placeable> cards, boolean neadToShowCost) {
@@ -207,7 +216,7 @@ public class View {
         showMinionsInBattleFormatted(cards);
     }
 
-    public void showMinionsInBattleFormatted(ArrayList<Card> cards) {
+    private void showMinionsInBattleFormatted(ArrayList<Card> cards) {
         for (Card card : cards) {
             System.out.println(card.getInGameID() + " : " + card.getName() + ", health : " + card.getHP() + ", location : (" +
                     card.getCell().getX() + ", " + card.getCell().getY() + "), power : " + card.getAP());
@@ -215,12 +224,11 @@ public class View {
     }
 
     public void showCardInfo(String string) {
-        System.out.println();
+        System.out.println(string);
     }
 
-    public void printCardWasFound(){
+    public void printCardWasFound() {
         System.out.println("card was found ins shop");
     }
-
 
 }

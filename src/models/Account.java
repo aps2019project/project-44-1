@@ -72,11 +72,11 @@ public class Account implements Comparable<Account> {
                 "5.exit";
     }
 
-    public void increaseMoney(int addedMoney) {
+    void increaseMoney(int addedMoney) {
         this.money += addedMoney;
     }
 
-    public void decreaseMoney(int decreasedMoney) {
+    void decreaseMoney(int decreasedMoney) {
         this.money -= decreasedMoney;
     }
 
@@ -85,7 +85,5 @@ public class Account implements Comparable<Account> {
             return false;
         return collection.validateDeck(collection.getMainDeck().getName());
     }
-
-
 
 }

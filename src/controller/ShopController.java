@@ -12,17 +12,17 @@ import static models.Enums.ErrorType.NO_ERROR;
 class ShopController {
     private static ShopController shopController = new ShopController();
     private Shop shop = Shop.getInstance();
-    private View view = new View();
+    private View view = View.getInstance();
 
-    private ShopController(){
+    private ShopController() {
     }
 
-    public static ShopController getInstance() {
+    static ShopController getInstance() {
         return shopController;
     }
 
     void main(Account account) {
-        shop.setAccount(account);/* may make exception*/
+        shop.setAccount(account);           /* may THROW exception*/
         boolean isFinish = false;
         do {
             ShopRequest request = new ShopRequest();
@@ -55,7 +55,6 @@ class ShopController {
                 case INVALID_COMMAND:
                     view.printError(ErrorType.INVALID_COMMAND);
             }
-
         }
         while (!isFinish);
     }
@@ -64,21 +63,20 @@ class ShopController {
         view.printShopMenuHelp(shop.toString());
     }
 
-    public void showShopCards() {
+    private void showShopCards() {
         view.printShopCards(shop.getCards());
     }
 
-    public void sellCard(ShopRequest request) {
+    private void sellCard(ShopRequest request) {
         int cardID = request.getCardID();
         boolean isDone = shop.sell(cardID);
-        if (isDone) {
-            view.successfulSellMessage();
-        } else {
+        if
+        (isDone) view.successfulSellMessage();
+        else
             view.unSuccessfulSellMessage();
-        }
     }
 
-    public void buyCard(ShopRequest request) {
+    private void buyCard(ShopRequest request) {
         ErrorType error;
         String cardName = request.getCardName();
         if (shop.getCard(cardName) != null) {
@@ -91,20 +89,18 @@ class ShopController {
         } else {
             view.successfulBuyMessage();
         }
-
     }
 
-    public void searchInShop(ShopRequest request) {
+    private void searchInShop(ShopRequest request) {
         String cardName = request.getCardName();
-        if (shop.searchInShop(cardName)){
+        if (shop.searchInShop(cardName)) {
             view.printCardWasFound();
-        }
-        else {
+        } else {
             view.printError(CARD_NOT_FOUND_IN_SHOP);
         }
     }
 
-    public void searchInCollection(ShopRequest request) {
+    private void searchInCollection(ShopRequest request) {
         String cardName = request.getCardName();
         int state = shop.searchInCollection(cardName);
         if (state != -1) {
@@ -114,9 +110,8 @@ class ShopController {
         }
     }
 
-    public void showCollectionCards() {
-        view.printCollectionItems(shop.getCards(),true);
+    private void showCollectionCards() {
+        view.printCollectionItems(shop.getCards(), true);
     }
-
 
 }

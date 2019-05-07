@@ -8,12 +8,12 @@ import view.View;
 class CollectionController {
     private static CollectionController collectionController = new CollectionController();
     private Collection collection;
-    private View view = new View();
+    private View view = View.getInstance();
 
     private CollectionController() {
     }
 
-    public static CollectionController getInstance() {
+    static CollectionController getInstance() {
         return collectionController;
     }
 
@@ -70,11 +70,11 @@ class CollectionController {
         while (!isFinish);
     }
 
-    public void showCollectionItemsAndCards() {
+    private void showCollectionItemsAndCards() {
         view.printCollectionItems(collection.getCollectionCards(), false);
     }
 
-    public void search(CollectionRequest request) {
+    private void search(CollectionRequest request) {
         String cardName = request.getCardName();
         if (collection.isInCollection(cardName)) {
             view.sout(collection.getCollectionID(cardName));
@@ -83,7 +83,7 @@ class CollectionController {
         }
     }
 
-    public void createDeck(CollectionRequest request) {
+    private void createDeck(CollectionRequest request) {
         String deckName = request.getDeckName();
         if (!collection.isUsedDeckName(deckName)) {
             collection.createDeck(deckName);
@@ -92,7 +92,7 @@ class CollectionController {
         }
     }
 
-    public void deleteDeck(CollectionRequest request) {
+    private void deleteDeck(CollectionRequest request) {
         String deckName = request.getDeckName();
         if (collection.isUsedDeckName(deckName)) {
             collection.deleteDeck(deckName);
@@ -101,7 +101,7 @@ class CollectionController {
         }
     }
 
-    public void addCardToDeck(CollectionRequest request) {
+    private void addCardToDeck(CollectionRequest request) {
         int cardID = request.getCardID();
         String deckName = request.getDeckName();
         Deck deck = collection.getDeck(deckName);
@@ -125,7 +125,7 @@ class CollectionController {
         collection.addToDeck(cardID, deckName);
     }
 
-    public void removeCardFromDeck(CollectionRequest request) {
+    private void removeCardFromDeck(CollectionRequest request) {
         int cardID = request.getCardID();
         String deckName = request.getDeckName();
         if (checkDeck(deckName)) return;
@@ -136,7 +136,7 @@ class CollectionController {
         collection.removeFromDeck(cardID, deckName);
     }
 
-    public void validateDeck(CollectionRequest request) {
+    private void validateDeck(CollectionRequest request) {
         String deckName = request.getDeckName();
         if (checkDeck(deckName)) return;
         if (collection.validateDeck(deckName)) {
@@ -146,8 +146,7 @@ class CollectionController {
         }
     }
 
-
-    public void selectMainDeck(CollectionRequest request) {
+    private void selectMainDeck(CollectionRequest request) {
         String deckName = request.getDeckName();
         if (checkDeck(deckName)) return;
         collection.selectMainDeck(deckName);
@@ -163,11 +162,11 @@ class CollectionController {
         return false;
     }
 
-    public void showAllDecks() {
+    private void showAllDecks() {
         view.printDecksInFormat(collection.getSortedDecks());
     }
 
-    public void showDeck(CollectionRequest request) {
+    private void showDeck(CollectionRequest request) {
         String deckName = request.getDeckName();
         Deck deck = collection.getDeck(deckName);
         if (deck == null) {
@@ -181,4 +180,5 @@ class CollectionController {
     public void help() {
         view.printCollectionMenuHelp(collection.toString());
     }
+
 }
