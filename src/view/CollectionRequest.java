@@ -3,7 +3,7 @@ package view;
 import models.Enums.ErrorType;
 
 public class CollectionRequest extends Request {
-    private View view = new View();
+    private View view = View.getInstance();
 
     @Override
     public RequestType getType() {

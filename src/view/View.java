@@ -80,7 +80,7 @@ public class View {
                 "2.create account\n" +
                 "3.show leaderboard\n" +
                 "4.Help\n" +
-                "5.Exit\n");
+                "5.Exit");
     }
 
     public void printCardsInFormat(ArrayList<Placeable> cards, boolean neadToShowCost) {
@@ -230,5 +230,11 @@ public class View {
     public void printCardWasFound() {
         System.out.println("card was found ins shop");
     }
+
+    public void usedAttackBefore(String cardID) {
+        System.out.println("Card with " + cardID +
+                " can′t attack ");
+    }
+
 
 }

@@ -4,7 +4,7 @@ import models.Enums.ErrorType;
 
 public class AccountRequest extends Request {
 
-    private View view = new View();
+    private View view = View.getInstance();
 
     public RequestType getType() {
         if (command.matches("select user \\w+")) {

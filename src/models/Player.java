@@ -85,7 +85,6 @@ public class Player {
     public void insert(String cardName, int x, int y) {
         Card c = null;
         int i;
-        View view = new View();
         for (i = 0; i < 5; i++) {
             if (hand[i].getName().equals(cardName)) {
                 c = hand[i];
@@ -93,17 +92,17 @@ public class Player {
             }
         }
         if (c == null)
-            view.printError(ErrorType.INVALID_CARD_NAME);
+            View.getInstance().printError(ErrorType.INVALID_CARD_NAME);
         else if (c.getNeededMana() > mana)
-            view.printError(ErrorType.NO_ENOUGH_MANA);
+            View.getInstance().printError(ErrorType.NO_ENOUGH_MANA);
         else if (invalidCoordination(x, y, 1))
-            view.printError(ErrorType.INVALID_TARGET);
+            View.getInstance().printError(ErrorType.INVALID_TARGET);
         else {
             c.setInGameID(IDGenerator(cardName));
             Battle.relater(c, myMap.getCells()[x - 1][y - 1]);
             hand[i] = nextCardInHand;
             nextCardInHand = deck.getCards().get(0);
-            view.sout(cardName + " with " + c.getInGameID() + " inserted to (" + x + "; " + y + ")");
+            View.getInstance().sout(cardName + " with " + c.getInGameID() + " inserted to (" + x + "; " + y + ")");
         }
     }       // TODO: 5/7/2019 must handle for spells
 
@@ -173,7 +172,21 @@ public class Player {
                 case -2:
                     return invalidCoordination(x - 1, y, 1);
             }
-        } //else if () ;
-        return false; }
+        } else if (x - xx == 1)
+            switch (y - yy) {
+                case 1:
+                    return invalidCoordination(x + 1, y + 1, 2);
+                case -1:
+                    return invalidCoordination(x + 1, y - 1, 2);
+            }
+        else if (x - xx == -1)
+            switch (y - yy) {
+                case 1:
+                    return invalidCoordination(x - 1, y + 1, 2);
+                case -1:
+                    return invalidCoordination(x - 1, y - 1, 2);
+            }
+        return false;
+    }
 
 }

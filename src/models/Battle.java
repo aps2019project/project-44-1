@@ -2,6 +2,7 @@ package models;
 
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
+import models.Enums.ErrorType;
 
 import java.util.ArrayList;
 
@@ -172,6 +173,19 @@ public class Battle implements Goal, Fight {
 
     public Account getSecond() {
         return second;
+    }
+
+    public ErrorType castAttack(Card src, Card dest) {
+        if (src.isInAttackRange(src.getCell(), dest.getCell())) {
+            dest.decreaseHealth(src.getAP(), true);
+            if (dest.isInAttackRange(dest.getCell(), src.getCell())) {
+                src.setAttackAvailable(false);
+                src.decreaseHealth(dest.getAP(), true);
+                return ErrorType.NO_ERROR;
+            }
+        }
+        return ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK;
+
     }
 
     public void setSecond(Account second) {

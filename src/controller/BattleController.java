@@ -115,7 +115,18 @@ class BattleController {
                 request.getLocationY()));
     }
 
-    private void ordinaryAttack(BattleRequest request) {
+    private void ordinaryAttack(Card src, BattleRequest request) {
+        Placeable dest = battle.getCard(request.getCardID());
+        if (!src.isAttackAvailable()) {
+            view.usedAttackBefore(src.getInGameID());
+        }
+        if (battle.getOpponentCardsInMap().contains((dest))) {
+            if (battle.castAttack(src, (Card) dest) == ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK) {
+                view.printError(ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK);
+            }
+        } else {
+            view.printError(ErrorType.INVALID_DEST_ID);
+        }
 
     }
 
@@ -234,12 +245,11 @@ class BattleController {
             request.getNewCommand();
             switch (request.getType()) {
                 case MOVE_CARD:
-                    // fek konam be function mocecard() soldier ro bedi behtare
                     battle.getCurrentPlayer().select(request.getCardID());
                     moveCard(request);
                     break;
                 case ATTACK_TO_OPPONENT:
-                    ordinaryAttack(request);
+                    ordinaryAttack(soldier, request);
                     break;
                 case COMBO_ATTACK:
                     comboAttack(request);

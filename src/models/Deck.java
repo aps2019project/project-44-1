@@ -10,7 +10,6 @@ public class Deck {
     private Hero hero;
     private ArrayList<Card> cards = new ArrayList<>();
     private String name;
-    private View view = new View();
 
 
     Deck(String deckName) {
@@ -85,11 +84,7 @@ public class Deck {
     }
 
     public View getView() {
-        return view;
-    }
-
-    public void setView(View view) {
-        this.view = view;
+        return View.getInstance();
     }
 
     /**
