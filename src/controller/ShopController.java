@@ -15,7 +15,6 @@ class ShopController {
     private View view = new View();
 
     private ShopController(){
-
     }
 
     public static ShopController getInstance() {
@@ -44,7 +43,7 @@ class ShopController {
                 case BUY:
                     buyCard(request);
                     break;
-                case SEARCH_COLLECTION:
+                case SEARCH_CARD_IN_COLLECTION:
                     searchInCollection(request);
                     break;
                 case SEARCH_SHOP:
@@ -97,8 +96,12 @@ class ShopController {
 
     public void searchInShop(ShopRequest request) {
         String cardName = request.getCardName();
-        shop.searchInShop(cardName);
-
+        if (shop.searchInShop(cardName)){
+            view.printCardWasFound();
+        }
+        else {
+            view.printError(CARD_NOT_FOUND_IN_SHOP);
+        }
     }
 
     public void searchInCollection(ShopRequest request) {

@@ -3,7 +3,6 @@ package view;
 import models.*;
 import models.Enums.ErrorType;
 
-import java.sql.DataTruncation;
 import java.util.ArrayList;
 
 public class View {
@@ -71,8 +70,8 @@ public class View {
                 "1.login\n" +
                 "2.create account\n" +
                 "3.show leaderboard\n" +
-                "4.help\n" +
-                "5.exit");
+                "4.Help\n" +
+                "5.Exit");
     }
 
     public void printCardsInFormat(ArrayList<Placeable> cards, boolean neadToShowCost) {
@@ -152,7 +151,7 @@ public class View {
     }
 
     public void printCardInCollection(String cardName, int cardID) {
-        System.out.println("card" + cardName + "found in collection with ID : " + cardID);
+        System.out.println("card " + cardName + " found in collection with ID : " + cardID);
     }
 
     public void printSelectSingleOrMulti() {
@@ -195,13 +194,33 @@ public class View {
         }
     }
 
-    public void showStoryGameKinds(){
+    public void showStoryGameKinds() {
         System.out.println();
         // TODO: 05/05/2019 after adding datas from json
     }
 
-    public void showMyMinions(ArrayList<Placeable> cards){
-
+    public void showMyMinions(ArrayList<Card> cards) {
+        showMinionsInBattleFormatted(cards);
     }
+
+    public void showOpponentMinions(ArrayList<Card> cards) {
+        showMinionsInBattleFormatted(cards);
+    }
+
+    public void showMinionsInBattleFormatted(ArrayList<Card> cards) {
+        for (Card card : cards) {
+            System.out.println(card.getInGameID() + " : " + card.getName() + ", health : " + card.getHP() + ", location : (" +
+                    card.getCell().getX() + ", " + card.getCell().getY() + "), power : " + card.getAP());
+        }
+    }
+
+    public void showCardInfo(String string) {
+        System.out.println();
+    }
+
+    public void printCardWasFound(){
+        System.out.println("card was found ins shop");
+    }
+
 
 }

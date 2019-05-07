@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class Shop {
     private static Shop shop = new Shop();
     private ArrayList<String> cardNames = new ArrayList<>();
-    private ArrayList<Placeable> cards = new ArrayList<>();
+    private ArrayList<Placeable> cards;
     private Account account;
 
     {
@@ -85,8 +85,13 @@ public class Shop {
 
     }
 
-    public void searchInShop(String cardName) {
-
+    public boolean searchInShop(String cardName) {
+        for (Placeable card:cards){
+            if (card.getName().equals(cardName)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public int searchInCollection(String cardName) {

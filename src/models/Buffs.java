@@ -41,8 +41,8 @@ public class Buffs {
         isCountiosly = contiously;
     }
 
-    public void castBuff(Card card){
-        switch (this.getName()){
+    public void castBuff(Card card) {
+        switch (this.getName()) {
 
         }
     }

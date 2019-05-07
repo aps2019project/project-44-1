@@ -14,7 +14,7 @@ public abstract class Request {
 
     public void getNewCommand() {
         this.command = scanner.nextLine();
-        command = command.toLowerCase();
+        command = command;
         if (command.equals("\n"))
             view.printError(ErrorType.ERROR_WITHOUT_MESSAGE);
     }

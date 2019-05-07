@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class Deck {
     private static final int maxCardNumber = 20;
-    private Item item = new Item();
-    private Hero hero = new Hero();
+    private Item item;
+    private Hero hero;
     private ArrayList<Card> cards = new ArrayList<>();
     private String name;
     private View view = new View();
@@ -35,10 +35,6 @@ public class Deck {
 
     public ArrayList<Card> getCards() {
         return cards;
-    }
-
-    public void setCards(ArrayList<Card> cards) {
-        this.cards = cards;
     }
 
     public String getName() {
@@ -70,8 +66,11 @@ public class Deck {
             setHero((Hero) placeable);
         } else if (placeable instanceof Item) {
             setItem((Item) placeable);
-        } else {
+        } else if (placeable instanceof Minion) {
             cards.add((Minion) placeable);
+        } else {
+            cards.add((Spell) placeable);
+
         }
     }
 

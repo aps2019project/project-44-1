@@ -46,11 +46,11 @@ public class Battle implements Goal, Fight {
         return firstPlayer;
     }
 
-    public Map getMap() {
-        return this.map;
+    private Map getMap() {
+        return map;
     }
 
-    static void relater(Placeable card, Cell cell) {
+    public static void relater(Placeable card, Cell cell) {
         card.setCell(cell);
         if (card instanceof Card)
             cell.setPlaceable((Card) card);
@@ -95,20 +95,30 @@ public class Battle implements Goal, Fight {
         this.firstPlayerWon = firstPlayerWon;
     }
 
-    public String getPlayerName(int turn) {
-        if (turn % 2 == 1) {
-            return firstPlayer.getName();
-        } else {
-            return secondPlayer.getName();
-        }
-    }
-
-    public Player getCurrentPlayer() {
+    private Player getCurrentPlayer() {
         if (turn % 2 == 1) {
             return firstPlayer;
         } else {
             return secondPlayer;
         }
+    }
+
+    public ArrayList<Card> getMyCardsInMap() {
+        ArrayList<Card> cards = new ArrayList<>();
+        for (Card card : map.getAllCardsInMap()) {
+            if (card.getOwner().getName().equals(getCurrentPlayer().getName()))
+                cards.add(card);
+        }
+        return cards;
+    }
+
+    public ArrayList<Card> getOpponentCardsInMap() {
+        ArrayList<Card> cards = new ArrayList<>();
+        for (Card card : map.getAllCardsInMap()) {
+            if (!card.getOwner().equals(getCurrentPlayer()))
+                cards.add(card);
+        }
+        return cards;
     }
 
     public Placeable getCard(String cardID) {
@@ -128,9 +138,5 @@ public class Battle implements Goal, Fight {
         else if (card instanceof Spell)
             return ((Spell) card).getSpellInfoInBattle();
         return null;
-    }
-
-    public int getTurn() {
-        return turn;
     }
 }

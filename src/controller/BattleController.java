@@ -80,7 +80,7 @@ class BattleController {
                     enterGraveyard(request);
                     break;
                 case END_GAME:
-                    endGame();
+//                    endGame();
                     break;
                 case SELECT_COLECTABLE:
                     selectCollectable(request);
@@ -150,9 +150,9 @@ class BattleController {
 
     }
 
-    private void endGame() {
-        addThisBattleToBattleHistory();
-    }
+//    private void endGame() {
+//        addThisBattleToBattleHistory();
+//    }
 
     private void enterGraveyard(BattleRequest request) {
         while (true) {
@@ -216,18 +216,18 @@ class BattleController {
 
     }
 
-    private void addThisBattleToBattleHistory() {
-        if (battle.isFirstPlayerWon()) {
-            Game.getInstance().getAccount1().addMatchHistory(new MatchHistory
-                    (Game.getInstance().getAccount1().getUsername(), true));
-            Game.getInstance().getAccount2().addMatchHistory(new MatchHistory
-                    (Game.getInstance().getAccount2().getUsername(), false));
-        } else {
-            Game.getInstance().getAccount1().addMatchHistory(new MatchHistory
-                    (Game.getInstance().getAccount1().getUsername(), false));
-            Game.getInstance().getAccount2().addMatchHistory(new MatchHistory
-                    (Game.getInstance().getAccount2().getUsername(), true));
-        }
-    }
+//    private void addThisBattleToBattleHistory() {
+//        if (battle.isFirstPlayerWon()) {
+//            Game.getInstance().getAccount1().addMatchHistory(new MatchHistory
+//                    (Game.getInstance().getAccount1().getUsername(), true));
+//            Game.getInstance().getAccount2().addMatchHistory(new MatchHistory
+//                    (Game.getInstance().getAccount2().getUsername(), false));
+//        } else {
+//            Game.getInstance().getAccount1().addMatchHistory(new MatchHistory
+//                    (Game.getInstance().getAccount1().getUsername(), false));
+//            Game.getInstance().getAccount2().addMatchHistory(new MatchHistory
+//                    (Game.getInstance().getAccount2().getUsername(), true));
+//        }
+//    }
 
 }

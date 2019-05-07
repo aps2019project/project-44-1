@@ -85,11 +85,6 @@ public class Collection implements Comparable<Placeable> {
         setMainDeck(this.getDeck(deckName));
     }
 
-
-    public void showDeck(String deckName) {
-
-    }
-
     private void sortCollection(ArrayList<Placeable> tempList) {
         Collections.sort(tempList);
     }
@@ -170,6 +165,7 @@ public class Collection implements Comparable<Placeable> {
 
     // TODO: 03/05/2019 decide to use CollectionIDGenerator or ID field in card
     public void addCardToCollection(Placeable card) {
+        card.setID(collectionIDGenerator());
         cardHashMap.put(collectionIDGenerator(), card);
     }
 
@@ -193,7 +189,7 @@ public class Collection implements Comparable<Placeable> {
 
     public int getCardIDInCollection(String cardName) {
         for (int i = 0; i < 100000; i++) {
-            if (cardHashMap.get(i).getName().equals(cardName)) {
+            if (cardHashMap.get(i) != null && cardHashMap.get(i).getName().equals(cardName)) {
                 return i;
             }
         }

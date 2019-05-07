@@ -5,20 +5,10 @@ import models.Enums.AttackType;
 import java.util.ArrayList;
 
 public class Hero extends Card {
-    private AttackType attackType;
     private boolean isDisarmed;
     private boolean isStunned;
     private ArrayList<Buffs> buffs = new ArrayList<>();
 
-
-
-    public AttackType getAttackType() {
-        return attackType;
-    }
-
-    public void setAttackType(AttackType attackType) {
-        this.attackType = attackType;
-    }
 
     @Override
     public String toString() {
@@ -46,9 +36,16 @@ public class Hero extends Card {
         isStunned = stunned;
     }
 
-    public void applyBuffs(){
-        for (Buffs buff: buffs){
+    public void applyBuffs() {
+        for (Buffs buff : buffs) {
             buff.castBuff(this);
         }
+    }
+
+    String getHeroInfoInBattle() {
+        return "Hero:\n" +
+                "Name : " + this.getName() + "\n" +
+                "Cost : " + this.getCost() + "\n" +
+                "Desc : ";// TODO: 06/05/2019 getdesc for hero
     }
 }

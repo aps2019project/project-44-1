@@ -74,7 +74,7 @@ public class CollectionRequest extends Request {
     }
 
     public String getCardName() {
-        if (getType() == RequestType.SEARCH_COLLECTION) {
+        if (getType() == RequestType.SEARCH_CARD_IN_COLLECTION) {
             return command.split(" ")[1];
         }
         return null;

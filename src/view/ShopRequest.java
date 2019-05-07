@@ -7,7 +7,7 @@ public class ShopRequest extends Request {
         if (command.matches("search\\s\\w+"))
             return RequestType.SEARCH_SHOP;
         else if (command.matches("search collection\\s\\w+"))
-            return RequestType.SEARCH_COLLECTION;
+            return RequestType.SEARCH_CARD_IN_COLLECTION;
         else if (command.matches("buy\\s\\w+"))
             return RequestType.BUY;
         else if (command.matches("sell\\s\\w+"))
@@ -39,7 +39,12 @@ public class ShopRequest extends Request {
 
     public int getCardID() {
         if (getType() == RequestType.SELL) {
-            return Integer.parseInt(command.split(" ")[1]);
+            try {
+                return Integer.parseInt(command.split(" ")[1]);
+            }catch (NumberFormatException ex){
+                return -1;
+            }
+
         }
         return -1;
         /** return -1 when ... */

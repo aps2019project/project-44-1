@@ -10,8 +10,7 @@ class CollectionController {
     private Collection collection;
     private View view = new View();
 
-    private CollectionController(){
-
+    private CollectionController() {
     }
 
     public static CollectionController getInstance() {
@@ -72,7 +71,7 @@ class CollectionController {
     }
 
     public void showCollectionItemsAndCards() {
-        view.printCollectionItems(collection.getCollectionCards(),false);
+        view.printCollectionItems(collection.getCollectionCards(), false);
     }
 
     public void search(CollectionRequest request) {
@@ -175,7 +174,7 @@ class CollectionController {
             view.printError(ErrorType.DECK_NOT_FOUND);
             return;
         }
-        view.printCardsInFormat(deck.getDeckCards(),false);
+        view.printCardsInFormat(deck.getDeckCards(), false);
 
     }
 

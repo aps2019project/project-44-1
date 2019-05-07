@@ -14,7 +14,6 @@ class AccountController {
     private View view = new View();
 
     private AccountController() {
-
     }
 
     public static AccountController getInstance() {
@@ -116,19 +115,18 @@ class AccountController {
     private void chooseGameMode(AccountRequest request, Player p1, Player p2,
                                 BattleKind battleKind) {
         view.showGameModes();
-        BattleController battleController = new BattleController();
         do {
             request.getNewCommand();
             if (request.getType().equals(RequestType.DEATH_MATCH)) {
-                battleController.main(new Battle(battleKind, BattleMode.DEATH_MATCH,
+                BattleController.getInstance().main(new Battle(battleKind, BattleMode.DEATH_MATCH,
                         p1, p2, 0));
             }
             if (request.getType().equals(RequestType.CAPTURE_FLAG1)) {
-                battleController.main(new Battle(battleKind, BattleMode.CAPTURE_FLAG_1,
+                BattleController.getInstance().main(new Battle(battleKind, BattleMode.CAPTURE_FLAG_1,
                         p1, p2, 1));
             }
             if (request.getType().equals(RequestType.CAPTURE_FLAG2)) {
-                battleController.main(new Battle(battleKind, BattleMode.CAPTURE_FLAG_2,
+                BattleController.getInstance().main(new Battle(battleKind, BattleMode.CAPTURE_FLAG_2,
                         p1, p2, request.getNumberOfFlags()));
             }
         } while (!request.getType().equals(RequestType.EXIT));

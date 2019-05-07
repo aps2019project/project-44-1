@@ -5,21 +5,21 @@ import java.util.Collections;
 
 public class Game {
     private static ArrayList<Account> accounts = new ArrayList<>();
-    private Account account1;
-    private Account account2;
-    private static int ID = 0;
+    //    private Account account1;
+//    private Account account2;
+//    private static int ID = 0;
     private static Game game = new Game();
 
     private Game() {
     }
 
-    public Account getAccount1() {
-        return account1;
-    }
-
-    public Account getAccount2() {
-        return account2;
-    }
+//    public Account getAccount1() {
+//        return account1;
+//    }
+//
+//    public Account getAccount2() {
+//        return account2;
+//    }
 
     public static Game getInstance() {
         return game;
@@ -41,14 +41,14 @@ public class Game {
     public void createAccount(String username, String password) {
         addAccount(new Account(username, password));
     }
+//
+//    public void setAccount1(Account account1) {
+//        this.account1 = account1;
+//    }
 
-    public void setAccount1(Account account1) {
-        this.account1 = account1;
-    }
-
-    public void setAccount2(Account account2) {
-        this.account2 = account2;
-    }
+//    public void setAccount2(Account account2) {
+//        this.account2 = account2;
+//    }
 
     private void addAccount(Account account) {
         accounts.add(account);
@@ -62,11 +62,10 @@ public class Game {
     /**
      * a good way to create unique IDs
      */
-    public static int IDCreator() {
-        ID++;
-        return ID;
-    }
-
+//    public static int IDCreator() {
+//        ID++;
+//        return ID;
+//    }
     public boolean isUsedUsername(String username) {
         for (Account account : accounts) {
             if (account.getUsername().equals(username)) {
@@ -85,8 +84,8 @@ public class Game {
         return "1.login\n" +
                 "2.creat account\n" +
                 "3.show leaderboard\n" +
-                "4.help\n" +
-                "5.exit";
+                "4.Help\n" +
+                "5.Exit";
     }
 
 }
