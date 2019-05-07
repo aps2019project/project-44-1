@@ -3,13 +3,15 @@ package models;
 import models.Enums.CellEffect;
 
 public class Cell {
+    /**
+     * has a genius method isFree to handle whether a card
+     * inserted in it or not
+     */
     private int x;
     private int y;
-    private boolean free = true;
     private Item item;
     private CellEffect cellEffect;
     private Card card;
-
 
     private CellEffect getCellEffect() {
         return cellEffect;
@@ -51,24 +53,17 @@ public class Cell {
         return x;
     }
 
-    public void setX(int x) {
+    public void setXandY(int x, int y) {
         this.x = x;
+        this.y = y;
     }
 
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
-
     public boolean isFree() {
-        return free;
-    }
-
-    public void setFree(boolean free) {
-        this.free = free;
+        return card == null;
     }
 
     public void setCellEffect(CellEffect cellEffect) {

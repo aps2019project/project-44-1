@@ -10,6 +10,14 @@ public class Map {
     private Cell[][] cells = new Cell[5][9];
     private ArrayList<Item> flags = new ArrayList<>();
 
+    Map() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
+                cells[i][j].setXandY(i, j);
+            }
+        }
+    }
+
     ArrayList<Item> getFlags() {
         return flags;
     }
@@ -30,7 +38,7 @@ public class Map {
         }
     }
 
-    public static int getManhatanDistance(Cell start, Cell end) {
+    static int getManhatanDistance(Cell start, Cell end) {
         return Math.abs(start.getX() - end.getX() + start.getY() - end.getY());
     }
 
@@ -70,6 +78,24 @@ public class Map {
                 cards.add(card);
         }
         return cards;
+    }
+
+    public Placeable getCard(String cardID) {
+        for (int row = 0; row < 5; row++) {
+            for (int column = 0; column < 9; column++) {
+                if (!cells[row][column].isFree()) {
+                    if (cells[row][column].getCard() != null
+                            && cells[row][column].getCard().getInGameID().equals(cardID)) {
+                        return cells[row][column].getCard();
+                    }
+                    if (cells[row][column].getItem() != null
+                            && cells[row][column].getItem().getInGameID().equals(cardID)) {
+                        return cells[row][column].getItem();
+                    }
+                }
+            }
+        }
+        return null;
     }
 
 }

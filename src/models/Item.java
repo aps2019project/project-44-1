@@ -5,6 +5,23 @@ import models.Enums.ItemType;
 public class Item extends Placeable {
     ItemType itemType;
     private Card carrier = new Card();
+    private String inGameID;
+
+    public ItemType getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(ItemType itemType) {
+        this.itemType = itemType;
+    }
+
+    public String getInGameID() {
+        return inGameID;
+    }
+
+    public void setInGameID(String inGameID) {
+        this.inGameID = inGameID;
+    }
 
     public Card getCarrier() {
         return carrier;

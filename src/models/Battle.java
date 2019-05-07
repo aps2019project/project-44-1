@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class Battle implements Goal, Fight {
     private BattleKind battleKind;
+    private Account first;
+    private Account second;
     private Player firstPlayer;
     private Player secondPlayer;
     private Map map = new Map();
@@ -16,16 +18,21 @@ public class Battle implements Goal, Fight {
     private int flagNumber;
     private boolean firstPlayerWon;
 
-    public Battle(BattleKind battleKind, BattleMode battleMode, Player firstPlayer, Player secondPlayer, int flagNumber) {
+    public Battle(BattleKind battleKind, BattleMode battleMode, Account firstPlayer, Account secondPlayer, int flagNumber) {
         this.battleKind = battleKind;
         this.battleMode = battleMode;
-        this.firstPlayer = firstPlayer;
+        this.first = firstPlayer;
+        this.second = secondPlayer;
+        this.flagNumber = flagNumber;
+    }
+
+    {
         firstPlayer.setMyMap(map);
         this.secondPlayer = secondPlayer;
         secondPlayer.setMyMap(map);
         this.flagNumber = flagNumber;
-        relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[2][0]);
-        relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[2][8]);
+        relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[0][2]);
+        relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[8][2]);
         firstPlayer.getDeck().removeFromDeck(firstPlayer.getDeck().getHero());
         secondPlayer.getDeck().removeFromDeck(secondPlayer.getDeck().getHero());
     }
@@ -46,8 +53,8 @@ public class Battle implements Goal, Fight {
         return firstPlayer;
     }
 
-    private Map getMap() {
-        return map;
+    public Map getMap() {
+        return this.map;
     }
 
     public static void relater(Placeable card, Cell cell) {
@@ -95,7 +102,15 @@ public class Battle implements Goal, Fight {
         this.firstPlayerWon = firstPlayerWon;
     }
 
-    private Player getCurrentPlayer() {
+    public String getPlayerName(int turn) {
+        if (turn % 2 == 1) {
+            return firstPlayer.getName();
+        } else {
+            return secondPlayer.getName();
+        }
+    }
+
+    public Player getCurrentPlayer() {
         if (turn % 2 == 1) {
             return firstPlayer;
         } else {
@@ -138,5 +153,29 @@ public class Battle implements Goal, Fight {
         else if (card instanceof Spell)
             return ((Spell) card).getSpellInfoInBattle();
         return null;
+    }
+
+    public Placeable selectCard(String cardID) {
+        return map.getCard(cardID);
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public Account getFirst() {
+        return first;
+    }
+
+    public void setFirst(Account first) {
+        this.first = first;
+    }
+
+    public Account getSecond() {
+        return second;
+    }
+
+    public void setSecond(Account second) {
+        this.second = second;
     }
 }

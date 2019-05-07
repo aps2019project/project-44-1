@@ -101,7 +101,7 @@ public class Shop {
 
     public Placeable getCard(String cardName) {
         Gson gson = new Gson();
-        File jsonFile = Paths.get("/src/models/Enums/database.json").toFile();
+        File jsonFile = Paths.get("/Users/username/projects/workspace/foo/src/test/resources/file.json").toFile();
         JsonObject jsonObject = null;
         try {
             jsonObject = gson.fromJson(new FileReader(jsonFile), JsonObject.class);

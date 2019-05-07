@@ -195,4 +195,12 @@ public class Collection implements Comparable<Placeable> {
         }
         return -1;
     }
+
+    public HashMap<Integer, Placeable> getCardHashMap() {
+        return cardHashMap;
+    }
+
+    public void setCardHashMap(HashMap<Integer, Placeable> cardHashMap) {
+        this.cardHashMap = cardHashMap;
+    }
 }

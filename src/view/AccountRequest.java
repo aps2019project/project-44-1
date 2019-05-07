@@ -31,6 +31,10 @@ public class AccountRequest extends Request {
                 return RequestType.DEATH_MATCH;
             case "Start multiplayer game captureflag1":
                 return RequestType.CAPTURE_FLAG1;
+            case "1":
+                return RequestType.SINGLE_PLAYER;
+            case "2":
+                return RequestType.MULTI_PLAYER;
             default:
                 view.printError(ErrorType.INVALID_COMMAND);
                 return RequestType.INVALID_COMMAND;
