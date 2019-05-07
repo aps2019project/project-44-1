@@ -1,41 +1,21 @@
 package models;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.stream.JsonReader;
 import models.Enums.ErrorType;
+import com.google.gson.*;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Shop {
     private static Shop shop = new Shop();
     private ArrayList<String> cardNames = new ArrayList<>();
-    private ArrayList<Placeable> cards;
+    private ArrayList<Placeable> cards = new ArrayList<>();
     private Account account;
-
-    {
-        Gson gson = new Gson();
-        JsonReader reader = null;
-        try {
-            reader = new JsonReader(new FileReader("D:\\project-44-1\\src\\models\\database.json"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        JsonObject obj = gson.fromJson(reader, JsonObject.class);
-        Hero[] heroes = gson.fromJson(obj.get("Hero"), Hero[].class);
-        Minion[] minions = gson.fromJson(obj.get("minions"), Minion[].class);
-        Item[] items = gson.fromJson(obj.get("Items"), Item[].class);
-        Spell[] spells = gson.fromJson(obj.get("Spell"), Spell[].class);
-        ArrayList<Placeable> cards = new ArrayList<>();
-        cards.addAll(Arrays.asList(heroes));
-        cards.addAll(Arrays.asList(minions));
-        cards.addAll(Arrays.asList(items));
-        cards.addAll(Arrays.asList(spells));
-        this.cards = cards;
-    }
 
 
     private Shop() {
@@ -85,13 +65,8 @@ public class Shop {
 
     }
 
-    public boolean searchInShop(String cardName) {
-        for (Placeable card:cards){
-            if (card.getName().equals(cardName)){
-                return true;
-            }
-        }
-        return false;
+    public void searchInShop(String cardName) {
+
     }
 
     public int searchInCollection(String cardName) {
@@ -124,13 +99,31 @@ public class Shop {
         this.account = account;
     }
 
-
     public Placeable getCard(String cardName) {
-        for (Placeable card : cards) {
-            if (card.getName().equals(cardName)) {
-                return card;
-            }
+        Gson gson = new Gson();
+        File jsonFile = Paths.get("/Users/username/projects/workspace/foo/src/test/resources/file.json").toFile();
+        JsonObject jsonObject = null;
+        try {
+            jsonObject = gson.fromJson(new FileReader(jsonFile), JsonObject.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
+        JsonArray minionArray = jsonObject.getAsJsonArray("minion");
+        for (JsonElement minion : minionArray) {
+            if (minion.getAsJsonObject().get("name").getAsString().equals(cardName)){
+                Card card = new Card();
+                card.setName(minion.getAsJsonObject().get("name").getAsString());
+                card.setHP(minion.getAsJsonObject().get("HP").getAsInt());
+                card.setAP(minion.getAsJsonObject().get("AP").getAsInt());
+                card.setRange(minion.getAsJsonObject().get("attackRange").getAsInt());
+                card.setCost(minion.getAsJsonObject().get("cost").getAsInt());
+                minion.getAsJsonObject().get("attackType").getAsString();
+                minion.getAsJsonObject().get("neededMana").getAsInt();
+                minion.getAsJsonObject().get("specialPowerCoolDown").getAsString();
+                minion.getAsJsonObject().get("specialPower").getAsString();
+                return card;
+                }
+            }
         return null;
     }
 
