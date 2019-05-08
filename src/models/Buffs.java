@@ -48,21 +48,21 @@ public class Buffs {
         switch (buffType) {
             case POWER_BUFF:
                 if (target.equals("HP")) {
-                    card.increaseHP(power);
+                    Fight.increaseHP(power,card);
                 }
                 if (target.equals("AP")) {
-                    card.increaseAP(power);
+                    Fight.increaseAP(power,card);
                 }
                 break;
             case POISION_BUFF:
-                card.decreaseHP(1, false);
+                Fight.decreaseHP(1, false,card);
                 break;
             case WEAKNESS_BUFF:
                 if (target.equals("HP")) {
-                    card.decreaseHP(power, false);
+                    Fight.decreaseHP(power, false,card);
                 }
                 if (target.equals("AP")) {
-                    card.decreaseAP(power);
+                    Fight.decreaseAP(power,card);
                 }
                 break;
             case STUN_BUFF:

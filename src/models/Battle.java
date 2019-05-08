@@ -27,12 +27,12 @@ public class Battle implements Goal, Fight {
     }
 
     {
+        firstPlayer = new Player(first.getCollection().getMainDeck(),first.getUsername());
         firstPlayer.setMyMap(map);
-        this.secondPlayer = secondPlayer;
+        this.secondPlayer = new Player(second.getCollection().getMainDeck(),second.getUsername());
         secondPlayer.setMyMap(map);
-        this.flagNumber = flagNumber;
-        relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[0][2]);
-        relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[8][2]);
+        relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[2][0]);
+        relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[2][8]);
         firstPlayer.getDeck().removeFromDeck(firstPlayer.getDeck().getHero());
         secondPlayer.getDeck().removeFromDeck(secondPlayer.getDeck().getHero());
     }
@@ -53,11 +53,11 @@ public class Battle implements Goal, Fight {
         return firstPlayer;
     }
 
-    public Map getMap() {
+    private Map getMap() {
         return this.map;
     }
 
-    public static void relater(Placeable card, Cell cell) {
+    static void relater(Placeable card, Cell cell) {
         card.setCell(cell);
         if (card instanceof Card)
             cell.setPlaceable((Card) card);
@@ -87,6 +87,7 @@ public class Battle implements Goal, Fight {
     }       //#TODO
 
     public void turnHandler() {       //method to handle all actions must occur at end of turn
+        manaHandler();
         turn++;
     }
 
@@ -173,10 +174,10 @@ public class Battle implements Goal, Fight {
 
     public ErrorType castAttack(Card src, Card dest) {
         if (src.isInAttackRange(src.getMyCell(), dest.getMyCell())) {
-            dest.decreaseHP(src.getAP(), true);
+            Fight.decreaseHP(src.getAP(), true, src);
             if (dest.isInAttackRange(dest.getMyCell(), src.getMyCell())) {
                 src.setAttackAvailable(false);
-                src.decreaseHP(dest.getAP(), true);
+                Fight.decreaseHP(dest.getAP(), true, src);
                 return ErrorType.NO_ERROR;
             }
         }
@@ -190,4 +191,19 @@ public class Battle implements Goal, Fight {
     public void setSecond(Account second) {
         this.second = second;
     }
+
+    private void manaHandler() {
+        if (turn > 14) {
+            getCurrentPlayer().setMana(9);
+            return;
+        }
+        switch (turn % 2) {
+            case 0:
+                getCurrentPlayer().setMana(Player.turnBeginMana[turn - 1]);
+                break;
+            case 1:
+                getCurrentPlayer().setMana(Player.turnBeginMana[turn - 2]);
+        }
+    }
+
 }

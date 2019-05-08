@@ -1,7 +1,6 @@
 package models;
 
 import models.Enums.ItemType;
-import models.Enums.SpellTarget;
 
 import java.util.ArrayList;
 
@@ -71,7 +70,7 @@ public class Map {
         return cards;
     }
 
-    public ArrayList<Card> getPlayerCardsInMap(String playerName) {
+    ArrayList<Card> getPlayerCardsInMap(String playerName) {
         ArrayList<Card> cards = new ArrayList<>();
         for (Card card : this.getAllCardsInMap()) {
             if (card.getOwner().getName().equals(playerName))
@@ -98,12 +97,11 @@ public class Map {
         return null;
     }
 
-    public Cell getCell(int x, int y) {
+    Cell getCell(int x, int y) {
         return cells[x - 1][y - 1];
-
     }
 
-    public ArrayList<Card> getEffectedCards(int x, int y, Spell spell) {
+    ArrayList<Card> getEffectedCards(int x, int y, Spell spell) {
         Cell cell = cells[x - 1][y - 1];
         ArrayList<Card> effectedCards = new ArrayList<>();
         switch (spell.getTarget()) {
@@ -120,7 +118,7 @@ public class Map {
             case SOME_CELL:
 
         }
-
+        return null;
     }
 
     private ArrayList<Card> getAroundCards(Cell cell) {
