@@ -11,12 +11,10 @@ import java.util.Arrays;
 
 public class Shop {
     private static Shop shop = new Shop();
-    private ArrayList<String> cardNames = new ArrayList<>();
-    private ArrayList<Placeable> cards = new ArrayList<>();
+    private ArrayList<Placeable> cards;
     private Account account;
 
     private Shop() {
-
     }
 
     {   //alrz1999 json
@@ -75,13 +73,9 @@ public class Shop {
         }
     }
 
-    public void setCards(ArrayList<Placeable> cards) {
-
-    }
-
     public boolean searchInShop(String cardName) {
-        for (Placeable card: cards){
-            if (card.getName().equals(cardName)){
+        for (Placeable card : cards) {
+            if (card.getName().equals(cardName)) {
                 return true;
             }
         }
@@ -102,16 +96,11 @@ public class Shop {
                 "5.sell [card id | card id]\n" +
                 "6.show\n" +
                 "7.help\n" +
-                "8.exit";
+                "8.exit\n";
     }
 
     public ArrayList<Placeable> getCards() {
         return cards;
-    }
-
-
-    public Account getAccount() {
-        return account;
     }
 
     public void setAccount(Account account) {
@@ -121,7 +110,7 @@ public class Shop {
     public Placeable getCard(String cardName) {
         // alireza rahmani json
 //        Gson gson = new Gson();
-//        File jsonFile = Paths.get("D:\\project-44-1\\src\\models\\database.json").toFile();
+//        File jsonFile = Paths.get("src\\models\\database.json").toFile();
 //        JsonObject jsonObject = null;
 //        try {
 //            jsonObject = gson.fromJson(new FileReader(jsonFile), JsonObject.class);
@@ -154,12 +143,8 @@ public class Shop {
         return null;
     }
 
-    public boolean haveEnoughMoneyToBuyCard(Placeable card, Account account) {
+    private boolean haveEnoughMoneyToBuyCard(Placeable card, Account account) {
         return account.getMoney() >= card.getCost();
-    }
-
-    public boolean canBuyItem() {
-        return account.getCollection().canBuyItem();
     }
 
 }

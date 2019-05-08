@@ -83,16 +83,16 @@ public class Card extends Placeable implements Fight {
         return specialPowerActivation;
     }
 
-    public Player getOwner() {
+    Player getOwner() {
         return owner;
     }
 
-    public void decreaseHealth(int num, boolean isAttack) {
+    void decreaseHealth(int num, boolean isAttack) {
         this.HP -= num;
         // holy buff will work here if isAttack == true
     }
 
-    public boolean isInAttackRange(Cell src, Cell dest) {
+    boolean isInAttackRange(Cell src, Cell dest) {
         switch (this.getAttackType()) {
             case MELEE:
                 return isInMeleeRange(src, dest);
@@ -116,11 +116,8 @@ public class Card extends Placeable implements Fight {
     private boolean isInMeleeRange(Cell src, Cell dest) {
         if (Map.getManhatanDistance(src, dest) == 1) {
             return true;
-        } else if (Map.getManhatanDistance(src, dest) == 2 && src.getX() == dest.getX() && src.getY() != dest.getY()) {
-            return true;
-        } else {
-            return false;
-        }
+        } else return Map.getManhatanDistance(src, dest) == 2 && src.getX() ==
+                dest.getX() && src.getY() != dest.getY();
 
     }
 

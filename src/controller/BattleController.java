@@ -47,7 +47,7 @@ class BattleController {
                     selectCard(request);
                     break;
                 case SHOW_MY_HAND:
-                    showHand(request);
+                    showHand();
                     break;
                 case INSERT_CARD_FROM_HAND_TO_MAP:
                     insertCard(request);
@@ -86,7 +86,7 @@ class BattleController {
     private void showCardInfo(BattleRequest request) {
         String cardID = request.getCardID();
         if (battle.getCard(cardID) != null)
-            view.showCardInfo(battle.getCardInfo(cardID));
+            view.sout(battle.getCardInfo(cardID));
         else
             view.printError(ErrorType.CARD_NOT_FOUND_IN_BATTLE);
     }
@@ -119,6 +119,7 @@ class BattleController {
         Placeable dest = battle.getCard(request.getCardID());
         if (!src.isAttackAvailable()) {
             view.usedAttackBefore(src.getInGameID());
+            return;
         }
         if (battle.getOpponentCardsInMap().contains((dest))) {
             if (battle.castAttack(src, (Card) dest) == ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK) {
@@ -143,8 +144,11 @@ class BattleController {
                 request.getLocationX(), request.getLocationY());
     }
 
-    private void showHand(BattleRequest request) {
-        String cardID = request.getCardID();
+    private void showHand() {
+        for (Card c:battle.getCurrentPlayer().getHand()) {
+            view.sout(c.toString() + "\n");
+        }
+        showNextCard();
     }
 
     private void endTurn() {
@@ -156,7 +160,7 @@ class BattleController {
     }
 
     private void showNextCard() {
-
+        view.sout("next card in hand will be : "+ battle.getCurrentPlayer().getNextCardInHand());
     }
 
     private void endGame() {

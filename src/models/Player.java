@@ -42,6 +42,10 @@ public class Player {
         return name;
     }
 
+    public Card getNextCardInHand() {
+        return nextCardInHand;
+    }
+
     public Card[] getHand() {
         return hand;
     }

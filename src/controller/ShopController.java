@@ -22,7 +22,7 @@ class ShopController {
     }
 
     void main(Account account) {
-        shop.setAccount(account);           /* may THROW exception*/
+        shop.setAccount(account);
         boolean isFinish = false;
         do {
             ShopRequest request = new ShopRequest();

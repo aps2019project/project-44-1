@@ -53,11 +53,11 @@ public class Battle implements Goal, Fight {
         return firstPlayer;
     }
 
-    public Map getMap() {
+    private Map getMap() {
         return this.map;
     }
 
-    public static void relater(Placeable card, Cell cell) {
+    static void relater(Placeable card, Cell cell) {
         card.setCell(cell);
         if (card instanceof Card)
             cell.setPlaceable((Card) card);
@@ -167,10 +167,6 @@ public class Battle implements Goal, Fight {
         return first;
     }
 
-    public void setFirst(Account first) {
-        this.first = first;
-    }
-
     public Account getSecond() {
         return second;
     }
@@ -185,10 +181,6 @@ public class Battle implements Goal, Fight {
             }
         }
         return ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK;
-
     }
 
-    public void setSecond(Account second) {
-        this.second = second;
-    }
 }

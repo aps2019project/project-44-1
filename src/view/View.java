@@ -66,7 +66,7 @@ public class View {
                 "2.Shop\n" +
                 "3.Battle\n" +
                 "4.Exit\n" +
-                "5.Help");
+                "5.Help\n");
     }
 
     void printGetPasswordCommand() {
@@ -80,7 +80,7 @@ public class View {
                 "2.create account\n" +
                 "3.show leaderboard\n" +
                 "4.Help\n" +
-                "5.Exit");
+                "5.Exit\n");
     }
 
     public void printCardsInFormat(ArrayList<Placeable> cards, boolean neadToShowCost) {
@@ -192,7 +192,7 @@ public class View {
 
     public void printGameKinds() {
         System.out.println("1.story\n" +
-                "2.custom game");
+                "2.custom game\n");
     }
 
     private void showCardCost(Placeable card, boolean neadToShowCost) {
@@ -223,10 +223,6 @@ public class View {
         }
     }
 
-    public void showCardInfo(String string) {
-        System.out.println(string);
-    }
-
     public void printCardWasFound() {
         System.out.println("card was found ins shop");
     }
@@ -235,6 +231,5 @@ public class View {
         System.out.println("Card with " + cardID +
                 " can′t attack ");
     }
-
 
 }
