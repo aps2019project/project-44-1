@@ -102,7 +102,7 @@ class BattleController {
             controlSoldier(request, (Card) selectedCard);
         }
         if (selectedCard instanceof Item) {
-
+            controlItem(request, (Item) selectedCard);
         }
         if (battle.getCurrentPlayer().select(request.getCardID()))
             view.printError(ErrorType.INVALID_CARD_ID);
@@ -186,25 +186,6 @@ class BattleController {
         // not sure about this
     }
 
-    private void selectCollectable(BattleRequest request) {
-        while (true) {
-            request.getNewCommand();
-            if (request.getType().equals("show item info")) {
-                showCollectableInfo(request);
-            }
-            if (request.getType().equals("use item")) {
-                useCollectable(request);
-            }
-            if (request.getType().equals("exit")) {
-                break;
-            }
-            if (request.getType().equals("show menu in collectable item menu")) {
-                showMenuInSelectCollectable();
-            }
-        }
-        //not sure about this
-    }
-
     private void helpInBattle() {
 
     }       //#TODO
@@ -260,6 +241,23 @@ class BattleController {
                     break;
                 case USE_SPECIAL_POWER:
                     useSpecialPower(request);
+                    break;
+                case EXIT:
+                    isFinish = true;
+
+            }
+        }
+        while (!isFinish && battle.finishChecker(battle));
+    }
+
+    private void controlItem(BattleRequest request, Item item) {
+        boolean isFinish = false;
+        do {
+            request.getNewCommand();
+            switch (request.getType()) {
+                case SHOW_SELECTED_ITEM_INFO:
+                    break;
+                case USE_COllectable_ITEM:
                     break;
                 case EXIT:
                     isFinish = true;

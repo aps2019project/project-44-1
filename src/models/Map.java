@@ -1,8 +1,8 @@
 package models;
 
 import models.Enums.ItemType;
+import models.Enums.SpellTarget;
 
-import java.lang.management.PlatformLoggingMXBean;
 import java.util.ArrayList;
 
 public class Map {
@@ -98,4 +98,44 @@ public class Map {
         return null;
     }
 
+    public Cell getCell(int x, int y) {
+        return cells[x - 1][y - 1];
+
+    }
+
+    public ArrayList<Card> getEffectedCards(int x, int y, Spell spell) {
+        Cell cell = cells[x - 1][y - 1];
+        ArrayList<Card> effectedCards = new ArrayList<>();
+        switch (spell.getTarget()) {
+            case MY_HERO:
+                effectedCards.add(cell.getCard());
+                return effectedCards;
+            case OPP_HERO:
+                effectedCards.add(cell.getCard());
+                return effectedCards;
+            case OPP_MINION_ARROUND_MY_HERO:
+                effectedCards.addAll(getAroundCards(cell));
+                //remove my minions and oppHero from this array
+                return effectedCards;
+            case SOME_CELL:
+
+        }
+
+    }
+
+    private ArrayList<Card> getAroundCards(Cell cell) {
+        ArrayList<Card> cards = new ArrayList<>();
+        for (int i = cell.getY() - 1; i < cell.getY() + 2; i++) {
+            for (int j = cell.getX() - 1; j < cell.getY() + 2; j++) {
+                if (cell.getY() == i && cell.getX() == j)
+                    continue;
+                if (i < 0 || i > 5 || j < 0 || j > 9)
+                    continue;
+                if (cell.getCard() != null) {
+                    cards.add(cell.getCard());
+                }
+            }
+        }
+        return cards;
+    }
 }

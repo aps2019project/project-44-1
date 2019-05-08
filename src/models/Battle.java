@@ -53,11 +53,11 @@ public class Battle implements Goal, Fight {
         return firstPlayer;
     }
 
-    private Map getMap() {
+    public Map getMap() {
         return this.map;
     }
 
-    static void relater(Placeable card, Cell cell) {
+    public static void relater(Placeable card, Cell cell) {
         card.setCell(cell);
         if (card instanceof Card)
             cell.setPlaceable((Card) card);
@@ -77,7 +77,7 @@ public class Battle implements Goal, Fight {
 
         ArrayList<Cell> cells = new ArrayList<>();      //^_^
         Card card;
-        getMap().getFlags().forEach(f -> cells.add(f.getCell()));
+        getMap().getFlags().forEach(f -> cells.add(f.getMyCell()));
         if (cells.size() == 1 && getBattleMode() == BattleMode.CAPTURE_FLAG_1) {
             card = getMap().getFlags().get(0).getCarrier();       //type2
         }
@@ -172,15 +172,22 @@ public class Battle implements Goal, Fight {
     }
 
     public ErrorType castAttack(Card src, Card dest) {
-        if (src.isInAttackRange(src.getCell(), dest.getCell())) {
-            dest.decreaseHealth(src.getAP(), true);
-            if (dest.isInAttackRange(dest.getCell(), src.getCell())) {
+        if (src.isInAttackRange(src.getMyCell(), dest.getMyCell())) {
+            dest.decreaseHP(src.getAP(), true);
+            if (dest.isInAttackRange(dest.getMyCell(), src.getMyCell())) {
                 src.setAttackAvailable(false);
-                src.decreaseHealth(dest.getAP(), true);
+                src.decreaseHP(dest.getAP(), true);
                 return ErrorType.NO_ERROR;
             }
         }
         return ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK;
     }
 
+    public void castSpell(int x, int y, Spell spell) {
+        ArrayList<Card> effectedCards = map.getEffectedCards(x, y, spell);
+    }
+
+    public void setSecond(Account second) {
+        this.second = second;
+    }
 }

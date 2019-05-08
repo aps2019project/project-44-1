@@ -219,7 +219,7 @@ public class View {
     private void showMinionsInBattleFormatted(ArrayList<Card> cards) {
         for (Card card : cards) {
             System.out.println(card.getInGameID() + " : " + card.getName() + ", health : " + card.getHP() + ", location : (" +
-                    card.getCell().getX() + ", " + card.getCell().getY() + "), power : " + card.getAP());
+                    card.getMyCell().getX() + ", " + card.getMyCell().getY() + "), power : " + card.getAP());
         }
     }
 

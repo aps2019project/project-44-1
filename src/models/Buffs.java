@@ -8,6 +8,8 @@ public class Buffs {
     private int power;
     private int duration;
     private boolean isCountiosly;
+    //for power buff to know increase health or power
+    private String target;
 
     public String getName() {
         return name;
@@ -42,8 +44,32 @@ public class Buffs {
     }
 
     public void castBuff(Card card) {
-        switch (this.getName()) {
-
+        //holy buff should be handel in Card class when
+        switch (buffType) {
+            case POWER_BUFF:
+                if (target.equals("HP")) {
+                    card.increaseHP(power);
+                }
+                if (target.equals("AP")) {
+                    card.increaseAP(power);
+                }
+                break;
+            case POISION_BUFF:
+                card.decreaseHP(1, false);
+                break;
+            case WEAKNESS_BUFF:
+                if (target.equals("HP")) {
+                    card.decreaseHP(power, false);
+                }
+                if (target.equals("AP")) {
+                    card.decreaseAP(power);
+                }
+                break;
+            case STUN_BUFF:
+                card.setStuned(true);
+                break;
+            case DISARM_BUFF:
+                card.setDisarmed(true);
         }
     }
 }

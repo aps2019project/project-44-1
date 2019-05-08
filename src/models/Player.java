@@ -101,7 +101,9 @@ public class Player {
             View.getInstance().printError(ErrorType.NO_ENOUGH_MANA);
         else if (invalidCoordination(x, y, 1))
             View.getInstance().printError(ErrorType.INVALID_TARGET);
-        else {
+        else if (!(c instanceof Spell && ((Spell) c).canCastSpell(x, y, myMap, this))) {
+            View.getInstance().printError(ErrorType.INVALID_TARGET);
+        } else {
             c.setInGameID(IDGenerator(cardName));
             Battle.relater(c, myMap.getCells()[x - 1][y - 1]);
             hand[i] = nextCardInHand;
@@ -112,7 +114,7 @@ public class Player {
 
     private boolean invalidCoordination(int x, int y, int distance) {
         for (Card c : myMap.getPlayerCardsInMap(this.name)) {
-            if (Map.getManhatanDistance(c.getCell(), myMap.getCells()[x - 1][y - 1]) == distance
+            if (Map.getManhatanDistance(c.getMyCell(), myMap.getCells()[x - 1][y - 1]) == distance
                     || myMap.getCells()[x - 1][y - 1].isFree())
                 return false;
         }
@@ -134,7 +136,7 @@ public class Player {
     }
 
     public String move(int x, int y) {
-        int distance = Map.getManhatanDistance(selectedCard.getCell(),
+        int distance = Map.getManhatanDistance(selectedCard.getMyCell(),
                 myMap.getCells()[x - 1][y - 1]);
         boolean flag = true;
         switch (distance) {
@@ -153,15 +155,15 @@ public class Player {
             return ErrorType.INVALID_TARGET.getMessage();
         else {
             Battle.relater(selectedCard, myMap.getCells()[x - 1][y - 1]);
-            return selectedCard.getInGameID() + " moved to " + selectedCard.getCell().getX()
-                    + " " + selectedCard.getCell().getY();
+            return selectedCard.getInGameID() + " moved to " + selectedCard.getMyCell().getX()
+                    + " " + selectedCard.getMyCell().getY();
         }
     }
 
     //if it want to move and there is opponent cards in his way
     private boolean superInvalidCoordination(int x, int y) {
-        int yy = selectedCard.getCell().getY();
-        int xx = selectedCard.getCell().getX();
+        int yy = selectedCard.getMyCell().getY();
+        int xx = selectedCard.getMyCell().getX();
         if (x == xx) {
             switch (yy - y) {
                 case 2:
