@@ -2,8 +2,8 @@ package models;
 
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
+import models.Enums.ErrorType;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 
 public class Battle implements Goal, Fight {
@@ -77,7 +77,7 @@ public class Battle implements Goal, Fight {
 
         ArrayList<Cell> cells = new ArrayList<>();      //^_^
         Card card;
-        getMap().getFlags().forEach(f -> cells.add(f.getCell()));
+        getMap().getFlags().forEach(f -> cells.add(f.getMyCell()));
         if (cells.size() == 1 && getBattleMode() == BattleMode.CAPTURE_FLAG_1) {
             card = getMap().getFlags().get(0).getCarrier();       //type2
         }
@@ -167,12 +167,24 @@ public class Battle implements Goal, Fight {
         return first;
     }
 
-    public void setFirst(Account first) {
-        this.first = first;
-    }
-
     public Account getSecond() {
         return second;
+    }
+
+    public ErrorType castAttack(Card src, Card dest) {
+        if (src.isInAttackRange(src.getMyCell(), dest.getMyCell())) {
+            dest.decreaseHP(src.getAP(), true);
+            if (dest.isInAttackRange(dest.getMyCell(), src.getMyCell())) {
+                src.setAttackAvailable(false);
+                src.decreaseHP(dest.getAP(), true);
+                return ErrorType.NO_ERROR;
+            }
+        }
+        return ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK;
+    }
+
+    public void castSpell(int x, int y, Spell spell) {
+        ArrayList<Card> effectedCards = map.getEffectedCards(x, y, spell);
     }
 
     public void setSecond(Account second) {

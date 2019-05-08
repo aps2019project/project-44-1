@@ -9,10 +9,9 @@ import view.View;
 public class GameController {
     private static GameController gameController = new GameController();
     private Game game = Game.getInstance();
-    private View view = new View();
+    private View view = View.getInstance();
 
     private GameController() {
-
     }
 
     public static GameController getInstance() {
@@ -52,7 +51,6 @@ public class GameController {
         String password = request.getPassword(view);
         if (account != null) {
             if (game.isValidPassword(account, password)) {
-//                game.setAccount1(account);
                 AccountController.getInstance().main(account);
             } else {
                 view.printError(ErrorType.INVALID_PASSWORD);
@@ -66,8 +64,7 @@ public class GameController {
         if (!game.isUsedUsername(request.getUserName())) {
             game.createAccount(request.getUserName(), request.getPassword(view));
         } else {
-            request.setError(ErrorType.USED_BEFORE_USERNAME);
-            view.printError(request.getError());
+            view.printError(ErrorType.USED_BEFORE_USERNAME);
         }
     }
 

@@ -25,7 +25,9 @@ public enum ErrorType {
     NO_ENOUGH_MANA("you don't have enough mana"),
     INVALID_TARGET("invalid target"),
     INVALID_CARD_ID("invalid card ID"),
-    NO_CARD_SELECTED("no card has been selected");
+    NO_CARD_SELECTED("no card has been selected"),
+    DEST_IS_UNAVAILABLE_FOR_ATTACK("opponent minion is unavailable for attack"),
+    INVALID_DEST_ID("Invalid card id");
 
 
     private String message;

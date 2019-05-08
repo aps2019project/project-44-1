@@ -4,7 +4,7 @@ public enum BuffType {
     HOLY_BUFF,
     WEAKNESS_BUFF,
     STUN_BUFF,
-    DISARM_BAFF,
+    DISARM_BUFF,
     POWER_BUFF,
     POISION_BUFF
 }

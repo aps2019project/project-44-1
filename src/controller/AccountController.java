@@ -11,12 +11,12 @@ import view.View;
 class AccountController {
     private static AccountController accountController = new AccountController();
     private Account account;
-    private View view = new View();
+    private View view = View.getInstance();
 
     private AccountController() {
     }
 
-    public static AccountController getInstance() {
+    static AccountController getInstance() {
         return accountController;
     }
 
@@ -75,7 +75,6 @@ class AccountController {
     }
 
     private void save() {
-
     }
 
     private void help() {

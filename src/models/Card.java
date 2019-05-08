@@ -12,6 +12,9 @@ public class Card extends Placeable implements Fight {
     private int range;
     private SpecialPowerActivation specialPowerActivation;
     private Player owner;
+    private boolean isAttackAvailable = true;
+    private boolean isStuned = false;
+    private boolean isDisarmed = false;
 
     void setOwner(Player owner) {
         this.owner = owner;
@@ -86,4 +89,83 @@ public class Card extends Placeable implements Fight {
         return owner;
     }
 
+    public void decreaseHP(int num, boolean isAttack) {
+        this.HP -= num;
+        // holy buff will work here if isAttack == true
+    }
+
+    public boolean isInAttackRange(Cell src, Cell dest) {
+        switch (this.getAttackType()) {
+            case MELEE:
+                return isInMeleeRange(src, dest);
+            case HYBRID:
+                return isInHybridRange(src, dest);
+            default:
+                return isInRangedRange(src, dest);
+        }
+    }
+
+    private boolean isInRangedRange(Cell src, Cell dest) {
+        return !isInMeleeRange(src, dest);
+
+    }
+
+    private boolean isInHybridRange(Cell src, Cell dest) {
+        return true;
+
+    }
+
+    private boolean isInMeleeRange(Cell src, Cell dest) {
+        if (Map.getManhatanDistance(src, dest) == 1) {
+            return true;
+        } else return Map.getManhatanDistance(src, dest) == 2 && src.getX() ==
+                dest.getX() && src.getY() != dest.getY();
+
+    }
+
+    public boolean isAttackAvailable() {
+        return isAttackAvailable;
+    }
+
+    public void setAttackAvailable(boolean attackAvailable) {
+        this.isAttackAvailable = attackAvailable;
+    }
+
+    public String getSpecialPower() {
+        return specialPower;
+    }
+
+    public void setSpecialPower(String specialPower) {
+        this.specialPower = specialPower;
+    }
+
+    public boolean isStuned() {
+        return isStuned;
+    }
+
+    public void setStuned(boolean stuned) {
+        isStuned = stuned;
+    }
+
+    public boolean isDisarmed() {
+        return isDisarmed;
+    }
+
+    public void setDisarmed(boolean disarmed) {
+        isDisarmed = disarmed;
+    }
+
+    public void increaseHP(int num) {
+        this.HP += num;
+    }
+
+    public void increaseAP(int num) {
+        this.AP += num;
+    }
+
+    public void decreaseAP(int num) {
+        this.AP -= num;
+        if (this.AP < 0)
+            this.AP = 0;
+    }
 }

@@ -7,6 +7,15 @@ import java.util.ArrayList;
 
 public class View {
 
+    private static View view = new View();
+
+    private View() {
+    }
+
+    public static View getInstance() {
+        return view;
+    }
+
     public void printError(ErrorType type) {
         if (type == null)
             return;
@@ -57,10 +66,10 @@ public class View {
                 "2.Shop\n" +
                 "3.Battle\n" +
                 "4.Exit\n" +
-                "5.Help");
+                "5.Help\n");
     }
 
-    public void printGetPasswordCommand() {
+    void printGetPasswordCommand() {
         System.out.println("Enter your password:");
     }
 
@@ -71,7 +80,7 @@ public class View {
                 "2.create account\n" +
                 "3.show leaderboard\n" +
                 "4.Help\n" +
-                "5.Exit");
+                "5.Exit\n");
     }
 
     public void printCardsInFormat(ArrayList<Placeable> cards, boolean neadToShowCost) {
@@ -183,7 +192,7 @@ public class View {
 
     public void printGameKinds() {
         System.out.println("1.story\n" +
-                "2.custom game");
+                "2.custom game\n");
     }
 
     private void showCardCost(Placeable card, boolean neadToShowCost) {
@@ -207,20 +216,20 @@ public class View {
         showMinionsInBattleFormatted(cards);
     }
 
-    public void showMinionsInBattleFormatted(ArrayList<Card> cards) {
+    private void showMinionsInBattleFormatted(ArrayList<Card> cards) {
         for (Card card : cards) {
             System.out.println(card.getInGameID() + " : " + card.getName() + ", health : " + card.getHP() + ", location : (" +
-                    card.getCell().getX() + ", " + card.getCell().getY() + "), power : " + card.getAP());
+                    card.getMyCell().getX() + ", " + card.getMyCell().getY() + "), power : " + card.getAP());
         }
     }
 
-    public void showCardInfo(String string) {
-        System.out.println();
-    }
-
-    public void printCardWasFound(){
+    public void printCardWasFound() {
         System.out.println("card was found ins shop");
     }
 
+    public void usedAttackBefore(String cardID) {
+        System.out.println("Card with " + cardID +
+                " can′t attack ");
+    }
 
 }

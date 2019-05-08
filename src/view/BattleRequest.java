@@ -128,4 +128,5 @@ public class BattleRequest extends Request {
             return null;
         }
     }
+
 }

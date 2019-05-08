@@ -8,7 +8,6 @@ public class Collection implements Comparable<Placeable> {
     private HashMap<Integer, Placeable> cardHashMap = new HashMap<>();
     private Deck mainDeck;
 
-
     public ArrayList<Placeable> getCollectionCards() {
         ArrayList<Placeable> tempList = new ArrayList<>(cardHashMap.values());
         sortCollection(tempList);
@@ -94,11 +93,11 @@ public class Collection implements Comparable<Placeable> {
         return 0;
     }
 
-    public Deck getMainDeck() {
+    Deck getMainDeck() {
         return mainDeck;
     }
 
-    public void setMainDeck(Deck mainDeck) {
+    private void setMainDeck(Deck mainDeck) {
         this.mainDeck = mainDeck;
     }
 
@@ -131,10 +130,10 @@ public class Collection implements Comparable<Placeable> {
                 "10.show deck [deck name]\n" +
                 "11.save\n" +
                 "12.help\n" +
-                "13.exit";
+                "13.exit\n";
     }
 
-    public void deleteCardFromCollection(int cardID) {
+    void deleteCardFromCollection(int cardID) {
         Placeable card = getCard(cardID);
         cardHashMap.remove(cardID);
         deleteCardFromDeck(card);
@@ -159,12 +158,12 @@ public class Collection implements Comparable<Placeable> {
         return numberOfItems;
     }
 
-    public boolean canBuyItem() {
+    boolean canBuyItem() {
         return maxItems - this.getNumberOfItemsInCollection() > 0;
     }
 
     // TODO: 03/05/2019 decide to use CollectionIDGenerator or ID field in card
-    public void addCardToCollection(Placeable card) {
+    void addCardToCollection(Placeable card) {
         card.setID(collectionIDGenerator());
         cardHashMap.put(collectionIDGenerator(), card);
     }
@@ -178,7 +177,7 @@ public class Collection implements Comparable<Placeable> {
         return -1;
     }
 
-    public int searchInCollection(String cardName) {
+    int searchInCollection(String cardName) {
         for (Placeable card : cardHashMap.values()) {
             if (card.getName().equals(cardName)) {
                 return getCardIDInCollection(cardName);
@@ -187,7 +186,7 @@ public class Collection implements Comparable<Placeable> {
         return -1;
     }
 
-    public int getCardIDInCollection(String cardName) {
+    private int getCardIDInCollection(String cardName) {
         for (int i = 0; i < 100000; i++) {
             if (cardHashMap.get(i) != null && cardHashMap.get(i).getName().equals(cardName)) {
                 return i;
@@ -203,4 +202,5 @@ public class Collection implements Comparable<Placeable> {
     public void setCardHashMap(HashMap<Integer, Placeable> cardHashMap) {
         this.cardHashMap = cardHashMap;
     }
+
 }

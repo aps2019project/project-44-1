@@ -42,6 +42,10 @@ public class Player {
         return name;
     }
 
+    public Card getNextCardInHand() {
+        return nextCardInHand;
+    }
+
     public Card[] getHand() {
         return hand;
     }
@@ -85,7 +89,6 @@ public class Player {
     public void insert(String cardName, int x, int y) {
         Card c = null;
         int i;
-        View view = new View();
         for (i = 0; i < 5; i++) {
             if (hand[i].getName().equals(cardName)) {
                 c = hand[i];
@@ -93,23 +96,25 @@ public class Player {
             }
         }
         if (c == null)
-            view.printError(ErrorType.INVALID_CARD_NAME);
+            View.getInstance().printError(ErrorType.INVALID_CARD_NAME);
         else if (c.getNeededMana() > mana)
-            view.printError(ErrorType.NO_ENOUGH_MANA);
+            View.getInstance().printError(ErrorType.NO_ENOUGH_MANA);
         else if (invalidCoordination(x, y, 1))
-            view.printError(ErrorType.INVALID_TARGET);
-        else {
+            View.getInstance().printError(ErrorType.INVALID_TARGET);
+        else if (!(c instanceof Spell && ((Spell) c).canCastSpell(x, y, myMap, this))) {
+            View.getInstance().printError(ErrorType.INVALID_TARGET);
+        } else {
             c.setInGameID(IDGenerator(cardName));
             Battle.relater(c, myMap.getCells()[x - 1][y - 1]);
             hand[i] = nextCardInHand;
             nextCardInHand = deck.getCards().get(0);
-            view.sout(cardName + " with " + c.getInGameID() + " inserted to (" + x + "; " + y + ")");
+            View.getInstance().sout(cardName + " with " + c.getInGameID() + " inserted to (" + x + "; " + y + ")");
         }
     }       // TODO: 5/7/2019 must handle for spells
 
     private boolean invalidCoordination(int x, int y, int distance) {
         for (Card c : myMap.getPlayerCardsInMap(this.name)) {
-            if (Map.getManhatanDistance(c.getCell(), myMap.getCells()[x - 1][y - 1]) == distance
+            if (Map.getManhatanDistance(c.getMyCell(), myMap.getCells()[x - 1][y - 1]) == distance
                     || myMap.getCells()[x - 1][y - 1].isFree())
                 return false;
         }
@@ -131,7 +136,7 @@ public class Player {
     }
 
     public String move(int x, int y) {
-        int distance = Map.getManhatanDistance(selectedCard.getCell(),
+        int distance = Map.getManhatanDistance(selectedCard.getMyCell(),
                 myMap.getCells()[x - 1][y - 1]);
         boolean flag = true;
         switch (distance) {
@@ -150,15 +155,15 @@ public class Player {
             return ErrorType.INVALID_TARGET.getMessage();
         else {
             Battle.relater(selectedCard, myMap.getCells()[x - 1][y - 1]);
-            return selectedCard.getInGameID() + " moved to " + selectedCard.getCell().getX()
-                    + " " + selectedCard.getCell().getY();
+            return selectedCard.getInGameID() + " moved to " + selectedCard.getMyCell().getX()
+                    + " " + selectedCard.getMyCell().getY();
         }
     }
 
     //if it want to move and there is opponent cards in his way
     private boolean superInvalidCoordination(int x, int y) {
-        int yy = selectedCard.getCell().getY();
-        int xx = selectedCard.getCell().getX();
+        int yy = selectedCard.getMyCell().getY();
+        int xx = selectedCard.getMyCell().getX();
         if (x == xx) {
             switch (yy - y) {
                 case 2:
@@ -173,7 +178,20 @@ public class Player {
                 case -2:
                     return invalidCoordination(x - 1, y, 1);
             }
-        } //else if () ;
+        } else if (x - xx == 1)
+            switch (y - yy) {
+                case 1:
+                    return invalidCoordination(x + 1, y + 1, 2);
+                case -1:
+                    return invalidCoordination(x + 1, y - 1, 2);
+            }
+        else if (x - xx == -1)
+            switch (y - yy) {
+                case 1:
+                    return invalidCoordination(x - 1, y + 1, 2);
+                case -1:
+                    return invalidCoordination(x - 1, y - 1, 2);
+            }
         return false;
     }
 

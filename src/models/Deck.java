@@ -5,12 +5,12 @@ import view.View;
 import java.util.ArrayList;
 
 public class Deck {
-    private static final int maxCardNumber = 20;
+    public static final int maxCardNumber = 20;
     private Item item;
     private Hero hero;
     private ArrayList<Card> cards = new ArrayList<>();
     private String name;
-    private View view = new View();
+    private View view = View.getInstance();
 
 
     Deck(String deckName) {
@@ -33,7 +33,7 @@ public class Deck {
         this.hero = hero;
     }
 
-    public ArrayList<Card> getCards() {
+    ArrayList<Card> getCards() {
         return cards;
     }
 
@@ -45,23 +45,19 @@ public class Deck {
         this.name = name;
     }
 
-    public static int getMaxCardNumber() {
-        return maxCardNumber;
-    }
-
-    public boolean isFull() {
+    boolean isFull() {
         return cards.size() == 20;
     }
 
-    public boolean isSpecifiedHero() {
+    boolean isSpecifiedHero() {
         return hero != null;
     }
 
-    public boolean isSpecifiedItem() {
+    boolean isSpecifiedItem() {
         return item != null;
     }
 
-    public void addToDeck(Placeable placeable) {
+    void addToDeck(Placeable placeable) {
         if (placeable instanceof Hero) {
             setHero((Hero) placeable);
         } else if (placeable instanceof Item) {
@@ -74,7 +70,7 @@ public class Deck {
         }
     }
 
-    public void removeFromDeck(Placeable placeable) {
+    void removeFromDeck(Placeable placeable) {
         if (placeable instanceof Hero) {
             hero = null;
         } else if (placeable instanceof Item) {
@@ -82,14 +78,6 @@ public class Deck {
         } else {
             cards.remove(placeable);
         }
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public void setView(View view) {
-        this.view = view;
     }
 
     /**
@@ -103,7 +91,7 @@ public class Deck {
         } else return isInDeckCards(cardID);
     }
 
-    public boolean isInDeckCards(int cardID) {
+    private boolean isInDeckCards(int cardID) {
         for (Placeable placeable : cards) {
             if (placeable.getID() == cardID) {
                 return true;
@@ -112,7 +100,7 @@ public class Deck {
         return false;
     }
 
-    public boolean isValidated() {
+    boolean isValidated() {
         return this.isFull() && this.isSpecifiedHero();
     }
 

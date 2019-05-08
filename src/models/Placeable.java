@@ -11,7 +11,7 @@ public abstract class Placeable implements Comparable<Placeable> {
         this.cost = cost;
     }
 
-    public Cell getCell() {
+    public Cell getMyCell() {
         return cell;
     }
 

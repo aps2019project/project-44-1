@@ -8,13 +8,12 @@ import view.View;
 class BattleController {
     private static BattleController battleController = new BattleController();
     private Battle battle;
-    private View view = new View();
+    private View view = View.getInstance();
 
     private BattleController() {
-
     }
 
-    public static BattleController getInstance() {
+    static BattleController getInstance() {
         return battleController;
     }
 
@@ -48,7 +47,7 @@ class BattleController {
                     selectCard(request);
                     break;
                 case SHOW_MY_HAND:
-                    showHand(request);
+                    showHand();
                     break;
                 case INSERT_CARD_FROM_HAND_TO_MAP:
                     insertCard(request);
@@ -74,7 +73,6 @@ class BattleController {
     }
 
     private void showGameInfo() {
-
     }
 
     private void showMyMinions() {
@@ -88,7 +86,7 @@ class BattleController {
     private void showCardInfo(BattleRequest request) {
         String cardID = request.getCardID();
         if (battle.getCard(cardID) != null)
-            view.showCardInfo(battle.getCardInfo(cardID));
+            view.sout(battle.getCardInfo(cardID));
         else
             view.printError(ErrorType.CARD_NOT_FOUND_IN_BATTLE);
     }
@@ -104,7 +102,7 @@ class BattleController {
             controlSoldier(request, (Card) selectedCard);
         }
         if (selectedCard instanceof Item) {
-
+            controlItem(request, (Item) selectedCard);
         }
         if (battle.getCurrentPlayer().select(request.getCardID()))
             view.printError(ErrorType.INVALID_CARD_ID);
@@ -117,7 +115,19 @@ class BattleController {
                 request.getLocationY()));
     }
 
-    private void ordinaryAttack(BattleRequest request) {
+    private void ordinaryAttack(Card src, BattleRequest request) {
+        Placeable dest = battle.getCard(request.getCardID());
+        if (!src.isAttackAvailable()) {
+            view.usedAttackBefore(src.getInGameID());
+            return;
+        }
+        if (battle.getOpponentCardsInMap().contains((dest))) {
+            if (battle.castAttack(src, (Card) dest) == ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK) {
+                view.printError(ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK);
+            }
+        } else {
+            view.printError(ErrorType.INVALID_DEST_ID);
+        }
 
     }
 
@@ -134,8 +144,11 @@ class BattleController {
                 request.getLocationX(), request.getLocationY());
     }
 
-    private void showHand(BattleRequest request) {
-        String cardID = request.getCardID();
+    private void showHand() {
+        for (Card c:battle.getCurrentPlayer().getHand()) {
+            view.sout(c.toString() + "\n");
+        }
+        showNextCard();
     }
 
     private void endTurn() {
@@ -147,7 +160,7 @@ class BattleController {
     }
 
     private void showNextCard() {
-
+        view.sout("next card in hand will be : "+ battle.getCurrentPlayer().getNextCardInHand());
     }
 
     private void endGame() {
@@ -171,25 +184,6 @@ class BattleController {
             }
         }
         // not sure about this
-    }
-
-    private void selectCollectable(BattleRequest request) {
-        while (true) {
-            request.getNewCommand();
-            if (request.getType().equals("show item info")) {
-                showCollectableInfo(request);
-            }
-            if (request.getType().equals("use item")) {
-                useCollectable(request);
-            }
-            if (request.getType().equals("exit")) {
-                break;
-            }
-            if (request.getType().equals("show menu in collectable item menu")) {
-                showMenuInSelectCollectable();
-            }
-        }
-        //not sure about this
     }
 
     private void helpInBattle() {
@@ -236,18 +230,34 @@ class BattleController {
             request.getNewCommand();
             switch (request.getType()) {
                 case MOVE_CARD:
-                    // fek konam be function mocecard() soldier ro bedi behtare
                     battle.getCurrentPlayer().select(request.getCardID());
                     moveCard(request);
                     break;
                 case ATTACK_TO_OPPONENT:
-                    ordinaryAttack(request);
+                    ordinaryAttack(soldier, request);
                     break;
                 case COMBO_ATTACK:
                     comboAttack(request);
                     break;
                 case USE_SPECIAL_POWER:
                     useSpecialPower(request);
+                    break;
+                case EXIT:
+                    isFinish = true;
+
+            }
+        }
+        while (!isFinish && battle.finishChecker(battle));
+    }
+
+    private void controlItem(BattleRequest request, Item item) {
+        boolean isFinish = false;
+        do {
+            request.getNewCommand();
+            switch (request.getType()) {
+                case SHOW_SELECTED_ITEM_INFO:
+                    break;
+                case USE_COllectable_ITEM:
                     break;
                 case EXIT:
                     isFinish = true;

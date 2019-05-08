@@ -1,5 +1,5 @@
 package models.Enums;
 
 public enum SpecialPowerActivation {
-    Passive, Onattack, combo, ondeath, onrespawn, ondefend
+    PASSIVE, ON_ATTACK, COMBO, ON_DEATH, ON_RESPAWN, ON_DEFEND
 }

@@ -1,7 +1,7 @@
 package models;
 
-import models.Enums.AttackType;
-import models.Enums.SpecialPowerActivation;
+//import models.Enums.AttackType;
+//import models.Enums.SpecialPowerActivation;
 
 public class Minion extends Card {
 
@@ -13,7 +13,7 @@ public class Minion extends Card {
 //        this.setAP(AP);
 //        this.setAttackType(attackType);
 //        this.setRange(range);
-////        this.setSpecialPower(specialPower);
+//      this.setSpecialPower(specialPower);
 //        this.setSpecialPowerActivation(specialPowerActivation);
 //    }
 
@@ -21,7 +21,7 @@ public class Minion extends Card {
     public String toString() {
         return " : Type : " + this.getClass().getName() +
                 " : Name : " + this.getName() +
-//                " - Class : " + super.getAttackType().getNameType() +
+                " - Class : " + this.getAttackType().getNameType() +
                 " - AP : " + this.getAP() +
                 " - HP : " + this.getHP() +
                 " - MP : " + this.getNeededMana() +
@@ -32,11 +32,12 @@ public class Minion extends Card {
     String getMinionInfoInBattle() {
         return "Minion:\n" +
                 "Name : " + this.getName() + "\n" +
-                "HP : " + this.getHP() + "\n" + "AP : " + this.getAP() + "\n" + "MP : " + this.getNeededMana() + "\n" +
+                "HP : " + this.getHP() + "\n" + "AP : " + this.getAP() +
+                "\n" + "MP : " + this.getNeededMana() + "\n" +
                 "Range:" +// TODO: 06/05/2019
                 "Combo-ability:" +// TODO: 06/05/2019
                 "Cost : " + this.getCost() + "\n" +
-                "Desc : ";// TODO: 06/05/2019 getdesc for hero
+                "Desc : ";// TODO: 06/05/2019 get desc for hero
     }
 
 }

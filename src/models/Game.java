@@ -29,11 +29,7 @@ public class Game {
     }
 
     public void createAccount(String username, String password) {
-        addAccount(new Account(username, password));
-    }
-
-    private void addAccount(Account account) {
-        accounts.add(account);
+        accounts.add(new Account(username, password));
     }
 
     public ArrayList<Account> getSortedAccounts() {
@@ -63,8 +59,8 @@ public class Game {
                 "5.Exit";
     }
 
-    {
-        Account test = new Account("test", "1234");
+    static {
+        Account test = new Account("test","1234");
         test.getCollection().addCardToCollection(Shop.getInstance().getCard("divsefid"));
         test.getCollection().addCardToCollection(Shop.getInstance().getCard("simorgh"));
         test.getCollection().addCardToCollection(Shop.getInstance().getCard("ejhdeha"));
