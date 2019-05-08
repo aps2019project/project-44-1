@@ -65,7 +65,6 @@ class CollectionController {
                     help();
                     break;
             }
-
         }
         while (!isFinish);
     }

@@ -24,7 +24,7 @@ public class Card extends Placeable implements Fight {
         this.specialPowerActivation = specialPowerActivation;
     }
 
-    public AttackType getAttackType() {
+    AttackType getAttackType() {
         return attackType;
     }
 
@@ -36,7 +36,7 @@ public class Card extends Placeable implements Fight {
         return HP;
     }
 
-    public void setHP(int HP) {
+    void setHP(int HP) {
         this.HP = HP;
     }
 
@@ -48,14 +48,6 @@ public class Card extends Placeable implements Fight {
         this.AP = AP;
     }
 
-//    public Spell getSpecialPower() {
-//        return specialPower;
-//    }
-//
-//    void setSpecialPower(Spell specialPower) {
-//        this.specialPower = specialPower;
-//    }
-
     public void setAttackType(AttackType attackType) {
         this.attackType = attackType;
     }
@@ -64,7 +56,7 @@ public class Card extends Placeable implements Fight {
         return inGameID;
     }
 
-    public void setInGameID(String inGameID) {
+    void setInGameID(String inGameID) {
         this.inGameID = inGameID;
     }
 
@@ -85,49 +77,15 @@ public class Card extends Placeable implements Fight {
         return specialPowerActivation;
     }
 
-    public Player getOwner() {
+    Player getOwner() {
         return owner;
-    }
-
-    public void decreaseHP(int num, boolean isAttack) {
-        this.HP -= num;
-        // holy buff will work here if isAttack == true
-    }
-
-    public boolean isInAttackRange(Cell src, Cell dest) {
-        switch (this.getAttackType()) {
-            case MELEE:
-                return isInMeleeRange(src, dest);
-            case HYBRID:
-                return isInHybridRange(src, dest);
-            default:
-                return isInRangedRange(src, dest);
-        }
-    }
-
-    private boolean isInRangedRange(Cell src, Cell dest) {
-        return !isInMeleeRange(src, dest);
-
-    }
-
-    private boolean isInHybridRange(Cell src, Cell dest) {
-        return true;
-
-    }
-
-    private boolean isInMeleeRange(Cell src, Cell dest) {
-        if (Map.getManhatanDistance(src, dest) == 1) {
-            return true;
-        } else return Map.getManhatanDistance(src, dest) == 2 && src.getX() ==
-                dest.getX() && src.getY() != dest.getY();
-
     }
 
     public boolean isAttackAvailable() {
         return isAttackAvailable;
     }
 
-    public void setAttackAvailable(boolean attackAvailable) {
+    void setAttackAvailable(boolean attackAvailable) {
         this.isAttackAvailable = attackAvailable;
     }
 
@@ -143,7 +101,7 @@ public class Card extends Placeable implements Fight {
         return isStuned;
     }
 
-    public void setStuned(boolean stuned) {
+    void setStuned(boolean stuned) {
         isStuned = stuned;
     }
 
@@ -155,17 +113,30 @@ public class Card extends Placeable implements Fight {
         isDisarmed = disarmed;
     }
 
-    public void increaseHP(int num) {
-        this.HP += num;
+    boolean isInAttackRange(Cell src, Cell dest) {
+        switch (this.getAttackType()) {
+            case MELEE:
+                return isInMeleeRange(src, dest);
+            case HYBRID:
+                return isInHybridRange(src, dest);
+            default:
+                return isInRangedRange(src, dest);
+        }
     }
 
-    public void increaseAP(int num) {
-        this.AP += num;
+    private boolean isInRangedRange(Cell src, Cell dest) {
+        return !isInMeleeRange(src, dest);
     }
 
-    public void decreaseAP(int num) {
-        this.AP -= num;
-        if (this.AP < 0)
-            this.AP = 0;
+    private boolean isInHybridRange(Cell src, Cell dest) {
+        return true;
     }
+
+    private boolean isInMeleeRange(Cell src, Cell dest) {
+        if (Map.getManhatanDistance(src, dest) == 1) {
+            return true;
+        } else return Map.getManhatanDistance(src, dest) == 2 && src.getX() ==
+                dest.getX() && src.getY() != dest.getY();
+    }
+
 }

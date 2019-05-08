@@ -8,7 +8,6 @@ public class Account implements Comparable<Account> {
     private String password;
     private int money = 15000;
     private int wins = 0;
-    private ArrayList<Deck> decks = new ArrayList<>();
     private Collection collection = new Collection();
     private ArrayList<MatchHistory> histories = new ArrayList<>();
 
@@ -43,10 +42,6 @@ public class Account implements Comparable<Account> {
 
     public int getWins() {
         return wins;
-    }
-
-    public ArrayList<Deck> getDecks() {
-        return decks;
     }
 
     @Override

@@ -20,6 +20,7 @@ class BattleController {
     void main(Battle battle) {
         this.battle = battle;
         boolean isFinish = false;
+        battle.getCurrentPlayer().setMana(Player.turnBeginMana[0]);
         do {
             BattleRequest request = new BattleRequest();
             request.getNewCommand();
@@ -117,7 +118,11 @@ class BattleController {
 
     private void ordinaryAttack(Card src, BattleRequest request) {
         Placeable dest = battle.getCard(request.getCardID());
-        if (!src.isAttackAvailable()) {
+        if (dest == null) {
+            view.printError(ErrorType.CARD_NOT_FOUND_IN_BATTLE);
+            return;
+        }
+        else if (!src.isAttackAvailable()) {
             view.usedAttackBefore(src.getInGameID());
             return;
         }
@@ -145,7 +150,7 @@ class BattleController {
     }
 
     private void showHand() {
-        for (Card c:battle.getCurrentPlayer().getHand()) {
+        for (Card c : battle.getCurrentPlayer().getHand()) {
             view.sout(c.toString() + "\n");
         }
         showNextCard();
@@ -160,7 +165,7 @@ class BattleController {
     }
 
     private void showNextCard() {
-        view.sout("next card in hand will be : "+ battle.getCurrentPlayer().getNextCardInHand());
+        view.sout("next card in hand will be : " + battle.getCurrentPlayer().getNextCardInHand());
     }
 
     private void endGame() {

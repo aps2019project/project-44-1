@@ -1,7 +1,5 @@
 package models;
 
-import view.View;
-
 import java.util.ArrayList;
 
 public class Deck {
@@ -10,7 +8,6 @@ public class Deck {
     private Hero hero;
     private ArrayList<Card> cards = new ArrayList<>();
     private String name;
-    private View view = View.getInstance();
 
 
     Deck(String deckName) {
