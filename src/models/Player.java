@@ -121,7 +121,7 @@ public class Player {
         return true;
     }
 
-    public boolean select(String inGameID) {
+    public boolean select(String inGameID) {        //returns true if selection was successful
         for (Card c : myMap.getPlayerCardsInMap(name)) {
             if (c.getInGameID().equals(inGameID)) {
                 selectedCard = c;
@@ -153,14 +153,17 @@ public class Player {
         }
         if (!flag)
             return ErrorType.INVALID_TARGET.getMessage();
+        else if (getSelectedCard().isMovedThisTurn())
+            return ErrorType.CARD_CANT_MOVE.getMessage();
         else {
             Battle.relater(selectedCard, myMap.getCells()[x - 1][y - 1]);
+            selectedCard.setMovedThisTurn(true);
             return selectedCard.getInGameID() + " moved to " + selectedCard.getMyCell().getX()
                     + " " + selectedCard.getMyCell().getY();
         }
     }
 
-    //if it want to move and there is opponent cards in his way
+    //if it wants to move and there is opponent cards in his way
     private boolean superInvalidCoordination(int x, int y) {
         int yy = selectedCard.getMyCell().getY();
         int xx = selectedCard.getMyCell().getX();

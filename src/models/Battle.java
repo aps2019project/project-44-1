@@ -3,6 +3,7 @@ package models;
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
 import models.Enums.ErrorType;
+import view.View;
 
 import java.util.ArrayList;
 
@@ -88,6 +89,10 @@ public class Battle implements Goal, Fight {
 
     public void turnHandler() {       //method to handle all actions must occur at end of turn
         manaHandler();
+        for (Card c:map.getAllCardsInMap()) {
+            c.setMovedThisTurn(false);
+            c.setAttackAvailable(true);
+        }
         turn++;
     }
 
@@ -170,18 +175,6 @@ public class Battle implements Goal, Fight {
 
     public Account getSecond() {
         return second;
-    }
-
-    public ErrorType castAttack(Card src, Card dest) {
-        if (src.isInAttackRange(src.getMyCell(), dest.getMyCell())) {
-            Fight.decreaseHP(src.getAP(), true, src);
-            if (dest.isInAttackRange(dest.getMyCell(), src.getMyCell())) {
-                src.setAttackAvailable(false);
-                Fight.decreaseHP(dest.getAP(), true, src);
-                return ErrorType.NO_ERROR;
-            }
-        }
-        return ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK;
     }
 
     public void castSpell(int x, int y, Spell spell) {

@@ -5,6 +5,8 @@ import models.Enums.ErrorType;
 import view.BattleRequest;
 import view.View;
 
+import static models.Enums.ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK;
+
 class BattleController {
     private static BattleController battleController = new BattleController();
     private Battle battle;
@@ -97,16 +99,15 @@ class BattleController {
         Placeable selectedCard = battle.getCard(cardID);
         if (selectedCard == null) {
             view.printError(ErrorType.INVALID_CARD_ID);
+        } else if (!battle.getCurrentPlayer().select(request.getCardID())) {
+            view.printError(ErrorType.INVALID_CARD_ID);
             return;
         }
         if (selectedCard instanceof Card) {
             controlSoldier(request, (Card) selectedCard);
-        }
-        if (selectedCard instanceof Item) {
+        } else if (selectedCard instanceof Item) {
             controlItem(request, (Item) selectedCard);
         }
-        if (battle.getCurrentPlayer().select(request.getCardID()))
-            view.printError(ErrorType.INVALID_CARD_ID);
     }
 
     private void moveCard(BattleRequest request) {
@@ -118,17 +119,16 @@ class BattleController {
 
     private void ordinaryAttack(Card src, BattleRequest request) {
         Placeable dest = battle.getCard(request.getCardID());
-        if (dest == null) {
+        if (dest == null || dest instanceof Spell) {
             view.printError(ErrorType.CARD_NOT_FOUND_IN_BATTLE);
             return;
-        }
-        else if (!src.isAttackAvailable()) {
+        } else if (!src.isAttackAvailable()) {
             view.usedAttackBefore(src.getInGameID());
             return;
         }
         if (battle.getOpponentCardsInMap().contains((dest))) {
-            if (battle.castAttack(src, (Card) dest) == ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK) {
-                view.printError(ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK);
+            if (battle.castAttack(src, (Card) dest) == DEST_IS_UNAVAILABLE_FOR_ATTACK) {
+                view.printError(DEST_IS_UNAVAILABLE_FOR_ATTACK);
             }
         } else {
             view.printError(ErrorType.INVALID_DEST_ID);
@@ -235,7 +235,6 @@ class BattleController {
             request.getNewCommand();
             switch (request.getType()) {
                 case MOVE_CARD:
-                    battle.getCurrentPlayer().select(request.getCardID());
                     moveCard(request);
                     break;
                 case ATTACK_TO_OPPONENT:
@@ -249,7 +248,6 @@ class BattleController {
                     break;
                 case EXIT:
                     isFinish = true;
-
             }
         }
         while (!isFinish && battle.finishChecker(battle));
