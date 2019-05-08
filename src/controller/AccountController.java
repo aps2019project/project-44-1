@@ -48,7 +48,7 @@ class AccountController {
                     isFinish = true;
                     break;
                 case SAVE:
-                    save();
+                    isFinish = true;
             }
         }
         while (!isFinish);
@@ -65,16 +65,11 @@ class AccountController {
             request.getNewCommand();
             if (request.getType().equals(RequestType.STORY_GAME)) {
                 int level = chooseStoryGame(request);
-
             }
             if (request.getType().equals(RequestType.CUSTOM_GAME)) {
                 /*custom game menu*/
             }
         } while (!request.getType().equals(RequestType.EXIT));
-
-    }
-
-    private void save() {
     }
 
     private void help() {
@@ -95,10 +90,10 @@ class AccountController {
             request.getNewCommand();
             if (request.getType().equals(RequestType.MULTI_PLAYER)) {
                 chooseSecondPlayer(request);
-            }
-            if (request.getType().equals(RequestType.SINGLE_PLAYER)) {
+            } else if (request.getType().equals(RequestType.SINGLE_PLAYER)) {
                 chooseGameKind(request);
-            }
+            } else if (request.getType().equals(RequestType.HELP))
+                view.sout("select \n multiPlayer \n or\nsinglePlayer");
         } while (!request.getType().equals(RequestType.EXIT));
     }
 

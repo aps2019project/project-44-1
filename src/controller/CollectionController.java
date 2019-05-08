@@ -35,7 +35,7 @@ class CollectionController {
                     search(request);
                     break;
                 case SAVE:
-
+                    isFinish = true;
                     break;
                 case CREATE_DECK:
                     createDeck(request);
@@ -104,7 +104,6 @@ class CollectionController {
         int cardID = request.getCardID();
         String deckName = request.getDeckName();
         Deck deck = collection.getDeck(deckName);
-
         if (collection.getCard(cardID) == null) {
             view.printError(ErrorType.CARD_NOT_FOUND_IN_COLLECTION);
             return;

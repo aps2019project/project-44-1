@@ -17,7 +17,7 @@ public class Shop {
     private Shop() {
     }
 
-    {   //alrz1999 json
+    {
         Gson gson = new Gson();
         JsonReader reader = null;
         try {

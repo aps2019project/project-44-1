@@ -3,12 +3,11 @@ package models;
 import java.util.ArrayList;
 
 public class Deck {
-    public static final int maxCardNumber = 20;
+    private static final int maxCardNumber = 20;
     private Item item;
     private Hero hero;
     private ArrayList<Card> cards = new ArrayList<>();
     private String name;
-
 
     Deck(String deckName) {
         this.name = deckName;
@@ -43,7 +42,7 @@ public class Deck {
     }
 
     boolean isFull() {
-        return cards.size() == 20;
+        return cards.size() == maxCardNumber;
     }
 
     boolean isSpecifiedHero() {
