@@ -18,14 +18,14 @@ public class Player {
     private Card nextCardInHand;
     private Card selectedCard;
 
-    public Player(Deck deck, String name) {
-        this.deck = deck;
+    public Player(Deck deck, String name) throws CloneNotSupportedException {
+        this.deck = deck.clone();
         this.name = name;
         for (Card card : deck.getCards()) {
             if (card instanceof Minion)
                 card.setOwner(this);
         }
-        deck.getHero().setOwner(this);
+        this.deck.getHero().setOwner(this);
         Collections.shuffle(deck.getDeckCards());
         initializeHand();
     }

@@ -36,7 +36,6 @@ public class AccountRequest extends Request {
             case "2":
                 return RequestType.MULTI_PLAYER;
             default:
-                view.printError(ErrorType.INVALID_COMMAND);
                 return RequestType.INVALID_COMMAND;
         }
     }

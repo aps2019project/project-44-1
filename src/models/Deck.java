@@ -2,7 +2,7 @@ package models;
 
 import java.util.ArrayList;
 
-public class Deck {
+public class Deck implements Cloneable {
     private static final int maxCardNumber = 20;
     private Item item;
     private Hero hero;
@@ -123,10 +123,17 @@ public class Deck {
 
     @Override
     public Deck clone() throws CloneNotSupportedException {
-        Deck deck = (Deck) super.clone();
-        deck.item = (Item) this.item.clone();
-        deck.hero = (Hero) this.hero.clone();
-        deck.cards = cloner();
+//        Deck deck = (Deck) super.clone();
+        Deck deck = new Deck(this.getName());
+//        deck.item = (Item) this.item.clone();
+//        deck.hero = (Hero) this.hero.clone();
+//        deck.cards = cloner();
+        deck.cards = this.cards;
+        deck.hero = this.hero.clone();
+        if (item != null)
+            deck.item = item.clone();
+
         return deck;
     }
+
 }

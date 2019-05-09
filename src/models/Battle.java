@@ -25,24 +25,25 @@ public class Battle implements Goal, Fight {
         this.first = firstPlayer;
         this.second = secondPlayer;
         this.flagNumber = flagNumber;
-    }
-
-    {
-        firstPlayer = new Player(first.getCollection().getMainDeck(),first.getUsername());
-        firstPlayer.setMyMap(map);
-        this.secondPlayer = new Player(second.getCollection().getMainDeck(),second.getUsername());
-        secondPlayer.setMyMap(map);
+        try {
+            this.firstPlayer = new Player(first.getCollection().getMainDeck(), first.getUsername());
+            this.firstPlayer.setMyMap(map);
+            this.secondPlayer = new Player(second.getCollection().getMainDeck(), second.getUsername());
+            this.secondPlayer.setMyMap(map);
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
         relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[2][0]);
         relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[2][8]);
-        firstPlayer.getDeck().removeFromDeck(firstPlayer.getDeck().getHero());
-        secondPlayer.getDeck().removeFromDeck(secondPlayer.getDeck().getHero());
+        this.firstPlayer.getDeck().removeFromDeck(this.firstPlayer.getDeck().getHero());
+        this.secondPlayer.getDeck().removeFromDeck(this.secondPlayer.getDeck().getHero());
     }
 
     BattleMode getBattleMode() {
         return battleMode;
     }
 
-    Player getSecondPlayer() {
+    public Player getSecondPlayer() {
         return secondPlayer;
     }
 
@@ -50,11 +51,11 @@ public class Battle implements Goal, Fight {
         return battleKind;
     }
 
-    Player getFirstPlayer() {
+    public Player getFirstPlayer() {
         return firstPlayer;
     }
 
-    private Map getMap() {
+    public Map getMap() {
         return this.map;
     }
 
@@ -89,7 +90,7 @@ public class Battle implements Goal, Fight {
 
     public void turnHandler() {       //method to handle all actions must occur at end of turn
         manaHandler();
-        for (Card c:map.getAllCardsInMap()) {
+        for (Card c : map.getAllCardsInMap()) {
             c.setMovedThisTurn(false);
             c.setAttackAvailable(true);
         }
@@ -198,5 +199,25 @@ public class Battle implements Goal, Fight {
                 getCurrentPlayer().setMana(Player.turnBeginMana[turn - 2]);
         }
     }
+
+    public Hero getFirstPlayerHero() {
+        for (Card card : map.getPlayerCardsInMap(getFirstPlayer().getName())) {
+            if (card instanceof Hero) {
+                return (Hero) card;
+            }
+        }
+        return null;
+    }
+
+    public Hero getSecondPlayerHero() {
+        for (Card card : map.getPlayerCardsInMap(getSecondPlayer().getName())) {
+            if (card instanceof Hero) {
+                return (Hero) card;
+            }
+        }
+        return null;
+    }
+
+
 
 }

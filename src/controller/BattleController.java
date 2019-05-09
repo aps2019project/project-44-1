@@ -24,6 +24,7 @@ class BattleController {
         boolean isFinish = false;
         battle.getCurrentPlayer().setMana(Player.turnBeginMana[0]);
         do {
+            View.getInstance().showMap(this.battle);
             BattleRequest request = new BattleRequest();
             request.getNewCommand();
             switch (request.getType()) {
@@ -72,7 +73,7 @@ class BattleController {
                     break;
             }
         }
-        while (!isFinish && battle.finishChecker(battle));
+        while (!isFinish && !battle.finishChecker(battle));
     }
 
     private void showGameInfo() {

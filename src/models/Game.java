@@ -86,6 +86,49 @@ public class Game {
         test.getCollection().addToDeck(7, "test");
         test.getCollection().addToDeck(7, "test");
         test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().selectMainDeck("test");
+
+
+    }
+
+    static {
+        Account test = new Account("test2","1234");
+        test.getCollection().addCardToCollection(Shop.getInstance().getCard("divsefid"));
+        test.getCollection().addCardToCollection(Shop.getInstance().getCard("simorgh"));
+        test.getCollection().addCardToCollection(Shop.getInstance().getCard("ejhdeha"));
+        test.getCollection().addCardToCollection(Shop.getInstance().getCard("KamandarFars"));
+        test.getCollection().addCardToCollection(Shop.getInstance().getCard("neyzedarfars"));
+        test.getCollection().addCardToCollection(Shop.getInstance().getCard("tajdanaei"));
+        test.getCollection().addCardToCollection(Shop.getInstance().getCard("Madness"));
+        Game.getAccounts().add(test);
+        test.getCollection().createDeck("test");
+        test.getCollection().addToDeck(1, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().addToDeck(7, "test");
+        test.getCollection().selectMainDeck("test");
 
 
     }

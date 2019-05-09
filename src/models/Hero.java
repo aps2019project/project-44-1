@@ -2,6 +2,7 @@ package models;
 
 import models.Enums.AttackType;
 
+import java.lang.reflect.GenericArrayType;
 import java.util.ArrayList;
 
 public class Hero extends Card {
@@ -47,5 +48,20 @@ public class Hero extends Card {
                 "Name : " + this.getName() + "\n" +
                 "Cost : " + this.getCost() + "\n" +
                 "Desc : ";// TODO: 06/05/2019 getdesc for hero
+    }
+
+    @Override
+    protected Hero clone() throws CloneNotSupportedException {
+        Hero newHero = new Hero();
+        newHero.setOwner(this.getOwner());
+        newHero.setDisarmed(this.isDisarmed);
+        newHero.setStunned(this.isStunned);
+        newHero.setHP(this.getHP());
+        newHero.setAP(this.getAP());
+        newHero.setAttackAvailable(this.isAttackAvailable());
+        newHero.setInGameID(this.getInGameID());
+        newHero.setName(this.getName());
+        newHero.setNeededMana(this.getNeededMana());
+        return newHero;
     }
 }

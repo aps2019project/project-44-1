@@ -4,7 +4,7 @@ import models.Enums.AttackType;
 import models.Enums.SpecialPowerActivation;
 import models.Enums.State;
 
-public class Card extends Placeable implements Fight {
+public class Card extends Placeable implements Fight, Cloneable {
     private int AP;
     private int HP;
     private String specialPower;
@@ -61,11 +61,18 @@ public class Card extends Placeable implements Fight {
 
     @Override
     protected Card clone() throws CloneNotSupportedException {
-        Card card = (Card) super.clone();
-        card.attackType = this.attackType;
-        card.specialPower = this.specialPower;
-        card.specialPowerActivation = this.specialPowerActivation;
-        return card;
+//        Card card = (Card) super.clone();
+        Card newCard = new Card();
+        newCard.HP = this.HP;
+        newCard.AP = this.AP;
+        newCard.attackType = this.attackType;
+        newCard.inGameID = this.inGameID;
+        newCard.range = this.range;
+        newCard.owner = this.owner;
+        newCard.specialPower = this.specialPower;
+        newCard.specialPowerActivation = this.specialPowerActivation;
+        newCard.state = this.state;
+        return newCard;
     }
 
     public int getRange() {
@@ -76,7 +83,7 @@ public class Card extends Placeable implements Fight {
         return specialPowerActivation;
     }
 
-    Player getOwner() {
+    public Player getOwner() {
         return owner;
     }
 
@@ -138,12 +145,13 @@ public class Card extends Placeable implements Fight {
                 dest.getX() && src.getY() != dest.getY();
     }
 
-    boolean isMovedThisTurn(){
+    boolean isMovedThisTurn() {
         return state[State.MOVED_THIS_TURN.getIndex()];
     }
 
-    void setMovedThisTurn(boolean b){
+    void setMovedThisTurn(boolean b) {
         this.state[State.MOVED_THIS_TURN.getIndex()] = b;
     }
+
 
 }

@@ -34,7 +34,6 @@ public class CollectionRequest extends Request {
         else if (command.matches("show"))
             return RequestType.SHOW_COLLECTION_ITEMS_AND_CARDS;
         else {
-            view.printError(ErrorType.INVALID_COMMAND);
             return RequestType.INVALID_COMMAND;
         }
     }

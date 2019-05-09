@@ -27,8 +27,8 @@ public interface Goal {
     }
 
     default boolean finishChecker(Battle battle) {
-        switch (finishByDeath(battle.getFirstPlayer().getDeck().getHero(),
-                battle.getSecondPlayer().getDeck().getHero())) {
+        switch (finishByDeath(battle.getFirstPlayerHero(),
+                battle.getSecondPlayerHero())) {
             case 1:
                 battle.setFirstPlayerWon(false);
                 return true;

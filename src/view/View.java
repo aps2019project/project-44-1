@@ -232,4 +232,25 @@ public class View {
                 " can′t attack ");
     }
 
+    public void showMap(Battle battle) {
+        Cell[][] cells = battle.getMap().getCells();
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (cells[i][j].getCard() instanceof Hero && cells[i][j].getCard().getOwner().equals(battle.getFirstPlayer())) {
+                    System.out.print(" O |");
+                } else if (cells[i][j].getCard() instanceof Minion && cells[i][j].getCard().getOwner().equals(battle.getFirstPlayer())) {
+                    System.out.print(" o |");
+                } else if (cells[i][j].getCard() instanceof Hero && cells[i][j].getCard().getOwner().equals(battle.getSecondPlayer())) {
+                    System.out.print(" X |");
+                } else if (cells[i][j].getCard() instanceof Minion && cells[i][j].getCard().getOwner().equals(battle.getSecondPlayer())) {
+                    System.out.print(" x |");
+                } else {
+                    System.out.print(" __|");
+                }
+            }
+
+            System.out.println();
+        }
+    }
+
 }

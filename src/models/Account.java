@@ -25,7 +25,7 @@ public class Account implements Comparable<Account> {
     }
 
     public Collection getCollection() {
-        return collection;
+        return this.collection;
     }
 
     public String getUsername() {
