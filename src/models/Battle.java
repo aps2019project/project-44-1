@@ -193,10 +193,11 @@ public class Battle implements Goal, Fight {
         }
         switch (turn % 2) {
             case 0:
-                getCurrentPlayer().setMana(Player.turnBeginMana[turn - 1]);
+                getCurrentPlayer().setMana(Player.turnBeginMana[turn / 2 - 1]);
                 break;
             case 1:
-                getCurrentPlayer().setMana(Player.turnBeginMana[turn - 2]);
+                getCurrentPlayer().setMana(Player.turnBeginMana[(turn + 1) / 2 - 1]);
+                // ArrayIndexOutOfBoundsException for turn 1
         }
     }
 
@@ -217,7 +218,6 @@ public class Battle implements Goal, Fight {
         }
         return null;
     }
-
 
 
 }

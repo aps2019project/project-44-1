@@ -50,7 +50,7 @@ public class Map {
         int counter = 0;
         for (Cell[] c : cells) {
             for (Cell cell : c) {
-                if (cell.getCard().getName().equals(cardName)) {
+                if (cell.getCard() != null && cell.getCard().getName().equals(cardName)) {
                     counter++;
                 }
             }

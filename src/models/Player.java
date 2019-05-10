@@ -21,7 +21,7 @@ public class Player {
     public Player(Deck deck, String name) throws CloneNotSupportedException {
         this.deck = deck.clone();
         this.name = name;
-        for (Card card : deck.getCards()) {
+        for (Card card : this.deck.getCards()) {
             if (card instanceof Minion)
                 card.setOwner(this);
         }
@@ -90,7 +90,7 @@ public class Player {
         Card c = null;
         int i;
         for (i = 0; i < 5; i++) {
-            if (hand[i].getName().equals(cardName)) {
+            if (hand[i] != null && hand[i].getName().equals(cardName)) {
                 c = hand[i];
                 break;
             }
@@ -101,7 +101,7 @@ public class Player {
             View.getInstance().printError(ErrorType.NO_ENOUGH_MANA);
         else if (invalidCoordination(x, y, 1))
             View.getInstance().printError(ErrorType.INVALID_TARGET);
-        else if (!(c instanceof Spell && ((Spell) c).canCastSpell(x, y, myMap, this))) {
+        else if (c instanceof Spell && !((Spell) c).canCastSpell(x, y, myMap, this)) {
             View.getInstance().printError(ErrorType.INVALID_TARGET);
         } else {
             c.setInGameID(IDGenerator(cardName));
@@ -115,7 +115,7 @@ public class Player {
     private boolean invalidCoordination(int x, int y, int distance) {
         for (Card c : myMap.getPlayerCardsInMap(this.name)) {
             if (Map.getManhatanDistance(c.getMyCell(), myMap.getCells()[x - 1][y - 1]) == distance
-                    || myMap.getCells()[x - 1][y - 1].isFree())
+                    && myMap.getCells()[x - 1][y - 1].isFree())
                 return false;
         }
         return true;

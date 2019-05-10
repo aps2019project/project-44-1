@@ -54,11 +54,11 @@ public class Hero extends Card {
     protected Hero clone() throws CloneNotSupportedException {
         Hero newHero = new Hero();
         newHero.setOwner(this.getOwner());
+        newHero.setAttackAvailable(this.isAttackAvailable());
         newHero.setDisarmed(this.isDisarmed);
         newHero.setStunned(this.isStunned);
         newHero.setHP(this.getHP());
         newHero.setAP(this.getAP());
-        newHero.setAttackAvailable(this.isAttackAvailable());
         newHero.setInGameID(this.getInGameID());
         newHero.setName(this.getName());
         newHero.setNeededMana(this.getNeededMana());

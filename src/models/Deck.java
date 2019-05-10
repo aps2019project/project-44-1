@@ -128,12 +128,29 @@ public class Deck implements Cloneable {
 //        deck.item = (Item) this.item.clone();
 //        deck.hero = (Hero) this.hero.clone();
 //        deck.cards = cloner();
-        deck.cards = this.cards;
+        deck.cards = cloneCards(this.cards);
         deck.hero = this.hero.clone();
         if (item != null)
             deck.item = item.clone();
 
         return deck;
+    }
+
+
+    private ArrayList<Card> cloneCards(ArrayList<Card> oldCards) {
+        ArrayList<Card> newCards = new ArrayList<>();
+        for (Card card : oldCards) {
+            try {
+                if (card instanceof Minion) {
+                    newCards.add((Minion)card.clone());
+                    continue;
+                }
+                newCards.add(card.clone());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+        }
+        return newCards;
     }
 
 }

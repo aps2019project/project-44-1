@@ -63,6 +63,9 @@ public class Card extends Placeable implements Fight, Cloneable {
     protected Card clone() throws CloneNotSupportedException {
 //        Card card = (Card) super.clone();
         Card newCard = new Card();
+        newCard.setName(this.getName());
+        newCard.setID(this.getID());
+        newCard.setNeededMana(this.getNeededMana());
         newCard.HP = this.HP;
         newCard.AP = this.AP;
         newCard.attackType = this.attackType;
