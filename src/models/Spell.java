@@ -91,4 +91,5 @@ public class Spell extends Card {
     public void setNumberOfTargetColumns(int numberOfTargetColumns) {
         this.numberOfTargetColumns = numberOfTargetColumns;
     }
+
 }

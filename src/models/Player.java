@@ -18,14 +18,14 @@ public class Player {
     private Card nextCardInHand;
     private Card selectedCard;
 
-    public Player(Deck deck, String name) {
-        this.deck = deck;
+    public Player(Deck deck, String name) throws CloneNotSupportedException {
+        this.deck = deck.clone();
         this.name = name;
-        for (Card card : deck.getCards()) {
+        for (Card card : this.deck.getCards()) {
             if (card instanceof Minion)
                 card.setOwner(this);
         }
-        deck.getHero().setOwner(this);
+        this.deck.getHero().setOwner(this);
         Collections.shuffle(deck.getDeckCards());
         initializeHand();
     }
@@ -90,7 +90,7 @@ public class Player {
         Card c = null;
         int i;
         for (i = 0; i < 5; i++) {
-            if (hand[i].getName().equals(cardName)) {
+            if (hand[i] != null && hand[i].getName().equals(cardName)) {
                 c = hand[i];
                 break;
             }
@@ -101,7 +101,7 @@ public class Player {
             View.getInstance().printError(ErrorType.NO_ENOUGH_MANA);
         else if (invalidCoordination(x, y, 1))
             View.getInstance().printError(ErrorType.INVALID_TARGET);
-        else if (!(c instanceof Spell && ((Spell) c).canCastSpell(x, y, myMap, this))) {
+        else if (c instanceof Spell && !((Spell) c).canCastSpell(x, y, myMap, this)) {
             View.getInstance().printError(ErrorType.INVALID_TARGET);
         } else {
             c.setInGameID(IDGenerator(cardName));
@@ -115,13 +115,13 @@ public class Player {
     private boolean invalidCoordination(int x, int y, int distance) {
         for (Card c : myMap.getPlayerCardsInMap(this.name)) {
             if (Map.getManhatanDistance(c.getMyCell(), myMap.getCells()[x - 1][y - 1]) == distance
-                    || myMap.getCells()[x - 1][y - 1].isFree())
+                    && myMap.getCells()[x - 1][y - 1].isFree())
                 return false;
         }
         return true;
     }
 
-    public boolean select(String inGameID) {
+    public boolean select(String inGameID) {        //returns true if selection was successful
         for (Card c : myMap.getPlayerCardsInMap(name)) {
             if (c.getInGameID().equals(inGameID)) {
                 selectedCard = c;
@@ -153,14 +153,17 @@ public class Player {
         }
         if (!flag)
             return ErrorType.INVALID_TARGET.getMessage();
+        else if (getSelectedCard().isMovedThisTurn())
+            return ErrorType.CARD_CANT_MOVE.getMessage();
         else {
             Battle.relater(selectedCard, myMap.getCells()[x - 1][y - 1]);
+            selectedCard.setMovedThisTurn(true);
             return selectedCard.getInGameID() + " moved to " + selectedCard.getMyCell().getX()
                     + " " + selectedCard.getMyCell().getY();
         }
     }
 
-    //if it want to move and there is opponent cards in his way
+    //if it wants to move and there is opponent cards in his way
     private boolean superInvalidCoordination(int x, int y) {
         int yy = selectedCard.getMyCell().getY();
         int xx = selectedCard.getMyCell().getX();

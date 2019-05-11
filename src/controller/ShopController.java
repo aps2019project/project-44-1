@@ -70,8 +70,8 @@ class ShopController {
     private void sellCard(ShopRequest request) {
         int cardID = request.getCardID();
         boolean isDone = shop.sell(cardID);
-        if
-        (isDone) view.successfulSellMessage();
+        if (isDone)
+            view.successfulSellMessage();
         else
             view.unSuccessfulSellMessage();
     }

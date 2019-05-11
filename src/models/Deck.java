@@ -2,13 +2,12 @@ package models;
 
 import java.util.ArrayList;
 
-public class Deck {
-    public static final int maxCardNumber = 20;
+public class Deck implements Cloneable {
+    private static final int maxCardNumber = 20;
     private Item item;
     private Hero hero;
     private ArrayList<Card> cards = new ArrayList<>();
     private String name;
-
 
     Deck(String deckName) {
         this.name = deckName;
@@ -43,7 +42,7 @@ public class Deck {
     }
 
     boolean isFull() {
-        return cards.size() == 20;
+        return cards.size() == maxCardNumber;
     }
 
     boolean isSpecifiedHero() {
@@ -124,10 +123,34 @@ public class Deck {
 
     @Override
     public Deck clone() throws CloneNotSupportedException {
-        Deck deck = (Deck) super.clone();
-        deck.item = (Item) this.item.clone();
-        deck.hero = (Hero) this.hero.clone();
-        deck.cards = cloner();
+//        Deck deck = (Deck) super.clone();
+        Deck deck = new Deck(this.getName());
+//        deck.item = (Item) this.item.clone();
+//        deck.hero = (Hero) this.hero.clone();
+//        deck.cards = cloner();
+        deck.cards = cloneCards(this.cards);
+        deck.hero = this.hero.clone();
+        if (item != null)
+            deck.item = item.clone();
+
         return deck;
     }
+
+
+    private ArrayList<Card> cloneCards(ArrayList<Card> oldCards) {
+        ArrayList<Card> newCards = new ArrayList<>();
+        for (Card card : oldCards) {
+            try {
+                if (card instanceof Minion) {
+                    newCards.add((Minion)card.clone());
+                    continue;
+                }
+                newCards.add(card.clone());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+        }
+        return newCards;
+    }
+
 }

@@ -40,7 +40,6 @@ public class GameController {
                     break;
                 case EXIT:
                     isFinish = true;
-                    break;
             }
         }
         while (!isFinish);

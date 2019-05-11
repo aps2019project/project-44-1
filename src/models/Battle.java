@@ -3,6 +3,7 @@ package models;
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
 import models.Enums.ErrorType;
+import view.View;
 
 import java.util.ArrayList;
 
@@ -24,24 +25,25 @@ public class Battle implements Goal, Fight {
         this.first = firstPlayer;
         this.second = secondPlayer;
         this.flagNumber = flagNumber;
-    }
-
-    {
-        firstPlayer = new Player(first.getCollection().getMainDeck(),first.getUsername());
-        firstPlayer.setMyMap(map);
-        this.secondPlayer = new Player(second.getCollection().getMainDeck(),second.getUsername());
-        secondPlayer.setMyMap(map);
+        try {
+            this.firstPlayer = new Player(first.getCollection().getMainDeck(), first.getUsername());
+            this.firstPlayer.setMyMap(map);
+            this.secondPlayer = new Player(second.getCollection().getMainDeck(), second.getUsername());
+            this.secondPlayer.setMyMap(map);
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
         relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[2][0]);
         relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[2][8]);
-        firstPlayer.getDeck().removeFromDeck(firstPlayer.getDeck().getHero());
-        secondPlayer.getDeck().removeFromDeck(secondPlayer.getDeck().getHero());
+        this.firstPlayer.getDeck().removeFromDeck(this.firstPlayer.getDeck().getHero());
+        this.secondPlayer.getDeck().removeFromDeck(this.secondPlayer.getDeck().getHero());
     }
 
     BattleMode getBattleMode() {
         return battleMode;
     }
 
-    Player getSecondPlayer() {
+    public Player getSecondPlayer() {
         return secondPlayer;
     }
 
@@ -49,11 +51,11 @@ public class Battle implements Goal, Fight {
         return battleKind;
     }
 
-    Player getFirstPlayer() {
+    public Player getFirstPlayer() {
         return firstPlayer;
     }
 
-    private Map getMap() {
+    public Map getMap() {
         return this.map;
     }
 
@@ -88,6 +90,10 @@ public class Battle implements Goal, Fight {
 
     public void turnHandler() {       //method to handle all actions must occur at end of turn
         manaHandler();
+        for (Card c : map.getAllCardsInMap()) {
+            c.setMovedThisTurn(false);
+            c.setAttackAvailable(true);
+        }
         turn++;
     }
 
@@ -172,18 +178,6 @@ public class Battle implements Goal, Fight {
         return second;
     }
 
-    public ErrorType castAttack(Card src, Card dest) {
-        if (src.isInAttackRange(src.getMyCell(), dest.getMyCell())) {
-            Fight.decreaseHP(src.getAP(), true, src);
-            if (dest.isInAttackRange(dest.getMyCell(), src.getMyCell())) {
-                src.setAttackAvailable(false);
-                Fight.decreaseHP(dest.getAP(), true, src);
-                return ErrorType.NO_ERROR;
-            }
-        }
-        return ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK;
-    }
-
     public void castSpell(int x, int y, Spell spell) {
         ArrayList<Card> effectedCards = map.getEffectedCards(x, y, spell);
     }
@@ -199,11 +193,31 @@ public class Battle implements Goal, Fight {
         }
         switch (turn % 2) {
             case 0:
-                getCurrentPlayer().setMana(Player.turnBeginMana[turn - 1]);
+                getCurrentPlayer().setMana(Player.turnBeginMana[turn / 2 - 1]);
                 break;
             case 1:
-                getCurrentPlayer().setMana(Player.turnBeginMana[turn - 2]);
+                getCurrentPlayer().setMana(Player.turnBeginMana[(turn + 1) / 2 - 1]);
+                // ArrayIndexOutOfBoundsException for turn 1
         }
     }
+
+    public Hero getFirstPlayerHero() {
+        for (Card card : map.getPlayerCardsInMap(getFirstPlayer().getName())) {
+            if (card instanceof Hero) {
+                return (Hero) card;
+            }
+        }
+        return null;
+    }
+
+    public Hero getSecondPlayerHero() {
+        for (Card card : map.getPlayerCardsInMap(getSecondPlayer().getName())) {
+            if (card instanceof Hero) {
+                return (Hero) card;
+            }
+        }
+        return null;
+    }
+
 
 }

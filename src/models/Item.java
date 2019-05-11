@@ -39,9 +39,12 @@ public class Item extends Placeable {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        Item item = (Item) super.clone();
-        item.itemType = this.itemType;
-        return item;
+    protected Item clone() throws CloneNotSupportedException {
+//        Item item = (Item) super.clone();
+        Item newItem = new Item();
+        newItem.carrier = this.carrier;
+        newItem.itemType = this.itemType;
+        newItem.inGameID = this.inGameID;
+        return newItem;
     }
 }

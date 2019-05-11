@@ -84,9 +84,9 @@ public class BattleRequest extends Request {
                         replace(",", " ").
                         replace(")", "").split(" ")[0]);
             case INSERT_CARD_FROM_HAND_TO_MAP:
-                return Integer.parseInt(command.replace("insert \\w+ in (", "").
+                return Integer.parseInt(command.replace("(", "").
                         replace(",", " ").
-                        replace(")", "").split(" ")[0]);
+                        replace(")", "").split(" ")[3]);
             case USE_COllectable_ITEM:
                 return Integer.parseInt(command.replace("use [location ", "").
                         replace(",", " ").
@@ -108,9 +108,9 @@ public class BattleRequest extends Request {
                         replace(",", " ").
                         replace(")", "").split(" ")[1]);
             case INSERT_CARD_FROM_HAND_TO_MAP:
-                return Integer.parseInt(command.replace("insert \\w+ in (", "").
+                return Integer.parseInt(command.replace("(", "").
                         replace(",", " ").
-                        replace(")", "").split(" ")[1]);
+                        replace(")", "").split(" ")[4]);
 
             case USE_COllectable_ITEM:
                 return Integer.parseInt(command.replace("use [location ", "").

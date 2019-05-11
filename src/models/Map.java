@@ -12,6 +12,7 @@ public class Map {
     Map() {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
+                cells[i][j] = new Cell();
                 cells[i][j].setXandY(i, j);
             }
         }
@@ -21,7 +22,7 @@ public class Map {
         return flags;
     }
 
-    Cell[][] getCells() {
+    public Cell[][] getCells() {
         return cells;
     }
 
@@ -49,7 +50,7 @@ public class Map {
         int counter = 0;
         for (Cell[] c : cells) {
             for (Cell cell : c) {
-                if (cell.getCard().getName().equals(cardName)) {
+                if (cell.getCard() != null && cell.getCard().getName().equals(cardName)) {
                     counter++;
                 }
             }
@@ -136,4 +137,6 @@ public class Map {
         }
         return cards;
     }
+
+
 }

@@ -27,7 +27,9 @@ public enum ErrorType {
     INVALID_CARD_ID("invalid card ID"),
     NO_CARD_SELECTED("no card has been selected"),
     DEST_IS_UNAVAILABLE_FOR_ATTACK("opponent minion is unavailable for attack"),
-    INVALID_DEST_ID("Invalid card id");
+    INVALID_DEST_ID("Invalid card id"),
+    CARD_CANT_MOVE("this card has been moved this turn"),
+    CARD_CANT_ATTACK("card can't attack");
 
 
     private String message;
@@ -39,4 +41,5 @@ public enum ErrorType {
     ErrorType(String message) {
         this.message = message;
     }
+
 }
