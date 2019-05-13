@@ -35,6 +35,8 @@ public class Battle implements Goal, Fight {
         }
         relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[2][0]);
         relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[2][8]);
+        this.firstPlayer.getDeck().getHero().setInGameID(this.firstPlayer.IDGenerator(this.firstPlayer.getDeck().getHero().getName()));
+        this.secondPlayer.getDeck().getHero().setInGameID(this.secondPlayer.IDGenerator(this.secondPlayer.getDeck().getHero().getName()));
         this.firstPlayer.getDeck().removeFromDeck(this.firstPlayer.getDeck().getHero());
         this.secondPlayer.getDeck().removeFromDeck(this.secondPlayer.getDeck().getHero());
     }
@@ -145,7 +147,7 @@ public class Battle implements Goal, Fight {
 
     public Placeable getCard(String cardID) {
         for (Card card : map.getAllCardsInMap()) {
-            if (card.getInGameID().equals(cardID))
+            if (card != null && card.getInGameID().equals(cardID))
                 return card;
         }
         return null;

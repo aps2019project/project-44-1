@@ -77,7 +77,7 @@ public class BattleRequest extends Request {
         switch (getType()) {
             case MOVE_CARD:
                 return Integer.parseInt(command.replace("move to ([", "").
-                        replace("], [", " ").
+                        replace("],[", " ").
                         replace("])", "").split(" ")[0]);
             case USE_SPECIAL_POWER:
                 return Integer.parseInt(command.replace("use special power (", "").
@@ -101,7 +101,7 @@ public class BattleRequest extends Request {
         switch (getType()) {
             case MOVE_CARD:
                 return Integer.parseInt(command.replace("move to ([", "")
-                        .replace("], [", " ")
+                        .replace("],[", " ")
                         .replace("])", "").split(" ")[1]);
             case USE_SPECIAL_POWER:
                 return Integer.parseInt(command.replace("use special power (", "").

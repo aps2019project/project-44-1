@@ -81,7 +81,7 @@ public class Player {
         nextCardInHand = deck.getCards().get(0);
     }
 
-    private String IDGenerator(String cardName) {
+    public String IDGenerator(String cardName) {
         return name + '_' + cardName + '_' +
                 (myMap.timesCardUsed(cardName) + 1);
     }
@@ -156,6 +156,7 @@ public class Player {
         else if (getSelectedCard().isMovedThisTurn())
             return ErrorType.CARD_CANT_MOVE.getMessage();
         else {
+            selectedCard.getMyCell().setCard(null);
             Battle.relater(selectedCard, myMap.getCells()[x - 1][y - 1]);
             selectedCard.setMovedThisTurn(true);
             return selectedCard.getInGameID() + " moved to " + selectedCard.getMyCell().getX()

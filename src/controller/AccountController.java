@@ -122,7 +122,7 @@ class AccountController {
             request.getNewCommand();
             if (request.getType().equals(RequestType.SELECT_SECOND_PLAYER)) {
                 Account secondPlayer = Game.getAccount(request.getSecondPlayerUsername());
-                if (secondPlayer != null && secondPlayer.isReadyToPlay()) {
+                if (secondPlayer != null && !secondPlayer.equals(account) && secondPlayer.isReadyToPlay()) {
                     chooseGameMode(request, account, secondPlayer);
                 } else {
                     view.printSecondPlayerIsNotReady();
