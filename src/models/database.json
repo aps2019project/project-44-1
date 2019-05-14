@@ -6,7 +6,7 @@
       "neededMana": 2,
       "HP": 6,
       "AP": 4,
-      "attackType": "ranged",
+      "attackType": "RANGED",
       "attackRange": 7,
       "specialPower": "",
       "specialPowerCoolDown": -1
@@ -17,7 +17,7 @@
       "neededMana": 2,
       "HP": 6,
       "AP": 4,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRange": -1,
       "specialPower": "",
       "specialPowerCoolDown": "passive"
@@ -28,7 +28,7 @@
       "neededMana": 1,
       "HP": 5,
       "AP": 3,
-      "attackType": "hybrid",
+      "attackType": "HYBRID",
       "attackRang": 3,
       "specialPower": "",
       "specialPowerCoolDown": -1
@@ -39,7 +39,7 @@
       "neededMana": 4,
       "HP": 10,
       "AP": 6,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": -1
@@ -50,7 +50,7 @@
       "neededMana": 9,
       "HP": 24,
       "AP": 6,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": "On attack"
@@ -61,7 +61,7 @@
       "neededMana": 7,
       "HP": 12,
       "AP": 4,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": "combo"
@@ -72,7 +72,7 @@
       "neededMana": 1,
       "HP": 3,
       "AP": 4,
-      "attackType": "ranged",
+      "attackType": "RANGED",
       "attackRang": 5,
       "specialPower": "",
       "specialPowerCoolDown": -1
@@ -83,7 +83,7 @@
       "neededMana": 1,
       "HP": 5,
       "AP": 2,
-      "attackType": "ranged",
+      "attackType": "RANGED",
       "attackRang": 7,
       "specialPower": "",
       "specialPowerCoolDown": -1
@@ -94,7 +94,7 @@
       "neededMana": 1,
       "HP": 4,
       "AP": 4,
-      "attackType": "hybrid",
+      "attackType": "HYBRID",
       "attackRang": 3,
       "specialPower": "",
       "specialPowerCoolDown": -1
@@ -105,7 +105,7 @@
       "neededMana": 4,
       "HP": 6,
       "AP": 6,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": 3,
       "specialPower": "",
       "specialPowerCoolDown": "On attack"
@@ -116,7 +116,7 @@
       "neededMana": 2,
       "HP": 3,
       "AP": 10,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": -1
@@ -127,7 +127,7 @@
       "neededMana": 6,
       "HP": 6,
       "AP": 10,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": "combo"
@@ -138,7 +138,7 @@
       "neededMana": 9,
       "HP": 14,
       "AP": 10,
-      "attackType": "hybrid",
+      "attackType": "HYBRID",
       "attackRang": 7,
       "specialPower": "",
       "specialPowerCoolDown": -1
@@ -149,7 +149,7 @@
       "neededMana": 9,
       "HP": 12,
       "AP": 12,
-      "attackType": "ranged",
+      "attackType": "RANGED",
       "attackRang": 7,
       "specialPower": "",
       "specialPowerCoolDown": -1
@@ -160,7 +160,7 @@
       "neededMana": 2,
       "HP": 0,
       "AP": 2,
-      "attackType": "ranged",
+      "attackType": "RANGED",
       "attackRang": 3,
       "specialPower": "",
       "specialPowerCoolDown": "passive"
@@ -171,7 +171,7 @@
       "neededMana": 6,
       "HP": 16,
       "AP": 8,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": -1
@@ -182,7 +182,7 @@
       "neededMana": 7,
       "HP": 12,
       "AP": 11,
-      "attackType": "hybrid",
+      "attackType": "HYBRID",
       "attackRang": 3,
       "specialPower": "",
       "specialPowerCoolDown": "On Death"
@@ -193,7 +193,7 @@
       "neededMana": 4,
       "HP": 5,
       "AP": 6,
-      "attackType": "ranged",
+      "attackType": "RANGED",
       "attackRang": 4,
       "specialPower": "",
       "specialPowerCoolDown": "On attack"
@@ -204,7 +204,7 @@
       "neededMana": 5,
       "HP": 9,
       "AP": 5,
-      "attackType": "ranged",
+      "attackType": "RANGED",
       "attackRang": 4,
       "specialPower": "",
       "specialPowerCoolDown": -1
@@ -215,7 +215,7 @@
       "neededMana": 2,
       "HP": 1,
       "AP": 8,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": "On attack"
@@ -226,7 +226,7 @@
       "neededMana": 8,
       "HP": 14,
       "AP": 7,
-      "attackType": "ranged",
+      "attackType": "RANGED",
       "attackRang": 5,
       "specialPower": "",
       "specialPowerCoolDown": "On Spawn"
@@ -237,7 +237,7 @@
       "neededMana": 5,
       "HP": 8,
       "AP": 2,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": "On attack"
@@ -248,7 +248,7 @@
       "neededMana": 4,
       "HP": 6,
       "AP": 2,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": "On attack"
@@ -259,7 +259,7 @@
       "neededMana": 3,
       "HP": 6,
       "AP": 1,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": "On attack"
@@ -270,7 +270,7 @@
       "neededMana": 4,
       "HP": 5,
       "AP": 4,
-      "attackType": "ranged",
+      "attackType": "RANGED",
       "attackRang": 3,
       "specialPower": "",
       "specialPowerCoolDown": "passive"
@@ -281,7 +281,7 @@
       "neededMana": 6,
       "HP": 6,
       "AP": 6,
-      "attackType": "ranged",
+      "attackType": "RANGED",
       "attackRang": 5,
       "specialPower": "",
       "specialPowerCoolDown": "passive"
@@ -292,7 +292,7 @@
       "neededMana": 5,
       "HP": 10,
       "AP": 4,
-      "attackType": "ranged",
+      "attackType": "RANGED",
       "attackRang": 4,
       "specialPower": "",
       "specialPowerCoolDown": "passive"
@@ -303,7 +303,7 @@
       "neededMana": 6,
       "HP": 10,
       "AP": 14,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": 3,
       "specialPower": "",
       "specialPowerCoolDown": "On defend"
@@ -314,7 +314,7 @@
       "neededMana": 8,
       "HP": 20,
       "AP": 12,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": "On defend"
@@ -325,7 +325,7 @@
       "neededMana": 4,
       "HP": 5,
       "AP": 7,
-      "attackType": "ranged",
+      "attackType": "RANGED",
       "attackRang": 5,
       "specialPower": "",
       "specialPowerCoolDown": "On defend"
@@ -336,7 +336,7 @@
       "neededMana": 8,
       "HP": 16,
       "AP": 9,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": "On respawn"
@@ -347,7 +347,7 @@
       "neededMana": 7,
       "HP": 14,
       "AP": 8,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": "On defend"
@@ -358,7 +358,7 @@
       "neededMana": 4,
       "HP": 6,
       "AP": 20,
-      "attackType": "ranged",
+      "attackType": "RANGED",
       "attackRang": 3,
       "specialPower": "",
       "specialPowerCoolDown": -1
@@ -369,7 +369,7 @@
       "neededMana": 9,
       "HP": 30,
       "AP": 8,
-      "attackType": "hybrid",
+      "attackType": "HYBRID",
       "attackRang": 2,
       "specialPower": "",
       "specialPowerCoolDown": -1
@@ -380,7 +380,7 @@
       "neededMana": 4,
       "HP": 10,
       "AP": 4,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": "passive"
@@ -391,7 +391,7 @@
       "neededMana": 3,
       "HP": 3,
       "AP": 4,
-      "attackType": "ranged",
+      "attackType": "RANGED",
       "attackRang": 5,
       "specialPower": "",
       "specialPowerCoolDown": "On respawn"
@@ -402,7 +402,7 @@
       "neededMana": 3,
       "HP": 1,
       "AP": 1,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": "On respawn"
@@ -413,7 +413,7 @@
       "neededMana": 4,
       "HP": 8,
       "AP": 5,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": "On death"
@@ -424,7 +424,7 @@
       "neededMana": 5,
       "HP": 10,
       "AP": 4,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
       "specialPowerCoolDown": "combo"
@@ -435,7 +435,7 @@
       "neededMana": 3,
       "HP": 6,
       "AP": 6,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": 3,
       "specialPower": "",
       "specialPowerCoolDown": "combo"
@@ -582,7 +582,7 @@
       "cost": 8000,
       "HP": 50,
       "AP": 4,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "spell": "",
       "Mp": 1,
@@ -593,7 +593,7 @@
       "cost": 9000,
       "HP": 50,
       "AP": 4,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "spell": "",
       "Mp": 3,
@@ -604,7 +604,7 @@
       "cost": 8000,
       "HP": 50,
       "AP": 4,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "spell": "",
       "Mp": 0,
@@ -615,7 +615,7 @@
       "cost": 8000,
       "HP": 50,
       "AP": 4,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "spell": "",
       "Mp": 1,
@@ -626,7 +626,7 @@
       "cost": 10000,
       "HP": 50,
       "AP": 4,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "spell": "",
       "Mp": 1,
@@ -637,7 +637,7 @@
       "cost": 8000,
       "HP": 50,
       "AP": 4,
-      "attackType": "melee",
+      "attackType": "MELEE",
       "attackRang": -1,
       "spell": "",
       "Mp": 1,
@@ -648,7 +648,7 @@
       "cost": 10000,
       "HP": 30,
       "AP": 2,
-      "attackType": "ranged",
+      "attackType": "RANGED",
       "attackRang": 6,
       "spell": "",
       "Mp": 2,
@@ -659,7 +659,7 @@
       "cost": 11000,
       "HP": 40,
       "AP": 3,
-      "attackType": "ranged",
+      "attackType": "RANGED",
       "attackRang": 3,
       "spell": "",
       "Mp": 1,
@@ -670,7 +670,7 @@
       "cost": 12000,
       "HP": 35,
       "AP": 3,
-      "attackType": "hybrid",
+      "attackType": "HYBRID",
       "attackRang": 3,
       "spell": "",
       "Mp": 0,
@@ -681,7 +681,7 @@
       "cost": 8000,
       "HP": 55,
       "AP": 7,
-      "attackType": "hybrid",
+      "attackType": "HYBRID",
       "attackRang": 4,
       "spell": "",
       "Mp": -1,

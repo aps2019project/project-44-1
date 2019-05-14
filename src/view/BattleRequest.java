@@ -17,7 +17,7 @@ public class BattleRequest extends Request {
             return RequestType.SELECT_CARD;
         else if (command.matches("move to \\(\\[\\d+],\\[\\d+]\\)"))
             return RequestType.MOVE_CARD;
-        else if (command.matches("attack \\d+"))
+        else if (command.matches("attack \\w+"))
             return RequestType.ATTACK_TO_OPPONENT;
         else if (command.matches("attack combo \\d+ \\d+ (\\d+)+"))
             return RequestType.COMBO_ATTACK;
@@ -63,7 +63,7 @@ public class BattleRequest extends Request {
             case SELECT_CARD:
                 return command.split(" ")[1];
             case ATTACK_TO_OPPONENT:
-                return command.split("")[1];
+                return command.split(" ")[1];
             case COMBO_ATTACK:
                 // TODO: 05/05/2019
             case SHOW_CARD_INFO_IN_GRAVEYARD:

@@ -25,7 +25,7 @@ public interface Fight {
 
     default ErrorType castAttack(Card src, Card dest) {
         if (src.isInAttackRange(src.getMyCell(), dest.getMyCell())) {
-            decreaseHP(src.getAP(), true, src);
+            decreaseHP(src.getAP(), true, dest);
             src.setAttackAvailable(false);
             if (dest.isInAttackRange(dest.getMyCell(), src.getMyCell())) {
                 src.setAttackAvailable(false);
