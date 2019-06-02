@@ -77,6 +77,9 @@ class BattleController {
     }
 
     private void showGameInfo() {
+        view.sout("player1 Mana : "+battle.getFirstPlayer().getMana()+
+                "\nplayer2 Mana : "+battle.getSecondPlayer().getMana());
+        view.sout(battle.toString());
     }
 
     private void showMyMinions() {
@@ -193,7 +196,7 @@ class BattleController {
     }
 
     private void helpInBattle() {
-
+        view.sout("1.Game Info  \n2.show my minions \nshow opponent minions \n show card inf");
     }       //#TODO
 
     private void showMenuInGraveyard() {

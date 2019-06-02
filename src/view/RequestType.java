@@ -1,6 +1,7 @@
 package view;
 
 public enum RequestType {
+
     LOGIN,
     CREATE_ACCOUNT,
     SHOW_LEADERBOARD,
@@ -8,9 +9,6 @@ public enum RequestType {
     LOGOUT,
     HELP,
     EXIT,
-    SHOP,
-    BATTLE,
-    COLLECTION,
     SHOW_COLLECTION_ITEMS_AND_CARDS,
     SEARCH_CARD_IN_COLLECTION,
     CREATE_DECK,
@@ -22,7 +20,6 @@ public enum RequestType {
     SHOW_ALL_DECKS,
     SHOW_DECK,
     SEARCH_SHOP,
-    SEARCH_COLLECTION,
     BUY,
     SELL,
     SHOW_SHOP_CARDS,
@@ -61,5 +58,4 @@ public enum RequestType {
     END_GAME,
     HELP_TO_PLAY,
     SHOW_MENU,
-
 }

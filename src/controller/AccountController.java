@@ -48,7 +48,7 @@ class AccountController {
                     isFinish = true;
                     break;
                 case SAVE:
-                    isFinish = true;
+                    save();
             }
         }
         while (!isFinish);
@@ -66,7 +66,7 @@ class AccountController {
             if (request.getType().equals(RequestType.STORY_GAME)) {
                 int level = chooseStoryGame(request);
             }
-            if (request.getType().equals(RequestType.CUSTOM_GAME)) {
+            else if (request.getType().equals(RequestType.CUSTOM_GAME)) {
                 /*custom game menu*/
             }
         } while (!request.getType().equals(RequestType.EXIT));
@@ -88,12 +88,17 @@ class AccountController {
         view.printSelectSingleOrMulti();
         do {
             request.getNewCommand();
-            if (request.getType().equals(RequestType.MULTI_PLAYER)) {
-                chooseSecondPlayer(request);
-            } else if (request.getType().equals(RequestType.SINGLE_PLAYER)) {
-                chooseGameKind(request);
-            } else if (request.getType().equals(RequestType.HELP))
-                view.sout("select \n multiPlayer \n or\nsinglePlayer");
+            switch (request.getType()) {
+                case MULTI_PLAYER:
+                    chooseSecondPlayer(request);
+                    break;
+                case SINGLE_PLAYER:
+                    chooseGameKind(request);
+                    break;
+                case HELP:
+                    view.sout("select \n multiPlayer \n or\nsinglePlayer");     // FIXME: 6/2/2019 bad smell
+                    break;
+            }
         } while (!request.getType().equals(RequestType.EXIT));
     }
 
@@ -146,4 +151,6 @@ class AccountController {
         return -1;
     }
 
+    private void save() {
+    }
 }

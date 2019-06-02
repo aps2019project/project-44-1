@@ -72,4 +72,7 @@ public class Account implements Comparable<Account> {
         return collection.validateDeck(collection.getMainDeck().getName());
     }
 
+    public boolean equals(Account obj) {
+        return obj.getUsername().equals(this.getUsername());
+    }
 }

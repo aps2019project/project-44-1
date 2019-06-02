@@ -70,24 +70,29 @@ public class Battle implements Goal, Fight {
 
     @Override
     public String toString() {
-        if (this.getBattleMode() == BattleMode.DEATH_MATCH) {
-            int HP1 = getFirstPlayer().getDeck().getHero().getHP();     //type1
-            int HP2 = getSecondPlayer().getDeck().getHero().getHP();
+       // if (this.getBattleMode() == BattleMode.DEATH_MATCH) {
+        int HP1 = 0,HP2 = 0;
+        for (Card c:map.getAllCardsInMap()) {
+            if (c instanceof Hero){
+                if (HP1==0)
+                    HP1 = c.getHP();
+                else HP2 = c.getHP();
+            }
+        }
             return "HP of first player Hero is " + HP1 + "\n" +
                     "HP of second player Hero is " + HP2;
-        } else if (this.battleMode == BattleMode.CAPTURE_FLAG_1) {
-
-        }
-
-        ArrayList<Cell> cells = new ArrayList<>();      //^_^
-        Card card;
-        getMap().getFlags().forEach(f -> cells.add(f.getMyCell()));
-        if (cells.size() == 1 && getBattleMode() == BattleMode.CAPTURE_FLAG_1) {
-            card = getMap().getFlags().get(0).getCarrier();       //type2
-        }
-        if (cells.size() > 1 && getBattleMode() == BattleMode.CAPTURE_FLAG_2)
-            getMap().getFlags().forEach(Item::getCarrier);       //type3
-        return "";
+        //} else if (this.battleMode == BattleMode.CAPTURE_FLAG_1) {
+//
+//        }
+//
+//        ArrayList<Cell> cells = new ArrayList<>();      //^_^
+//        Card card;
+//        getMap().getFlags().forEach(f -> cells.add(f.getMyCell()));
+//        if (cells.size() == 1 && getBattleMode() == BattleMode.CAPTURE_FLAG_1) {
+//            card = getMap().getFlags().get(0).getCarrier();       //type2
+//        }
+//        if (cells.size() > 1 && getBattleMode() == BattleMode.CAPTURE_FLAG_2)
+//            getMap().getFlags().forEach(Item::getCarrier);       //type3
     }       //#TODO
 
     public void turnHandler() {       //method to handle all actions must occur at end of turn
