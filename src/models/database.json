@@ -815,5 +815,94 @@
       "name": "DisarmBuff",
       "desc": "deactivate counter attack"
     }
+  ],
+  "SinglePlayerLevels": [
+    {
+      "Hero": "divsefid",
+      "Spell": [
+        "Total Disarm",
+        "Lighting Bolt",
+        "All Disarm",
+        "All Poison",
+        "Dispel",
+        "Sacrifice",
+        "Shock"
+      ],
+      "Minions": [
+        1,
+        9,
+        11,
+        11,
+        13,
+        17,
+        18,
+        21,
+        22,
+        26,
+        38,
+        36,
+        40
+      ],
+      "Item": 1,
+      "Prize": 500
+    },
+    {
+      "Hero": 5,
+      "Spell": [
+        2,
+        3,
+        5,
+        9,
+        8,
+        13,
+        19
+      ],
+      "Minions": [
+        2,
+        3,
+        5,
+        8,
+        12,
+        15,
+        15,
+        19,
+        23,
+        27,
+        30,
+        33,
+        39
+      ],
+      "Item": 18,
+      "Prize": 1000
+    },
+    {
+      "Hero": 7,
+      "Spell": [
+        6,
+        10,
+        12,
+        14,
+        15,
+        16,
+        17
+      ],
+      "Minions": [
+        6,
+        7,
+        10,
+        14,
+        16,
+        16,
+        20,
+        24,
+        25,
+        28,
+        29,
+        31,
+        34
+      ],
+      "Item": 12,
+      "Prize": 1500
+    }
   ]
 }

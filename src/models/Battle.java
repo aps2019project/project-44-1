@@ -8,6 +8,7 @@ import view.View;
 import java.util.ArrayList;
 
 public class Battle implements Goal, Fight {
+
     private BattleKind battleKind;
     private Account first;
     private Account second;
@@ -18,6 +19,7 @@ public class Battle implements Goal, Fight {
     private int turn = 1;
     private int flagNumber;
     private boolean firstPlayerWon;
+    private int prize = 1000;
 
     public Battle(BattleKind battleKind, BattleMode battleMode, Account firstPlayer, Account secondPlayer, int flagNumber) {
         this.battleKind = battleKind;
@@ -45,6 +47,10 @@ public class Battle implements Goal, Fight {
         return battleMode;
     }
 
+    public void setPrize(int prize) {
+        this.prize = prize;
+    }
+
     public Player getSecondPlayer() {
         return secondPlayer;
     }
@@ -70,17 +76,17 @@ public class Battle implements Goal, Fight {
 
     @Override
     public String toString() {
-       // if (this.getBattleMode() == BattleMode.DEATH_MATCH) {
-        int HP1 = 0,HP2 = 0;
-        for (Card c:map.getAllCardsInMap()) {
-            if (c instanceof Hero){
-                if (HP1==0)
+        // if (this.getBattleMode() == BattleMode.DEATH_MATCH) {
+        int HP1 = 0, HP2 = 0;
+        for (Card c : map.getAllCardsInMap()) {
+            if (c instanceof Hero) {
+                if (HP1 == 0)
                     HP1 = c.getHP();
                 else HP2 = c.getHP();
             }
         }
-            return "HP of first player Hero is " + HP1 + "\n" +
-                    "HP of second player Hero is " + HP2;
+        return "HP of first player Hero is " + HP1 + "\n" +
+                "HP of second player Hero is " + HP2;
         //} else if (this.battleMode == BattleMode.CAPTURE_FLAG_1) {
 //
 //        }

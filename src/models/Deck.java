@@ -108,19 +108,6 @@ public class Deck implements Cloneable {
         return cards;
     }
 
-
-    private ArrayList<Card> cloner() {
-        ArrayList<Card> cards = new ArrayList<>();
-        for (Card c : this.cards) {
-            try {
-                cards.add(c.clone());
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
-            }
-        }
-        return cards;
-    }
-
     @Override
     public Deck clone() throws CloneNotSupportedException {
 //        Deck deck = (Deck) super.clone();
@@ -135,7 +122,6 @@ public class Deck implements Cloneable {
 
         return deck;
     }
-
 
     private ArrayList<Card> cloneCards(ArrayList<Card> oldCards) {
         ArrayList<Card> newCards = new ArrayList<>();

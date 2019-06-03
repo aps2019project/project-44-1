@@ -35,7 +35,6 @@ public abstract class Placeable implements Comparable<Placeable> {
         this.ID = ID;
     }
 
-
     @Override
     public int compareTo(Placeable o) {
         if (o.getClass() == this.getClass()) {
@@ -63,4 +62,5 @@ public abstract class Placeable implements Comparable<Placeable> {
     public void setName(String name) {
         this.name = name;
     }
+
 }

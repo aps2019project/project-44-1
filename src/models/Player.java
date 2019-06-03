@@ -18,7 +18,7 @@ public class Player {
     private Card nextCardInHand;
     private Card selectedCard;
 
-    public Player(Deck deck, String name) throws CloneNotSupportedException {
+    Player(Deck deck, String name) throws CloneNotSupportedException {
         this.deck = deck.clone();
         this.name = name;
         for (Card card : this.deck.getCards()) {
@@ -81,7 +81,7 @@ public class Player {
         nextCardInHand = deck.getCards().get(0);
     }
 
-    public String IDGenerator(String cardName) {
+    String IDGenerator(String cardName) {
         return name + '_' + cardName + '_' +
                 (myMap.timesCardUsed(cardName) + 1);
     }

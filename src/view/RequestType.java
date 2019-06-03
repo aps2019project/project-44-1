@@ -48,7 +48,6 @@ public enum RequestType {
     INSERT_CARD_FROM_HAND_TO_MAP,
     SHOW_COLLECTABLES,
     END_TURN,
-    SELECT_COLECTABLE,
     SHOW_SELECTED_ITEM_INFO,
     USE_COllectable_ITEM,
     ENTER_GRAVEYARD,
@@ -56,6 +55,5 @@ public enum RequestType {
     SHOW_CARD_INFO_IN_GRAVEYARD,
     SHOW_ALL_CARDS_IN_GRAVEYARD,
     END_GAME,
-    HELP_TO_PLAY,
     SHOW_MENU,
 }

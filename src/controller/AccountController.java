@@ -59,17 +59,27 @@ class AccountController {
     }
 
     private void chooseGameKind(AccountRequest request) {
-        Account ai_player;
         do {
             view.printGameKinds();
             request.getNewCommand();
-            if (request.getType().equals(RequestType.STORY_GAME)) {
-                int level = chooseStoryGame(request);
-            }
-            else if (request.getType().equals(RequestType.CUSTOM_GAME)) {
-                /*custom game menu*/
+            switch (request.getType()) {
+                case STORY_GAME:
+                    singleKind(request);
+                    break;
+                case CUSTOM_GAME:
+                    /*custom game menu*/
             }
         } while (!request.getType().equals(RequestType.EXIT));
+    }
+
+    private void singleKind(AccountRequest request) {
+        int level = chooseStoryGame(request);
+        ArtificialIntelligence artificialIntelligence = new ArtificialIntelligence();
+        Account ai_player = artificialIntelligence.getAccount(level);
+        RequestType type = artificialIntelligence.getType(level);
+        if (!type.equals(RequestType.CAPTURE_FLAG2))
+            modeHandler(type, account, ai_player);
+        else multipleFlagMode(account, ai_player, 5);     //must ASK
     }
 
     private void help() {
@@ -106,19 +116,33 @@ class AccountController {
         view.showGameModes();
         do {
             request.getNewCommand();
-            if (request.getType().equals(RequestType.DEATH_MATCH)) {
+            modeHandler(request.getType(), p1, p2);
+        } while (!request.getType().equals(RequestType.EXIT));
+    }
+
+    private void modeHandler(RequestType type, Account p1, Account p2) {
+        switch (type) {
+            case DEATH_MATCH:
                 BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER, BattleMode.DEATH_MATCH,
                         p1, p2, 0));
-            }
-            if (request.getType().equals(RequestType.CAPTURE_FLAG1)) {
+                break;
+            case CAPTURE_FLAG1:
                 BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER, BattleMode.CAPTURE_FLAG_1,
                         p1, p2, 1));
-            }
-            if (request.getType().equals(RequestType.CAPTURE_FLAG2)) {
-                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER, BattleMode.CAPTURE_FLAG_2,
-                        p1, p2, request.getNumberOfFlags()));
-            }
-        } while (!request.getType().equals(RequestType.EXIT));
+                break;
+            case CAPTURE_FLAG2:
+                multipleFlagMode(p1, p2);
+        }
+    }
+
+    private void multipleFlagMode(Account p1, Account p2, int... flagNum) {
+        if (flagNum == null) {
+            int[] ints = new int[1];
+            ints[0] = new AccountRequest().getNumberOfFlags();
+            flagNum = ints;
+        }
+        BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER, BattleMode.CAPTURE_FLAG_2,
+                p1, p2, flagNum[0]));
     }
 
     private void chooseSecondPlayer(AccountRequest request) {
@@ -153,4 +177,5 @@ class AccountController {
 
     private void save() {
     }
+
 }
