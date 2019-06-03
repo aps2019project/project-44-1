@@ -21,12 +21,13 @@ public class Battle implements Goal, Fight {
     private boolean firstPlayerWon;
     private int prize = 1000;
 
-    public Battle(BattleKind battleKind, BattleMode battleMode, Account firstPlayer, Account secondPlayer, int flagNumber) {
+    public Battle(BattleKind battleKind, BattleMode battleMode, Account firstPlayer, Account secondPlayer, int flagNumber,int... prize) {
         this.battleKind = battleKind;
         this.battleMode = battleMode;
         this.first = firstPlayer;
         this.second = secondPlayer;
         this.flagNumber = flagNumber;
+        this.prize = prize[0];
         try {
             this.firstPlayer = new Player(first.getCollection().getMainDeck(), first.getUsername());
             this.firstPlayer.setMyMap(map);
@@ -45,10 +46,6 @@ public class Battle implements Goal, Fight {
 
     BattleMode getBattleMode() {
         return battleMode;
-    }
-
-    public void setPrize(int prize) {
-        this.prize = prize;
     }
 
     public Player getSecondPlayer() {

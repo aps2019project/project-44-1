@@ -14,7 +14,6 @@ public class ArtificialIntelligence {
     private String[] Spell;
     private String[] Minions;
     private String Item;
-    private int Prize;
     private Gson gson = new Gson();
 
     public Account getAccount(int level) {

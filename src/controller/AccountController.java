@@ -124,11 +124,11 @@ class AccountController {
         switch (type) {
             case DEATH_MATCH:
                 BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER, BattleMode.DEATH_MATCH,
-                        p1, p2, 0));
+                        p1, p2, 0, 500));
                 break;
             case CAPTURE_FLAG1:
                 BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER, BattleMode.CAPTURE_FLAG_1,
-                        p1, p2, 1));
+                        p1, p2, 1, 1000));
                 break;
             case CAPTURE_FLAG2:
                 multipleFlagMode(p1, p2);
@@ -142,7 +142,7 @@ class AccountController {
             flagNum = ints;
         }
         BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER, BattleMode.CAPTURE_FLAG_2,
-                p1, p2, flagNum[0]));
+                p1, p2, flagNum[0], 1500));
     }
 
     private void chooseSecondPlayer(AccountRequest request) {
