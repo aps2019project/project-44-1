@@ -1,9 +1,12 @@
 package controller;
 
-import models.*;
+import models.Account;
+import models.ArtificialIntelligence;
+import models.Battle;
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
 import models.Enums.ErrorType;
+import models.Game;
 import view.AccountRequest;
 import view.RequestType;
 import view.View;
@@ -54,42 +57,7 @@ class AccountController {
         while (!isFinish);
     }
 
-    private void enterShop() {
-        ShopController.getInstance().main(account);
-    }
-
-    private void chooseGameKind(AccountRequest request) {
-        do {
-            view.printGameKinds();
-            request.getNewCommand();
-            switch (request.getType()) {
-                case STORY_GAME:
-                    singleKind(request);
-                    break;
-                case CUSTOM_GAME:
-                    /*custom game menu*/
-            }
-        } while (!request.getType().equals(RequestType.EXIT));
-    }
-
-    private void singleKind(AccountRequest request) {
-        int level = chooseStoryGame(request);
-        ArtificialIntelligence artificialIntelligence = new ArtificialIntelligence();
-        Account ai_player = artificialIntelligence.getAccount(level);
-        RequestType type = artificialIntelligence.getType(level);
-        if (!type.equals(RequestType.CAPTURE_FLAG2))
-            modeHandler(type, account, ai_player);
-        else multipleFlagMode(account, ai_player, 5);     //must ASK
-    }
-
-    private void help() {
-        view.printAccountMenuHelp(account.toString());
-    }
-
-    private void enterCollection() {
-        CollectionController.getInstance().main(this.account.getCollection());
-    }
-
+    //------------------------------------------------------------Battle
     private void enterBattle(AccountRequest request) {
         if (!account.isReadyToPlay()) {
             view.printError(ErrorType.MAIN_DECK_IS_NOT_VALID);
@@ -112,39 +80,6 @@ class AccountController {
         } while (!request.getType().equals(RequestType.EXIT));
     }
 
-    private void chooseGameMode(AccountRequest request, Account p1, Account p2) {
-        view.showGameModes();
-        do {
-            request.getNewCommand();
-            modeHandler(request.getType(), p1, p2);
-        } while (!request.getType().equals(RequestType.EXIT));
-    }
-
-    private void modeHandler(RequestType type, Account p1, Account p2) {
-        switch (type) {
-            case DEATH_MATCH:
-                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER, BattleMode.DEATH_MATCH,
-                        p1, p2, 0, 500));
-                break;
-            case CAPTURE_FLAG1:
-                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER, BattleMode.CAPTURE_FLAG_1,
-                        p1, p2, 1, 1000));
-                break;
-            case CAPTURE_FLAG2:
-                multipleFlagMode(p1, p2);
-        }
-    }
-
-    private void multipleFlagMode(Account p1, Account p2, int... flagNum) {
-        if (flagNum == null) {
-            int[] ints = new int[1];
-            ints[0] = new AccountRequest().getNumberOfFlags();
-            flagNum = ints;
-        }
-        BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER, BattleMode.CAPTURE_FLAG_2,
-                p1, p2, flagNum[0], 1500));
-    }
-
     private void chooseSecondPlayer(AccountRequest request) {
         do {
             view.printPlayersList(Game.getAccounts(), account);
@@ -158,6 +93,53 @@ class AccountController {
                 }
             }
         } while (!request.getType().equals(RequestType.EXIT));
+    }
+
+    private void chooseGameMode(AccountRequest request, Account p1, Account p2) {
+        view.showGameModes();
+        do {
+            request.getNewCommand();
+            modeHandler(request.getType(), p1, p2, BattleKind.MULTI_PLAYER);
+        } while (!request.getType().equals(RequestType.EXIT));
+    }
+
+    private void modeHandler(RequestType type, Account p1, Account p2, BattleKind battleKind) {
+        switch (type) {
+            case DEATH_MATCH:
+                BattleController.getInstance().main(new Battle(battleKind, BattleMode.DEATH_MATCH,
+                        p1, p2, 0, 500));
+                break;
+            case CAPTURE_FLAG1:
+                BattleController.getInstance().main(new Battle(battleKind, BattleMode.CAPTURE_FLAG_1,
+                        p1, p2, 1, 1000));
+                break;
+            case CAPTURE_FLAG2:
+                multipleFlagMode(p1, p2, battleKind);
+        }
+    }
+
+    private void chooseGameKind(AccountRequest request) {
+        do {
+            view.printGameKinds();
+            request.getNewCommand();
+            switch (request.getType()) {
+                case STORY_GAME:
+                    storyGame(request);
+                    break;
+                case CUSTOM_GAME:
+                    /*custom game menu*/
+            }
+        } while (!request.getType().equals(RequestType.EXIT));
+    }
+
+    private void storyGame(AccountRequest request) {
+        int level = chooseStoryGame(request);
+        ArtificialIntelligence artificialIntelligence = new ArtificialIntelligence();
+        Account ai_player = artificialIntelligence.getAccount(level);
+        RequestType type = artificialIntelligence.getType(level);
+        if (!type.equals(RequestType.CAPTURE_FLAG2))
+            modeHandler(type, account, ai_player, BattleKind.SINGLE_PLAYER);
+        else multipleFlagMode(account, ai_player, BattleKind.SINGLE_PLAYER, 5);     //must ASK
     }
 
     private int chooseStoryGame(AccountRequest request) {
@@ -175,7 +157,30 @@ class AccountController {
         return -1;
     }
 
+    private void multipleFlagMode(Account p1, Account p2, BattleKind battleKind, int... flagNum) {
+        if (flagNum == null) {
+            int[] ints = new int[1];
+            ints[0] = new AccountRequest().getNumberOfFlags();
+            flagNum = ints;
+        }
+        BattleController.getInstance().main(new Battle(battleKind, BattleMode.CAPTURE_FLAG_2,
+                p1, p2, flagNum[0], 1500));
+    }
+
+    //-----------------------------------------------------------------
     private void save() {
+    }
+
+    private void help() {
+        view.printAccountMenuHelp(account.toString());
+    }
+
+    private void enterCollection() {
+        CollectionController.getInstance().main(this.account.getCollection());
+    }
+
+    private void enterShop() {
+        ShopController.getInstance().main(account);
     }
 
 }

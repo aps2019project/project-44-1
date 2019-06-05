@@ -77,8 +77,8 @@ class BattleController {
     }
 
     private void showGameInfo() {
-        view.sout("player1 Mana : "+battle.getFirstPlayer().getMana()+
-                "\nplayer2 Mana : "+battle.getSecondPlayer().getMana());
+        view.sout("player1 Mana : " + battle.getFirstPlayer().getMana() +
+                "\nplayer2 Mana : " + battle.getSecondPlayer().getMana());
         view.sout(battle.toString());
     }
 
