@@ -1,6 +1,7 @@
 package controller;
 
 import models.*;
+import models.Enums.BattleKind;
 import models.Enums.ErrorType;
 import view.BattleRequest;
 import view.View;
@@ -32,7 +33,7 @@ class BattleController {
                     //battle.getWinner().increaseMoney(1000);        //#TODO exceptions
                     isFinish = true;
                     break;
-                case HELP:          //#TODO eazzz
+                case HELP:                   //#TODO eazzz
                     helpInBattle();
                     break;
                 case SHOW_GAME_INFO:         //#TODO eazzz
@@ -101,9 +102,7 @@ class BattleController {
     private void selectCard(BattleRequest request) {
         String cardID = request.getCardID();
         Placeable selectedCard = battle.getCard(cardID);
-        if (selectedCard == null) {
-            view.printError(ErrorType.INVALID_CARD_ID);
-        } else if (!battle.getCurrentPlayer().select(request.getCardID())) {
+        if (selectedCard == null || !battle.getCurrentPlayer().select(request.getCardID())) {
             view.printError(ErrorType.INVALID_CARD_ID);
             return;
         }
@@ -161,6 +160,10 @@ class BattleController {
     }
 
     private void endTurn() {
+        if (battle.getBattleKind().equals(BattleKind.SINGLE_PLAYER)) {
+            battle.turnHandler();
+            ArtificialIntelligence.aiAction(this.battle);
+        }
         battle.turnHandler();
     }
 

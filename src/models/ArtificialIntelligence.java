@@ -9,6 +9,8 @@ import view.RequestType;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
+import static models.Enums.ErrorType.NO_ERROR;
+
 public class ArtificialIntelligence {
     private String Hero;
     private String[] Spell;
@@ -75,6 +77,16 @@ public class ArtificialIntelligence {
                 return RequestType.CAPTURE_FLAG2;
         }
         return null;
+    }
+
+    public static void aiAction(Battle battle) {
+        models.Hero hero = battle.getSecondPlayerHero();
+        for (Card c : battle.getOpponentCardsInMap()) {
+            if (battle.castAttack(hero, c) == NO_ERROR) {
+                return;
+            }
+        }
+        hero.getOwner().move(hero.getMyCell().getX() - 2, hero.getMyCell().getY());
     }
 
 }

@@ -31,10 +31,14 @@ public class AccountRequest extends Request {
                 return RequestType.DEATH_MATCH;
             case "Start multiplayer game captureflag1":
                 return RequestType.CAPTURE_FLAG1;
-            case "1":
+            case "single player":           //CHANGED!!!
                 return RequestType.SINGLE_PLAYER;
-            case "2":
+            case "multi player":            //CHANGED!!!
                 return RequestType.MULTI_PLAYER;
+            case "story mode":
+                return RequestType.STORY_GAME;
+            case "custom game":
+                return RequestType.CUSTOM_GAME;
             default:
                 return RequestType.INVALID_COMMAND;
         }

@@ -191,7 +191,7 @@ public class View {
     }
 
     public void printGameKinds() {
-        System.out.println("1.story\n" +
+        System.out.println("1.story mode\n" +
                 "2.custom game\n");
     }
 
@@ -204,8 +204,8 @@ public class View {
     }
 
     public void showStoryGameKinds() {
-        System.out.println();
-        // TODO: 05/05/2019 after adding datas from json
+        System.out.println("choose level between:\n1.death match\n2.save flag\n" +
+                "3.capture multiple flags");
     }
 
     public void showMyMinions(ArrayList<Card> cards) {
