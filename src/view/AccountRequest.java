@@ -39,6 +39,8 @@ public class AccountRequest extends Request {
                 return RequestType.STORY_GAME;
             case "custom game":
                 return RequestType.CUSTOM_GAME;
+            case "show match histories":
+                return RequestType.SHOW_MATCH_HISTORY;
             default:
                 return RequestType.INVALID_COMMAND;
         }

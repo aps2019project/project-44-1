@@ -56,4 +56,6 @@ public enum RequestType {
     SHOW_ALL_CARDS_IN_GRAVEYARD,
     END_GAME,
     SHOW_MENU,
+    SHOW_MATCH_HISTORY
+
 }

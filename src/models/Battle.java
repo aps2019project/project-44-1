@@ -2,8 +2,6 @@ package models;
 
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
-import models.Enums.ErrorType;
-import view.View;
 
 import java.util.ArrayList;
 
@@ -46,6 +44,10 @@ public class Battle implements Goal, Fight {
 
     BattleMode getBattleMode() {
         return battleMode;
+    }
+
+    public int getPrize() {
+        return prize;
     }
 
     public Player getSecondPlayer() {
@@ -211,7 +213,7 @@ public class Battle implements Goal, Fight {
         }
     }
 
-    public Hero getFirstPlayerHero() {
+    Hero getFirstPlayerHero() {
         for (Card card : map.getPlayerCardsInMap(getFirstPlayer().getName())) {
             if (card instanceof Hero) {
                 return (Hero) card;
@@ -220,7 +222,7 @@ public class Battle implements Goal, Fight {
         return null;
     }
 
-    public Hero getSecondPlayerHero() {
+    Hero getSecondPlayerHero() {
         for (Card card : map.getPlayerCardsInMap(getSecondPlayer().getName())) {
             if (card instanceof Hero) {
                 return (Hero) card;
@@ -228,6 +230,5 @@ public class Battle implements Goal, Fight {
         }
         return null;
     }
-
 
 }

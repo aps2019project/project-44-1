@@ -52,6 +52,8 @@ class AccountController {
                     break;
                 case SAVE:
                     save();
+                case SHOW_MATCH_HISTORY:
+                    account.showHistory();
             }
         }
         while (!isFinish);

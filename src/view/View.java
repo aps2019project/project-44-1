@@ -66,7 +66,7 @@ public class View {
                 "2.Shop\n" +
                 "3.Battle\n" +
                 "4.Exit\n" +
-                "5.Help\n");
+                "5.Help\n" + "6.show match histories\n");
     }
 
     void printGetPasswordCommand() {

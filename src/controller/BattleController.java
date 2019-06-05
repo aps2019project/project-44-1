@@ -30,7 +30,6 @@ class BattleController {
             request.getNewCommand();
             switch (request.getType()) {
                 case EXIT:
-                    //battle.getWinner().increaseMoney(1000);        //#TODO exceptions
                     isFinish = true;
                     break;
                 case HELP:                   //#TODO eazzz
@@ -68,13 +67,31 @@ class BattleController {
                     break;
                 case ENTER_GRAVEYARD:
                     enterGraveyard(request);
-                    break;
-                case END_GAME:
-                    endGame();
-                    break;
+            }
+            if (battle.finishChecker(battle)) {
+                isFinish = true;
+                gameHistory();
             }
         }
-        while (!isFinish && !battle.finishChecker(battle));
+        while (!isFinish);
+    }
+
+    private void gameHistory() {
+        if (battle.isFirstPlayerWon()) {
+            battle.getFirst().increaseWins();
+            battle.getFirst().increaseMoney(battle.getPrize());
+            MatchHistory matchHistory = new MatchHistory(battle.getSecond().getUsername(), true);
+            battle.getFirst().addMatchHistory(matchHistory);
+            matchHistory = new MatchHistory(battle.getFirst().getUsername(), false);
+            battle.getSecond().addMatchHistory(matchHistory);
+        } else {
+            battle.getSecond().increaseWins();
+            battle.getSecond().increaseMoney(battle.getPrize());
+            MatchHistory matchHistory = new MatchHistory(battle.getFirst().getUsername(), true);
+            battle.getSecond().addMatchHistory(matchHistory);
+            matchHistory = new MatchHistory(battle.getSecond().getUsername(), false);
+            battle.getFirst().addMatchHistory(matchHistory);
+        }
     }
 
     private void showGameInfo() {
@@ -175,10 +192,6 @@ class BattleController {
         view.sout("next card in hand will be : " + battle.getCurrentPlayer().getNextCardInHand());
     }
 
-    private void endGame() {
-        addThisBattleToBattleHistory();
-    }
-
     private void enterGraveyard(BattleRequest request) {
         while (true) {
             request.getNewCommand();
@@ -220,20 +233,6 @@ class BattleController {
 
     private void useCollectable(BattleRequest request) {
 
-    }
-
-    private void addThisBattleToBattleHistory() {
-        if (battle.isFirstPlayerWon()) {
-            battle.getFirst().addMatchHistory(new MatchHistory
-                    (battle.getFirst().getUsername(), true));
-            battle.getSecond().addMatchHistory(new MatchHistory
-                    (battle.getSecond().getUsername(), false));
-        } else {
-            battle.getFirst().addMatchHistory(new MatchHistory
-                    (battle.getFirst().getUsername(), false));
-            battle.getSecond().addMatchHistory(new MatchHistory
-                    (battle.getSecond().getUsername(), true));
-        }
     }
 
     private void controlSoldier(BattleRequest request, Card soldier) {

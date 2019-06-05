@@ -1,5 +1,7 @@
 package models;
 
+import view.View;
+
 import java.util.ArrayList;
 
 public class Account implements Comparable<Account> {
@@ -58,7 +60,7 @@ public class Account implements Comparable<Account> {
                 "5.exit";
     }
 
-    void increaseMoney(int addedMoney) {
+    public void increaseMoney(int addedMoney) {
         this.money += addedMoney;
     }
 
@@ -75,4 +77,11 @@ public class Account implements Comparable<Account> {
     public boolean equals(Account obj) {
         return obj.getUsername().equals(this.getUsername());
     }
+
+    public void showHistory() {
+        for (MatchHistory h : histories) {
+            View.getInstance().sout(h.toString());
+        }
+    }
+
 }
