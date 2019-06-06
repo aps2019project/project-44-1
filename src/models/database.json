@@ -846,7 +846,7 @@
       "Item": 1
     },
     {
-      "Hero": 5,
+      "Hero": "zahhak",
       "Spell": [
         2,
         3,
@@ -874,7 +874,7 @@
       "Item": 18
     },
     {
-      "Hero": 7,
+      "Hero": "arash",
       "Spell": [
         6,
         10,

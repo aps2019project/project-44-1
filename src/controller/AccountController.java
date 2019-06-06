@@ -76,7 +76,7 @@ class AccountController {
                     chooseGameKind(request);
                     break;
                 case HELP:
-                    view.sout("select \n multiPlayer \n or\nsinglePlayer");     // FIXME: 6/2/2019 bad smell
+                    view.sout("select \n multiPlayer \n or\nsinglePlayer");
                     break;
             }
         } while (!request.getType().equals(RequestType.EXIT));

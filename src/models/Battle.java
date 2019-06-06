@@ -4,6 +4,7 @@ import models.Enums.BattleKind;
 import models.Enums.BattleMode;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Battle implements Goal, Fight {
 
@@ -19,13 +20,14 @@ public class Battle implements Goal, Fight {
     private boolean firstPlayerWon;
     private int prize = 1000;
 
-    public Battle(BattleKind battleKind, BattleMode battleMode, Account firstPlayer, Account secondPlayer, int flagNumber,int... prize) {
+    public Battle(BattleKind battleKind, BattleMode battleMode, Account firstPlayer, Account secondPlayer, int flagNumber, int... prize) {
         this.battleKind = battleKind;
         this.battleMode = battleMode;
         this.first = firstPlayer;
         this.second = secondPlayer;
         this.flagNumber = flagNumber;
-        this.prize = prize[0];
+        if (prize != null)
+            this.prize = prize[0];
         try {
             this.firstPlayer = new Player(first.getCollection().getMainDeck(), first.getUsername());
             this.firstPlayer.setMyMap(map);
@@ -34,12 +36,27 @@ public class Battle implements Goal, Fight {
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
+        if (!battleMode.equals(BattleMode.DEATH_MATCH)) {
+            setFlags();
+        }
         relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[2][0]);
         relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[2][8]);
         this.firstPlayer.getDeck().getHero().setInGameID(this.firstPlayer.IDGenerator(this.firstPlayer.getDeck().getHero().getName()));
         this.secondPlayer.getDeck().getHero().setInGameID(this.secondPlayer.IDGenerator(this.secondPlayer.getDeck().getHero().getName()));
         this.firstPlayer.getDeck().removeFromDeck(this.firstPlayer.getDeck().getHero());
         this.secondPlayer.getDeck().removeFromDeck(this.secondPlayer.getDeck().getHero());
+    }
+
+    private void setFlags() {
+        Random random = new Random();
+        for (int i = 0; i < flagNumber; i++) {
+            int x = random.nextInt(5);
+            int y = random.nextInt(9);
+            if (map.getCell(x, y).isFree()) {
+                Item flag = new Item();
+                flag.flagInitialize(i);
+            }
+        }
     }
 
     BattleMode getBattleMode() {
@@ -107,6 +124,11 @@ public class Battle implements Goal, Fight {
             c.setAttackAvailable(true);
         }
         turn++;
+        if (battleMode.equals(BattleMode.CAPTURE_FLAG_1)) {
+
+        } else if (battleMode.equals(BattleMode.CAPTURE_FLAG_2)) {
+
+        }
     }
 
     int getFlagNumber() {

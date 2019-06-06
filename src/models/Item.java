@@ -15,7 +15,7 @@ public class Item extends Placeable {
         this.itemType = itemType;
     }
 
-    public String getInGameID() {
+    String getInGameID() {
         return inGameID;
     }
 
@@ -39,12 +39,20 @@ public class Item extends Placeable {
     }
 
     @Override
-    protected Item clone() throws CloneNotSupportedException {
-//        Item item = (Item) super.clone();
+    protected Item clone() {
         Item newItem = new Item();
         newItem.carrier = this.carrier;
         newItem.itemType = this.itemType;
         newItem.inGameID = this.inGameID;
         return newItem;
+    }
+
+    void flagInitialize(int index) {
+        setName("flag");
+        setItemType(ItemType.FLAG);
+        setNeededMana(0);
+        setCost(0);
+        setID(index);
+        setInGameID("flag" + index);
     }
 }

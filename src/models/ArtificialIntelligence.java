@@ -86,7 +86,14 @@ public class ArtificialIntelligence {
                 return;
             }
         }
-        hero.getOwner().move(hero.getMyCell().getX() - 2, hero.getMyCell().getY());
+        int y = hero.getMyCell().getY();
+        hero.getOwner().move(hero.getMyCell().getX(), y + backAndForth(y));
+    }
+
+    private static int backAndForth(int currentY) {
+        if (currentY < 2) {
+            return 2;
+        } else return -2;
     }
 
 }

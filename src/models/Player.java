@@ -43,7 +43,10 @@ public class Player {
     }
 
     public Card getNextCardInHand() {
-        return nextCardInHand;
+        if (nextCardInHand == null) {
+            return nextCardInHand;
+        }
+        return null;
     }
 
     public Card[] getHand() {

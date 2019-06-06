@@ -61,7 +61,6 @@ public class Card extends Placeable implements Fight, Cloneable {
 
     @Override
     protected Card clone() throws CloneNotSupportedException {
-//        Card card = (Card) super.clone();
         Card newCard = new Card();
         newCard.setName(this.getName());
         newCard.setID(this.getID());
@@ -156,5 +155,9 @@ public class Card extends Placeable implements Fight, Cloneable {
         this.state[State.MOVED_THIS_TURN.getIndex()] = b;
     }
 
+    @Override
+    public String toString() {
+        return this.getName();
+    }
 
 }

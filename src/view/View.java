@@ -204,8 +204,10 @@ public class View {
     }
 
     public void showStoryGameKinds() {
-        System.out.println("choose level between:\n1.death match\n2.save flag\n" +
-                "3.capture multiple flags");
+        System.out.println("choose level between:\n" +
+                "1.death match\tOPPONENT : divsefid" +
+                "\n2.save flag\tOPPONENT : zahhak\n" +
+                "3.capture multiple flags\tOPPONENT : arash");
     }
 
     public void showMyMinions(ArrayList<Card> cards) {

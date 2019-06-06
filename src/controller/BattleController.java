@@ -80,16 +80,24 @@ class BattleController {
         if (battle.isFirstPlayerWon()) {
             battle.getFirst().increaseWins();
             battle.getFirst().increaseMoney(battle.getPrize());
-            MatchHistory matchHistory = new MatchHistory(battle.getSecond().getUsername(), true);
+            view.sout("PLAYER \t" + battle.getFirst().getUsername() +
+                    "\nWON!!!" + "PRIZE : \t" + battle.getPrize());
+            MatchHistory matchHistory = new MatchHistory(battle.getSecond().getUsername(),
+                    true);
             battle.getFirst().addMatchHistory(matchHistory);
-            matchHistory = new MatchHistory(battle.getFirst().getUsername(), false);
+            matchHistory = new MatchHistory(battle.getFirst().getUsername(),
+                    false);
             battle.getSecond().addMatchHistory(matchHistory);
         } else {
             battle.getSecond().increaseWins();
             battle.getSecond().increaseMoney(battle.getPrize());
-            MatchHistory matchHistory = new MatchHistory(battle.getFirst().getUsername(), true);
+            view.sout("PLAYER \t" + battle.getSecond().getUsername() +
+                    "\nWON!!!" + "PRIZE : \t" + battle.getPrize());
+            MatchHistory matchHistory = new MatchHistory(battle.getFirst().getUsername(),
+                    true);
             battle.getSecond().addMatchHistory(matchHistory);
-            matchHistory = new MatchHistory(battle.getSecond().getUsername(), false);
+            matchHistory = new MatchHistory(battle.getSecond().getUsername(),
+                    false);
             battle.getFirst().addMatchHistory(matchHistory);
         }
     }
@@ -189,7 +197,10 @@ class BattleController {
     }
 
     private void showNextCard() {
-        view.sout("next card in hand will be : " + battle.getCurrentPlayer().getNextCardInHand());
+        Card card = battle.getCurrentPlayer().getNextCardInHand();
+        if (card != null) {
+            view.sout("next card in hand will be : " + card.toString());
+        } else view.sout("no card will be added to your hand!!!");
     }
 
     private void enterGraveyard(BattleRequest request) {
