@@ -53,7 +53,7 @@ public class Cell {
         return x;
     }
 
-    public void setXandY(int x, int y) {
+    void setXandY(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -62,7 +62,7 @@ public class Cell {
         return y;
     }
 
-    public boolean isFree() {
+    boolean isFree() {
         return card == null;
     }
 

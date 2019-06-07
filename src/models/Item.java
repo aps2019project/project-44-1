@@ -3,7 +3,7 @@ package models;
 import models.Enums.ItemType;
 
 public class Item extends Placeable {
-    ItemType itemType;
+    private ItemType itemType;
     private Card carrier = new Card();
     private String inGameID;
 
@@ -11,7 +11,7 @@ public class Item extends Placeable {
         return itemType;
     }
 
-    public void setItemType(ItemType itemType) {
+    private void setItemType(ItemType itemType) {
         this.itemType = itemType;
     }
 
@@ -19,7 +19,7 @@ public class Item extends Placeable {
         return inGameID;
     }
 
-    public void setInGameID(String inGameID) {
+    private void setInGameID(String inGameID) {
         this.inGameID = inGameID;
     }
 
@@ -55,4 +55,9 @@ public class Item extends Placeable {
         setID(index);
         setInGameID("flag" + index);
     }
+
+    public void saveFlag(){
+
+    }
+
 }

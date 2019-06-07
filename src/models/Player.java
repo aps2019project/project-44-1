@@ -117,8 +117,8 @@ public class Player {
 
     private boolean invalidCoordination(int x, int y, int distance) {
         for (Card c : myMap.getPlayerCardsInMap(this.name)) {
-            if (Map.getManhatanDistance(c.getMyCell(), myMap.getCells()[x - 1][y - 1]) == distance
-                    && myMap.getCells()[x - 1][y - 1].isFree())
+            if (Map.getManhatanDistance(c.getMyCell(), myMap.getCells()[x - 1][y - 1])
+                    == distance && myMap.getCells()[x - 1][y - 1].isFree())
                 return false;
         }
         return true;
@@ -200,6 +200,14 @@ public class Player {
                     return invalidCoordination(x - 1, y - 1, 2);
             }
         return false;
+    }
+
+    void increaseTurnsFlagSaved() {
+        this.turnsFlagSaved++;
+    }
+
+    void increaseFlagsCaptured() {
+        this.flagsCaptured++;
     }
 
 }
