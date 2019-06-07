@@ -73,7 +73,7 @@ class AccountController {
                     chooseSecondPlayer(request);
                     break;
                 case SINGLE_PLAYER:
-                    chooseGameKind(request);
+                    storyOrCustom(request);
                     break;
                 case HELP:
                     view.sout("select \n multiPlayer \n or\nsinglePlayer");
@@ -88,7 +88,8 @@ class AccountController {
             request.getNewCommand();
             if (request.getType().equals(RequestType.SELECT_SECOND_PLAYER)) {
                 Account secondPlayer = Game.getAccount(request.getSecondPlayerUsername());
-                if (secondPlayer != null && !secondPlayer.equals(account) && secondPlayer.isReadyToPlay()) {
+                if (secondPlayer != null && !secondPlayer.equals(account) &&
+                        secondPlayer.isReadyToPlay()) {
                     chooseGameMode(request, account, secondPlayer);
                 } else {
                     view.printSecondPlayerIsNotReady();
@@ -101,26 +102,27 @@ class AccountController {
         view.showGameModes();
         do {
             request.getNewCommand();
-            modeHandler(request.getType(), p1, p2, BattleKind.MULTI_PLAYER);
+            modeHandler(request.getType(), p1, p2);
         } while (!request.getType().equals(RequestType.EXIT));
     }
 
-    private void modeHandler(RequestType type, Account p1, Account p2, BattleKind battleKind) {
+    private void modeHandler(RequestType type, Account p1, Account p2) {
         switch (type) {
             case DEATH_MATCH:
-                BattleController.getInstance().main(new Battle(battleKind, BattleMode.DEATH_MATCH,
-                        p1, p2, 0, 500));
+                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER,
+                        BattleMode.DEATH_MATCH, p1, p2, 0));
                 break;
             case CAPTURE_FLAG1:
-                BattleController.getInstance().main(new Battle(battleKind, BattleMode.CAPTURE_FLAG_1,
-                        p1, p2, 1, 1000));
+                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER,
+                        BattleMode.CAPTURE_FLAG_1, p1, p2, 1));
                 break;
             case CAPTURE_FLAG2:
-                multipleFlagMode(p1, p2, battleKind);
+                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER, BattleMode.CAPTURE_FLAG_2,
+                        p1, p2, new AccountRequest().getNumberOfFlags()));
         }
     }
 
-    private void chooseGameKind(AccountRequest request) {
+    private void storyOrCustom(AccountRequest request) {
         do {
             view.printGameKinds();
             request.getNewCommand();
@@ -135,16 +137,26 @@ class AccountController {
     }
 
     private void storyGame(AccountRequest request) {
-        int level = chooseStoryGame(request);
+        int level = selectStoryModeLevel(request);
         ArtificialIntelligence artificialIntelligence = new ArtificialIntelligence();
         Account ai_player = artificialIntelligence.getAccount(level);
         RequestType type = artificialIntelligence.getType(level);
-        if (!type.equals(RequestType.CAPTURE_FLAG2))
-            modeHandler(type, account, ai_player, BattleKind.SINGLE_PLAYER);
-        else multipleFlagMode(account, ai_player, BattleKind.SINGLE_PLAYER, 5);     //must ASK
+        switch (type) {
+            case CAPTURE_FLAG1:
+                BattleController.getInstance().main(new Battle(BattleKind.SINGLE_PLAYER,
+                        BattleMode.CAPTURE_FLAG_1, account, ai_player, 1, 1000));
+                break;
+            case DEATH_MATCH:
+                BattleController.getInstance().main(new Battle(BattleKind.SINGLE_PLAYER,
+                        BattleMode.DEATH_MATCH, account, ai_player, 0, 500));
+                break;
+            case CAPTURE_FLAG2:
+                BattleController.getInstance().main(new Battle(BattleKind.SINGLE_PLAYER,
+                        BattleMode.CAPTURE_FLAG_2, account, ai_player, 5, 500));     //must "ASK"
+        }
     }
 
-    private int chooseStoryGame(AccountRequest request) {
+    private int selectStoryModeLevel(AccountRequest request) {
         boolean isFinish = false;
         do {
             view.showStoryGameKinds();
@@ -157,16 +169,6 @@ class AccountController {
         }
         while (!isFinish);
         return -1;
-    }
-
-    private void multipleFlagMode(Account p1, Account p2, BattleKind battleKind, int... flagNum) {
-        if (flagNum == null) {
-            int[] ints = new int[1];
-            ints[0] = new AccountRequest().getNumberOfFlags();
-            flagNum = ints;
-        }
-        BattleController.getInstance().main(new Battle(battleKind, BattleMode.CAPTURE_FLAG_2,
-                p1, p2, flagNum[0], 1500));
     }
 
     //-----------------------------------------------------------------
