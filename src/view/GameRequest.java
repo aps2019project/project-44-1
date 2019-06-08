@@ -18,7 +18,7 @@ public class GameRequest extends Request {
         } else if (command.equals(EXIT)) {
             return RequestType.EXIT;
         } else {
-            /** INVALID_COMMAND can be converted to null*/
+            /* INVALID_COMMAND can be converted to null*/
             return RequestType.INVALID_COMMAND;
         }
     }

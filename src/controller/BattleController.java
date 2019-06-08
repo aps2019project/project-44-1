@@ -1,6 +1,7 @@
 package controller;
 
 import models.*;
+import models.Enums.BattleKind;
 import models.Enums.ErrorType;
 import view.BattleRequest;
 import view.View;
@@ -29,10 +30,9 @@ class BattleController {
             request.getNewCommand();
             switch (request.getType()) {
                 case EXIT:
-                    //battle.getWinner().increaseMoney(1000);        //#TODO exceptions
                     isFinish = true;
                     break;
-                case HELP:          //#TODO eazzz
+                case HELP:                   //#TODO eazzz
                     helpInBattle();
                     break;
                 case SHOW_GAME_INFO:         //#TODO eazzz
@@ -67,16 +67,45 @@ class BattleController {
                     break;
                 case ENTER_GRAVEYARD:
                     enterGraveyard(request);
-                    break;
-                case END_GAME:
-                    endGame();
-                    break;
+            }
+            if (battle.finishChecker(battle)) {
+                isFinish = true;
+                gameHistory();
             }
         }
-        while (!isFinish && !battle.finishChecker(battle));
+        while (!isFinish);
+    }
+
+    private void gameHistory() {
+        if (battle.isFirstPlayerWon()) {
+            battle.getFirst().increaseWins();
+            battle.getFirst().increaseMoney(battle.getPrize());
+            view.sout("PLAYER \t" + battle.getFirst().getUsername() +
+                    "\nWON!!!" + "PRIZE : \t" + battle.getPrize());
+            MatchHistory matchHistory = new MatchHistory(battle.getSecond().getUsername(),
+                    true);
+            battle.getFirst().addMatchHistory(matchHistory);
+            matchHistory = new MatchHistory(battle.getFirst().getUsername(),
+                    false);
+            battle.getSecond().addMatchHistory(matchHistory);
+        } else {
+            battle.getSecond().increaseWins();
+            battle.getSecond().increaseMoney(battle.getPrize());
+            view.sout("PLAYER \t" + battle.getSecond().getUsername() +
+                    "\nWON!!!" + "PRIZE : \t" + battle.getPrize());
+            MatchHistory matchHistory = new MatchHistory(battle.getFirst().getUsername(),
+                    true);
+            battle.getSecond().addMatchHistory(matchHistory);
+            matchHistory = new MatchHistory(battle.getSecond().getUsername(),
+                    false);
+            battle.getFirst().addMatchHistory(matchHistory);
+        }
     }
 
     private void showGameInfo() {
+        view.sout("player1 Mana : " + battle.getFirstPlayer().getMana() +
+                "\nplayer2 Mana : " + battle.getSecondPlayer().getMana());
+        view.sout(battle.toString());
     }
 
     private void showMyMinions() {
@@ -98,9 +127,7 @@ class BattleController {
     private void selectCard(BattleRequest request) {
         String cardID = request.getCardID();
         Placeable selectedCard = battle.getCard(cardID);
-        if (selectedCard == null) {
-            view.printError(ErrorType.INVALID_CARD_ID);
-        } else if (!battle.getCurrentPlayer().select(request.getCardID())) {
+        if (selectedCard == null || !battle.getCurrentPlayer().select(request.getCardID())) {
             view.printError(ErrorType.INVALID_CARD_ID);
             return;
         }
@@ -158,6 +185,10 @@ class BattleController {
     }
 
     private void endTurn() {
+        if (battle.getBattleKind().equals(BattleKind.SINGLE_PLAYER)) {
+            battle.turnHandler();
+            ArtificialIntelligence.aiAction(this.battle);
+        }
         battle.turnHandler();
     }
 
@@ -166,11 +197,10 @@ class BattleController {
     }
 
     private void showNextCard() {
-        view.sout("next card in hand will be : " + battle.getCurrentPlayer().getNextCardInHand());
-    }
-
-    private void endGame() {
-        addThisBattleToBattleHistory();
+        Card card = battle.getCurrentPlayer().getNextCardInHand();
+        if (card != null) {
+            view.sout("next card in hand will be : " + card.toString());
+        } else view.sout("no card will be added to your hand!!!");
     }
 
     private void enterGraveyard(BattleRequest request) {
@@ -193,7 +223,7 @@ class BattleController {
     }
 
     private void helpInBattle() {
-
+        view.sout("1.Game Info  \n2.show my minions \nshow opponent minions \n show card inf");
     }       //#TODO
 
     private void showMenuInGraveyard() {
@@ -214,20 +244,6 @@ class BattleController {
 
     private void useCollectable(BattleRequest request) {
 
-    }
-
-    private void addThisBattleToBattleHistory() {
-        if (battle.isFirstPlayerWon()) {
-            battle.getFirst().addMatchHistory(new MatchHistory
-                    (battle.getFirst().getUsername(), true));
-            battle.getSecond().addMatchHistory(new MatchHistory
-                    (battle.getSecond().getUsername(), false));
-        } else {
-            battle.getFirst().addMatchHistory(new MatchHistory
-                    (battle.getFirst().getUsername(), false));
-            battle.getSecond().addMatchHistory(new MatchHistory
-                    (battle.getSecond().getUsername(), true));
-        }
     }
 
     private void controlSoldier(BattleRequest request, Card soldier) {

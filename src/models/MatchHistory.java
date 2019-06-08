@@ -15,13 +15,24 @@ public class MatchHistory {
         return (System.currentTimeMillis() - startDate) / 1000;
     }
 
-    public String getElapsedTimeFormatted() {
+    private String getElapsedTimeFormatted() {
         long elapsedTimeInMinute = getElapsedTimeInSec() / 60;
         if (elapsedTimeInMinute < 60) {
-            return Long.toString(elapsedTimeInMinute);
+            return elapsedTimeInMinute + "minutes";
         } else {
-            return Long.toString(elapsedTimeInMinute / 60);
+            return elapsedTimeInMinute / 60 + "hours";
         }
+    }
+
+    @Override
+    public String toString() {
+        return opponent + "\t" + wl() + "\t" + getElapsedTimeFormatted() + "ago";
+    }
+
+    private String wl() {
+        if (hasWon)
+            return "WIN";
+        else return "LOOSE";
     }
 
 }

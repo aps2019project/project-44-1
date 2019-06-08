@@ -1,6 +1,7 @@
 package view;
 
 public enum RequestType {
+
     LOGIN,
     CREATE_ACCOUNT,
     SHOW_LEADERBOARD,
@@ -8,9 +9,6 @@ public enum RequestType {
     LOGOUT,
     HELP,
     EXIT,
-    SHOP,
-    BATTLE,
-    COLLECTION,
     SHOW_COLLECTION_ITEMS_AND_CARDS,
     SEARCH_CARD_IN_COLLECTION,
     CREATE_DECK,
@@ -22,7 +20,6 @@ public enum RequestType {
     SHOW_ALL_DECKS,
     SHOW_DECK,
     SEARCH_SHOP,
-    SEARCH_COLLECTION,
     BUY,
     SELL,
     SHOW_SHOP_CARDS,
@@ -51,7 +48,6 @@ public enum RequestType {
     INSERT_CARD_FROM_HAND_TO_MAP,
     SHOW_COLLECTABLES,
     END_TURN,
-    SELECT_COLECTABLE,
     SHOW_SELECTED_ITEM_INFO,
     USE_COllectable_ITEM,
     ENTER_GRAVEYARD,
@@ -59,7 +55,7 @@ public enum RequestType {
     SHOW_CARD_INFO_IN_GRAVEYARD,
     SHOW_ALL_CARDS_IN_GRAVEYARD,
     END_GAME,
-    HELP_TO_PLAY,
     SHOW_MENU,
+    SHOW_MATCH_HISTORY
 
 }

@@ -1,21 +1,6 @@
 package models;
 
-//import models.Enums.AttackType;
-//import models.Enums.SpecialPowerActivation;
-
 public class Minion extends Card {
-
-//    public Minion(String name, int neededMana, int HP, int AP, AttackType attackType,
-//                  int range, Spell specialPower, SpecialPowerActivation specialPowerActivation) {
-//        this.setName(name);
-//        this.setNeededMana(neededMana);
-//        this.setHP(HP);
-//        this.setAP(AP);
-//        this.setAttackType(attackType);
-//        this.setRange(range);
-//      this.setSpecialPower(specialPower);
-//        this.setSpecialPowerActivation(specialPowerActivation);
-//    }
 
     @Override
     public String toString() {
@@ -41,9 +26,10 @@ public class Minion extends Card {
     }
 
     @Override
-    protected Minion clone() throws CloneNotSupportedException {
+    protected Minion clone() {
         Minion minion = new Minion();
         minion.setOwner(this.getOwner());
+        minion.setAttackType(this.getAttackType());
         minion.setDisarmed(this.isDisarmed());
         minion.setStuned(this.isStuned());
         minion.setHP(this.getHP());
@@ -54,4 +40,5 @@ public class Minion extends Card {
         minion.setNeededMana(this.getNeededMana());
         return minion;
     }
+
 }

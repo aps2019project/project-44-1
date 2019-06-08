@@ -35,7 +35,7 @@ class CollectionController {
                     search(request);
                     break;
                 case SAVE:
-                    isFinish = true;
+                    save();
                     break;
                 case CREATE_DECK:
                     createDeck(request);
@@ -177,6 +177,9 @@ class CollectionController {
 
     public void help() {
         view.printCollectionMenuHelp(collection.toString());
+    }
+
+    private void save() {
     }
 
 }

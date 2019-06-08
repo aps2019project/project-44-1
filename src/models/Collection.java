@@ -97,7 +97,7 @@ public class Collection implements Comparable<Placeable> {
         return mainDeck;
     }
 
-    private void setMainDeck(Deck mainDeck) {
+    void setMainDeck(Deck mainDeck) {
         this.mainDeck = mainDeck;
     }
 

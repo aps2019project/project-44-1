@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Game {
-    private static ArrayList<Account> accounts = new ArrayList<>();
 
+    private static ArrayList<Account> accounts = new ArrayList<>();
     private static Game game = new Game();
 
     private Game() {

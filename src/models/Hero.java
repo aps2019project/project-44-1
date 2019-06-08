@@ -62,6 +62,7 @@ public class Hero extends Card {
         newHero.setInGameID(this.getInGameID());
         newHero.setName(this.getName());
         newHero.setNeededMana(this.getNeededMana());
+        newHero.setAttackType(this.getAttackType());
         return newHero;
     }
 }

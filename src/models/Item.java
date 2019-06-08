@@ -3,7 +3,7 @@ package models;
 import models.Enums.ItemType;
 
 public class Item extends Placeable {
-    ItemType itemType;
+    private ItemType itemType;
     private Card carrier = new Card();
     private String inGameID;
 
@@ -11,19 +11,19 @@ public class Item extends Placeable {
         return itemType;
     }
 
-    public void setItemType(ItemType itemType) {
+    private void setItemType(ItemType itemType) {
         this.itemType = itemType;
     }
 
-    public String getInGameID() {
+    String getInGameID() {
         return inGameID;
     }
 
-    public void setInGameID(String inGameID) {
+    private void setInGameID(String inGameID) {
         this.inGameID = inGameID;
     }
 
-    public Card getCarrier() {
+    Card getCarrier() {
         return carrier;
     }
 
@@ -39,12 +39,29 @@ public class Item extends Placeable {
     }
 
     @Override
-    protected Item clone() throws CloneNotSupportedException {
-//        Item item = (Item) super.clone();
+    protected Item clone() {
         Item newItem = new Item();
         newItem.carrier = this.carrier;
         newItem.itemType = this.itemType;
         newItem.inGameID = this.inGameID;
         return newItem;
     }
+
+
+    /**
+     * only useful field is inGameID which is generated in last line
+     */
+    void flagInitialize(int index) {
+        setName("flag");
+        setItemType(ItemType.FLAG);
+        setNeededMana(0);
+        setCost(0);
+        setID(index);
+        setInGameID("flag" + index);
+    }
+
+    public void saveFlag(){
+
+    }
+
 }

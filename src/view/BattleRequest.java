@@ -17,7 +17,7 @@ public class BattleRequest extends Request {
             return RequestType.SELECT_CARD;
         else if (command.matches("move to \\(\\[\\d+],\\[\\d+]\\)"))
             return RequestType.MOVE_CARD;
-        else if (command.matches("attack \\d+"))
+        else if (command.matches("attack \\w+"))
             return RequestType.ATTACK_TO_OPPONENT;
         else if (command.matches("attack combo \\d+ \\d+ (\\d+)+"))
             return RequestType.COMBO_ATTACK;
@@ -63,7 +63,7 @@ public class BattleRequest extends Request {
             case SELECT_CARD:
                 return command.split(" ")[1];
             case ATTACK_TO_OPPONENT:
-                return command.split("")[1];
+                return command.split(" ")[1];
             case COMBO_ATTACK:
                 // TODO: 05/05/2019
             case SHOW_CARD_INFO_IN_GRAVEYARD:
@@ -77,7 +77,7 @@ public class BattleRequest extends Request {
         switch (getType()) {
             case MOVE_CARD:
                 return Integer.parseInt(command.replace("move to ([", "").
-                        replace("], [", " ").
+                        replace("],[", " ").
                         replace("])", "").split(" ")[0]);
             case USE_SPECIAL_POWER:
                 return Integer.parseInt(command.replace("use special power (", "").
@@ -101,7 +101,7 @@ public class BattleRequest extends Request {
         switch (getType()) {
             case MOVE_CARD:
                 return Integer.parseInt(command.replace("move to ([", "")
-                        .replace("], [", " ")
+                        .replace("],[", " ")
                         .replace("])", "").split(" ")[1]);
             case USE_SPECIAL_POWER:
                 return Integer.parseInt(command.replace("use special power (", "").

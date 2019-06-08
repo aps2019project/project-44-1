@@ -2,12 +2,12 @@ package models;
 
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
-import models.Enums.ErrorType;
-import view.View;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Battle implements Goal, Fight {
+
     private BattleKind battleKind;
     private Account first;
     private Account second;
@@ -18,29 +18,70 @@ public class Battle implements Goal, Fight {
     private int turn = 1;
     private int flagNumber;
     private boolean firstPlayerWon;
+    private int prize = 1000;
 
-    public Battle(BattleKind battleKind, BattleMode battleMode, Account firstPlayer, Account secondPlayer, int flagNumber) {
+    public Battle(BattleKind battleKind, BattleMode battleMode, Account firstPlayer,
+                  Account secondPlayer, int flagNumber, int... prize) {
         this.battleKind = battleKind;
         this.battleMode = battleMode;
         this.first = firstPlayer;
         this.second = secondPlayer;
         this.flagNumber = flagNumber;
+        if (prize.length == 1)
+            this.prize = prize[0];
         try {
-            this.firstPlayer = new Player(first.getCollection().getMainDeck(), first.getUsername());
+            this.firstPlayer = new Player(first.getCollection().getMainDeck(),
+                    first.getUsername());
             this.firstPlayer.setMyMap(map);
-            this.secondPlayer = new Player(second.getCollection().getMainDeck(), second.getUsername());
+            this.secondPlayer = new Player(second.getCollection().getMainDeck(),
+                    second.getUsername());
             this.secondPlayer.setMyMap(map);
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
+        if (!battleMode.equals(BattleMode.DEATH_MATCH))
+            putFlags();
+        putHeroes();
+    }
+
+    private void putHeroes() {
         relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[2][0]);
         relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[2][8]);
+        this.firstPlayer.getDeck().getHero().setInGameID(this.firstPlayer.
+                IDGenerator(this.firstPlayer.getDeck().getHero().getName()));
+        this.secondPlayer.getDeck().getHero().setInGameID(this.secondPlayer.
+                IDGenerator(this.secondPlayer.getDeck().getHero().getName()));
         this.firstPlayer.getDeck().removeFromDeck(this.firstPlayer.getDeck().getHero());
         this.secondPlayer.getDeck().removeFromDeck(this.secondPlayer.getDeck().getHero());
     }
 
+    private void putFlags() {
+        Random random = new Random();
+        for (int i = 0; i < flagNumber; i++) {
+            int x = random.nextInt(5);
+            int y = random.nextInt(9);
+            if (x == 0 || y == 0) {
+                i--;
+                continue;
+            }
+            Cell cell = map.getCell(x, y);
+            if (cell.isFree()) {
+                Item flag = new Item();
+                flag.flagInitialize(i);
+                relater(flag, cell);
+                map.putFlagInMap(flag);
+//                System.out.println(x + "\t" + y);
+            } else
+                i--;
+        }
+    }
+
     BattleMode getBattleMode() {
         return battleMode;
+    }
+
+    public int getPrize() {
+        return prize;
     }
 
     public Player getSecondPlayer() {
@@ -59,44 +100,6 @@ public class Battle implements Goal, Fight {
         return this.map;
     }
 
-    static void relater(Placeable card, Cell cell) {
-        card.setCell(cell);
-        if (card instanceof Card)
-            cell.setPlaceable((Card) card);
-        else cell.setItem((Item) card);
-    }
-
-    @Override
-    public String toString() {
-        if (this.getBattleMode() == BattleMode.DEATH_MATCH) {
-            int HP1 = getFirstPlayer().getDeck().getHero().getHP();     //type1
-            int HP2 = getSecondPlayer().getDeck().getHero().getHP();
-            return "HP of first player Hero is " + HP1 + "\n" +
-                    "HP of second player Hero is " + HP2;
-        } else if (this.battleMode == BattleMode.CAPTURE_FLAG_1) {
-
-        }
-
-        ArrayList<Cell> cells = new ArrayList<>();      //^_^
-        Card card;
-        getMap().getFlags().forEach(f -> cells.add(f.getMyCell()));
-        if (cells.size() == 1 && getBattleMode() == BattleMode.CAPTURE_FLAG_1) {
-            card = getMap().getFlags().get(0).getCarrier();       //type2
-        }
-        if (cells.size() > 1 && getBattleMode() == BattleMode.CAPTURE_FLAG_2)
-            getMap().getFlags().forEach(Item::getCarrier);       //type3
-        return "";
-    }       //#TODO
-
-    public void turnHandler() {       //method to handle all actions must occur at end of turn
-        manaHandler();
-        for (Card c : map.getAllCardsInMap()) {
-            c.setMovedThisTurn(false);
-            c.setAttackAvailable(true);
-        }
-        turn++;
-    }
-
     int getFlagNumber() {
         return flagNumber;
     }
@@ -107,6 +110,80 @@ public class Battle implements Goal, Fight {
 
     void setFirstPlayerWon(boolean firstPlayerWon) {
         this.firstPlayerWon = firstPlayerWon;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public Account getFirst() {
+        return first;
+    }
+
+    public Account getSecond() {
+        return second;
+    }
+
+    //-----------------------------------------getter & setter & constructing ^_^
+
+    static void relater(Placeable card, Cell cell) {
+        card.setCell(cell);
+        if (card instanceof Card)
+            cell.setPlaceable((Card) card);
+        else cell.setItem((Item) card);
+    }
+
+    @Override
+    public String toString() {
+        // if (this.getBattleMode() == BattleMode.DEATH_MATCH) {
+        int HP1 = 0, HP2 = 0;
+        for (Card c : map.getAllCardsInMap()) {
+            if (c instanceof Hero) {
+                if (HP1 == 0)
+                    HP1 = c.getHP();
+                else HP2 = c.getHP();
+            }
+        }
+        return "HP of first player Hero is " + HP1 + "\n" +
+                "HP of second player Hero is " + HP2;
+        //} else if (this.battleMode == BattleMode.CAPTURE_FLAG_1) {
+//
+//        }
+//
+//        ArrayList<Cell> cells = new ArrayList<>();      //^_^
+//        Card card;
+//        getMap().getFlags().forEach(f -> cells.add(f.getMyCell()));
+//        if (cells.size() == 1 && getBattleMode() == BattleMode.CAPTURE_FLAG_1) {
+//            card = getMap().getFlags().get(0).getCarrier();       //type2
+//        }
+//        if (cells.size() > 1 && getBattleMode() == BattleMode.CAPTURE_FLAG_2)
+//            getMap().getFlags().forEach(Item::getCarrier);       //type3
+    }       //#TODO
+
+    /**
+     * method to handle all actions must occur at end of turn
+     */
+    public void turnHandler() {
+        manaHandler();
+        for (Card c : map.getAllCardsInMap()) {
+            c.setMovedThisTurn(false);
+            c.setAttackAvailable(true);
+        }
+        turn++;
+        increaseTurnsFlagSaved();
+    }
+
+    private void increaseTurnsFlagSaved() {
+        if (battleMode.equals(BattleMode.CAPTURE_FLAG_1)) {
+            for (Item f : map.getFlags()) {
+                Player player = f.getCarrier().getOwner();
+                if (player != null) {
+                    if (!player.equals(firstPlayer) && !player.equals(secondPlayer))
+                        throw new NullPointerException();
+                    player.increaseTurnsFlagSaved();
+                }
+            }
+        }
     }
 
     public String getPlayerName(int turn) {
@@ -145,7 +222,7 @@ public class Battle implements Goal, Fight {
 
     public Placeable getCard(String cardID) {
         for (Card card : map.getAllCardsInMap()) {
-            if (card.getInGameID().equals(cardID))
+            if (card != null && card.getInGameID().equals(cardID))
                 return card;
         }
         return null;
@@ -162,28 +239,8 @@ public class Battle implements Goal, Fight {
         return null;
     }
 
-    public Placeable selectCard(String cardID) {
-        return map.getCard(cardID);
-    }
-
-    public int getTurn() {
-        return turn;
-    }
-
-    public Account getFirst() {
-        return first;
-    }
-
-    public Account getSecond() {
-        return second;
-    }
-
     public void castSpell(int x, int y, Spell spell) {
         ArrayList<Card> effectedCards = map.getEffectedCards(x, y, spell);
-    }
-
-    public void setSecond(Account second) {
-        this.second = second;
     }
 
     private void manaHandler() {
@@ -201,7 +258,7 @@ public class Battle implements Goal, Fight {
         }
     }
 
-    public Hero getFirstPlayerHero() {
+    Hero getFirstPlayerHero() {
         for (Card card : map.getPlayerCardsInMap(getFirstPlayer().getName())) {
             if (card instanceof Hero) {
                 return (Hero) card;
@@ -210,7 +267,7 @@ public class Battle implements Goal, Fight {
         return null;
     }
 
-    public Hero getSecondPlayerHero() {
+    Hero getSecondPlayerHero() {
         for (Card card : map.getPlayerCardsInMap(getSecondPlayer().getName())) {
             if (card instanceof Hero) {
                 return (Hero) card;
@@ -218,6 +275,5 @@ public class Battle implements Goal, Fight {
         }
         return null;
     }
-
 
 }

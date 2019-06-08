@@ -52,8 +52,6 @@ class ShopController {
                 case SHOW_COLLECTION_ITEMS_AND_CARDS:
                     showCollectionCards();
                     break;
-                case INVALID_COMMAND:
-                    view.printError(ErrorType.INVALID_COMMAND);
             }
         }
         while (!isFinish);

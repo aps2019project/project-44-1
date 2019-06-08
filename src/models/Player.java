@@ -18,7 +18,7 @@ public class Player {
     private Card nextCardInHand;
     private Card selectedCard;
 
-    public Player(Deck deck, String name) throws CloneNotSupportedException {
+    Player(Deck deck, String name) throws CloneNotSupportedException {
         this.deck = deck.clone();
         this.name = name;
         for (Card card : this.deck.getCards()) {
@@ -43,7 +43,10 @@ public class Player {
     }
 
     public Card getNextCardInHand() {
-        return nextCardInHand;
+        if (nextCardInHand == null) {
+            return nextCardInHand;
+        }
+        return null;
     }
 
     public Card[] getHand() {
@@ -81,7 +84,7 @@ public class Player {
         nextCardInHand = deck.getCards().get(0);
     }
 
-    private String IDGenerator(String cardName) {
+    String IDGenerator(String cardName) {
         return name + '_' + cardName + '_' +
                 (myMap.timesCardUsed(cardName) + 1);
     }
@@ -114,8 +117,8 @@ public class Player {
 
     private boolean invalidCoordination(int x, int y, int distance) {
         for (Card c : myMap.getPlayerCardsInMap(this.name)) {
-            if (Map.getManhatanDistance(c.getMyCell(), myMap.getCells()[x - 1][y - 1]) == distance
-                    && myMap.getCells()[x - 1][y - 1].isFree())
+            if (Map.getManhatanDistance(c.getMyCell(), myMap.getCells()[x - 1][y - 1])
+                    == distance && myMap.getCells()[x - 1][y - 1].isFree())
                 return false;
         }
         return true;
@@ -156,6 +159,7 @@ public class Player {
         else if (getSelectedCard().isMovedThisTurn())
             return ErrorType.CARD_CANT_MOVE.getMessage();
         else {
+            selectedCard.getMyCell().setCard(null);
             Battle.relater(selectedCard, myMap.getCells()[x - 1][y - 1]);
             selectedCard.setMovedThisTurn(true);
             return selectedCard.getInGameID() + " moved to " + selectedCard.getMyCell().getX()
@@ -196,6 +200,14 @@ public class Player {
                     return invalidCoordination(x - 1, y - 1, 2);
             }
         return false;
+    }
+
+    void increaseTurnsFlagSaved() {
+        this.turnsFlagSaved++;
+    }
+
+    void increaseFlagsCaptured() {
+        this.flagsCaptured++;
     }
 
 }
