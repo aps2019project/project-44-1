@@ -23,7 +23,7 @@ public class Item extends Placeable {
         this.inGameID = inGameID;
     }
 
-    public Card getCarrier() {
+    Card getCarrier() {
         return carrier;
     }
 
@@ -47,6 +47,10 @@ public class Item extends Placeable {
         return newItem;
     }
 
+
+    /**
+     * only useful field is inGameID which is generated in last line
+     */
     void flagInitialize(int index) {
         setName("flag");
         setItemType(ItemType.FLAG);

@@ -27,7 +27,7 @@ public class Battle implements Goal, Fight {
         this.first = firstPlayer;
         this.second = secondPlayer;
         this.flagNumber = flagNumber;
-        if (prize != null)
+        if (prize.length == 1)
             this.prize = prize[0];
         try {
             this.firstPlayer = new Player(first.getCollection().getMainDeck(),
@@ -40,7 +40,7 @@ public class Battle implements Goal, Fight {
             e.printStackTrace();
         }
         if (!battleMode.equals(BattleMode.DEATH_MATCH))
-            setFlags();
+            putFlags();
         putHeroes();
     }
 
@@ -55,17 +55,22 @@ public class Battle implements Goal, Fight {
         this.secondPlayer.getDeck().removeFromDeck(this.secondPlayer.getDeck().getHero());
     }
 
-    private void setFlags() {
+    private void putFlags() {
         Random random = new Random();
         for (int i = 0; i < flagNumber; i++) {
             int x = random.nextInt(5);
             int y = random.nextInt(9);
+            if (x == 0 || y == 0) {
+                i--;
+                continue;
+            }
             Cell cell = map.getCell(x, y);
             if (cell.isFree()) {
                 Item flag = new Item();
                 flag.flagInitialize(i);
-                flag.setCell(cell);
+                relater(flag, cell);
                 map.putFlagInMap(flag);
+//                System.out.println(x + "\t" + y);
             } else
                 i--;
         }
@@ -119,7 +124,7 @@ public class Battle implements Goal, Fight {
         return second;
     }
 
-    //---------------------------------------------------------getter & setter ^_^
+    //-----------------------------------------getter & setter & constructing ^_^
 
     static void relater(Placeable card, Cell cell) {
         card.setCell(cell);
@@ -155,7 +160,10 @@ public class Battle implements Goal, Fight {
 //            getMap().getFlags().forEach(Item::getCarrier);       //type3
     }       //#TODO
 
-    public void turnHandler() {       //method to handle all actions must occur at end of turn
+    /**
+     * method to handle all actions must occur at end of turn
+     */
+    public void turnHandler() {
         manaHandler();
         for (Card c : map.getAllCardsInMap()) {
             c.setMovedThisTurn(false);

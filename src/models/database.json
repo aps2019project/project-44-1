@@ -829,7 +829,7 @@
         "Shock"
       ],
       "Minions": [
-        1,
+        "KamandarFars",
         9,
         11,
         11,
@@ -874,7 +874,7 @@
       "Item": 18
     },
     {
-      "Hero": "arash",
+      "Hero": "arashv",
       "Spell": [
         6,
         10,

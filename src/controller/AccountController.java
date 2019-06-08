@@ -117,8 +117,11 @@ class AccountController {
                         BattleMode.CAPTURE_FLAG_1, p1, p2, 1));
                 break;
             case CAPTURE_FLAG2:
+                view.sout("enter number of flags");
+                AccountRequest ar = new AccountRequest();
+                ar.getNewCommand();
                 BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER, BattleMode.CAPTURE_FLAG_2,
-                        p1, p2, new AccountRequest().getNumberOfFlags()));
+                        p1, p2, ar.getNumberOfFlags()));
         }
     }
 

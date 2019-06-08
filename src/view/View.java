@@ -2,6 +2,7 @@ package view;
 
 import models.*;
 import models.Enums.ErrorType;
+import models.Enums.ItemType;
 
 import java.util.ArrayList;
 
@@ -238,6 +239,16 @@ public class View {
         Cell[][] cells = battle.getMap().getCells();
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
+                try {
+                    if (cells[i][j].getItem() != null &&
+                            cells[i][j].getItem().getItemType().equals(ItemType.FLAG)) {
+                        System.out.print(" f |");
+                        continue;
+                    }
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                    System.out.println(i + "\t" + j);
+                }
                 if (cells[i][j].getCard() instanceof Hero && cells[i][j].getCard().getOwner().equals(battle.getFirstPlayer())) {
                     System.out.print(" O |");
                 } else if (cells[i][j].getCard() instanceof Minion && cells[i][j].getCard().getOwner().equals(battle.getFirstPlayer())) {
@@ -249,6 +260,7 @@ public class View {
                 } else {
                     System.out.print(" __|");
                 }
+
             }
 
             System.out.println();
