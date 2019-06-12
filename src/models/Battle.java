@@ -45,7 +45,7 @@ public class Battle implements Goal, Fight {
     }
 
     private void putHeroes() {
-        relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[2][3]);// FIXME: 6/12/2019 here
+        relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[2][0]);
         relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[2][8]);
         this.firstPlayer.getDeck().getHero().setInGameID(this.firstPlayer.
                 IDGenerator(this.firstPlayer.getDeck().getHero().getName()));

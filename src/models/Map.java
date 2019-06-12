@@ -90,7 +90,7 @@ public class Map {
     }
 
     Cell getCell(int x, int y) {
-        return cells[x - 1][y - 1];
+        return cells[x][y];
     }
 
     ArrayList<Card> getEffectedCards(int x, int y, Spell spell) {
