@@ -828,78 +828,78 @@
         "Sacrifice",
         "Shock"
       ],
-      "Minions": [
+      "Cards": [
         "KamandarFars",
-        9,
-        11,
-        11,
-        13,
-        17,
-        18,
-        21,
-        22,
-        26,
-        38,
-        36,
-        40
+        "neyzedartorani",
+        "ghorzdartorani",
+        "ghorzdartorani",
+        "divsiah",
+        "ghlebozorg",
+        "marsammi",
+        "margholpeykar",
+        "ghorghsefid",
+        "jadogharaazam",
+        "siavash",
+        "nanesarma",
+        "arjhanghdiv"
       ],
-      "Item": 1
+      "Item": "tajdanaei"
     },
     {
       "Hero": "zahhak",
       "Spell": [
-        2,
-        3,
-        5,
-        9,
-        8,
-        13,
-        19
+        "Area Dispel",
+        "Empower",
+        "Hellfire",
+        "All Disarm",
+        "Madness",
+        "Ghaza bokhor joon begiri",
+        "Shock"
       ],
-      "Minions": [
-        2,
-        3,
-        5,
-        8,
-        12,
-        15,
-        15,
-        19,
-        23,
-        27,
-        30,
-        33,
-        39
+      "Cards": [
+        "ShamshirzanFars",
+        "neyzedarfars",
+        "pahlavanfars",
+        "ghollabsangdartorani",
+        "shahzadetorani",
+        "oghab",
+        "oghab",
+        "ejhdehaatashandaz",
+        "palang",
+        "jen",
+        "giv",
+        "eeraj",
+        "shahghol"
       ],
-      "Item": 18
+      "Item": "soul eater"
     },
     {
       "Hero": "arashv",
       "Spell": [
-        6,
-        10,
-        12,
-        14,
-        15,
-        16,
-        17
+        "Lighting Bolt",
+        "All Poison",
+        "Health With profit",
+        "All Power",
+        "All Attack",
+        "Weakening",
+        "Sacrifice"
       ],
-      "Minions": [
-        6,
-        7,
-        10,
-        14,
-        16,
-        16,
-        20,
-        24,
-        25,
-        28,
-        29,
-        31,
-        34
+      "Cards": [
+        "sepahsalarfars",
+        "kamandartorani",
+        "jasostorani",
+        "gholsangandaz",
+        "divghorazsavar",
+        "divghorazsavar",
+        "shirdarande",
+        "ghorgh",
+        "jadoghar",
+        "ghorazvahshi",
+        "piran",
+        "bahman",
+        "gholbozorg"
       ],
-      "Item": 12
+      "Item": "terror hood"
     }
   ]
 }

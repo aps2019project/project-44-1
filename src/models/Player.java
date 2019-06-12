@@ -5,6 +5,7 @@ import view.View;
 
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class Player {
     private Card[] hand = new Card[5];
@@ -76,17 +77,21 @@ public class Player {
     private void initializeHand() {
         Iterator<Card> iterator = deck.getCards().iterator();
         int i = 0;
-        while (i < 5) {
-            hand[i] = iterator.next();
-            i++;
-            iterator.remove();
+        try {
+            while (i < 5) {
+                hand[i] = iterator.next();
+                i++;
+                iterator.remove();
+            }
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+            System.out.println(i);
         }
         nextCardInHand = deck.getCards().get(0);
     }
 
     String IDGenerator(String cardName) {
-        return name + '_' + cardName + '_' +
-                (myMap.timesCardUsed(cardName) + 1);
+        return name + '_' + cardName + '_' + myMap.timesCardUsed(cardName, this);
     }
 
     public void insert(String cardName, int x, int y) {
@@ -111,14 +116,15 @@ public class Player {
             Battle.relater(c, myMap.getCells()[x - 1][y - 1]);
             hand[i] = nextCardInHand;
             nextCardInHand = deck.getCards().get(0);
-            View.getInstance().sout(cardName + " with " + c.getInGameID() + " inserted to (" + x + "; " + y + ")");
+            View.getInstance().sout(cardName + " with " + c.getInGameID()
+                    + " inserted to (" + x + "; " + y + ")");
         }
     }       // TODO: 5/7/2019 must handle for spells
 
     private boolean invalidCoordination(int x, int y, int distance) {
         for (Card c : myMap.getPlayerCardsInMap(this.name)) {
-            if (Map.getManhatanDistance(c.getMyCell(), myMap.getCells()[x - 1][y - 1])
-                    == distance && myMap.getCells()[x - 1][y - 1].isFree())
+            if (Map.getManhatanDistance(c.getMyCell(), myMap.getCells()[x][y])
+                    == distance && myMap.getCells()[x][y].isFree())
                 return false;
         }
         return true;
@@ -139,8 +145,10 @@ public class Player {
     }
 
     public String move(int x, int y) {
+        x--;
+        y--;
         int distance = Map.getManhatanDistance(selectedCard.getMyCell(),
-                myMap.getCells()[x - 1][y - 1]);
+                myMap.getCells()[x][y]);
         boolean flag = true;
         switch (distance) {
             case 1:
@@ -160,45 +168,52 @@ public class Player {
             return ErrorType.CARD_CANT_MOVE.getMessage();
         else {
             selectedCard.getMyCell().setCard(null);
-            Battle.relater(selectedCard, myMap.getCells()[x - 1][y - 1]);
+            Battle.relater(selectedCard, myMap.getCells()[x][y]);
             selectedCard.setMovedThisTurn(true);
-            return selectedCard.getInGameID() + " moved to " + selectedCard.getMyCell().getX()
-                    + " " + selectedCard.getMyCell().getY();
+            return selectedCard.getInGameID() + " moved to " + (selectedCard.getMyCell()
+                    .getX() + 1) + " " + (selectedCard.getMyCell().getY() + 1);
         }
     }
 
-    //if it wants to move and there is opponent cards in his way
+    /**
+     * if it wants to move and there is opponent cards in his way
+     */
     private boolean superInvalidCoordination(int x, int y) {
         int yy = selectedCard.getMyCell().getY();
         int xx = selectedCard.getMyCell().getX();
-        if (x == xx) {
-            switch (yy - y) {
-                case 2:
-                    return invalidCoordination(x, y + 1, 1);
-                case -2:
-                    return invalidCoordination(x, y - 1, 1);
-            }
-        } else if (y == yy) {
-            switch (xx - x) {
-                case 2:
-                    return invalidCoordination(x + 1, y, 1);
-                case -2:
-                    return invalidCoordination(x - 1, y, 1);
-            }
-        } else if (x - xx == 1)
-            switch (y - yy) {
-                case 1:
-                    return invalidCoordination(x + 1, y + 1, 2);
-                case -1:
-                    return invalidCoordination(x + 1, y - 1, 2);
-            }
-        else if (x - xx == -1)
-            switch (y - yy) {
-                case 1:
-                    return invalidCoordination(x - 1, y + 1, 2);
-                case -1:
-                    return invalidCoordination(x - 1, y - 1, 2);
-            }
+        try {
+            if (x == xx) {
+                switch (yy - y) {
+                    case 2:
+                        return invalidCoordination(x, y + 1, 1);
+                    case -2:
+                        return invalidCoordination(x, y - 1, 1);
+                }
+            } else if (y == yy) {
+                switch (xx - x) {
+                    case 2:
+                        return invalidCoordination(x + 1, y, 1);
+                    case -2:
+                        return invalidCoordination(x - 1, y, 1);
+                }
+            } else if (x - xx == 1)
+                switch (y - yy) {
+                    case 1:
+                        return invalidCoordination(x + 1, y + 1, 2);
+                    case -1:
+                        return invalidCoordination(x + 1, y, 2);
+                }
+            else if (x - xx == -1)
+                switch (y - yy) {
+                    case 1:
+                        return invalidCoordination(x - 1, y + 1, 2);
+                    case -1:
+                        return invalidCoordination(x - 1, y, 2);
+                }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+            View.getInstance().sout(x + "\t" + xx + "\t" + y + "\t" + yy);
+        }
         return false;
     }
 

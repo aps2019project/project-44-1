@@ -98,7 +98,7 @@ public class Game {
 
     static {
         Account test = new Account("test2","1234");
-        test.getCollection().addCardToCollection(Shop.getInstance().getCard("divsefid"));
+        test.getCollection().addCardToCollection(Shop.getInstance().getCard("simorgh"));
         test.getCollection().addCardToCollection(Shop.getInstance().getCard("simorgh"));
         test.getCollection().addCardToCollection(Shop.getInstance().getCard("ejhdeha"));
         test.getCollection().addCardToCollection(Shop.getInstance().getCard("KamandarFars"));

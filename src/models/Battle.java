@@ -45,12 +45,14 @@ public class Battle implements Goal, Fight {
     }
 
     private void putHeroes() {
-        relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[2][0]);
+        relater(getFirstPlayer().getDeck().getHero(), getMap().getCells()[2][3]);// FIXME: 6/12/2019 here
         relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[2][8]);
         this.firstPlayer.getDeck().getHero().setInGameID(this.firstPlayer.
                 IDGenerator(this.firstPlayer.getDeck().getHero().getName()));
+//        View.getInstance().sout(firstPlayer.getMyMap().getCell(3,1).getCard().toString());
         this.secondPlayer.getDeck().getHero().setInGameID(this.secondPlayer.
                 IDGenerator(this.secondPlayer.getDeck().getHero().getName()));
+//        View.getInstance().sout(firstPlayer.getMyMap().getCell(3,9).getCard().toString());
         this.firstPlayer.getDeck().removeFromDeck(this.firstPlayer.getDeck().getHero());
         this.secondPlayer.getDeck().removeFromDeck(this.secondPlayer.getDeck().getHero());
     }
@@ -65,7 +67,7 @@ public class Battle implements Goal, Fight {
                 continue;
             }
             Cell cell = map.getCell(x, y);
-            if (cell.isFree()) {
+            if (cell.isFree() && cell.getItem() == null) {
                 Item flag = new Item();
                 flag.flagInitialize(i);
                 relater(flag, cell);
@@ -144,6 +146,7 @@ public class Battle implements Goal, Fight {
                 else HP2 = c.getHP();
             }
         }
+//        System.out.println(Arrays.toString(map.getAllCardsInMap().toArray()));
         return "HP of first player Hero is " + HP1 + "\n" +
                 "HP of second player Hero is " + HP2;
         //} else if (this.battleMode == BattleMode.CAPTURE_FLAG_1) {

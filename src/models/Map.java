@@ -29,18 +29,19 @@ public class Map {
     }
 
     static int getManhatanDistance(Cell start, Cell end) {
-        return Math.abs(start.getX() - end.getX() + start.getY() - end.getY());
+        return Math.abs(start.getX() - end.getX()) + Math.abs(start.getY() - end.getY());
     }
 
     public static int getManhatanDistance(int startX, int startY, int endX, int endY) {
-        return Math.abs(startX - endX + startY - endY);
+        return Math.abs(startX - endX) + Math.abs(startY - endY);
     }
 
-    int timesCardUsed(String cardName) {
+    int timesCardUsed(String cardName, Player inserter) {
         int counter = 0;
         for (Cell[] c : cells) {
             for (Cell cell : c) {
-                if (cell.getCard() != null && cell.getCard().getName().equals(cardName)) {
+                if (cell.getCard() != null && cell.getCard().getName().equals(cardName)
+                        && cell.getCard().getOwner().equals(inserter)) {
                     counter++;
                 }
             }

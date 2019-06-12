@@ -8,13 +8,14 @@ import view.RequestType;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Arrays;
 
 import static models.Enums.ErrorType.NO_ERROR;
 
 public class ArtificialIntelligence {
     private String Hero;
     private String[] Spell;
-    private String[] Minions;
+    private String[] Cards;
     private String Item;
     private Gson gson = new Gson();
 
@@ -60,10 +61,11 @@ public class ArtificialIntelligence {
         for (String s : ai.Spell) {
             deck.getDeckCards().add(shop.getCard(s));
         }
-        for (String s : ai.Minions) {
-            deck.getDeckCards().add(shop.getCard(s));
+        for (String s : ai.Cards) {
+            deck.addToDeck(shop.getCard(s));
         }
         deck.setItem((models.Item) shop.getCard(ai.Item));
+        System.out.println(Arrays.toString(deck.getDeckCards().toArray()));
         return deck;
     }
 
@@ -87,6 +89,7 @@ public class ArtificialIntelligence {
             }
         }
         int y = hero.getMyCell().getY();
+        hero.getOwner().select(hero.getInGameID());
         hero.getOwner().move(hero.getMyCell().getX(), y + backAndForth(y));
     }
 
