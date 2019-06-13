@@ -149,6 +149,23 @@ public class Player implements Move {
         x--;
         y--;
         int distance = Map.getManhatanDistance(selectedCard.getMyCell(), myMap.getCells()[x][y]);
+        if (!canMove(x, y, distance))
+            return ErrorType.INVALID_TARGET.getMessage();
+        else {
+            return moveIT(x, y);
+        }
+    }
+
+    private String moveIT(int x, int y) {
+        selectedCard.getMyCell().setCard(null);
+        Battle.relater(selectedCard, myMap.getCells()[x][y]);
+        selectedCard.setMovedThisTurn(true);
+        movingDirections(x, y, selectedCard.getMyCell().getX(), selectedCard.getMyCell().getY());
+        return selectedCard.getInGameID() + " moved to " + (selectedCard.getMyCell().getX() + 1) + " "
+                + (selectedCard.getMyCell().getY() + 1);
+    }
+
+    private boolean canMove(int x, int y, int distance) {
         boolean flag = true;
         switch (distance) {
             case 1:
@@ -162,15 +179,7 @@ public class Player implements Move {
             default:
                 flag = false;
         }
-        if (!flag)
-            return ErrorType.INVALID_TARGET.getMessage();
-        else {
-            selectedCard.getMyCell().setCard(null);
-            Battle.relater(selectedCard, myMap.getCells()[x][y]);
-            selectedCard.setMovedThisTurn(true);
-            return selectedCard.getInGameID() + " moved to " + (selectedCard.getMyCell().getX() + 1) + " "
-                    + (selectedCard.getMyCell().getY() + 1);
-        }
+        return flag;
     }
 
 }

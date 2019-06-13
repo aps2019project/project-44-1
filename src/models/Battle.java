@@ -49,10 +49,8 @@ public class Battle implements Goal, Fight {
         relater(getSecondPlayer().getDeck().getHero(), getMap().getCells()[2][8]);
         this.firstPlayer.getDeck().getHero().setInGameID(this.firstPlayer.
                 IDGenerator(this.firstPlayer.getDeck().getHero().getName()));
-//        View.getInstance().sout(firstPlayer.getMyMap().getCell(3,1).getCard().toString());
         this.secondPlayer.getDeck().getHero().setInGameID(this.secondPlayer.
                 IDGenerator(this.secondPlayer.getDeck().getHero().getName()));
-//        View.getInstance().sout(firstPlayer.getMyMap().getCell(3,9).getCard().toString());
         this.firstPlayer.getDeck().removeFromDeck(this.firstPlayer.getDeck().getHero());
         this.secondPlayer.getDeck().removeFromDeck(this.secondPlayer.getDeck().getHero());
     }
@@ -72,7 +70,6 @@ public class Battle implements Goal, Fight {
                 flag.flagInitialize(i);
                 relater(flag, cell);
                 map.putFlagInMap(flag);
-//                System.out.println(x + "\t" + y);
             } else
                 i--;
         }

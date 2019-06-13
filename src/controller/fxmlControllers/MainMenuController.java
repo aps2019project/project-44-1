@@ -1,8 +1,6 @@
 package controller.fxmlControllers;
 
 import Main.Main;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
@@ -19,10 +17,7 @@ public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        shopButton.setOnAction(event -> {
-            Main.getStage().getScene().setRoot(Main.getShopPage());
-        });
+        shopButton.setOnAction(event -> Main.getStage().getScene().setRoot(Main.getShopPage()));
     }
-    
-    
+
 }

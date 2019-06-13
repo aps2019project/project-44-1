@@ -1,9 +1,8 @@
-#rootGridPane{
+#rootGridPane {
     -fx-background-image: url("../images/background@2x.jpg");
     -fx-background-size: 100% 100%;
 
 }
-
 
 .normalButton {
     -fx-border-color: transparent;
@@ -31,19 +30,18 @@
     -fx-text-fill: white;
 }
 
-#usernameTextField{
+#usernameTextField {
     /*-fx-padding: ;*/
 }
 
-
-.text-field{
+.text-field {
     -fx-fit-to-width: 50%;
     -fx-pref-width: 50%;
     -fx-background-color: #ddd;
     -fx-font-size: 14;
 }
 
-#submitButton{
+#submitButton {
     -fx-background-image: url("../images/button_confirm.png");
     -fx-background-size: 100% 100%;
     -fx-column-halignment: center;
@@ -56,7 +54,8 @@
 
 
 }
-#submitButton:focused{
+
+#submitButton:focused {
     -fx-background-image: url("../images/button_confirm_glow.png");
     -fx-background-size: 100% 100%;
 

@@ -36,7 +36,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/view/fxmls/loginPage.fxml"));
         Main.setStage(primaryStage);
-        Scene scene = new Scene(root,850,500);
+        primaryStage.setTitle("DUELYST");
+        Scene scene = new Scene(root, 850, 500);
         scene.getStylesheets().add("/view/styleSheets/login.css");
         scene.getStylesheets().add("/view/styleSheets/mainMenu.css");
         scene.getStylesheets().add("/view/styleSheets/shop.css");
@@ -64,7 +65,7 @@ public class Main extends Application {
         return stage;
     }
 
-    public static void setStage(Stage stage) {
+    private static void setStage(Stage stage) {
         Main.stage = stage;
     }
 
@@ -75,5 +76,5 @@ public class Main extends Application {
     public static void setShopPage(Parent shopPage) {
         Main.shopPage = shopPage;
     }
-}
 
+}

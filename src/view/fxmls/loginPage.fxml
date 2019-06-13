@@ -31,37 +31,35 @@
         <RowConstraints maxHeight="138.6667022705078" minHeight="10.0" prefHeight="76.66670227050781"
                         vgrow="SOMETIMES"/>
     </rowConstraints>
-    <children>
-        <Button fx:id="logInButton" alignment="TOP_RIGHT" mnemonicParsing="false" styleClass="normalButton"
-                stylesheets="@../styleSheets/login.css" text="LOG IN" GridPane.columnIndex="1"
-                GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-            <GridPane.margin>
-                <Insets right="10.0"/>
-            </GridPane.margin>
-        </Button>
-        <Button fx:id="signUpButton" mnemonicParsing="false" styleClass="normalButton"
-                stylesheets="@../styleSheets/login.css" text="SIGN UP" GridPane.columnIndex="2" GridPane.rowIndex="1">
-            <GridPane.margin>
-                <Insets left="10.0"/>
-            </GridPane.margin>
-        </Button>
-        <TextField id="usernameTextField" fx:id="usernameTextField" prefHeight="34.0" prefWidth="199.0"
-                   promptText="USERNAME" styleClass="text-field" stylesheets="@../styleSheets/login.css"
-                   GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
-            <GridPane.margin>
-                <Insets bottom="5.0"/>
-            </GridPane.margin>
-        </TextField>
-        <PasswordField fx:id="passwordTextField" prefHeight="33.0" prefWidth="203.0" promptText="PASSWORD"
-                       styleClass="text-field" stylesheets="@../styleSheets/login.css" GridPane.columnIndex="1"
-                       GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="TOP">
-            <GridPane.margin>
-                <Insets top="5.0"/>
-            </GridPane.margin>
-        </PasswordField>
-        <Button id="submitButton" fx:id="submitButton" mnemonicParsing="false" onAction="#handleSubmit"
-                prefHeight="259.0" prefWidth="620.0" text="LOG IN" GridPane.columnIndex="1" GridPane.columnSpan="2"
-                GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4"
-                GridPane.valignment="CENTER"/>
-    </children>
+    <Button fx:id="logInButton" alignment="TOP_RIGHT" mnemonicParsing="false" styleClass="normalButton"
+            stylesheets="@../styleSheets/login.css" text="LOG IN" GridPane.columnIndex="1"
+            GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+        <GridPane.margin>
+            <Insets right="10.0"/>
+        </GridPane.margin>
+    </Button>
+    <Button fx:id="signUpButton" mnemonicParsing="false" styleClass="normalButton"
+            stylesheets="@../styleSheets/login.css" text="SIGN UP" GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <GridPane.margin>
+            <Insets left="10.0"/>
+        </GridPane.margin>
+    </Button>
+    <TextField id="usernameTextField" fx:id="usernameTextField" prefHeight="34.0" prefWidth="199.0"
+               promptText="USERNAME" styleClass="text-field" stylesheets="@../styleSheets/login.css"
+               GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+        <GridPane.margin>
+            <Insets bottom="5.0"/>
+        </GridPane.margin>
+    </TextField>
+    <PasswordField fx:id="passwordTextField" prefHeight="33.0" prefWidth="203.0" promptText="PASSWORD"
+                   styleClass="text-field" stylesheets="@../styleSheets/login.css" GridPane.columnIndex="1"
+                   GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="TOP">
+        <GridPane.margin>
+            <Insets top="5.0"/>
+        </GridPane.margin>
+    </PasswordField>
+    <Button id="submitButton" fx:id="submitButton" mnemonicParsing="false" onAction="#handleSubmit"
+            prefHeight="259.0" prefWidth="620.0" text="LOG IN" GridPane.columnIndex="1" GridPane.columnSpan="2"
+            GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4"
+            GridPane.valignment="CENTER"/>
 </GridPane>

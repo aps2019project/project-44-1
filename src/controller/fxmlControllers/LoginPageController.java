@@ -1,6 +1,5 @@
 package controller.fxmlControllers;
 
-
 import Main.Main;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -29,13 +28,13 @@ public class LoginPageController implements Initializable {
         submitButton.setOnAction(event -> {
             String username = usernameTextField.getText();
             String password = passwordTextField.getText();
-            if (submitButton.getText().equals("LOG IN")){
+            if (submitButton.getText().equals("LOG IN")) {
                 Main.getStage().getScene().setRoot(Main.getMainMenu());
-            }
-            else {
+            } else {
 
             }
 
         });
     }
+
 }

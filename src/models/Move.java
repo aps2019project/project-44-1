@@ -1,5 +1,6 @@
 package models;
 
+import models.Enums.Directions;
 import view.View;
 
 public interface Move {
@@ -56,6 +57,23 @@ public interface Move {
             return map.getCell(xx, y).isFree();
         }
         return false;
+    }
+
+    default Directions[] movingDirections(int x, int y, int xx, int yy) {
+        Directions[] directions = new Directions[2];
+        if (x == xx) {
+            switch (x - xx) {
+                case -2:
+                    break;
+                case -1:
+                    break;
+                case 1:
+                    break;
+                case 2:
+            }
+
+        }
+        return directions;
     }
 
 }
