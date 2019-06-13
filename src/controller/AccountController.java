@@ -11,6 +11,8 @@ import view.AccountRequest;
 import view.RequestType;
 import view.View;
 
+import java.util.Arrays;
+
 class AccountController {
     private static AccountController accountController = new AccountController();
     private Account account;

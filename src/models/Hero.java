@@ -17,7 +17,7 @@ public class Hero extends Card {
                 " - AP : " + this.getAP() +
                 " - HP : " + this.getHP() +
 //                " - Class : " + this.getAttackType().getNameType() +
-                " - Special power: ";
+                " - Special power: " + "\tin game id : " + this.getInGameID();
         // TODO: 30/04/2019 get special power in string
     }
 
@@ -51,7 +51,7 @@ public class Hero extends Card {
     }
 
     @Override
-    protected Hero clone() throws CloneNotSupportedException {
+    protected Hero clone() {
         Hero newHero = new Hero();
         newHero.setOwner(this.getOwner());
         newHero.setAttackAvailable(this.isAttackAvailable());
@@ -65,4 +65,5 @@ public class Hero extends Card {
         newHero.setAttackType(this.getAttackType());
         return newHero;
     }
+
 }

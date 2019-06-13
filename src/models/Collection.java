@@ -93,7 +93,7 @@ public class Collection implements Comparable<Placeable> {
         return 0;
     }
 
-    Deck getMainDeck() {
+    public Deck getMainDeck() {
         return mainDeck;
     }
 

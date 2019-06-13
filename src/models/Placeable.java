@@ -40,7 +40,8 @@ public abstract class Placeable implements Comparable<Placeable> {
         if (o.getClass() == this.getClass()) {
             return 0;
         }
-        if (this instanceof Hero && (o instanceof Item || o instanceof Minion || o instanceof Spell)) {
+        if (this instanceof Hero && (o instanceof Item || o instanceof Minion ||
+                o instanceof Spell)) {
             return 1;
         } else if (this instanceof Item && (o instanceof Minion || o instanceof Spell)) {
             return 1;

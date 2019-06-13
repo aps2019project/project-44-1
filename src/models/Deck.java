@@ -109,7 +109,7 @@ public class Deck implements Cloneable {
     }
 
     @Override
-    public Deck clone() throws CloneNotSupportedException {
+    public Deck clone() {
 //        Deck deck = (Deck) super.clone();
         Deck deck = new Deck(this.getName());
 //        deck.item = (Item) this.item.clone();

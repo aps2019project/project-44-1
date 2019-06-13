@@ -8,13 +8,14 @@ import view.RequestType;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Arrays;
 
 import static models.Enums.ErrorType.NO_ERROR;
 
 public class ArtificialIntelligence {
     private String Hero;
     private String[] Spell;
-    private String[] Minions;
+    private String[] Cards;
     private String Item;
     private Gson gson = new Gson();
 
@@ -27,11 +28,10 @@ public class ArtificialIntelligence {
                 ai = gson.fromJson(array.get(0), ArtificialIntelligence.class);
                 break;
             case 2:
-                ai = gson.fromJson(array.get(0), ArtificialIntelligence.class);
-
+                ai = gson.fromJson(array.get(1), ArtificialIntelligence.class);
                 break;
             case 3:
-                ai = gson.fromJson(array.get(0), ArtificialIntelligence.class);
+                ai = gson.fromJson(array.get(2), ArtificialIntelligence.class);
         }
         return realAI(ai);
     }
@@ -60,8 +60,8 @@ public class ArtificialIntelligence {
         for (String s : ai.Spell) {
             deck.getDeckCards().add(shop.getCard(s));
         }
-        for (String s : ai.Minions) {
-            deck.getDeckCards().add(shop.getCard(s));
+        for (String s : ai.Cards) {
+            deck.addToDeck(shop.getCard(s));
         }
         deck.setItem((models.Item) shop.getCard(ai.Item));
         return deck;
@@ -87,7 +87,9 @@ public class ArtificialIntelligence {
             }
         }
         int y = hero.getMyCell().getY();
-        hero.getOwner().move(hero.getMyCell().getX(), y + backAndForth(y));
+        hero.getOwner().select(hero.getInGameID());
+        System.out.println(hero.getOwner().move(hero.getMyCell().getX() + 1,
+                y + backAndForth(y) + 1));
     }
 
     private static int backAndForth(int currentY) {

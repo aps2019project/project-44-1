@@ -206,9 +206,9 @@ public class View {
 
     public void showStoryGameKinds() {
         System.out.println("choose level between:\n" +
-                "1.death match\tOPPONENT : divsefid" +
-                "\n2.save flag\tOPPONENT : zahhak\n" +
-                "3.capture multiple flags\tOPPONENT : arash");
+                "1.death match\t\tOPPONENT : divsefid" +
+                "\n2.save flag\t\tOPPONENT : zahhak\n" +
+                "3.capture multiple flags\t\tOPPONENT : arash");
     }
 
     public void showMyMinions(ArrayList<Card> cards) {
@@ -221,8 +221,9 @@ public class View {
 
     private void showMinionsInBattleFormatted(ArrayList<Card> cards) {
         for (Card card : cards) {
-            System.out.println(card.getInGameID() + " : " + card.getName() + ", health : " + card.getHP() + ", location : (" +
-                    card.getMyCell().getX() + ", " + card.getMyCell().getY() + "), power : " + card.getAP());
+            System.out.println(card.getInGameID() + " : " + card.getName() +
+                    ", health : " + card.getHP() + ", location : (" + card.getMyCell().getX()
+                    + ", " + card.getMyCell().getY() + "), power : " + card.getAP());
         }
     }
 
@@ -249,13 +250,17 @@ public class View {
                     e.printStackTrace();
                     System.out.println(i + "\t" + j);
                 }
-                if (cells[i][j].getCard() instanceof Hero && cells[i][j].getCard().getOwner().equals(battle.getFirstPlayer())) {
+                if (cells[i][j].getCard() instanceof Hero && cells[i][j].getCard().
+                        getOwner().equals(battle.getFirstPlayer())) {
                     System.out.print(" O |");
-                } else if (cells[i][j].getCard() instanceof Minion && cells[i][j].getCard().getOwner().equals(battle.getFirstPlayer())) {
+                } else if (cells[i][j].getCard() instanceof Minion && cells[i][j].
+                        getCard().getOwner().equals(battle.getFirstPlayer())) {
                     System.out.print(" o |");
-                } else if (cells[i][j].getCard() instanceof Hero && cells[i][j].getCard().getOwner().equals(battle.getSecondPlayer())) {
+                } else if (cells[i][j].getCard() instanceof Hero && cells[i][j].
+                        getCard().getOwner().equals(battle.getSecondPlayer())) {
                     System.out.print(" X |");
-                } else if (cells[i][j].getCard() instanceof Minion && cells[i][j].getCard().getOwner().equals(battle.getSecondPlayer())) {
+                } else if (cells[i][j].getCard() instanceof Minion && cells[i][j].
+                        getCard().getOwner().equals(battle.getSecondPlayer())) {
                     System.out.print(" x |");
                 } else {
                     System.out.print(" __|");
