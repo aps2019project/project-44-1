@@ -61,7 +61,7 @@ public class View {
     }
 
     public void showMainMenu() {
-        System.out.println("Main menu\n" +
+        System.out.println("Main.Main menu\n" +
                 "-------\n" +
                 "1.Collection\n" +
                 "2.Shop\n" +
