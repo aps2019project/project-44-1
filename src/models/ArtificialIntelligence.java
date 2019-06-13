@@ -28,11 +28,10 @@ public class ArtificialIntelligence {
                 ai = gson.fromJson(array.get(0), ArtificialIntelligence.class);
                 break;
             case 2:
-                ai = gson.fromJson(array.get(0), ArtificialIntelligence.class);
-
+                ai = gson.fromJson(array.get(1), ArtificialIntelligence.class);
                 break;
             case 3:
-                ai = gson.fromJson(array.get(0), ArtificialIntelligence.class);
+                ai = gson.fromJson(array.get(2), ArtificialIntelligence.class);
         }
         return realAI(ai);
     }
@@ -65,7 +64,6 @@ public class ArtificialIntelligence {
             deck.addToDeck(shop.getCard(s));
         }
         deck.setItem((models.Item) shop.getCard(ai.Item));
-        System.out.println(Arrays.toString(deck.getDeckCards().toArray()));
         return deck;
     }
 
@@ -90,7 +88,8 @@ public class ArtificialIntelligence {
         }
         int y = hero.getMyCell().getY();
         hero.getOwner().select(hero.getInGameID());
-        hero.getOwner().move(hero.getMyCell().getX(), y + backAndForth(y));
+        System.out.println(hero.getOwner().move(hero.getMyCell().getX() + 1,
+                y + backAndForth(y) + 1));
     }
 
     private static int backAndForth(int currentY) {
