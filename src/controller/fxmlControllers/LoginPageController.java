@@ -1,8 +1,9 @@
 package controller.fxmlControllers;
 
-import Main.Main;
+import controller.GameController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -17,6 +18,7 @@ public class LoginPageController implements Initializable {
     public Button submitButton;
     public PasswordField passwordTextField;
     public TextField usernameTextField;
+    public Label label;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -25,16 +27,23 @@ public class LoginPageController implements Initializable {
     }
 
     public void handleSubmit() {
-        submitButton.setOnAction(event -> {
-            String username = usernameTextField.getText();
-            String password = passwordTextField.getText();
-            if (submitButton.getText().equals("LOG IN")) {
-                Main.getStage().getScene().setRoot(Main.getMainMenu());
-            } else {
+        submitButton.setOnAction(event -> loginAction());
+    }
 
-            }
+    private void loginAction() {
+        System.out.println("hello");
+//        GameController gameController = GameController.getInstance();
+//        gameController.getGraphicState(usernameTextField.getText(), passwordTextField.getText(),
+//                submitButton.getText().equals("LOG IN"));
+//        gameController.start();
+//        String labelText = gameController.getLabelText();
+//        if (labelText != null)
+//            appearLabel(labelText);
+    }
 
-        });
+    private void appearLabel(String text) {
+        label.setText(text);
+        label.setVisible(true);
     }
 
 }

@@ -29,7 +29,8 @@ public enum ErrorType {
     DEST_IS_UNAVAILABLE_FOR_ATTACK("opponent minion is unavailable for attack"),
     INVALID_DEST_ID("Invalid card id"),
     CARD_CANT_MOVE("this card has been moved this turn"),
-    CARD_CANT_ATTACK("card can't attack");
+    CARD_CANT_ATTACK("card can't attack"),
+    ACCOUNT_CREATED("account created successfully!");
 
 
     private String message;

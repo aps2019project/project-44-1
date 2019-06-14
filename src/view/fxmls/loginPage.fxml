@@ -2,15 +2,17 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <GridPane id="rootGridPane" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
           minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styleSheets/login.css"
-          xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="controller.fxmlControllers.LoginPageController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.33334350585938" minWidth="10.0" percentWidth="33.0"
@@ -32,8 +34,8 @@
                         vgrow="SOMETIMES"/>
     </rowConstraints>
     <Button fx:id="logInButton" alignment="TOP_RIGHT" mnemonicParsing="false" styleClass="normalButton"
-            stylesheets="@../styleSheets/login.css" text="LOG IN" GridPane.columnIndex="1"
-            GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+            stylesheets="@../styleSheets/login.css" text="LOG IN" GridPane.columnIndex="1" GridPane.halignment="RIGHT"
+            GridPane.rowIndex="1">
         <GridPane.margin>
             <Insets right="10.0"/>
         </GridPane.margin>
@@ -58,8 +60,14 @@
             <Insets top="5.0"/>
         </GridPane.margin>
     </PasswordField>
-    <Button id="submitButton" fx:id="submitButton" mnemonicParsing="false" onAction="#handleSubmit"
-            prefHeight="259.0" prefWidth="620.0" text="LOG IN" GridPane.columnIndex="1" GridPane.columnSpan="2"
-            GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4"
-            GridPane.valignment="CENTER"/>
+    <Button id="submitButton" fx:id="submitButton" mnemonicParsing="false" onAction="#handleSubmit" prefHeight="259.0"
+            prefWidth="620.0" text="LOG IN" GridPane.columnIndex="1" GridPane.columnSpan="2"
+            GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER"/>
+    <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" prefHeight="85.0" prefWidth="204.0"
+           textAlignment="CENTER" textFill="#cd1f1f" visible="false" GridPane.columnIndex="1" GridPane.columnSpan="2"
+           GridPane.rowIndex="5">
+        <font>
+            <Font name="System Bold" size="25.0"/>
+        </font>
+    </Label>
 </GridPane>

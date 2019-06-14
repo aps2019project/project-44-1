@@ -15,7 +15,6 @@ public class Main extends Application {
     private static Parent shopPage;
     private static Stage stage;
 
-
     static {
         try {
             loginPage = FXMLLoader.load(Main.class.getResource("/view/fxmls/loginPage.fxml"));
@@ -25,11 +24,11 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    //---------------------------------------------------- windows are loaded
 
     public static void main(String[] args) {
         launch(args);
-        GameController.getInstance().main();
-
+//        GameController.getInstance().main();
     }
 
     @Override
@@ -45,20 +44,8 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static Parent getLoginPage() {
-        return loginPage;
-    }
-
-    public static void setLoginPage(Parent loginPage) {
-        Main.loginPage = loginPage;
-    }
-
     public static Parent getMainMenu() {
         return mainMenu;
-    }
-
-    public static void setMainMenu(Parent mainMenu) {
-        Main.mainMenu = mainMenu;
     }
 
     public static Stage getStage() {
@@ -71,10 +58,6 @@ public class Main extends Application {
 
     public static Parent getShopPage() {
         return shopPage;
-    }
-
-    public static void setShopPage(Parent shopPage) {
-        Main.shopPage = shopPage;
     }
 
 }
