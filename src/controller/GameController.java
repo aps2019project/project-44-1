@@ -16,11 +16,8 @@ public class GameController extends Thread {
     }
 
     public static GameController getInstance() {
-        gameController.setName("gameController");
-        gameController.setDaemon(true);
         return gameController;
     }
-
 //    public void main() {
 //        GameRequest request;
 //        boolean isFinish = false;
@@ -54,23 +51,33 @@ public class GameController extends Thread {
             if (game.isValidPassword(account, password)) {
                 AccountController.getInstance().main(account);      // FIXME: 6/13/2019 here
             } else {
-//                view.printError(ErrorType.INVALID_PASSWORD);
-                labelText = ErrorType.INVALID_PASSWORD.getMessage();
+                showMessage(ErrorType.INVALID_PASSWORD);
             }
         } else {
-//            view.printError(ErrorType.INVALID_USERNAME);
-            labelText = ErrorType.INVALID_USERNAME.getMessage();
+            showMessage(ErrorType.INVALID_USERNAME);
         }
     }
 
     private void createAccount() {
+        if (username.equals("")) {
+            showMessage(ErrorType.INVALID_USERNAME);
+            return;
+        }
+        if (password.equals("")) {
+            showMessage(ErrorType.INVALID_PASSWORD);
+            return;
+        }
         if (!game.isUsedUsername(username)) {
             game.createAccount(username, password);
-            labelText = ErrorType.ACCOUNT_CREATED.getMessage();
+            showMessage(ErrorType.ACCOUNT_CREATED);
         } else {
-//            view.printError(ErrorType.USED_BEFORE_USERNAME);
-            labelText = ErrorType.USED_BEFORE_USERNAME.getMessage();
+            showMessage(ErrorType.USED_BEFORE_USERNAME);
         }
+    }
+
+    private void showMessage(ErrorType errorType) {
+        labelText = errorType.getMessage();
+        System.out.println(errorType.getMessage());
     }
 //
 //    private void showLeaderboard() {
@@ -83,11 +90,23 @@ public class GameController extends Thread {
 
     @Override
     public void run() {
-        System.out.println(gameController.getName());
-        if (isLoginRequest)
-            login();
-        else
-            createAccount();
+        decide();
+    }
+
+    private synchronized void decide() {
+        while (true) {
+            try {
+                if (isLoginRequest)
+                    login();
+                else
+                    createAccount();
+                if (Thread.holdsLock(this)) {
+                    wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void getGraphicState(String username, String password, boolean isLoginRequest) {

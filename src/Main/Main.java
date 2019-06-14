@@ -1,6 +1,5 @@
 package Main;
 
-import controller.GameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,7 +27,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-//        GameController.getInstance().main();
     }
 
     @Override
@@ -42,10 +40,6 @@ public class Main extends Application {
         scene.getStylesheets().add("/view/styleSheets/shop.css");
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    public static Parent getMainMenu() {
-        return mainMenu;
     }
 
     public static Stage getStage() {

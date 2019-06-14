@@ -63,9 +63,9 @@
     <Button id="submitButton" fx:id="submitButton" mnemonicParsing="false" onAction="#handleSubmit" prefHeight="259.0"
             prefWidth="620.0" text="LOG IN" GridPane.columnIndex="1" GridPane.columnSpan="2"
             GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER"/>
-    <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" prefHeight="85.0" prefWidth="204.0"
-           textAlignment="CENTER" textFill="#cd1f1f" visible="false" GridPane.columnIndex="1" GridPane.columnSpan="2"
-           GridPane.rowIndex="5">
+    <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" prefHeight="89.0" prefWidth="605.0"
+           textAlignment="CENTER" textFill="#cd1f1f" GridPane.columnIndex="0" GridPane.columnSpan="4"
+           GridPane.rowIndex="5" visible="false">
         <font>
             <Font name="System Bold" size="25.0"/>
         </font>

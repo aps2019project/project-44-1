@@ -19,7 +19,11 @@ public class LoginPageController implements Initializable {
     public PasswordField passwordTextField;
     public TextField usernameTextField;
     public Label label;
+    private final GameController gameController = GameController.getInstance();
 
+    /**
+     * incredibly runs twice!!!
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         logInButton.setOnAction(event -> submitButton.setText("LOG IN"));
@@ -31,19 +35,35 @@ public class LoginPageController implements Initializable {
     }
 
     private void loginAction() {
-        System.out.println("hello");
-//        GameController gameController = GameController.getInstance();
-//        gameController.getGraphicState(usernameTextField.getText(), passwordTextField.getText(),
-//                submitButton.getText().equals("LOG IN"));
-//        gameController.start();
-//        String labelText = gameController.getLabelText();
-//        if (labelText != null)
-//            appearLabel(labelText);
+        if (!gameController.isAlive())
+            initializeThread();
+        synchronized (gameController) {
+            Thread.yield();
+            gameController.notify();
+        }
+        try {
+            Thread.sleep(3);            //it's a trick to wait for receive logic process results
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String labelText = gameController.getLabelText();
+        if (labelText != null) {
+            appearLabel(labelText);
+        }
     }
 
     private void appearLabel(String text) {
         label.setText(text);
         label.setVisible(true);
+    }
+
+    private void initializeThread() {
+        gameController.setName("gameController");
+        gameController.setDaemon(true);
+        gameController.setPriority(Thread.MAX_PRIORITY);
+        gameController.getGraphicState(usernameTextField.getText(), passwordTextField.getText(),
+                submitButton.getText().equals("LOG IN"));
+        gameController.start();
     }
 
 }
