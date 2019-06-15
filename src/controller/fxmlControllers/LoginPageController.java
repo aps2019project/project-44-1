@@ -1,5 +1,6 @@
 package controller.fxmlControllers;
 
+import Main.Main;
 import controller.GameController;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.Initializable;
@@ -38,7 +39,9 @@ public class LoginPageController implements Initializable {
     }
 
     public void handleSubmit() {
-        submitButton.setOnAction(event -> loginAction());
+        submitButton.setOnAction(event ->
+                Main.getStage().getScene().setRoot(Main.getMainMenu()));
+//                loginAction());
     }
 
     private void loginAction() {
@@ -85,7 +88,7 @@ public class LoginPageController implements Initializable {
         timer.schedule(task, DISAPPEARING_LABEL_DELAY);
     }
 
-    public void showLeaderboard(){
+    public void showLeaderboard() {
 
     }
 

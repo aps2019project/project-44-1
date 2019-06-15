@@ -63,4 +63,12 @@ public class Main extends Application {
     public static Parent getCollectionPage() {
         return collectionPage;
     }
+
+    public static Parent getLoginPage() {
+        return loginPage;
+    }
+
+    public static Parent getMainMenu() {
+        return mainMenu;
+    }
 }
