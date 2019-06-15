@@ -12,7 +12,7 @@
 
 <GridPane id="rootGridPane" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
           minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styleSheets/login.css"
-          xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
+          xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="controller.fxmlControllers.LoginPageController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.33334350585938" minWidth="10.0" percentWidth="33.0"
@@ -64,10 +64,17 @@
             prefWidth="620.0" text="LOG IN" GridPane.columnIndex="1" GridPane.columnSpan="2"
             GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER"/>
     <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" prefHeight="89.0" prefWidth="605.0"
-           textAlignment="CENTER" textFill="#cd1f1f" GridPane.columnIndex="0" GridPane.columnSpan="4"
-           GridPane.rowIndex="5" visible="false">
+           textAlignment="CENTER" textFill="#cd1f1f" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="4"
+           GridPane.rowIndex="5">
         <font>
             <Font name="System Bold" size="25.0"/>
         </font>
     </Label>
+    <Button fx:id="leaderboard" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="68.0"
+            prefWidth="164.0" text="LEADERBOARD" textAlignment="CENTER" GridPane.columnIndex="3"
+            onAction="#showLeaderboard">
+        <font>
+            <Font name="System Bold Italic" size="15.0"/>
+        </font>
+    </Button>
 </GridPane>

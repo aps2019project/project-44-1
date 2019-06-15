@@ -10,6 +10,8 @@ import javafx.scene.layout.GridPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LoginPageController implements Initializable {
     public GridPane root;
@@ -19,7 +21,9 @@ public class LoginPageController implements Initializable {
     public PasswordField passwordTextField;
     public TextField usernameTextField;
     public Label label;
+    public Button leaderboard;
     private final GameController gameController = GameController.getInstance();
+    private static final int DISAPPEARING_LABEL_DELAY = 1000;
 
     /**
      * incredibly runs twice!!!
@@ -38,11 +42,12 @@ public class LoginPageController implements Initializable {
         if (!gameController.isAlive())
             initializeThread();
         synchronized (gameController) {
-            Thread.yield();
             gameController.notify();
         }
         try {
-            Thread.sleep(3);            //it's a trick to wait for receive logic process results
+            gameController.getGraphicState(usernameTextField.getText(), passwordTextField.getText(),
+                    submitButton.getText().equals("LOG IN"));
+            Thread.sleep(5);            //it's a trick to wait for receive logic process results
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -55,15 +60,30 @@ public class LoginPageController implements Initializable {
     private void appearLabel(String text) {
         label.setText(text);
         label.setVisible(true);
+        disappearLabel();
     }
 
     private void initializeThread() {
         gameController.setName("gameController");
         gameController.setDaemon(true);
-        gameController.setPriority(Thread.MAX_PRIORITY);
         gameController.getGraphicState(usernameTextField.getText(), passwordTextField.getText(),
                 submitButton.getText().equals("LOG IN"));
         gameController.start();
+    }
+
+    private void disappearLabel() {
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                label.setVisible(false);
+            }
+        };
+        timer.schedule(task, DISAPPEARING_LABEL_DELAY);
+    }
+
+    public void showLeaderboard(){
+
     }
 
 }
