@@ -3,13 +3,14 @@ package controller;
 import models.Account;
 import models.Enums.ErrorType;
 import models.Game;
-import view.GameRequest;
-import view.View;
 
-public class GameController {
+public class GameController extends Thread {
     private static GameController gameController = new GameController();
     private Game game = Game.getInstance();
-    private View view = View.getInstance();
+    private String username;
+    private String password;
+    private boolean isLoginRequest;
+    private String labelText = null;
 
     private GameController() {
     }
@@ -17,62 +18,105 @@ public class GameController {
     public static GameController getInstance() {
         return gameController;
     }
+//    public void main() {
+//        GameRequest request;
+//        boolean isFinish = false;
+//        do {
+//            view.printStartMenu();          /*show menu*/
+//            request = new GameRequest();
+//            request.getNewCommand();
+//            switch (request.getType()) {
+//                case LOGIN:
+//                    login(request);
+//                    break;
+//                case CREATE_ACCOUNT:
+//                    createAccount(request);
+//                    break;
+//                case HELP:
+//                    help();
+//                    break;
+//                case SHOW_LEADERBOARD:
+//                    showLeaderboard();
+//                    break;
+//                case EXIT:
+//                    isFinish = true;
+//            }
+//        }
+//        while (!isFinish);
+//    }
 
-    public void main() {
-        GameRequest request;
-        boolean isFinish = false;
-        do {
-            view.printStartMenu();          /*show menu*/
-            request = new GameRequest();
-            request.getNewCommand();
-            switch (request.getType()) {
-                case LOGIN:
-                    login(request);
-                    break;
-                case CREATE_ACCOUNT:
-                    createAccount(request);
-                    break;
-                case HELP:
-                    help();
-                    break;
-                case SHOW_LEADERBOARD:
-                    showLeaderboard();
-                    break;
-                case EXIT:
-                    isFinish = true;
-            }
-        }
-        while (!isFinish);
-    }
-
-    private void login(GameRequest request) {
-        Account account = Game.getAccount(request.getUserName());
-        String password = request.getPassword(view);
+    private void login() {
+        Account account = Game.getAccount(username);
         if (account != null) {
             if (game.isValidPassword(account, password)) {
-                AccountController.getInstance().main(account);
+                AccountController.getInstance().main(account);      // FIXME: 6/13/2019 here
             } else {
-                view.printError(ErrorType.INVALID_PASSWORD);
+                showMessage(ErrorType.INVALID_PASSWORD);
             }
         } else {
-            view.printError(ErrorType.INVALID_USERNAME);
+            showMessage(ErrorType.INVALID_USERNAME);
         }
     }
 
-    private void createAccount(GameRequest request) {
-        if (!game.isUsedUsername(request.getUserName())) {
-            game.createAccount(request.getUserName(), request.getPassword(view));
+    private void createAccount() {
+        if (username.equals("")) {
+            showMessage(ErrorType.INVALID_USERNAME);
+            return;
+        }
+        if (password.equals("")) {
+            showMessage(ErrorType.INVALID_PASSWORD);
+            return;
+        }
+        if (!game.isUsedUsername(username)) {
+            game.createAccount(username, password);
+            showMessage(ErrorType.ACCOUNT_CREATED);
         } else {
-            view.printError(ErrorType.USED_BEFORE_USERNAME);
+            showMessage(ErrorType.USED_BEFORE_USERNAME);
         }
     }
 
-    private void showLeaderboard() {
-        view.printLeaderboard(game.getSortedAccounts());
+    private void showMessage(ErrorType errorType) {
+        labelText = errorType.getMessage();
+        System.out.println(errorType.getMessage());
+    }
+//
+//    private void showLeaderboard() {
+//        view.printLeaderboard(game.getSortedAccounts());
+//    }
+//
+//    private void help() {
+//        view.printGameMenuHelp(game.toString());
+//    }
+
+    @Override
+    public void run() {
+        decide();
     }
 
-    private void help() {
-        view.printGameMenuHelp(game.toString());
+    private synchronized void decide() {
+        while (true) {
+            try {
+                if (isLoginRequest)
+                    login();
+                else
+                    createAccount();
+                if (Thread.holdsLock(this)) {
+                    wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getGraphicState(String username, String password, boolean isLoginRequest) {
+        this.password = password;
+        this.username = username;
+        this.isLoginRequest = isLoginRequest;
+    }
+
+    public String getLabelText() {
+        return labelText;
     }
 
 }

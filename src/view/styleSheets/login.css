@@ -1,0 +1,62 @@
+#rootGridPane {
+    -fx-background-image: url("../images/background@2x.jpg");
+    -fx-background-size: 100% 100%;
+
+}
+
+.normalButton {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family: Andalus;
+    -fx-font-size: 17;
+    -fx-text-fill: #ffffff;
+    -fx-column-halignment: center;
+    -fx-row-valignment: center;
+    -fx-fit-to-width: inherit;
+}
+
+.normalButton:focused {
+    -fx-border-color: transparent;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid;
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.normalButton:pressed {
+    -fx-background-color: #95caf0;
+    -fx-text-fill: white;
+}
+
+#usernameTextField {
+    /*-fx-padding: ;*/
+}
+
+.text-field {
+    -fx-fit-to-width: 50%;
+    -fx-pref-width: 50%;
+    -fx-background-color: #ddd;
+    -fx-font-size: 14;
+}
+
+#submitButton {
+    -fx-background-image: url("../images/button_confirm.png");
+    -fx-background-size: 100% 100%;
+    -fx-column-halignment: center;
+    -fx-cell-size: 100% 100%;
+    -fx-fill-height: 100%;
+    -fx-fill-width: 100%;
+    -fx-background-color: transparent;
+    -fx-font-size: 17;
+    -fx-font-family: Andalus;
+
+
+}
+
+#submitButton:hover {
+    -fx-background-image: url("../images/button_confirm_glow.png");
+    -fx-background-size: 100% 100%;
+}
+

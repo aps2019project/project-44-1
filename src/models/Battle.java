@@ -65,12 +65,11 @@ public class Battle implements Goal, Fight {
                 continue;
             }
             Cell cell = map.getCell(x, y);
-            if (cell.isFree()) {
+            if (cell.isFree() && cell.getItem() == null) {
                 Item flag = new Item();
                 flag.flagInitialize(i);
                 relater(flag, cell);
                 map.putFlagInMap(flag);
-//                System.out.println(x + "\t" + y);
             } else
                 i--;
         }
@@ -144,6 +143,7 @@ public class Battle implements Goal, Fight {
                 else HP2 = c.getHP();
             }
         }
+//        System.out.println(Arrays.toString(map.getAllCardsInMap().toArray()));
         return "HP of first player Hero is " + HP1 + "\n" +
                 "HP of second player Hero is " + HP2;
         //} else if (this.battleMode == BattleMode.CAPTURE_FLAG_1) {

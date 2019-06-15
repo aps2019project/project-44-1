@@ -8,10 +8,13 @@ import models.Enums.BattleMode;
 import models.Enums.ErrorType;
 import models.Game;
 import view.AccountRequest;
+import view.GameRequest;
 import view.RequestType;
 import view.View;
 
-class AccountController {
+import java.util.Arrays;
+
+public class AccountController extends Thread {
     private static AccountController accountController = new AccountController();
     private Account account;
     private View view = View.getInstance();
@@ -19,44 +22,42 @@ class AccountController {
     private AccountController() {
     }
 
-    static AccountController getInstance() {
+    public static AccountController getInstance() {
+        accountController.setDaemon(true);
         return accountController;
     }
 
     void main(Account account) {
         AccountRequest request;
         this.account = account;
-        boolean isFinish = false;
-        do {
-            view.showMainMenu();
-            request = new AccountRequest();
-            request.getNewCommand();
-            switch (request.getType()) {
-                case ENTER_COLLECTION:
-                    enterCollection();
-                    break;
-                case ENTER_SHOP:
-                    enterShop();
-                    break;
-                case ENTER_BATTLE:
-                    enterBattle(request);
-                    break;
-                case EXIT:
-                    System.exit(0);
-                    break;
-                case HELP:
-                    help();
-                    break;
-                case LOGOUT:
-                    isFinish = true;
-                    break;
-                case SAVE:
-                    save();
-                case SHOW_MATCH_HISTORY:
-                    account.showHistory();
-            }
+        view.showMainMenu();
+        request = new AccountRequest();
+        request.getNewCommand();
+        switch (request.getType()) {
+            case ENTER_COLLECTION:
+                enterCollection();
+                break;
+            case ENTER_SHOP:
+                enterShop();
+                break;
+            case ENTER_BATTLE:
+                enterBattle(request);
+                break;
+            case EXIT:
+                System.exit(0);
+                break;
+            case HELP:
+                help();
+                break;
+            case LOGOUT:
+
+                break;
+            case SAVE:
+                save();
+            case SHOW_MATCH_HISTORY:
+                account.showHistory();
         }
-        while (!isFinish);
+
     }
 
     //------------------------------------------------------------Battle
@@ -189,5 +190,6 @@ class AccountController {
     private void enterShop() {
         ShopController.getInstance().main(account);
     }
+
 
 }
