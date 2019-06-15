@@ -55,8 +55,8 @@
 
 }
 
-#submitButton:focused {
+#submitButton:hover {
     -fx-background-image: url("../images/button_confirm_glow.png");
     -fx-background-size: 100% 100%;
-
 }
+
