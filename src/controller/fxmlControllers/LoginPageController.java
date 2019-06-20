@@ -36,6 +36,7 @@ public class LoginPageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         logInButton.setOnAction(event -> submitButton.setText("LOG IN"));
         signUpButton.setOnAction(event -> submitButton.setText("SIGN UP"));
+        handleSubmit();
     }
 
     public void handleSubmit() {
