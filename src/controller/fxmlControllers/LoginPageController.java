@@ -1,17 +1,17 @@
 package controller.fxmlControllers;
 
-import Main.Main;
+//import Main.Main;
+
 import controller.GameController;
-import javafx.animation.AnimationTimer;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -40,8 +40,8 @@ public class LoginPageController implements Initializable {
 
     public void handleSubmit() {
         submitButton.setOnAction(event ->
-                Main.getStage().getScene().setRoot(Main.getMainMenu()));
-//                loginAction());
+//                Main.getStage().getScene().setRoot(Main.getMainMenu()));
+                loginAction());
     }
 
     private void loginAction() {
@@ -88,8 +88,9 @@ public class LoginPageController implements Initializable {
         timer.schedule(task, DISAPPEARING_LABEL_DELAY);
     }
 
-    public void showLeaderboard() {
-
+    public void showLeaderboard() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/leaderboard.fxml"));
+        label.getScene().setRoot(loader.load());
     }
 
 }
