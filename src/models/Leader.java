@@ -9,7 +9,7 @@ public class Leader {
     private String username;
     private int wins;
 
-    public Leader(String username, int wins) {
+    private Leader(String username, int wins) {
         this.username = username;
         this.wins = wins;
     }
