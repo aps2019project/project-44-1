@@ -1,4 +1,6 @@
-package models;
+package view.fxmls.wrapperClasses;
+
+import models.Account;
 
 import java.util.ArrayList;
 

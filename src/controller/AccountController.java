@@ -8,11 +8,8 @@ import models.Enums.BattleMode;
 import models.Enums.ErrorType;
 import models.Game;
 import view.AccountRequest;
-import view.GameRequest;
 import view.RequestType;
 import view.View;
-
-import java.util.Arrays;
 
 public class AccountController extends Thread {
     private static AccountController accountController = new AccountController();
@@ -26,42 +23,41 @@ public class AccountController extends Thread {
         accountController.setDaemon(true);
         return accountController;
     }
-
-    void main(Account account) {
-        AccountRequest request;
-        this.account = account;
-        view.showMainMenu();
-        request = new AccountRequest();
-        request.getNewCommand();
-        switch (request.getType()) {
-            case ENTER_COLLECTION:
-                enterCollection();
-                break;
-            case ENTER_SHOP:
-                enterShop();
-                break;
-            case ENTER_BATTLE:
-                enterBattle(request);
-                break;
-            case EXIT:
-                System.exit(0);
-                break;
-            case HELP:
-                help();
-                break;
-            case LOGOUT:
-
-                break;
-            case SAVE:
-                save();
-            case SHOW_MATCH_HISTORY:
-                account.showHistory();
-        }
-
-    }
+//    void main(Account account) {
+//        AccountRequest request;
+//        this.account = account;
+//        view.showMainMenu();
+//        request = new AccountRequest();
+//        request.getNewCommand();
+//        switch (request.getType()) {
+//            case ENTER_COLLECTION:
+//                enterCollection();
+//                break;
+//            case ENTER_SHOP:
+//                enterShop();
+//                break;
+//            case ENTER_BATTLE:
+//                enterBattle(request);
+//                break;
+//            case EXIT:
+//                System.exit(0);
+//                break;
+//            case HELP:
+//                help();
+//                break;
+//            case LOGOUT:
+//
+//                break;
+//            case SAVE:
+//                save();
+//            case SHOW_MATCH_HISTORY:
+//                account.showHistory();
+//        }
+//
+//    }
 
     //------------------------------------------------------------Battle
-    private void enterBattle(AccountRequest request) {
+    public void enterBattle(AccountRequest request) {
         if (!account.isReadyToPlay()) {
             view.printError(ErrorType.MAIN_DECK_IS_NOT_VALID);
             return;
@@ -176,20 +172,25 @@ public class AccountController extends Thread {
     }
 
     //-----------------------------------------------------------------
-    private void save() {
+    public void save() {
     }
+//    private void help() {
+//        view.printAccountMenuHelp(account.toString());
+//    }
 
-    private void help() {
-        view.printAccountMenuHelp(account.toString());
-    }
-
-    private void enterCollection() {
+    public void enterCollection() {
         CollectionController.getInstance().main(this.account.getCollection());
     }
 
-    private void enterShop() {
+    public void enterShop() {
         ShopController.getInstance().main(account);
     }
 
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public void logout() {
+    }
 
 }

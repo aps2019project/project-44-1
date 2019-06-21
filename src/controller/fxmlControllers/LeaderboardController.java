@@ -10,7 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Game;
-import models.Leader;
+import view.fxmls.wrapperClasses.Leader;
 
 import java.io.IOException;
 import java.net.URL;

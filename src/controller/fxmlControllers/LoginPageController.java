@@ -1,7 +1,6 @@
 package controller.fxmlControllers;
 
-//import Main.Main;
-
+import Main.Main;
 import controller.GameController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import models.Enums.ErrorType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,9 +40,7 @@ public class LoginPageController implements Initializable {
     }
 
     public void handleSubmit() {
-        submitButton.setOnAction(event ->
-//                Main.getStage().getScene().setRoot(Main.getMainMenu()));
-                loginAction());
+        submitButton.setOnAction(event -> loginAction());
     }
 
     private void loginAction() {
@@ -65,6 +63,10 @@ public class LoginPageController implements Initializable {
     }
 
     private void appearLabel(String text) {
+        if (text.equals(ErrorType.NO_ERROR.getMessage())) {
+            Main.getStage().getScene().setRoot(Main.getMainMenu());
+            return;
+        }
         label.setText(text);
         label.setVisible(true);
         disappearLabel();
