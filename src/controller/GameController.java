@@ -1,10 +1,15 @@
 package controller;
 
+import Main.Main;
+import controller.fxmlControllers.MainMenuController;
+import javafx.fxml.FXMLLoader;
 import models.Account;
 import models.Enums.ErrorType;
 import models.Game;
 
-public class GameController extends Thread {
+import java.io.IOException;
+
+public class GameController {
     private static GameController gameController = new GameController();
     private Game game = Game.getInstance();
     private String username;
@@ -45,11 +50,13 @@ public class GameController extends Thread {
 //        while (!isFinish);
 //    }
 
-    private void login() {
+    public void login(String username,String password) {
         Account account = Game.getAccount(username);
         if (account != null) {
             if (game.isValidPassword(account, password)) {
-                AccountController.getInstance().main(account);      // FIXME: 6/13/2019 here
+//                AccountController.getInstance().main(account);
+                Main.getStage().getScene().setRoot(Main.getMainMenu());
+                MainMenuController.setAccount(account);// FIXME: 6/13/2019 her
             } else {
                 showMessage(ErrorType.INVALID_PASSWORD);
             }
@@ -58,7 +65,7 @@ public class GameController extends Thread {
         }
     }
 
-    private void createAccount() {
+    public void createAccount(String username,String password) {
         if (username.equals("")) {
             showMessage(ErrorType.INVALID_USERNAME);
             return;
@@ -88,32 +95,7 @@ public class GameController extends Thread {
 //        view.printGameMenuHelp(game.toString());
 //    }
 
-    @Override
-    public void run() {
-        decide();
-    }
 
-    private synchronized void decide() {
-        while (true) {
-            try {
-                if (isLoginRequest)
-                    login();
-                else
-                    createAccount();
-                if (Thread.holdsLock(this)) {
-                    wait();
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void getGraphicState(String username, String password, boolean isLoginRequest) {
-        this.password = password;
-        this.username = username;
-        this.isLoginRequest = isLoginRequest;
-    }
 
     public String getLabelText() {
         return labelText;

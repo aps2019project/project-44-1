@@ -3,6 +3,8 @@ package controller.fxmlControllers;
 //import Main.Main;
 
 import controller.GameController;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -40,42 +42,38 @@ public class LoginPageController implements Initializable {
     }
 
     public void handleSubmit() {
-        submitButton.setOnAction(event ->
-//                Main.getStage().getScene().setRoot(Main.getMainMenu()));
-                loginAction());
+        submitButton.setOnAction(event -> {
+            String username = usernameTextField.getText();
+            String password = passwordTextField.getText();
+            if (submitButton.getText().equals("LOG IN")) {
+                login(username, password);
+            } else {
+                signUp(username, password);
+            }
+        });
     }
 
-    private void loginAction() {
-        if (!gameController.isAlive())
-            initializeThread();
-        synchronized (gameController) {
-            gameController.notify();
-        }
-        try {
-            gameController.getGraphicState(usernameTextField.getText(), passwordTextField.getText(),
-                    submitButton.getText().equals("LOG IN"));
-            Thread.sleep(5);            //it's a trick to wait for receive logic process results
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    private void signUp(String username, String password) {
+        gameController.createAccount(username,password);
         String labelText = gameController.getLabelText();
         if (labelText != null) {
             appearLabel(labelText);
         }
     }
 
+    private void login(String username, String password) {
+        gameController.login(username,password);
+        String labelText = gameController.getLabelText();
+        if (labelText != null) {
+            appearLabel(labelText);
+        }
+    }
+
+
     private void appearLabel(String text) {
         label.setText(text);
         label.setVisible(true);
         disappearLabel();
-    }
-
-    private void initializeThread() {
-        gameController.setName("gameController");
-        gameController.setDaemon(true);
-        gameController.getGraphicState(usernameTextField.getText(), passwordTextField.getText(),
-                submitButton.getText().equals("LOG IN"));
-        gameController.start();
     }
 
     private void disappearLabel() {
