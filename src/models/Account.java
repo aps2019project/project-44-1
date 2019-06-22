@@ -86,4 +86,8 @@ public class Account implements Comparable<Account> {
         }
     }
 
+    public ArrayList<MatchHistory> getHistories() {
+        return histories;
+    }
+
 }

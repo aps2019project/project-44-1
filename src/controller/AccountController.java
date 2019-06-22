@@ -193,4 +193,8 @@ public class AccountController extends Thread {
     public void logout() {
     }
 
+    public Account getAccount() {
+        return this.account;
+    }
+
 }

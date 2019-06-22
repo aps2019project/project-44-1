@@ -2,9 +2,11 @@ package controller.fxmlControllers;
 
 import Main.Main;
 import controller.AccountController;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -15,7 +17,7 @@ public class MainMenuController implements Initializable {
     public Button saveButton;
     public Button logoutButton;
     public Button exitButton;
-//    public Button historyButton;
+    public Button historyButton;
     private AccountController accountController = AccountController.getInstance();
 
     @Override
@@ -26,8 +28,7 @@ public class MainMenuController implements Initializable {
         logoutButton.setOnAction(actionEvent -> logout());
         saveButton.setOnAction(actionEvent -> save());
         battleButton.setOnAction(actionEvent -> goToBattle());
-        // FIXME: 6/21/2019 matchHistory
-//        historyButton.setOnAction(actionEvent -> showMatchHistories());
+        historyButton.setOnAction(actionEvent -> showMatchHistories());
     }
 
     private void goToCollection() {
@@ -36,6 +37,14 @@ public class MainMenuController implements Initializable {
     }
 
     private void goToShop() {
+        float f = 3F;
+        try {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         accountController.enterShop();
         Main.getStage().getScene().setRoot(Main.getShopPage());
     }
@@ -57,6 +66,12 @@ public class MainMenuController implements Initializable {
     }
 
     private void showMatchHistories() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/matchHistories.fxml"));
+        try {
+            exitButton.getScene().setRoot(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
