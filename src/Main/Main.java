@@ -21,7 +21,6 @@ public class Main extends Application {
             loginPage = FXMLLoader.load(Main.class.getResource("/view/fxmls/loginPage.fxml"));
             mainMenu = FXMLLoader.load(Main.class.getResource("/view/fxmls/mainMenu.fxml"));
             shopPage = FXMLLoader.load(Main.class.getResource("/view/fxmls/shop.fxml"));
-            collectionPage = FXMLLoader.load(Main.class.getResource("/view/fxmls/collectionPage.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

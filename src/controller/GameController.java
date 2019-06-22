@@ -51,7 +51,6 @@ public class GameController extends Thread {
             if (game.isValidPassword(account, password)) {
                 showMessage(ErrorType.NO_ERROR);
                 AccountController.getInstance().setAccount(account);
-                return true;
             } else {
                 showMessage(ErrorType.INVALID_PASSWORD);
             }

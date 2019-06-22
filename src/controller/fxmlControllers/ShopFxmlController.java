@@ -1,9 +1,7 @@
 package controller.fxmlControllers;
 
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -18,7 +16,6 @@ import models.Shop;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -36,8 +33,6 @@ public class ShopFxmlController implements Initializable {
         public CardContainer(Label text) throws FileNotFoundException {
             vBox = new VBox();
             this.label = text;
-
-
         }
     }
 
