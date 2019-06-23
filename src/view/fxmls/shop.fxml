@@ -21,7 +21,5 @@
                         prefHeight="142.33331298828125" vgrow="SOMETIMES"/>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
     </rowConstraints>
-    <children>
-        <ScrollPane fx:id="scrollPane" GridPane.columnIndex="1" GridPane.rowSpan="3"/>
-    </children>
+    <ScrollPane fx:id="scrollPane" GridPane.columnIndex="1" GridPane.rowSpan="3"/>
 </GridPane>

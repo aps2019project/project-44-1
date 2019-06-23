@@ -2,12 +2,9 @@ package controller.fxmlControllers;
 
 import Main.Main;
 import controller.AccountController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import models.Account;
 
 import java.io.IOException;
 import java.net.URL;
