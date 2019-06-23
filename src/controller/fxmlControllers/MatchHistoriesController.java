@@ -4,16 +4,15 @@ import controller.AccountController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Account;
+import models.Game;
 import view.fxmls.wrapperClasses.History;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,7 +28,7 @@ public class MatchHistoriesController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        back.setOnAction(event -> turnBack());
+        back.setOnAction(event -> Game.getInstance().loadPage(table, "/view/fxmls/mainMenu.fxml"));
         account = accountController.getAccount();
         populateTable();
     }
@@ -41,15 +40,6 @@ public class MatchHistoriesController implements Initializable {
         opponent.setCellValueFactory(new PropertyValueFactory<>("username"));
         w_l.setCellValueFactory(new PropertyValueFactory<>("wins"));
         time.setCellValueFactory(new PropertyValueFactory<>("time"));
-    }
-
-    private void turnBack() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/mainMenu.fxml"));
-        try {
-            table.getScene().setRoot(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

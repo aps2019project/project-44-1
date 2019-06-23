@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="381.0" prefWidth="297.0" stylesheets="@../styleSheets/cardInShop.css"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.fxmlControllers.CardInShopController" >
+    <Label fx:id="mana" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="15.0" prefHeight="35.0"
+           prefWidth="42.0" text="0" textAlignment="CENTER">
+        <font>
+            <Font name="System Bold" size="24.0"/>
+        </font>
+    </Label>
+    <Label fx:id="AP" alignment="CENTER" layoutX="58.0" layoutY="214.0" prefHeight="50.0" prefWidth="42.0" text="0"
+           textAlignment="CENTER" textFill="#efff09">
+        <font>
+            <Font name="System Bold" size="27.0"/>
+        </font>
+    </Label>
+    <Label fx:id="HP" alignment="CENTER" contentDisplay="CENTER" layoutX="209.0" layoutY="214.0" prefHeight="50.0"
+           prefWidth="42.0" text="0" textAlignment="CENTER" textFill="RED">
+        <font>
+            <Font name="System Bold" size="27.0"/>
+        </font>
+    </Label>
+    <Label fx:id="desc" alignment="CENTER" layoutX="20.0" layoutY="258.0" prefHeight="97.0" prefWidth="258.0"
+           text="DESC" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="20.0"/>
+        </font>
+    </Label>
+    <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="167.0" prefHeight="44.0"
+           prefWidth="290.0" text="NAME" textAlignment="CENTER" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="27.0"/>
+        </font>
+    </Label>
+</AnchorPane>

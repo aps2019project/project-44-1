@@ -25,7 +25,7 @@ public class LeaderboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        back.setOnAction(event -> turnBack());
+        back.setOnAction(event -> Game.getInstance().loadPage(table, "/view/fxmls/loginPage.fxml"));
         populateTable();
     }
 
@@ -35,15 +35,6 @@ public class LeaderboardController implements Initializable {
         table.setItems(list);
         username.setCellValueFactory(new PropertyValueFactory<>("username"));
         wins.setCellValueFactory(new PropertyValueFactory<>("wins"));
-    }
-
-    private void turnBack() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/loginPage.fxml"));
-        try {
-            table.getScene().setRoot(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

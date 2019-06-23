@@ -5,6 +5,7 @@ import controller.AccountController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import models.Game;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,8 +44,9 @@ public class MainMenuController implements Initializable {
     }
 
     private void goToShop() {
-        accountController.enterShop();
-        Main.getStage().getScene().setRoot(Main.getShopPage());
+//        accountController.enterShop();
+//        Main.getStage().getScene().setRoot(Main.getShopPage());
+        Game.getInstance().loadPage(exitButton, "/view/fxmls/cardInShop.fxml");
     }
 
     private void save() {
@@ -64,12 +66,7 @@ public class MainMenuController implements Initializable {
     }
 
     private void showMatchHistories() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/matchHistories.fxml"));
-        try {
-            exitButton.getScene().setRoot(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Game.getInstance().loadPage(exitButton, "/view/fxmls/matchHistories.fxml");
     }
 
 }

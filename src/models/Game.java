@@ -1,5 +1,9 @@
 package models;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -48,6 +52,20 @@ public class Game {
 
     public boolean isValidPassword(Account account, String password) {
         return account.getPassword().equals(password);
+    }
+
+    /**
+     * global and useful method to change scenes
+     *
+     * @since adding graphics to game
+     */
+    public void loadPage(Node node, final String url) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
+        try {
+            node.getScene().setRoot(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
