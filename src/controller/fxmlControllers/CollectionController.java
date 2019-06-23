@@ -3,10 +3,7 @@ package controller.fxmlControllers;
 import Main.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -31,6 +28,7 @@ public class CollectionController implements Initializable {
     public Button addCardToDeckButton;
     public MenuButton decks;
     private static Collection collection;
+    private CheckBox[] checkBoxes;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -44,12 +42,15 @@ public class CollectionController implements Initializable {
         FlowPane deckCardsFlowPane = new FlowPane();
         allCardsScrollPane.setPannable(true);
         allCardsScrollPane.setContent(allCardsFlowPane);
+        checkBoxes = new CheckBox[collection.getCollectionCards().size()];
 
         for (Placeable card : collection.getCollectionCards()) {
             VBox vBox = new VBox();
+            CheckBox checkBox = new CheckBox();
+            checkBoxes[collection.getCollectionCards().indexOf(card)] = checkBox;
             ImageView imageView = new ImageView(image);
             Label name = new Label(card.getName());
-            vBox.getChildren().addAll(imageView, name);
+            vBox.getChildren().addAll(imageView, name,checkBox);
             allCardsFlowPane.getChildren().add(vBox);
         }
     }

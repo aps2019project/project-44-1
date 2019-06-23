@@ -28,17 +28,17 @@
     <children>
         <ScrollPane fx:id="allCardsScrollPane" prefHeight="225.0" prefWidth="100.0" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.rowSpan="3" />
         <Button id="backButton" fx:id="backButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#backAction" prefHeight="98.0" prefWidth="261.0" stylesheets="@../styleSheets/collection.css" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-        <Button fx:id="addCardToDeckButton" mnemonicParsing="false" text="add to deck" GridPane.rowIndex="6" />
-        <MenuButton fx:id="decks" mnemonicParsing="false" text="decks" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+        <Button fx:id="addCardToDeckButton" mnemonicParsing="false" styleClass="collectionButtons" stylesheets="@../styleSheets/collection.css" text="add to deck" GridPane.rowIndex="6" />
+        <MenuButton fx:id="decks" mnemonicParsing="false" stylesheets="@../styleSheets/collection.css" text="decks" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2">
             <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
                 <MenuItem mnemonicParsing="false" text="Action 2" />
             </items>
         </MenuButton>
-        <Button fx:id="createDeckButton" mnemonicParsing="false" text="create deck" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-        <Button fx:id="setMainDeckButton" mnemonicParsing="false" text="set as main deck" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-        <Button fx:id="removeFromDeckButton" mnemonicParsing="false" text="remove from deck" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-        <Button fx:id="deleteDeckButton" mnemonicParsing="false" text="delete deck" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+        <Button fx:id="createDeckButton" mnemonicParsing="false" styleClass="collectionButtons" stylesheets="@../styleSheets/collection.css" text="create deck" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <Button fx:id="setMainDeckButton" mnemonicParsing="false" styleClass="collectionButtons" stylesheets="@../styleSheets/collection.css" text="set as main deck" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <Button fx:id="removeFromDeckButton" mnemonicParsing="false" styleClass="collectionButtons" stylesheets="@../styleSheets/collection.css" text="remove from deck" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+        <Button fx:id="deleteDeckButton" mnemonicParsing="false" styleClass="collectionButtons" stylesheets="@../styleSheets/collection.css" text="delete deck" GridPane.columnIndex="4" GridPane.rowIndex="6" />
         <ScrollPane fx:id="deckCardsScrollPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="3" />
     </children>
 </GridPane>
