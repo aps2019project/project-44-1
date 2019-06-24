@@ -23,6 +23,9 @@ public class ShopRequest extends Request {
         }
     }
 
+    /**
+     * @return null when ...
+     */
     public String getCardName() {
         switch (getType()) {
             case SEARCH_CARD_IN_COLLECTION:
@@ -33,10 +36,12 @@ public class ShopRequest extends Request {
                 return command.split(" ")[1];
             default:
                 return null;
-            /** return null when ... */
         }
     }
 
+    /**
+     * @return null when ...
+     */
     public int getCardID() {
         if (getType() == RequestType.SELL) {
             try {
@@ -44,11 +49,8 @@ public class ShopRequest extends Request {
             }catch (NumberFormatException ex){
                 return -1;
             }
-
         }
         return -1;
-        /** return -1 when ... */
-
     }
 
 }

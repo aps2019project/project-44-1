@@ -1,9 +1,6 @@
 package view;
 
-import models.Enums.ErrorType;
-
 public class CollectionRequest extends Request {
-    private View view = View.getInstance();
 
     @Override
     public RequestType getType() {
@@ -38,6 +35,9 @@ public class CollectionRequest extends Request {
         }
     }
 
+    /**
+     * @return null when ...
+     */
     public String getDeckName() {
         switch (getType()) {
             case CREATE_DECK:
@@ -56,10 +56,12 @@ public class CollectionRequest extends Request {
                 return command.split(" ")[2];
             default:
                 return null;
-            /** return null when ... */
         }
     }
 
+    /**
+     * @return -1 when ...
+     */
     public int getCardID() {
         switch (getType()) {
             case ADD_CARD_TO_DECK:
@@ -68,16 +70,17 @@ public class CollectionRequest extends Request {
                 return Integer.parseInt(command.split(" ")[1]);
             default:
                 return -1;
-            /** return -1 when ... */
         }
     }
 
+    /**
+     * @return null when ...
+     */
     public String getCardName() {
         if (getType() == RequestType.SEARCH_CARD_IN_COLLECTION) {
             return command.split(" ")[1];
         }
         return null;
-        /** return null when ... */
     }
 
 }
