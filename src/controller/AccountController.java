@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.scene.Node;
 import models.Account;
 import models.ArtificialIntelligence;
 import models.Battle;
@@ -183,14 +184,16 @@ public class AccountController extends Thread {
     }
 
     public void enterShop() {
-        ShopController.getInstance().main(account);
+        ShopController.getInstance().getShop().setAccount(account);
     }
 
     public void setAccount(Account account) {
         this.account = account;
     }
 
-    public void logout() {
+    public void logout(Node node) {
+        account = null;
+        Game.getInstance().loadPage(node,"/view/fxmls/loginPage.fxml");
     }
 
     public Account getAccount() {
