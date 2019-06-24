@@ -46,7 +46,7 @@ public class MainMenuController implements Initializable {
     private void goToShop() {
 //        accountController.enterShop();
 //        Main.getStage().getScene().setRoot(Main.getShopPage());
-        Game.getInstance().loadPage(exitButton, "/view/fxmls/cardInShop.fxml");
+        Game.getInstance().loadPage(exitButton, "/view/fxmls/shop.fxml");
     }
 
     private void save() {

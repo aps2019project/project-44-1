@@ -56,7 +56,7 @@ public class Shop {
     }
 
     /**
-     * it's better to throw execptions
+     * it's better to throw exceptions
      */
     public ErrorType buy(String cardName) {
         Placeable card = getCard(cardName);
