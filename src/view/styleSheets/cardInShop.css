@@ -1,6 +1,6 @@
 #pane {
     -fx-background-image: url("../images/neutral_unit@2x.png"), url("../images/icon_mana.png");
-    -fx-background-size: 95% 95%, 20% 20%; /*background,hero,mana_icon*/
+    -fx-background-size: 95% 90%, 20% 17%; /*background,mana_icon*/
     -fx-background-repeat: no-repeat;
-    -fx-background-position: 100% 100%, 0% 0%;
+    -fx-background-position: 100% 0%, 0% 0%;
 }

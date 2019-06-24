@@ -69,9 +69,6 @@ public class ShopFxmlController implements Initializable {
                 break;
             case "name":
                 label.setText(getName(c));
-                break;
-            case "desc":
-                label.setText(c.getDesc());
         }
     }
 
@@ -86,6 +83,7 @@ public class ShopFxmlController implements Initializable {
         } else if (c instanceof Hero) {
             s += "HERO";
         }
+        s += ("\n" + c.getCost());
         return s;
     }
 

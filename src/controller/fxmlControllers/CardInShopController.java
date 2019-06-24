@@ -2,6 +2,7 @@ package controller.fxmlControllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -16,9 +17,9 @@ public class CardInShopController implements Initializable {
     public Label mana;
     public Label AP;
     public Label HP;
-    public Label desc;
     public Label name;
     public ImageView imageView;
+    public CheckBox checkBox;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
