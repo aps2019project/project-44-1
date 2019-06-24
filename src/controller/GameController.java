@@ -45,17 +45,19 @@ public class GameController extends Thread {
 //        while (!isFinish);
 //    }
 
-    private void login() {
+    private boolean login() {
         Account account = Game.getAccount(username);
         if (account != null) {
             if (game.isValidPassword(account, password)) {
-                AccountController.getInstance().main(account);      // FIXME: 6/13/2019 here
+                showMessage(ErrorType.NO_ERROR);
+                AccountController.getInstance().setAccount(account);
             } else {
                 showMessage(ErrorType.INVALID_PASSWORD);
             }
         } else {
             showMessage(ErrorType.INVALID_USERNAME);
         }
+        return false;
     }
 
     private void createAccount() {
@@ -96,9 +98,10 @@ public class GameController extends Thread {
     private synchronized void decide() {
         while (true) {
             try {
-                if (isLoginRequest)
-                    login();
-                else
+                if (isLoginRequest) {
+                    if (login())
+                        return;
+                } else
                     createAccount();
                 if (Thread.holdsLock(this)) {
                     wait();

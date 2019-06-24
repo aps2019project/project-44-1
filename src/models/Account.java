@@ -79,11 +79,15 @@ public class Account implements Comparable<Account> {
     }
 
     public void showHistory() {
-        if (histories.size()==0)
+        if (histories.size() == 0)
             View.getInstance().sout("no match history found :(");
         for (MatchHistory h : histories) {
             View.getInstance().sout(h.toString());
         }
+    }
+
+    public ArrayList<MatchHistory> getHistories() {
+        return histories;
     }
 
 }

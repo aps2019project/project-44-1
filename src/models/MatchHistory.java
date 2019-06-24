@@ -26,13 +26,17 @@ public class MatchHistory {
 
     @Override
     public String toString() {
-        return opponent + "\t" + wl() + "\t" + getElapsedTimeFormatted() + "ago";
-    }
+        return getElapsedTimeFormatted() + "ago";
+    }           //CHANGED!!!
 
-    private String wl() {
+    public String wl() {
         if (hasWon)
             return "WIN";
         else return "LOOSE";
+    }
+
+    public String getOpponent() {
+        return opponent;
     }
 
 }

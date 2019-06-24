@@ -6,6 +6,7 @@ public abstract class Placeable implements Comparable<Placeable> {
     private int ID;
     private String name;
     private int cost;
+    private String url;
 
     void setCost(int cost) {
         this.cost = cost;
@@ -19,7 +20,7 @@ public abstract class Placeable implements Comparable<Placeable> {
         this.cell = cell;
     }
 
-    int getNeededMana() {
+    public int getNeededMana() {
         return neededMana;
     }
 
@@ -62,6 +63,14 @@ public abstract class Placeable implements Comparable<Placeable> {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
 }
