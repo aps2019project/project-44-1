@@ -3,7 +3,7 @@ package controller.fxmlControllers;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import java.net.URL;
@@ -18,13 +18,11 @@ public class CardInShopController implements Initializable {
     public Label HP;
     public Label desc;
     public Label name;
+    public ImageView imageView;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        BackgroundImage myBI = new BackgroundImage(new Image("my url", 32, 32, false, true,true),
-//                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-//                BackgroundSize.DEFAULT);
-//        pane.setBackground(new Background(myBI));
+
     }
 }
 

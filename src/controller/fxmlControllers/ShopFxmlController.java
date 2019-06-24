@@ -6,13 +6,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import models.Card;
-import models.Game;
-import models.Placeable;
-import models.Shop;
+import models.*;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,58 +21,72 @@ public class ShopFxmlController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         back.setOnAction(actionEvent -> Game.getInstance().loadPage(back, "/view/fxmls/mainMenu.fxml"));
+        craftGraphics();
+    }
+
+    private void craftGraphics() {
         Shop shop = Shop.getInstance();
         for (Placeable c : shop.getCards()) {
             if (!(c instanceof Card))
                 continue;
             try {
-                Node loader = FXMLLoader.load(getClass().getResource("/view/fxmls/cardInShop.fxml"));
+                AnchorPane loader = FXMLLoader.load(getClass().getResource("/view/fxmls/cardInShop.fxml"));
+                specifyImageAndText((Card) c, loader);
                 pane.getChildren().add(loader);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-//        System.out.println(scrolane.getContent());
         }
     }
 
-    private AnchorPane craftGraphics(Card card) {
-        AnchorPane anchorPane = new AnchorPane();
-        BackgroundImage myBI = new BackgroundImage(new Image(card.getUrl(), 32, 32,
-                false, true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        pane.setBackground(new Background(myBI, defaultBackground(), manaIcon()));
-        addLabels(card, anchorPane);
-        return anchorPane;
+    private void specifyImageAndText(Card c, AnchorPane loader) {
+        for (Node n : loader.getChildren()) {
+            if (n instanceof ImageView)
+                getImageView(((ImageView) n), c.getUrl());
+            if (n instanceof Label) {
+                getLabelText(c, (Label) n);
+            }
+        }
     }
 
-    private void addLabels(Card card, AnchorPane anchorPane) {
-        Label mana = new Label();
-        Label AP = new Label();
-        Label HP = new Label();
-        Label desc = new Label();
-        Label name = new Label();
-        mana.setText(String.valueOf(card.getNeededMana()));
-        AP.setText(String.valueOf(card.getAP()));
-        HP.setText(String.valueOf(card.getHP()));
-        desc.setText(String.valueOf(card.getDesc()));
-        name.setText(String.valueOf(card.getName()));
-        anchorPane.getChildren().addAll(mana, AP, HP, name, desc);
+    private void getImageView(ImageView view, String url) {
+        Image image = new Image("view/images/cardGifs/boss_decepticleprime_breathing.gif");
+        view.setImage(image);
+        view.setScaleX(2);
+        view.setScaleY(2);
     }
 
-    private BackgroundImage defaultBackground() {
-        return new BackgroundImage(new Image("src/view/images/neutral_unit@2x.png",
-                32, 32, false, false), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+    private void getLabelText(Card c, Label label) {
+        switch (label.getId()) {
+            case "mana":
+                label.setText(String.valueOf(c.getNeededMana()));
+                break;
+            case "HP":
+                label.setText(String.valueOf(c.getHP()));
+                break;
+            case "AP":
+                label.setText(String.valueOf(c.getAP()));
+                break;
+            case "name":
+                label.setText(getName(c));
+                break;
+            case "desc":
+                label.setText(c.getDesc());
+        }
     }
 
-    private BackgroundImage manaIcon() {
-        return new BackgroundImage(new Image("src/view/images/neutral_unit@2x.png",
-                32, 32, false, false), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-    }
-
-    private String getPath(Card card) {
-        return null;
+    private String getName(Card c) {
+        String s;
+        s = c.getName();
+        s += "\n";
+        if (c instanceof Minion) {
+            s += "MINION";
+        } else if (c instanceof Spell) {
+            s += "SPELL";
+        } else if (c instanceof Hero) {
+            s += "HERO";
+        }
+        return s;
     }
 
 }
