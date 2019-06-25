@@ -1,10 +1,12 @@
 package controller.fxmlControllers;
 
+import controller.ShopController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import models.Shop;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,7 +23,8 @@ public class CardInShopController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        pane.setOnMouseClicked(mouseEvent -> System.out.println("you added "+name.getText()+"to your CART"));
+        ShopController shopController = ShopController.getInstance();
+        pane.setOnMouseClicked(mouseEvent -> shopController.buyCard(name.getText()));
     }
 }
 

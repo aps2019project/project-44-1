@@ -8,15 +8,15 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.fxmlControllers.ShopFxmlController">
-   <ScrollPane layoutX="27.0" layoutY="66.0" prefHeight="398.0" prefWidth="662.0">
-      <content>
-         <FlowPane fx:id="pane" alignment="CENTER" prefHeight="334.0" prefWidth="598.0" />
-      </content>
+   <ScrollPane layoutX="27.0" layoutY="66.0" prefHeight="398.0" prefWidth="630.0">
+      <FlowPane fx:id="pane" alignment="CENTER" prefHeight="334.0" prefWidth="598.0" />
    </ScrollPane>
     <Button fx:id="back" layoutX="700.0" layoutY="60.0" mnemonicParsing="false" text="back" />
-   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="220.0" layoutY="14.0" prefHeight="26.0" prefWidth="275.0" text="mark items that you want to buy" textAlignment="CENTER" textFill="#42cd65">
+   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="220.0" layoutY="14.0" prefHeight="26.0" prefWidth="275.0" text="select items that you want to buy" textAlignment="CENTER" textFill="#42cd65">
       <font>
          <Font name="System Bold Italic" size="16.0" />
       </font>
    </Label>
+   <Label fx:id="message" layoutX="673.0" layoutY="119.0" prefHeight="149.0" prefWidth="82.0" />
+   <Label fx:id="money" layoutX="677.0" layoutY="388.0" prefHeight="50.0" prefWidth="71.0" />
 </AnchorPane>
