@@ -1,10 +1,14 @@
 package models;
 
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class Game {
@@ -13,6 +17,7 @@ public class Game {
     private static Game game = new Game();
 
     private Game() {
+        fillAccounts();
     }
 
     public static Game getInstance() {
@@ -63,6 +68,19 @@ public class Game {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
         try {
             node.getScene().setRoot(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillAccounts() {
+        Gson gson = new Gson();
+        JsonReader reader;
+        try {
+            reader = new JsonReader(new FileReader("src\\models\\accountSaves.json"));
+            Account[] json = gson.fromJson(reader, Account[].class);
+            if (json != null)
+                accounts.addAll(Arrays.asList(json));
         } catch (IOException e) {
             e.printStackTrace();
         }

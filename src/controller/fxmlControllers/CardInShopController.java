@@ -2,7 +2,6 @@ package controller.fxmlControllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -19,11 +18,10 @@ public class CardInShopController implements Initializable {
     public Label HP;
     public Label name;
     public ImageView imageView;
-    public CheckBox checkBox;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        pane.setOnMouseClicked(mouseEvent -> System.out.println("you added "+name.getText()+"to your CART"));
     }
 }
 
