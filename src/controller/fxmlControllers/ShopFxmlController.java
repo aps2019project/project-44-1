@@ -1,5 +1,6 @@
 package controller.fxmlControllers;
 
+import controller.ShopController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -17,6 +18,7 @@ public class ShopFxmlController implements Initializable {
 
     public Button back;
     public FlowPane pane;
+    private ShopController shopController = ShopController.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -50,7 +52,7 @@ public class ShopFxmlController implements Initializable {
     }
 
     private void getImageView(ImageView view, String url) {
-        Image image = new Image("view/images/cardGifs/boss_decepticleprime_breathing.gif");
+        Image image = new Image("view/images/cardGifs/boss_grym_breathing.gif");
         view.setImage(image);
         view.setScaleX(2);
         view.setScaleY(2);

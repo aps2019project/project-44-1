@@ -2,9 +2,6 @@ package view;
 
 public enum RequestType {
 
-    LOGIN,
-    CREATE_ACCOUNT,
-    SHOW_LEADERBOARD,
     SAVE,
     LOGOUT,
     HELP,

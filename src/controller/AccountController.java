@@ -1,15 +1,20 @@
 package controller;
 
-import models.Account;
-import models.ArtificialIntelligence;
-import models.Battle;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.stream.JsonReader;
+import javafx.scene.Node;
+import models.*;
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
 import models.Enums.ErrorType;
-import models.Game;
 import view.AccountRequest;
 import view.RequestType;
 import view.View;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class AccountController extends Thread {
     private static AccountController accountController = new AccountController();
@@ -173,24 +178,56 @@ public class AccountController extends Thread {
 
     //-----------------------------------------------------------------
     public void save() {
+        Gson gson = new Gson();
+        JsonReader reader;
+        try {
+            reader = new JsonReader(new FileReader("src\\models\\accountSaves.json"));
+            JsonArray array = gson.fromJson(reader, JsonArray.class);
+            Account[] accounts = gson.fromJson(array, Account[].class);
+            write(gson, accounts);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-//    private void help() {
-//        view.printAccountMenuHelp(account.toString());
-//    }
+
+    private void write(Gson gson, Account[] accounts) throws IOException {
+        FileWriter writer;
+        Account[] accounts2;
+        writer = new FileWriter("src/models/accountSaves.json");
+        accounts2 = getAccounts(accounts);
+        writer.write(gson.toJson(accounts2));
+        writer.flush();
+        writer.close();
+    }
+
+    private Account[] getAccounts(Account[] accounts) {
+        Account[] accounts2;
+        if (accounts != null) {
+            accounts2 = new Account[accounts.length + 1];
+            System.arraycopy(accounts, 0, accounts2, 0, accounts.length);
+            accounts2[accounts2.length - 1] = account;
+        } else {
+            accounts2 = new Account[1];
+            accounts2[0] = account;
+        }
+        return accounts2;
+    }
 
     public void enterCollection() {
         CollectionController.getInstance().main(this.account.getCollection());
     }
 
     public void enterShop() {
-        ShopController.getInstance().main(account);
+        ShopController.getInstance().getShop().setAccount(account);
     }
 
     public void setAccount(Account account) {
         this.account = account;
     }
 
-    public void logout() {
+    public void logout(Node node) {
+        account = null;
+        Game.getInstance().loadPage(node, "/view/fxmls/loginPage.fxml");
     }
 
     public Account getAccount() {

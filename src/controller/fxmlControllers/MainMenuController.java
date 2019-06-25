@@ -44,8 +44,7 @@ public class MainMenuController implements Initializable {
     }
 
     private void goToShop() {
-//        accountController.enterShop();
-//        Main.getStage().getScene().setRoot(Main.getShopPage());
+        accountController.enterShop();
         Game.getInstance().loadPage(exitButton, "/view/fxmls/shop.fxml");
     }
 
@@ -62,7 +61,7 @@ public class MainMenuController implements Initializable {
     }
 
     private void logout() {
-        accountController.logout();
+        accountController.logout(exitButton);
     }
 
     private void showMatchHistories() {

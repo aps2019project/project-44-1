@@ -1,6 +1,6 @@
 package models;
 
-public abstract class Placeable implements Comparable<Placeable> {
+public class Placeable implements Comparable<Placeable> {
     private Cell cell;
     private int neededMana;
     private int ID;
