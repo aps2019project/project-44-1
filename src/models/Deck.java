@@ -53,7 +53,7 @@ public class Deck implements Cloneable {
         return item != null;
     }
 
-    void addToDeck(Placeable placeable) {
+    public void addToDeck(Placeable placeable) {
         if (placeable instanceof Hero) {
             setHero((Hero) placeable);
         } else if (placeable instanceof Item) {
@@ -66,13 +66,23 @@ public class Deck implements Cloneable {
         }
     }
 
-    void removeFromDeck(Placeable placeable) {
+    public void removeFromDeck(Placeable placeable) {
         if (placeable instanceof Hero) {
             hero = null;
         } else if (placeable instanceof Item) {
             item = null;
         } else {
             cards.remove(placeable);
+        }
+    }
+
+    public void removeFromDeck(String name) {
+        for (Card card : cards) {
+            if (card.getName().equals(name)) {
+                cards.remove(card);
+                break;
+            }
+
         }
     }
 
@@ -128,7 +138,7 @@ public class Deck implements Cloneable {
         for (Card card : oldCards) {
             try {
                 if (card instanceof Minion) {
-                    newCards.add((Minion)card.clone());
+                    newCards.add((Minion) card.clone());
                     continue;
                 }
                 newCards.add(card.clone());
