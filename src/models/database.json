@@ -9,7 +9,8 @@
       "attackType": "RANGED",
       "attackRange": 7,
       "specialPower": "",
-      "specialPowerCoolDown": -1
+      "specialPowerCoolDown": -1,
+      "path": "src/view/images/cardGifs/boss_andromeda_breathing.gif"
     },
     {
       "name": "ShamshirzanFars",
@@ -20,7 +21,8 @@
       "attackType": "MELEE",
       "attackRange": -1,
       "specialPower": "",
-      "specialPowerCoolDown": "passive"
+      "specialPowerCoolDown": "passive",
+      "path": "src/view/images/cardGifs/boss_antiswarm_breathing.gif"
     },
     {
       "name": "neyzedarfars",
@@ -31,7 +33,8 @@
       "attackType": "HYBRID",
       "attackRang": 3,
       "specialPower": "",
-      "specialPowerCoolDown": -1
+      "specialPowerCoolDown": -1,
+      "path": "src/view/images/cardGifs/boss_chaosknight_breathing.gif"
     },
     {
       "name": "asbsavarfars",
@@ -42,7 +45,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": -1
+      "specialPowerCoolDown": -1,
+      "path": "src/view/images/cardGifs/boss_borealjuggernaut_breathing.gif"
     },
     {
       "name": "pahlavanfars",
@@ -53,7 +57,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": "On attack"
+      "specialPowerCoolDown": "On attack",
+      "path": "src/view/images/cardGifs/boss_christmas_breathing.gif"
     },
     {
       "name": "sepahsalarfars",
@@ -64,7 +69,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": "combo"
+      "specialPowerCoolDown": "combo",
+      "path": "src/view/images/cardGifs/boss_cindera_breathing.gif"
     },
     {
       "name": "kamandartorani",
@@ -75,7 +81,8 @@
       "attackType": "RANGED",
       "attackRang": 5,
       "specialPower": "",
-      "specialPowerCoolDown": -1
+      "specialPowerCoolDown": -1,
+      "path": "src/view/images/cardGifs/boss_crystal_breathing.gif"
     },
     {
       "name": "ghollabsangdartorani",
@@ -86,7 +93,8 @@
       "attackType": "RANGED",
       "attackRang": 7,
       "specialPower": "",
-      "specialPowerCoolDown": -1
+      "specialPowerCoolDown": -1,
+      "path": "src/view/images/cardGifs/boss_decepticle_breathing.gif"
     },
     {
       "name": "neyzedartorani",
@@ -97,7 +105,8 @@
       "attackType": "HYBRID",
       "attackRang": 3,
       "specialPower": "",
-      "specialPowerCoolDown": -1
+      "specialPowerCoolDown": -1,
+      "path": "src/view/images/cardGifs/boss_decepticlechassis_breathing.gif"
     },
     {
       "name": "jasostorani",
@@ -108,7 +117,8 @@
       "attackType": "MELEE",
       "attackRang": 3,
       "specialPower": "",
-      "specialPowerCoolDown": "On attack"
+      "specialPowerCoolDown": "On attack",
+      "path": "src/view/images/cardGifs/boss_decepticlehelm_breathing.gif"
     },
     {
       "name": "ghorzdartorani",
@@ -119,7 +129,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": -1
+      "specialPowerCoolDown": -1,
+      "path": "src/view/images/cardGifs/boss_decepticleprime_breathing.gif"
     },
     {
       "name": "shahzadetorani",
@@ -130,7 +141,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": "combo"
+      "specialPowerCoolDown": "combo",
+      "path": "src/view/images/cardGifs/boss_decepticlesword_breathing.gif"
     },
     {
       "name": "divsiah",
@@ -141,7 +153,8 @@
       "attackType": "HYBRID",
       "attackRang": 7,
       "specialPower": "",
-      "specialPowerCoolDown": -1
+      "specialPowerCoolDown": -1,
+      "path": "src/view/images/cardGifs/boss_decepticlewings_breathing.gif"
     },
     {
       "name": "gholsangandaz",
@@ -152,7 +165,8 @@
       "attackType": "RANGED",
       "attackRang": 7,
       "specialPower": "",
-      "specialPowerCoolDown": -1
+      "specialPowerCoolDown": -1,
+      "path": "src/view/images/cardGifs/boss_emp_breathing.gif"
     },
     {
       "name": "oghab",
@@ -163,7 +177,8 @@
       "attackType": "RANGED",
       "attackRang": 3,
       "specialPower": "",
-      "specialPowerCoolDown": "passive"
+      "specialPowerCoolDown": "passive",
+      "path": "src/view/images/cardGifs/boss_gol_breathing.gif"
     },
     {
       "name": "divghorazsavar",
@@ -174,7 +189,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": -1
+      "specialPowerCoolDown": -1,
+      "path": "src/view/images/cardGifs/boss_grym_breathing.gif"
     },
     {
       "name": "ghlebozorg",
@@ -185,7 +201,8 @@
       "attackType": "HYBRID",
       "attackRang": 3,
       "specialPower": "",
-      "specialPowerCoolDown": "On Death"
+      "specialPowerCoolDown": "On Death",
+      "path": "src/view/images/cardGifs/boss_harmony_breathing.gif"
     },
     {
       "name": "marsammi",
@@ -196,7 +213,8 @@
       "attackType": "RANGED",
       "attackRang": 4,
       "specialPower": "",
-      "specialPowerCoolDown": "On attack"
+      "specialPowerCoolDown": "On attack",
+      "path": "src/view/images/cardGifs/boss_invader_breathing.gif"
     },
     {
       "name": "ejhdehaatashandaz",
@@ -207,7 +225,8 @@
       "attackType": "RANGED",
       "attackRang": 4,
       "specialPower": "",
-      "specialPowerCoolDown": -1
+      "specialPowerCoolDown": -1,
+      "path": "src/view/images/cardGifs/boss_kane_breathing.gif"
     },
     {
       "name": "shirdarande",
@@ -218,7 +237,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": "On attack"
+      "specialPowerCoolDown": "On attack",
+      "path": "src/view/images/cardGifs/boss_kron_breathing.gif"
     },
     {
       "name": "margholpeykar",
@@ -229,7 +249,8 @@
       "attackType": "RANGED",
       "attackRang": 5,
       "specialPower": "",
-      "specialPowerCoolDown": "On Spawn"
+      "specialPowerCoolDown": "On Spawn",
+      "path": "src/view/images/cardGifs/boss_legion_breathing.gif"
     },
     {
       "name": "ghorghsefid",
@@ -240,7 +261,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": "On attack"
+      "specialPowerCoolDown": "On attack",
+      "path": "src/view/images/cardGifs/boss_malyk_breathing.gif"
     },
     {
       "name": "palang",
@@ -251,7 +273,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": "On attack"
+      "specialPowerCoolDown": "On attack",
+      "path": "src/view/images/cardGifs/boss_manaman_breathing.gif"
     },
     {
       "name": "ghorgh",
@@ -262,7 +285,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": "On attack"
+      "specialPowerCoolDown": "On attack",
+      "path": "src/view/images/cardGifs/boss_orias_breathing.gif"
     },
     {
       "name": "jadoghar",
@@ -273,7 +297,8 @@
       "attackType": "RANGED",
       "attackRang": 3,
       "specialPower": "",
-      "specialPowerCoolDown": "passive"
+      "specialPowerCoolDown": "passive",
+      "path": "src/view/images/cardGifs/boss_oriasidol_breathing.gif"
     },
     {
       "name": "jadogharaazam",
@@ -284,7 +309,8 @@
       "attackType": "RANGED",
       "attackRang": 5,
       "specialPower": "",
-      "specialPowerCoolDown": "passive"
+      "specialPowerCoolDown": "passive",
+      "path": "src/view/images/cardGifs/boss_paragon_breathing.gif"
     },
     {
       "name": "jen",
@@ -295,7 +321,8 @@
       "attackType": "RANGED",
       "attackRang": 4,
       "specialPower": "",
-      "specialPowerCoolDown": "passive"
+      "specialPowerCoolDown": "passive",
+      "path": "src/view/images/cardGifs/boss_protector_breathing.gif"
     },
     {
       "name": "ghorazvahshi",
@@ -306,7 +333,8 @@
       "attackType": "MELEE",
       "attackRang": 3,
       "specialPower": "",
-      "specialPowerCoolDown": "On defend"
+      "specialPowerCoolDown": "On defend",
+      "path": "src/view/images/cardGifs/boss_sandpanther_breathing.gif"
     },
     {
       "name": "piran",
@@ -317,7 +345,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": "On defend"
+      "specialPowerCoolDown": "On defend",
+      "path": "src/view/images/cardGifs/boss_serpenti_breathing.gif"
     },
     {
       "name": "giv",
@@ -328,7 +357,8 @@
       "attackType": "RANGED",
       "attackRang": 5,
       "specialPower": "",
-      "specialPowerCoolDown": "On defend"
+      "specialPowerCoolDown": "On defend",
+      "path": "src/view/images/cardGifs/boss_shadowlord_breathing.gif"
     },
     {
       "name": "bahman",
@@ -339,7 +369,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": "On respawn"
+      "specialPowerCoolDown": "On respawn",
+      "path": "src/view/images/cardGifs/boss_shinkagezendo_breathing.gif"
     },
     {
       "name": "ashkbos",
@@ -350,7 +381,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": "On defend"
+      "specialPowerCoolDown": "On defend",
+      "path": "src/view/images/cardGifs/boss_skurge_breathing.gif"
     },
     {
       "name": "eeraj",
@@ -361,7 +393,8 @@
       "attackType": "RANGED",
       "attackRang": 3,
       "specialPower": "",
-      "specialPowerCoolDown": -1
+      "specialPowerCoolDown": -1,
+      "path": "src/view/images/cardGifs/boss_skyfalltyrant_breathing.gif"
     },
     {
       "name": "gholbozorg",
@@ -372,7 +405,8 @@
       "attackType": "HYBRID",
       "attackRang": 2,
       "specialPower": "",
-      "specialPowerCoolDown": -1
+      "specialPowerCoolDown": -1,
+      "path": "src/view/images/cardGifs/boss_solfist_breathing.gif"
     },
     {
       "name": "ghol2sar",
@@ -383,7 +417,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": "passive"
+      "specialPowerCoolDown": "passive",
+      "path": "src/view/images/cardGifs/boss_soulstealer_breath.gif"
     },
     {
       "name": "nanesarma",
@@ -394,7 +429,8 @@
       "attackType": "RANGED",
       "attackRang": 5,
       "specialPower": "",
-      "specialPowerCoolDown": "On respawn"
+      "specialPowerCoolDown": "On respawn",
+      "path": "src/view/images/cardGifs/boss_spelleater_breathing.gif"
     },
     {
       "name": "foladzereh",
@@ -405,7 +441,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": "On respawn"
+      "specialPowerCoolDown": "On respawn",
+      "path": "src/view/images/cardGifs/boss_taskmaster_breathing.gif"
     },
     {
       "name": "siavash",
@@ -416,7 +453,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": "On death"
+      "specialPowerCoolDown": "On death",
+      "path": "src/view/images/cardGifs/boss_umbra_breathing.gif"
     },
     {
       "name": "shahghol",
@@ -427,7 +465,8 @@
       "attackType": "MELEE",
       "attackRang": -1,
       "specialPower": "",
-      "specialPowerCoolDown": "combo"
+      "specialPowerCoolDown": "combo",
+      "path": "src/view/images/cardGifs/boss_unhallowed_breathing.gif"
     },
     {
       "name": "arjhanghdiv",
@@ -438,7 +477,8 @@
       "attackType": "MELEE",
       "attackRang": 3,
       "specialPower": "",
-      "specialPowerCoolDown": "combo"
+      "specialPowerCoolDown": "combo",
+      "path": "src/view/images/cardGifs/boss_valiant_breathing.gif"
     }
   ],
   "Spell": [
@@ -586,7 +626,8 @@
       "attackRang": -1,
       "spell": "",
       "Mp": 1,
-      "coolDown": 2
+      "coolDown": 2,
+      "path": "src/view/images/cardGifs/boss_vampire_breathing.gif"
     },
     {
       "name": "simorgh",
@@ -597,7 +638,8 @@
       "attackRang": -1,
       "spell": "",
       "Mp": 3,
-      "cool down": 8
+      "cool down": 8,
+      "path": "src/view/images/cardGifs/boss_wolfpunch_breathing.gif"
     },
     {
       "name": "ejhdeha",
@@ -608,7 +650,8 @@
       "attackRang": -1,
       "spell": "",
       "Mp": 0,
-      "cool down": 1
+      "cool down": 1,
+      "path": "src/view/images/cardGifs/boss_wraith_breathing.gif"
     },
     {
       "name": "rakhsh",
@@ -619,7 +662,8 @@
       "attackRang": -1,
       "spell": "",
       "Mp": 1,
-      "cool down": 2
+      "cool down": 2,
+      "path": "src/view/images/cardGifs/boss_wujin_breathing.gif"
     },
     {
       "name": "zahhak",
@@ -630,7 +674,8 @@
       "attackRang": -1,
       "spell": "",
       "Mp": 1,
-      "cool down": 3
+      "cool down": 3,
+      "path": "src/view/images/cardGifs/f1_altgeneraltier2_breathing.gif"
     },
     {
       "name": "kave",
@@ -641,7 +686,8 @@
       "attackRang": -1,
       "spell": "",
       "Mp": 1,
-      "cool down": 3
+      "cool down": 3,
+      "path": "src/view/images/cardGifs/f1_bromemk2_breathing.gif"
     },
     {
       "name": "arash",
@@ -652,7 +698,8 @@
       "attackRang": 6,
       "spell": "",
       "Mp": 2,
-      "cool down": 2
+      "cool down": 2,
+      "path": "src/view/images/cardGifs/f1_general_skinroguelegacy_breathing.gif"
     },
     {
       "name": "afsane",
@@ -663,7 +710,8 @@
       "attackRang": 3,
       "spell": "",
       "Mp": 1,
-      "cool down": 2
+      "cool down": 2,
+      "path": "src/view/images/cardGifs/f1_tier2general_breathing.gif"
     },
     {
       "name": "esfandiar",
@@ -674,7 +722,8 @@
       "attackRang": 3,
       "spell": "",
       "Mp": 0,
-      "cool down": 1
+      "cool down": 1,
+      "path": "src/view/images/cardGifs/f2_altgeneraltier2_breathing.gif"
     },
     {
       "name": "rostam",
@@ -685,7 +734,8 @@
       "attackRang": 4,
       "spell": "",
       "Mp": -1,
-      "cool down": -1
+      "cool down": -1,
+      "path": "src/view/images/cardGifs/f2_shidaimk2_breathing.gif"
     }
   ],
   "Items": [
