@@ -18,32 +18,6 @@ public class GameController extends Thread {
     public static GameController getInstance() {
         return gameController;
     }
-//    public void main() {
-//        GameRequest request;
-//        boolean isFinish = false;
-//        do {
-//            view.printStartMenu();          /*show menu*/
-//            request = new GameRequest();
-//            request.getNewCommand();
-//            switch (request.getType()) {
-//                case LOGIN:
-//                    login(request);
-//                    break;
-//                case CREATE_ACCOUNT:
-//                    createAccount(request);
-//                    break;
-//                case HELP:
-//                    help();
-//                    break;
-//                case SHOW_LEADERBOARD:
-//                    showLeaderboard();
-//                    break;
-//                case EXIT:
-//                    isFinish = true;
-//            }
-//        }
-//        while (!isFinish);
-//    }
 
     private boolean login() {
         Account account = Game.getAccount(username);
@@ -79,16 +53,7 @@ public class GameController extends Thread {
 
     private void showMessage(ErrorType errorType) {
         labelText = errorType.getMessage();
-        System.out.println(errorType.getMessage());
     }
-//
-//    private void showLeaderboard() {
-//        view.printLeaderboard(game.getSortedAccounts());
-//    }
-//
-//    private void help() {
-//        view.printGameMenuHelp(game.toString());
-//    }
 
     @Override
     public void run() {

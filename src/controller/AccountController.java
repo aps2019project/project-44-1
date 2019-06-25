@@ -28,38 +28,6 @@ public class AccountController extends Thread {
         accountController.setDaemon(true);
         return accountController;
     }
-//    void main(Account account) {
-//        AccountRequest request;
-//        this.account = account;
-//        view.showMainMenu();
-//        request = new AccountRequest();
-//        request.getNewCommand();
-//        switch (request.getType()) {
-//            case ENTER_COLLECTION:
-//                enterCollection();
-//                break;
-//            case ENTER_SHOP:
-//                enterShop();
-//                break;
-//            case ENTER_BATTLE:
-//                enterBattle(request);
-//                break;
-//            case EXIT:
-//                System.exit(0);
-//                break;
-//            case HELP:
-//                help();
-//                break;
-//            case LOGOUT:
-//
-//                break;
-//            case SAVE:
-//                save();
-//            case SHOW_MATCH_HISTORY:
-//                account.showHistory();
-//        }
-//
-//    }
 
     //------------------------------------------------------------Battle
     public void enterBattle(AccountRequest request) {
@@ -214,7 +182,7 @@ public class AccountController extends Thread {
     }
 
     public void enterCollection() {
-        CollectionController.getInstance().main(this.account.getCollection());
+        CollectionController.getInstance().setCollection(this.account.getCollection());
     }
 
     public void enterShop() {

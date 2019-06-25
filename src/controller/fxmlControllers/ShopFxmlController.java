@@ -18,10 +18,13 @@ public class ShopFxmlController implements Initializable {
 
     public Button back;
     public FlowPane pane;
+    public Label money;
+    public Label message;
     private ShopController shopController = ShopController.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        shopController.setShopFxmlController(this);
         back.setOnAction(actionEvent -> Game.getInstance().loadPage(back, "/view/fxmls/mainMenu.fxml"));
         craftGraphics();
     }

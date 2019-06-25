@@ -1,11 +1,12 @@
 package controller.fxmlControllers;
 
+import controller.ShopController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import models.Shop;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,11 +20,11 @@ public class CardInShopController implements Initializable {
     public Label HP;
     public Label name;
     public ImageView imageView;
-    public CheckBox checkBox;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        ShopController shopController = ShopController.getInstance();
+        pane.setOnMouseClicked(mouseEvent -> shopController.buyCard(name.getText()));
     }
 }
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,7 +11,7 @@
             <Font name="System Bold" size="24.0" />
         </font>
     </Label>
-    <Label fx:id="AP" alignment="CENTER" layoutX="58.0" layoutY="214.0" prefHeight="50.0" prefWidth="51.0" text="0" textAlignment="CENTER" textFill="#efff09">
+    <Label fx:id="AP" alignment="CENTER" layoutX="49.0" layoutY="214.0" prefHeight="50.0" prefWidth="60.0" text="0" textAlignment="CENTER" textFill="#efff09">
         <font>
             <Font name="System Bold" size="27.0" />
         </font>
@@ -28,9 +27,4 @@
         </font>
     </Label>
    <ImageView fx:id="imageView" fitHeight="191.0" fitWidth="235.0" layoutX="58.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-   <CheckBox fx:id="checkBox" alignment="CENTER" layoutX="31.0" layoutY="402.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="252.0" text="buy this item" textFill="#1c75ea">
-      <font>
-         <Font name="System Bold" size="16.0" />
-      </font>
-   </CheckBox>
 </AnchorPane>

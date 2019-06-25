@@ -120,4 +120,8 @@ public class Shop {
         return account.getMoney() >= card.getCost();
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
 }

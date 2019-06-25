@@ -1,11 +1,15 @@
 package controller;
 
+import com.google.gson.Gson;
 import models.*;
 import models.Enums.ErrorType;
 import view.CollectionRequest;
 import view.View;
 
-class CollectionController {
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class CollectionController {
     private static CollectionController collectionController = new CollectionController();
     private Collection collection;
     private View view = View.getInstance();
@@ -13,60 +17,8 @@ class CollectionController {
     private CollectionController() {
     }
 
-    static CollectionController getInstance() {
+    public static CollectionController getInstance() {
         return collectionController;
-    }
-
-    void main(Collection collection) {
-        CollectionRequest request;
-        this.collection = collection;
-        boolean isFinish = false;
-        do {
-            request = new CollectionRequest();
-            request.getNewCommand();
-            switch (request.getType()) {
-                case EXIT:
-                    isFinish = true;
-                    break;
-                case SHOW_COLLECTION_ITEMS_AND_CARDS:
-                    showCollectionItemsAndCards();
-                    break;
-                case SEARCH_CARD_IN_COLLECTION:
-                    search(request);
-                    break;
-                case SAVE:
-                    save();
-                    break;
-                case CREATE_DECK:
-                    createDeck(request);
-                    break;
-                case DELETE_DECK:
-                    deleteDeck(request);
-                    break;
-                case ADD_CARD_TO_DECK:
-                    addCardToDeck(request);
-                    break;
-                case REMOVE_CARD_FROM_DECK:
-                    removeCardFromDeck(request);
-                    break;
-                case VALIDATE:
-                    validateDeck(request);
-                    break;
-                case SELECT_DECK:
-                    selectMainDeck(request);
-                    break;
-                case SHOW_ALL_DECKS:
-                    showAllDecks();
-                    break;
-                case SHOW_DECK:
-                    showDeck(request);
-                    break;
-                case HELP:
-                    help();
-                    break;
-            }
-        }
-        while (!isFinish);
     }
 
     private void showCollectionItemsAndCards() {
@@ -175,11 +127,24 @@ class CollectionController {
 
     }
 
-    public void help() {
-        view.printCollectionMenuHelp(collection.toString());
+    private void save() {
     }
 
-    private void save() {
+    public void setCollection(Collection collection) {
+        this.collection = collection;
+    }
+
+    public void exportDeck(String deckName) {
+        Deck deck = collection.getDeck(deckName);
+        Gson gson = new Gson();
+        try {
+            FileWriter fileWriter = new FileWriter("deck.json");
+            fileWriter.write(gson.toJson(deck));
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

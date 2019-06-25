@@ -38,7 +38,7 @@ public class Account implements Comparable<Account> {
         return password;
     }
 
-    int getMoney() {
+    public int getMoney() {
         return money;
     }
 
@@ -89,5 +89,6 @@ public class Account implements Comparable<Account> {
     public ArrayList<MatchHistory> getHistories() {
         return histories;
     }
+
 
 }
