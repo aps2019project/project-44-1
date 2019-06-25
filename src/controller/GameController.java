@@ -53,7 +53,6 @@ public class GameController extends Thread {
 
     private void showMessage(ErrorType errorType) {
         labelText = errorType.getMessage();
-        System.out.println(errorType.getMessage());
     }
 
     @Override

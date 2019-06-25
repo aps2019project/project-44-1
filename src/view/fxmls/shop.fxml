@@ -17,6 +17,13 @@
          <Font name="System Bold Italic" size="16.0" />
       </font>
    </Label>
-   <Label fx:id="message" layoutX="673.0" layoutY="119.0" prefHeight="149.0" prefWidth="82.0" />
-   <Label fx:id="money" layoutX="677.0" layoutY="388.0" prefHeight="50.0" prefWidth="71.0" />
+   <Label fx:id="message" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="119.0" prefHeight="150.0" prefWidth="102.0" textAlignment="CENTER">
+      <font>
+         <Font name="System Bold" size="14.0" />
+      </font></Label>
+   <Label fx:id="money" alignment="CENTER" layoutX="677.0" layoutY="388.0" prefHeight="50.0" prefWidth="71.0" text="15000" textAlignment="CENTER" textFill="#f74300">
+      <font>
+         <Font name="System Bold" size="15.0" />
+      </font>
+   </Label>
 </AnchorPane>

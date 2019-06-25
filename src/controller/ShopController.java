@@ -77,12 +77,7 @@ public class ShopController {
 
     public void buyCard(String cardName) {
         cardName = cardName.split("\n")[0];
-        ErrorType error=null;
-        if (shop.getCard(cardName) != null) {
-            error = shop.buy(cardName);
-        } else {
-            System.out.println("card not found");
-        }
+        ErrorType error = shop.buy(cardName);
         if (error != NO_ERROR) {
             shopFxmlController.message.setText(error.getMessage());
         } else {
@@ -90,30 +85,34 @@ public class ShopController {
         }
         shopFxmlController.money.setText(String.valueOf(shop.getAccount().getMoney()));
     }
-//    private void searchInShop(ShopRequest request) {
-//        String cardName = request.getCardName();
-//        if (shop.searchInShop(cardName)) {
-//            view.printCardWasFound();
-//        } else {
-//            view.printError(CARD_NOT_FOUND_IN_SHOP);
-//        }
+////    private void searchInShop(ShopRequest request) {
+////        String cardName = request.getCardName();
+////        if (shop.searchInShop(cardName)) {
+////            view.printCardWasFound();
+////        } else {
+////            view.printError(CARD_NOT_FOUND_IN_SHOP);
+////        }
+////    }
+////    private void searchInCollection(ShopRequest request) {
+////        String cardName = request.getCardName();
+////        int state = shop.searchInCollection(cardName);
+////        if (state != -1) {
+////            view.printCardInCollection(cardName, state);
+////        } else {
+////            view.printNoCardWithThisName(cardName);
+////        }
+////    }
+//
+//    private void showCollectionCards() {
+//        view.printCollectionItems(shop.getCards(), true);
 //    }
-//    private void searchInCollection(ShopRequest request) {
-//        String cardName = request.getCardName();
-//        int state = shop.searchInCollection(cardName);
-//        if (state != -1) {
-//            view.printCardInCollection(cardName, state);
-//        } else {
-//            view.printNoCardWithThisName(cardName);
-//        }
-//    }
-
-    private void showCollectionCards() {
-        view.printCollectionItems(shop.getCards(), true);
-    }
 
     public Shop getShop() {
         return shop;
+    }
+
+    public ShopFxmlController getShopFxmlController() {
+        return shopFxmlController;
     }
 
 }
