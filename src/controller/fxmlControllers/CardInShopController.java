@@ -20,11 +20,19 @@ public class CardInShopController implements Initializable {
     public Label HP;
     public Label name;
     public ImageView imageView;
+    private boolean buy;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ShopController shopController = ShopController.getInstance();
-        pane.setOnMouseClicked(mouseEvent -> shopController.buyCard(name.getText()));
+        pane.setOnMouseClicked(mouseEvent -> {
+            shopController.buyCard(name.getText());
+            System.out.println(buy);
+        });
     }
-}
 
+    void setBuy(boolean buy) {
+        this.buy = buy;
+    }
+
+}

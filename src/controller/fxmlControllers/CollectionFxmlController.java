@@ -27,7 +27,6 @@ public class CollectionFxmlController implements Initializable {
     public ComboBox<String> decks;
     private static Collection collection;
     public ScrollPane deckCardsScrollPane;
-    public Button sell;
     private ArrayList<CardContainer> deckCards;
     private ArrayList<CardContainer> collectionCards;
 
@@ -93,16 +92,20 @@ public class CollectionFxmlController implements Initializable {
     private void addCollectionCards() {
         collectionCards = new ArrayList<>();
         for (Placeable card : collection.getCollectionCards()) {
-            CardContainer cardContainer;
-            if (card == null)
-                continue;
-            if (card instanceof Card)
-                cardContainer = new CardContainer((Card) card);
-            else
-                cardContainer = new CardContainer(card);
-            allCardsFlowPane.getChildren().add(cardContainer.getAnchorPane());
-            collectionCards.add(cardContainer);
+            setCardContainer(card, allCardsFlowPane, collectionCards);
         }
+    }
+
+    private void setCardContainer(Placeable card, FlowPane allCardsFlowPane, ArrayList<CardContainer> collectionCards) {
+        CardContainer cardContainer;
+        if (card == null)
+            return;
+        if (card instanceof Card)
+            cardContainer = new CardContainer((Card) card);
+        else
+            cardContainer = new CardContainer(card);
+        allCardsFlowPane.getChildren().add(cardContainer.getAnchorPane());
+        collectionCards.add(cardContainer);
     }
 
     private void addCreatedDecksToComboBox() {
@@ -116,15 +119,7 @@ public class CollectionFxmlController implements Initializable {
             if (decks.getValue() != null) {
                 deckCards = new ArrayList<>();
                 for (Placeable card : collection.getDeck(decks.getValue()).getDeckCards()) {
-                    CardContainer cardContainer;
-                    if (card == null)
-                        continue;
-                    if (card instanceof Card)
-                        cardContainer = new CardContainer((Card) card);
-                    else
-                        cardContainer = new CardContainer(card);
-                    deckCardsFlowPane.getChildren().add(cardContainer.getAnchorPane());
-                    deckCards.add(cardContainer);
+                    setCardContainer(card, deckCardsFlowPane, deckCards);
                 }
             }
         };

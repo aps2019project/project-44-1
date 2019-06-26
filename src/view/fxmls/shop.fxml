@@ -3,28 +3,47 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.fxmlControllers.ShopFxmlController">
-   <ScrollPane layoutX="27.0" layoutY="66.0" prefHeight="398.0" prefWidth="630.0">
-      <FlowPane fx:id="pane" alignment="CENTER" prefHeight="334.0" prefWidth="598.0" />
-   </ScrollPane>
-    <Button fx:id="back" layoutX="700.0" layoutY="60.0" mnemonicParsing="false" text="back" />
-   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="220.0" layoutY="14.0" prefHeight="26.0" prefWidth="275.0" text="click on cards that you want buy" textAlignment="CENTER" textFill="#42cd65">
+   <TitledPane animated="false" layoutX="5.0" layoutY="67.0" prefHeight="406.0" prefWidth="352.0" text="shop">
+      <content>
+         <ScrollPane prefHeight="378.0" prefWidth="296.0">
+            <FlowPane fx:id="pane" alignment="CENTER" prefHeight="375.0" prefWidth="345.0" />
+         </ScrollPane>
+      </content>
+   </TitledPane>
+    <Button id="backButton" fx:id="back" layoutX="-2.0" layoutY="-5.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="71.0" stylesheets="@../styleSheets/collection.css" />
+   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="203.0" layoutY="15.0" prefHeight="35.0" prefWidth="318.0" text="click on cards that you want to sell or buy" textAlignment="CENTER" textFill="#42cd65">
       <font>
          <Font name="System Bold Italic" size="16.0" />
       </font>
    </Label>
-   <Label fx:id="message" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="119.0" prefHeight="150.0" prefWidth="102.0" textAlignment="CENTER">
-      <font>
-         <Font name="System Bold" size="14.0" />
-      </font></Label>
-   <Label fx:id="money" alignment="CENTER" layoutX="677.0" layoutY="388.0" prefHeight="50.0" prefWidth="71.0" text="15000" textAlignment="CENTER" textFill="#f74300">
+   <Label fx:id="money" alignment="CENTER" layoutX="682.0" layoutY="407.0" prefHeight="58.0" prefWidth="71.0" text="15000" textAlignment="CENTER" textFill="#f74300">
       <font>
          <Font name="System Bold" size="15.0" />
       </font>
    </Label>
-   <Button fx:id="sell" layoutX="677.0" layoutY="338.0" mnemonicParsing="false" text="collection" />
+   <Label fx:id="message" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="144.0" layoutY="159.0" prefHeight="219.0" prefWidth="411.0" textAlignment="CENTER">
+      <font>
+         <Font name="System Bold" size="14.0" />
+      </font>
+   </Label>
+   <TitledPane layoutX="365.0" layoutY="67.0" prefHeight="406.0" prefWidth="318.0" text="collection">
+      <content>
+         <ScrollPane prefHeight="407.0" prefWidth="317.0">
+            <content>
+               <FlowPane fx:id="collectionPane" prefHeight="374.0" prefWidth="314.0" />
+            </content>
+         </ScrollPane>
+      </content>
+   </TitledPane>
+   <Label alignment="CENTER" layoutX="685.0" layoutY="336.0" prefHeight="58.0" prefWidth="80.0" text="your money" textAlignment="CENTER" textFill="#df0715">
+      <font>
+         <Font name="System Bold" size="14.0" />
+      </font>
+   </Label>
 </AnchorPane>

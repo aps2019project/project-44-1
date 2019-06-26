@@ -1,6 +1,5 @@
 package controller.fxmlControllers;
 
-import controller.CollectionController;
 import controller.ShopController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,36 +19,47 @@ public class ShopFxmlController implements Initializable {
     public Button back;
     public FlowPane pane;
     public Label money;
+    public FlowPane collectionPane;
     public Label message;
-    public Button sell;
     private ShopController shopController = ShopController.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         shopController.setShopFxmlController(this);
-        sell.setOnAction(actionEvent -> goForSelling());
         back.setOnAction(actionEvent -> Game.getInstance().loadPage(back, "/view/fxmls/mainMenu.fxml"));
         craftGraphics();
-    }
-
-    private void goForSelling() {
-        CollectionController controller = CollectionController.getInstance();
-
-        Game.getInstance().loadPage(sell,"/view/fxmls/collectionPage.fxml");
     }
 
     private void craftGraphics() {
         Shop shop = Shop.getInstance();
         for (Placeable c : shop.getCards()) {
-            if (!(c instanceof Card))
-                continue;
-            try {
-                AnchorPane loader = FXMLLoader.load(getClass().getResource("/view/fxmls/cardInShop.fxml"));
-                specifyImageAndText((Card) c, loader);
-                pane.getChildren().add(loader);
-            } catch (Exception e) {
-                e.printStackTrace();
+            fillPanes(c, pane, true);
+        }
+        Account account = shop.getAccount();
+        Collection collection;
+        if (account == null) {
+            return;
+        }
+        collection = shop.getAccount().getCollection();
+        for (Placeable c : collection.getCollectionCards()) {
+            fillPanes(c, collectionPane, false);
+        }
+    }
+
+    private void fillPanes(Placeable c, FlowPane collectionPane, boolean buy) {
+        if (!(c instanceof Card))
+            return;
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/fxmls/cardInShop.fxml"));
+            specifyImageAndText((Card) c, anchorPane);
+            CardInShopController controller = loader.getController();
+            if (controller != null) {
+                controller.setBuy(buy);
             }
+            collectionPane.getChildren().add(anchorPane);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
