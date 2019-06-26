@@ -12,7 +12,7 @@
       <FlowPane fx:id="pane" alignment="CENTER" prefHeight="334.0" prefWidth="598.0" />
    </ScrollPane>
     <Button fx:id="back" layoutX="700.0" layoutY="60.0" mnemonicParsing="false" text="back" />
-   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="220.0" layoutY="14.0" prefHeight="26.0" prefWidth="275.0" text="select items that you want to buy" textAlignment="CENTER" textFill="#42cd65">
+   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="220.0" layoutY="14.0" prefHeight="26.0" prefWidth="275.0" text="click on cards that you want buy" textAlignment="CENTER" textFill="#42cd65">
       <font>
          <Font name="System Bold Italic" size="16.0" />
       </font>
@@ -26,4 +26,5 @@
          <Font name="System Bold" size="15.0" />
       </font>
    </Label>
+   <Button fx:id="sell" layoutX="677.0" layoutY="338.0" mnemonicParsing="false" text="collection" />
 </AnchorPane>

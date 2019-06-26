@@ -13,10 +13,9 @@ import view.fxmls.wrapperClasses.CardContainer;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 
-public class CollectionController implements Initializable {
+public class CollectionFxmlController implements Initializable {
     public Button createDeckButton;
     public Button setMainDeckButton;
     public Button removeFromDeckButton;
@@ -28,6 +27,7 @@ public class CollectionController implements Initializable {
     public ComboBox<String> decks;
     private static Collection collection;
     public ScrollPane deckCardsScrollPane;
+    public Button sell;
     private ArrayList<CardContainer> deckCards;
     private ArrayList<CardContainer> collectionCards;
 

@@ -1,5 +1,6 @@
 package controller.fxmlControllers;
 
+import controller.CollectionController;
 import controller.ShopController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,13 +21,21 @@ public class ShopFxmlController implements Initializable {
     public FlowPane pane;
     public Label money;
     public Label message;
+    public Button sell;
     private ShopController shopController = ShopController.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         shopController.setShopFxmlController(this);
+        sell.setOnAction(actionEvent -> goForSelling());
         back.setOnAction(actionEvent -> Game.getInstance().loadPage(back, "/view/fxmls/mainMenu.fxml"));
         craftGraphics();
+    }
+
+    private void goForSelling() {
+        CollectionController controller = CollectionController.getInstance();
+
+        Game.getInstance().loadPage(sell,"/view/fxmls/collectionPage.fxml");
     }
 
     private void craftGraphics() {

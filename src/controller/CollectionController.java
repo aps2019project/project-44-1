@@ -13,6 +13,7 @@ public class CollectionController {
     private static CollectionController collectionController = new CollectionController();
     private Collection collection;
     private View view = View.getInstance();
+    private boolean forwardedFromShop;
 
     private CollectionController() {
     }
@@ -145,6 +146,14 @@ public class CollectionController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean isForwardedFromShop() {
+        return forwardedFromShop;
+    }
+
+    public void setForwardedFromShop(boolean forwardedFromShop) {
+        this.forwardedFromShop = forwardedFromShop;
     }
 
 }
