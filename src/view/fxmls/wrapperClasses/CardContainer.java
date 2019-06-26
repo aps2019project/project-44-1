@@ -2,6 +2,7 @@ package view.fxmls.wrapperClasses;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import models.Card;
@@ -28,7 +29,7 @@ public class CardContainer {
     }
 
 
-    public CardContainer(int mana, int ap, int hp, String name) {
+    private CardContainer(int mana, int ap, int hp, String name) {
         manaLabel = new Label(Integer.toString(mana));
         manaLabel.setStyle("-fx-font-size: 24px;-fx-text-fill: black;-fx-text-alignment: center;-fx-text-overrun: ELLIPSIS;-fx-alignment: center;" +
                 "-fx-pref-width: 51;-fx-pref-height: 39;-fx-font-weight: bold");
@@ -53,15 +54,25 @@ public class CardContainer {
         nameLabel.setLayoutX(6);
         nameLabel.setLayoutY(279);
 
-         checkBox.setLayoutX(21);
-         checkBox.setLayoutY(386 );
-         checkBox.setPrefSize(10,10);
+        checkBox.setLayoutX(21);
+        checkBox.setLayoutY(386);
+        checkBox.setPrefSize(10, 10);
 
         checkBox.setLayoutX(21);
         checkBox.setLayoutY(390);
         checkBox.setStyle("-fx-font-size: 20");
 
-        anchorPane.getChildren().addAll(manaLabel, attackPointLabel, healthPointLabel, nameLabel,checkBox);
+
+        //todo according to the name of hero can take a image
+        imageView = new ImageView(new Image("/view/images/cardGifs/boss_protector_breathing.gif"));
+
+
+        imageView.setFitHeight(191);
+        imageView.setFitWidth(235);
+        imageView.setLayoutX(58);
+        imageView.setLayoutY(10);
+
+        anchorPane.getChildren().addAll(manaLabel, attackPointLabel, healthPointLabel, nameLabel, checkBox, imageView);
 
     }
 
