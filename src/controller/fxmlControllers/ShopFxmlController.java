@@ -47,7 +47,7 @@ public class ShopFxmlController implements Initializable {
     private void specifyImageAndText(Card c, AnchorPane loader) {
         for (Node n : loader.getChildren()) {
             if (n instanceof ImageView)
-                getImageView(((ImageView) n), c.getUrl());
+                getImageView(((ImageView) n), c.getPath());
             if (n instanceof Label) {
                 getLabelText(c, (Label) n);
             }
@@ -55,10 +55,18 @@ public class ShopFxmlController implements Initializable {
     }
 
     private void getImageView(ImageView view, String url) {
-        Image image = new Image("view/images/cardGifs/boss_grym_breathing.gif");
+        Image image;
+        if (url == null) {
+            image = getImage();
+        } else
+            image = new Image(url);
         view.setImage(image);
         view.setScaleX(2);
         view.setScaleY(2);
+    }
+
+    private Image getImage() {
+        return new Image("view/images/cardGifs/boss_grym_breathing.gif");
     }
 
     private void getLabelText(Card c, Label label) {
