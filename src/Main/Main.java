@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,6 +39,7 @@ public class Main extends Application {
         Main.setStage(primaryStage);
         primaryStage.setTitle("DUELYST");
         Scene scene = new Scene(root, 850, 500);
+        primaryStage.getIcons().add(new Image("/view/images/icon_gold.png"));
         scene.getStylesheets().add("/view/styleSheets/login.css");
         scene.getStylesheets().add("/view/styleSheets/mainMenu.css");
         scene.getStylesheets().add("/view/styleSheets/shop.css");

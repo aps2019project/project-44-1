@@ -1,20 +1,19 @@
 package controller.fxmlControllers;
 
 import Main.Main;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
-import models.Collection;
-import models.Placeable;
+import models.*;
+import view.fxmls.wrapperClasses.CardContainer;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 public class CollectionController implements Initializable {
@@ -22,37 +21,115 @@ public class CollectionController implements Initializable {
     public Button setMainDeckButton;
     public Button removeFromDeckButton;
     public Button deleteDeckButton;
-    public ScrollPane deckCardsScrollPane;
-    public ScrollPane allCardsScrollPane;
+    public FlowPane deckCardsFlowPane;
+    public FlowPane allCardsFlowPane;
     public Button backButton;
     public Button addCardToDeckButton;
-    public MenuButton decks;
+    public ComboBox<String> decks;
     private static Collection collection;
-    private CheckBox[] checkBoxes;
+    public ScrollPane deckCardsScrollPane;
+    private ArrayList<CardContainer> deckCards;
+    private ArrayList<CardContainer> collectionCards;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Image image = null;
-        try {
-            image = new Image(new FileInputStream("src/view/images/general_f1third.png"), 150, 200, false, false);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        FlowPane allCardsFlowPane = new FlowPane();
-        FlowPane deckCardsFlowPane = new FlowPane();
-        allCardsScrollPane.setPannable(true);
-        allCardsScrollPane.setContent(allCardsFlowPane);
-        checkBoxes = new CheckBox[collection.getCollectionCards().size()];
+        addCreatedDecksToComboBox();
+        showSelectedDeckCards();
+        addCollectionCards();
+        deleteDeckBtnOnAction();
+        removeCardFromDeckBtn();
+        selectMainDeckBtn();
+        addCardToDeckBtn();
+    }
 
+    private void addCardToDeckBtn() {
+        addCardToDeckButton.setOnAction(event -> {
+            if (decks.getValue() == null || !checkSelectedCards())
+                return;
+            for (CardContainer cardContainer : collectionCards) {
+                if (cardContainer.getCheckBox().isSelected()) {
+                    collection.getDeck(decks.getValue()).addToDeck(cardContainer.getCard());
+                    deckCards.add(cardContainer);
+                }
+            }
+        });
+    }
+
+    private void selectMainDeckBtn() {
+        setMainDeckButton.setOnAction(event -> {
+            if (decks.getValue() == null)
+                return;
+            collection.selectMainDeck(decks.getValue());
+        });
+    }
+
+    private void removeCardFromDeckBtn() {
+        removeFromDeckButton.setOnAction(event -> {
+            if (decks.getValue() == null)
+                return;
+            Deck selectedDeck = collection.getDeck(decks.getValue());
+
+            for (CardContainer card : deckCards) {
+                if (card.getCheckBox().isSelected()) {
+                    selectedDeck.removeFromDeck(card.getCard());
+                    deckCardsFlowPane.getChildren().remove(card.getAnchorPane());
+                }
+            }
+            deckCards.removeIf(cardContainer -> cardContainer.getCheckBox().isSelected());
+        });
+    }
+
+    private void deleteDeckBtnOnAction() {
+        deleteDeckButton.setOnAction(event -> {
+            if (decks.getValue() == null)
+                return;
+            collection.deleteDeck(decks.getValue());
+            decks.getItems().remove(decks.getValue());
+            deckCardsFlowPane.getChildren().clear();
+            decks.setValue(null);
+        });
+    }
+
+    private void addCollectionCards() {
+        collectionCards = new ArrayList<>();
         for (Placeable card : collection.getCollectionCards()) {
-            VBox vBox = new VBox();
-            CheckBox checkBox = new CheckBox();
-            checkBoxes[collection.getCollectionCards().indexOf(card)] = checkBox;
-            ImageView imageView = new ImageView(image);
-            Label name = new Label(card.getName());
-            vBox.getChildren().addAll(imageView, name,checkBox);
-            allCardsFlowPane.getChildren().add(vBox);
+            CardContainer cardContainer;
+            if (card == null)
+                continue;
+            if (card instanceof Card)
+                cardContainer = new CardContainer((Card) card);
+            else
+                cardContainer = new CardContainer(card);
+            allCardsFlowPane.getChildren().add(cardContainer.getAnchorPane());
+            collectionCards.add(cardContainer);
         }
+    }
+
+    private void addCreatedDecksToComboBox() {
+        for (Deck deck : collection.getSortedDecks()) {
+            decks.getItems().add(deck.getName());
+        }
+    }
+
+    private void showSelectedDeckCards() {
+        EventHandler<ActionEvent> eventEventHandler = event -> {
+            if (decks.getValue() != null) {
+                deckCards = new ArrayList<>();
+                for (Placeable card : collection.getDeck(decks.getValue()).getDeckCards()) {
+                    CardContainer cardContainer;
+                    if (card == null)
+                        continue;
+                    if (card instanceof Card)
+                        cardContainer = new CardContainer((Card) card);
+                    else
+                        cardContainer = new CardContainer(card);
+                    deckCardsFlowPane.getChildren().add(cardContainer.getAnchorPane());
+                    deckCards.add(cardContainer);
+                }
+            }
+        };
+
+        decks.setOnAction(eventEventHandler);
     }
 
     public static void setCollection(Collection collection1) {
@@ -66,6 +143,36 @@ public class CollectionController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean checkSelectedCards() {
+        int heroCounter = 0;
+        int itemCounter = 0;
+        int normalCardCounter = 0;
+        for (CardContainer cardContainer : collectionCards) {
+            if (cardContainer.getCheckBox().isSelected()) {
+                if (cardContainer.getCard() instanceof Hero)
+                    heroCounter++;
+                if (cardContainer.getCard() instanceof Item)
+                    itemCounter++;
+                if (cardContainer.getCard() instanceof Minion || cardContainer.getCard() instanceof Spell)
+                    normalCardCounter++;
+            }
+        }
+        if (heroCounter > 1 || (heroCounter == 1 && !collection.canAddHero(collection.getDeck(decks.getValue())))) {
+            // dialogBox to say "can not add more than one hero to deck"
+            return false;
+        }
+        if (itemCounter > 1 || (itemCounter == 1 && !collection.canAddItem(collection.getDeck(decks.getValue())))) {
+            // dialogBox to say "can not add more than one item to deck"
+            return false;
+        }
+        if (collection.getDeck(decks.getValue()).getDeckCards().size() + normalCardCounter > 20) {
+            // dialogBox to say "can not add more than 20 minion and spell to deck"
+            return false;
+        }
+        return true;
+
     }
 
 }
