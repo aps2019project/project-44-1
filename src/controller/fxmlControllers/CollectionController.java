@@ -1,25 +1,15 @@
 package controller.fxmlControllers;
 
 import Main.Main;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
-import models.Card;
-import models.Collection;
-import models.Deck;
-import models.Placeable;
+import models.*;
 import view.fxmls.wrapperClasses.CardContainer;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -39,6 +29,7 @@ public class CollectionController implements Initializable {
     private static Collection collection;
     public ScrollPane deckCardsScrollPane;
     private ArrayList<CardContainer> deckCards;
+    private ArrayList<CardContainer> collectionCards;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -46,21 +37,45 @@ public class CollectionController implements Initializable {
         showSelectedDeckCards();
         addCollectionCards();
         deleteDeckBtnOnAction();
-        removeFromDeckButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (decks.getValue()==null)
-                    return;
-                Deck selectedDeck = collection.getDeck(decks.getValue());
+        removeCardFromDeckBtn();
+        selectMainDeckBtn();
+        addCardToDeckBtn();
+    }
 
-                for (CardContainer card:deckCards){
-                    if (card.getCheckBox().isSelected()){
-                        selectedDeck.removeFromDeck(card.getNameLabel().getText());
-                        deckCardsFlowPane.getChildren().remove(card.getAnchorPane());
-                    }
+    private void addCardToDeckBtn() {
+        addCardToDeckButton.setOnAction(event -> {
+            if (decks.getValue() == null || !checkSelectedCards())
+                return;
+            for (CardContainer cardContainer : collectionCards) {
+                if (cardContainer.getCheckBox().isSelected()) {
+                    collection.getDeck(decks.getValue()).addToDeck(cardContainer.getCard());
+                    deckCards.add(cardContainer);
                 }
-                deckCards.removeIf(cardContainer -> cardContainer.getCheckBox().isSelected());
             }
+        });
+    }
+
+    private void selectMainDeckBtn() {
+        setMainDeckButton.setOnAction(event -> {
+            if (decks.getValue() == null)
+                return;
+            collection.selectMainDeck(decks.getValue());
+        });
+    }
+
+    private void removeCardFromDeckBtn() {
+        removeFromDeckButton.setOnAction(event -> {
+            if (decks.getValue() == null)
+                return;
+            Deck selectedDeck = collection.getDeck(decks.getValue());
+
+            for (CardContainer card : deckCards) {
+                if (card.getCheckBox().isSelected()) {
+                    selectedDeck.removeFromDeck(card.getCard());
+                    deckCardsFlowPane.getChildren().remove(card.getAnchorPane());
+                }
+            }
+            deckCards.removeIf(cardContainer -> cardContainer.getCheckBox().isSelected());
         });
     }
 
@@ -76,6 +91,7 @@ public class CollectionController implements Initializable {
     }
 
     private void addCollectionCards() {
+        collectionCards = new ArrayList<>();
         for (Placeable card : collection.getCollectionCards()) {
             CardContainer cardContainer;
             if (card == null)
@@ -85,6 +101,7 @@ public class CollectionController implements Initializable {
             else
                 cardContainer = new CardContainer(card);
             allCardsFlowPane.getChildren().add(cardContainer.getAnchorPane());
+            collectionCards.add(cardContainer);
         }
     }
 
@@ -126,6 +143,36 @@ public class CollectionController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean checkSelectedCards() {
+        int heroCounter = 0;
+        int itemCounter = 0;
+        int normalCardCounter = 0;
+        for (CardContainer cardContainer : collectionCards) {
+            if (cardContainer.getCheckBox().isSelected()) {
+                if (cardContainer.getCard() instanceof Hero)
+                    heroCounter++;
+                if (cardContainer.getCard() instanceof Item)
+                    itemCounter++;
+                if (cardContainer.getCard() instanceof Minion || cardContainer.getCard() instanceof Spell)
+                    normalCardCounter++;
+            }
+        }
+        if (heroCounter > 1 || (heroCounter == 1 && !collection.canAddHero(collection.getDeck(decks.getValue())))) {
+            // dialogBox to say "can not add more than one hero to deck"
+            return false;
+        }
+        if (itemCounter > 1 || (itemCounter == 1 && !collection.canAddItem(collection.getDeck(decks.getValue())))) {
+            // dialogBox to say "can not add more than one item to deck"
+            return false;
+        }
+        if (collection.getDeck(decks.getValue()).getDeckCards().size() + normalCardCounter > 20) {
+            // dialogBox to say "can not add more than 20 minion and spell to deck"
+            return false;
+        }
+        return true;
+
     }
 
 }

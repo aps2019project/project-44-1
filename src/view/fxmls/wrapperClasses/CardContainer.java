@@ -16,6 +16,7 @@ public class CardContainer {
     private Label nameLabel;
     private ImageView imageView;
     private CheckBox checkBox;
+    private Placeable card;
 
     {
         anchorPane.setStyle("-fx-background-image: url('/view/images/neutral_unit@2x.png'),url('/view/images/icon_mana.png');" +
@@ -66,10 +67,12 @@ public class CardContainer {
 
     public CardContainer(Card card) {
         this(card.getNeededMana(), card.getAP(), card.getHP(), card.getName());
+        this.card = card;
     }
 
     public CardContainer(Placeable placeable) {
         this(placeable.getNeededMana(), 0, 0, placeable.getName());
+        this.card = placeable;
     }
 
     public AnchorPane getAnchorPane() {
@@ -82,5 +85,9 @@ public class CardContainer {
 
     public Label getNameLabel() {
         return nameLabel;
+    }
+
+    public Placeable getCard() {
+        return card;
     }
 }
