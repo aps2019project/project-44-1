@@ -58,6 +58,7 @@ public class MainMenuController implements Initializable {
 
     private void goToBattle() {
 //        accountController.enterBattle();
+        Game.getInstance().loadPage(exitButton,"/view/fxmls/battleMenu.fxml");
     }
 
     private void logout() {
