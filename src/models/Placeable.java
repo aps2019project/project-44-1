@@ -28,7 +28,7 @@ public class Placeable implements Comparable<Placeable> {
         this.neededMana = neededMana;
     }
 
-    int getID() {
+    public int getID() {
         return ID;
     }
 
