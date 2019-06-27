@@ -487,133 +487,152 @@
       "cost": 1000,
       "neededMana": 0,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-crop.gif"
     },
     {
       "name": "Area Dispel",
       "cost": 1500,
       "neededMana": 2,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-gif-maker (1).gif"
     },
     {
       "name": "Empower",
       "cost": 250,
       "neededMana": 1,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-gif-maker (2).gif"
     },
     {
       "name": "Fireball",
       "cost": 400,
       "neededMana": 1,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-gif-maker (3).gif"
     },
     {
       "name": "Hellfire",
       "cost": 600,
       "neededMana": 3,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-gif-maker.gif"
     },
     {
       "name": "Lighting Bolt",
       "cost": 1250,
       "neededMana": 2,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-gif-maker (1).gif"
     },
     {
       "name": "Poison Lake",
       "cost": 900,
       "neededMana": 5,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-gif-maker (2).gif"
     },
     {
       "name": "Madness",
       "cost": 650,
       "neededMana": 0,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-gif-maker (3).gif"
     },
     {
       "name": "All Disarm",
       "cost": 2000,
       "neededMana": 9,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-gif-maker.gif"
     },
     {
       "name": "All Poison",
       "cost": 1500,
       "neededMana": 8,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-crop.gif"
     },
     {
       "name": "Dispel",
       "cost": 2100,
       "neededMana": 0,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-gif-maker.gif"
     },
     {
       "name": "Health With profit",
       "cost": 2250,
       "neededMana": 0,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-gif-maker (1).gif"
     },
     {
       "name": "Ghaza bokhor joon begiri",
       "cost": 2500,
       "neededMana": 2,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-gif-maker (2).gif"
     },
     {
       "name": "All Power",
       "cost": 2000,
       "neededMana": 4,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-gif-maker (3).gif"
     },
     {
       "name": "All Attack",
       "cost": 1500,
       "neededMana": 4,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-gif-maker.gif"
     },
     {
       "name": "Weakening",
       "cost": 1000,
       "neededMana": 1,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-crop.gif"
     },
     {
       "name": "Sacrifice",
       "cost": 1600,
       "neededMana": 3,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-crop.gif"
     },
     {
       "name": "Kings Guard",
       "cost": 1750,
       "neededMana": 3,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-gif-maker.gif"
     },
     {
       "name": "Shock",
       "cost": 1200,
       "neededMana": 1,
       "target": "",
-      "effect": ""
+      "effect": "",
+      "path": "view/images/cardGifs/ezgif.com-gif-maker (1).gif"
     }
   ],
   "Hero": [
