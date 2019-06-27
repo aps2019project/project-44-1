@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="297.0" stylesheets="@../styleSheets/cardInShop.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.fxmlControllers.CardInShopController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="297.0" stylesheets="@../styleSheets/cardInShop.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" >
     <Label fx:id="mana" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="17.0" prefHeight="39.0" prefWidth="51.0" text="0" textAlignment="CENTER">
         <font>
             <Font name="System Bold" size="24.0" />

@@ -36,28 +36,26 @@ public class ShopFxmlController implements Initializable {
             fillPanes(c, pane, true);
         }
         Account account = shop.getAccount();
-        Collection collection;
         if (account == null) {
             return;
         }
-        collection = shop.getAccount().getCollection();
+        Collection collection = account.getCollection();
         for (Placeable c : collection.getCollectionCards()) {
             fillPanes(c, collectionPane, false);
         }
     }
 
-    private void fillPanes(Placeable c, FlowPane collectionPane, boolean buy) {
+    public void fillPanes(Placeable c, FlowPane flowPane, boolean buy) {
         if (!(c instanceof Card))
             return;
         try {
-            FXMLLoader loader = new FXMLLoader();
-            AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/fxmls/cardInShop.fxml"));
+            CardInShopController inShopController = new CardInShopController();
+            inShopController.setBuy(buy);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/cardInShop.fxml"));
+            loader.setController(inShopController);
+            AnchorPane anchorPane = loader.load();
             specifyImageAndText((Card) c, anchorPane);
-            CardInShopController controller = loader.getController();
-            if (controller != null) {
-                controller.setBuy(buy);
-            }
-            collectionPane.getChildren().add(anchorPane);
+            flowPane.getChildren().add(anchorPane);
         } catch (Exception e) {
             e.printStackTrace();
         }

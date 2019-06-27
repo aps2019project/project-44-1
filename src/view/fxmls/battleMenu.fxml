@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.fxmlControllers.BattleMenuController">
+   <Separator layoutX="294.0" orientation="VERTICAL" prefHeight="402.0" prefWidth="11.0" style="-fx-background-color: red;" />
+   <TitledPane layoutY="1.0" prefHeight="400.0" prefWidth="292.0" text="multiplayer Game with ...">
+      <content>
+         <ScrollPane prefHeight="392.0" prefWidth="200.0">
+            <content>
+               <ListView fx:id="accounts" prefHeight="374.0" prefWidth="277.0" />
+            </content>
+         </ScrollPane>
+      </content>
+   </TitledPane>
+</AnchorPane>
