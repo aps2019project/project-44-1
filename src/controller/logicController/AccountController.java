@@ -1,4 +1,4 @@
-package controller;
+package controller.logicController;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -8,8 +8,8 @@ import models.*;
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
 import models.Enums.ErrorType;
-import view.AccountRequest;
-import view.RequestType;
+import view.request.AccountRequest;
+import view.request.RequestType;
 import view.View;
 
 import java.io.FileReader;

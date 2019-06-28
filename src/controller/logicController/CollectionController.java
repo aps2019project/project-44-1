@@ -1,9 +1,9 @@
-package controller;
+package controller.logicController;
 
 import com.google.gson.Gson;
 import models.*;
 import models.Enums.ErrorType;
-import view.CollectionRequest;
+import view.request.CollectionRequest;
 import view.View;
 
 import java.io.FileWriter;

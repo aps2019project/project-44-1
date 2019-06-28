@@ -1,4 +1,4 @@
-package view;
+package view.request;
 
 public class BattleRequest extends Request {
 

@@ -1,4 +1,4 @@
-package controller;
+package controller.logicController;
 
 import models.Account;
 import models.Enums.ErrorType;

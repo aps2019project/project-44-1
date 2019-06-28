@@ -1,9 +1,9 @@
-package controller;
+package controller.logicController;
 
 import models.*;
 import models.Enums.BattleKind;
 import models.Enums.ErrorType;
-import view.BattleRequest;
+import view.request.BattleRequest;
 import view.View;
 
 import static models.Enums.ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK;

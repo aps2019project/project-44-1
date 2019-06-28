@@ -1,4 +1,4 @@
-package view;
+package view.request;
 
 public enum RequestType {
 
@@ -16,10 +16,6 @@ public enum RequestType {
     SELECT_DECK,
     SHOW_ALL_DECKS,
     SHOW_DECK,
-    SEARCH_SHOP,
-    BUY,
-    SELL,
-    SHOW_SHOP_CARDS,
     INVALID_COMMAND,
     ENTER_COLLECTION,
     ENTER_SHOP,

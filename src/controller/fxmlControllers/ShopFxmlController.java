@@ -1,6 +1,6 @@
 package controller.fxmlControllers;
 
-import controller.ShopController;
+import controller.logicController.ShopController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;

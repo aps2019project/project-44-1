@@ -1,4 +1,4 @@
-package controller;
+package controller.logicController;
 
 import controller.fxmlControllers.ShopFxmlController;
 import javafx.scene.control.Label;

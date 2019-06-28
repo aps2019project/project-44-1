@@ -1,6 +1,7 @@
-package view;
+package view.request;
 
 import models.Enums.ErrorType;
+import view.View;
 
 public class AccountRequest extends Request {
 
@@ -69,4 +70,5 @@ public class AccountRequest extends Request {
                 return -1;
         }
     }
+
 }

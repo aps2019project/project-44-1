@@ -1,6 +1,6 @@
 package controller.fxmlControllers;
 
-import controller.AccountController;
+import controller.logicController.AccountController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

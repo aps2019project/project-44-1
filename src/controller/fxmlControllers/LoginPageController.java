@@ -1,7 +1,7 @@
 package controller.fxmlControllers;
 
 import Main.Main;
-import controller.GameController;
+import controller.logicController.GameController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
