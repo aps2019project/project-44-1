@@ -1,24 +1,21 @@
-#pane1 {
-    -fx-background-image: url("../images/background@2x.jpg");
+#pane {
+    -fx-background-image: url("../images/chapter6_background@2x.jpg");
     -fx-background-size: 100% 100%;
     -fx-background-repeat: no-repeat;
 }
 
-#single, #multi {
-    -fx-background-image: url("../images/sliding_panel_paging_button@2x.png");
-    -fx-background-size: 100% 100%;
+#fLabel, #sLabel, #tLabel {
     -fx-column-halignment: center;
     -fx-cell-size: 100% 100%;
     -fx-fill-height: 100%;
     -fx-fill-width: 100%;
-    -fx-background-color: transparent;
     -fx-font-size: 17;
     -fx-font-family: Andalus;
+    -fx-background-color: rgba(175, 255, 161, 0.47);
 }
 
-#choose {
-    -fx-font-family: Andalus;
-    -fx-background-color: rgba(175, 255, 161, 0.47);
+#first, #second, #third {
+    -fx-background-color: rgba(255, 239, 242, 0.35);
 }
 
 #back{
@@ -27,4 +24,3 @@
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
-
