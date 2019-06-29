@@ -19,7 +19,16 @@ import java.io.IOException;
 public class AccountController extends Thread {
     private static AccountController accountController = new AccountController();
     private Account account;
+    private Account opponent;
+    private int state;
     private View view = View.getInstance();
+    /**
+     * 11 = singlePlayer, first level
+     * 12 = singlePlayer, second level
+     * 13 = singlePlayer, third level
+     * 20 = multiPlayer
+     */
+    public static final int[] states = {11, 12, 13, 20};
 
     private AccountController() {
     }
@@ -144,7 +153,7 @@ public class AccountController extends Thread {
         return -1;
     }
 
-    //-----------------------------------------------------------------
+    //-----------------------------------------------------------------save
     public void save() {
         Gson gson = new Gson();
         JsonReader reader;
@@ -181,6 +190,7 @@ public class AccountController extends Thread {
         return accounts2;
     }
 
+    //----------------------------------------------------------------------
     public void enterCollection() {
         CollectionController.getInstance().setCollection(this.account.getCollection());
     }
@@ -200,6 +210,19 @@ public class AccountController extends Thread {
 
     public Account getAccount() {
         return this.account;
+    }
+
+    public void setOpponent(Account opponent) {
+        this.opponent = opponent;
+    }
+
+    @Override
+    public void run() {
+//        enterBattle();
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 
 }

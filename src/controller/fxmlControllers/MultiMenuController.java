@@ -3,12 +3,14 @@ package controller.fxmlControllers;
 import controller.logicController.AccountController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import models.Account;
 import models.Game;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -20,7 +22,7 @@ public class MultiMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        back.setOnAction(actionEvent -> Game.getInstance().loadPage(back,"/view/fxmls/battleMenu.fxml"));
+        back.setOnAction(actionEvent -> Game.getInstance().loadPage(back, "/view/fxmls/battleMenu.fxml"));
         populateList();
     }
 
@@ -35,6 +37,25 @@ public class MultiMenuController implements Initializable {
         }
         accounts.setItems(strings);
         accounts.setOnMouseClicked(mouseEvent -> System.out.println(accounts.getSelectionModel().getSelectedItem()));
+    }
+
+    void enterBattle(int state, String... userName) {
+        MapController controller = new MapController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/map.fxml"));
+        loader.setController(controller);
+        startThread(state, userName[0]);
+        try {
+            back.getScene().setRoot(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void startThread(int state, String userName) {
+        accountController.setState(state);
+        accountController.setOpponent(Game.getAccount(userName));
+        accountController.setDaemon(true);
+        accountController.start();
     }
 
 }
