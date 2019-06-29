@@ -1,0 +1,16 @@
+#back {
+    -fx-background-image: url("../images/button_back_corner@2x.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+#label{
+    -fx-column-halignment: center;
+    -fx-cell-size: 100% 100%;
+    -fx-fill-height: 100%;
+    -fx-fill-width: 100%;
+    -fx-font-size: 22;
+    -fx-font-family: Andalus;
+    -fx-background-color: rgba(255, 191, 96, 0.47);
+}

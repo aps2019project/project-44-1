@@ -10,18 +10,15 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
-    private static Parent loginPage;
     private static Parent mainMenu;
-    private static Parent shopPage;
-    private static Parent collectionPage;
     private static Stage stage;
 
 
     static {
         try {
-            loginPage = FXMLLoader.load(Main.class.getResource("/view/fxmls/loginPage.fxml"));
+            FXMLLoader.load(Main.class.getResource("/view/fxmls/loginPage.fxml"));
             mainMenu = FXMLLoader.load(Main.class.getResource("/view/fxmls/mainMenu.fxml"));
-            shopPage = FXMLLoader.load(Main.class.getResource("/view/fxmls/shop.fxml"));
+            FXMLLoader.load(Main.class.getResource("/view/fxmls/shop.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,7 +39,6 @@ public class Main extends Application {
         primaryStage.getIcons().add(new Image("/view/images/icon_gold.png"));
         scene.getStylesheets().add("/view/styleSheets/login.css");
         scene.getStylesheets().add("/view/styleSheets/mainMenu.css");
-        scene.getStylesheets().add("/view/styleSheets/shop.css");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -55,20 +51,8 @@ public class Main extends Application {
         Main.stage = stage;
     }
 
-    public static Parent getShopPage() {
-        return shopPage;
-    }
-
-    public static Parent getCollectionPage() {
-        return collectionPage;
-    }
-
     public static Parent getMainMenu() {
         return mainMenu;
-    }
-
-    public static Parent getLoginPage() {
-        return loginPage;
     }
 
 }
