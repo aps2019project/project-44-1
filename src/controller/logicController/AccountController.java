@@ -7,10 +7,7 @@ import javafx.scene.Node;
 import models.*;
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
-import models.Enums.ErrorType;
-import view.request.AccountRequest;
 import view.request.RequestType;
-import view.View;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -19,16 +16,13 @@ import java.io.IOException;
 public class AccountController extends Thread {
     private static AccountController accountController = new AccountController();
     private Account account;
-    private Account opponent;
+    private Account opponent = null;
     private int state;
-    private View view = View.getInstance();
-    /**
-     * 11 = singlePlayer, first level
-     * 12 = singlePlayer, second level
-     * 13 = singlePlayer, third level
-     * 20 = multiPlayer
-     */
-    public static final int[] states = {11, 12, 13, 20};
+    public static final int SINGLE1 = 1;
+    public static final int SINGLE2 = 2;
+    public static final int SINGLE3 = 3;
+    public static final int MULTI1 = 20;
+    public static final int MULTI2 = 22;
 
     private AccountController() {
     }
@@ -39,87 +33,32 @@ public class AccountController extends Thread {
     }
 
     //------------------------------------------------------------Battle
-    public void enterBattle(AccountRequest request) {
-        if (!account.isReadyToPlay()) {
-            view.printError(ErrorType.MAIN_DECK_IS_NOT_VALID);
-            return;
-        }
-        view.printSelectSingleOrMulti();
-        do {
-            request.getNewCommand();
-            switch (request.getType()) {
-                case MULTI_PLAYER:
-                    chooseSecondPlayer(request);
-                    break;
-                case SINGLE_PLAYER:
-                    storyOrCustom(request);
-                    break;
-                case HELP:
-                    view.sout("select \n multiPlayer \n or\nsinglePlayer");
-                    break;
-            }
-        } while (!request.getType().equals(RequestType.EXIT));
-    }
-
-    private void chooseSecondPlayer(AccountRequest request) {
-        do {
-            view.printPlayersList(Game.getAccounts(), account);
-            request.getNewCommand();
-            if (request.getType().equals(RequestType.SELECT_SECOND_PLAYER)) {
-                Account secondPlayer = Game.getAccount(request.getSecondPlayerUsername());
-                if (secondPlayer != null && !secondPlayer.equals(account) &&
-                        secondPlayer.isReadyToPlay()) {
-                    chooseGameMode(request, account, secondPlayer);
-                } else {
-                    view.printSecondPlayerIsNotReady();
-                }
-            }
-        } while (!request.getType().equals(RequestType.EXIT));
-    }
-
-    private void chooseGameMode(AccountRequest request, Account p1, Account p2) {
-        view.showGameModes();
-        do {
-            request.getNewCommand();
-            modeHandler(request.getType(), p1, p2);
-        } while (!request.getType().equals(RequestType.EXIT));
-    }
-
-    private void modeHandler(RequestType type, Account p1, Account p2) {
-        switch (type) {
-            case DEATH_MATCH:
-                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER,
-                        BattleMode.DEATH_MATCH, p1, p2, 0));
-                break;
-            case CAPTURE_FLAG1:
-                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER,
-                        BattleMode.CAPTURE_FLAG_1, p1, p2, 1));
-                break;
-            case CAPTURE_FLAG2:
-                view.sout("enter number of flags");
-                AccountRequest ar = new AccountRequest();
-                ar.getNewCommand();
-                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER, BattleMode.CAPTURE_FLAG_2,
-                        p1, p2, ar.getNumberOfFlags()));
+    private void enterBattle() {
+        if (state >= MULTI1) {
+            modeHandler();
+        } else {
+            storyGame();
         }
     }
 
-    private void storyOrCustom(AccountRequest request) {
-        do {
-            view.printGameKinds();
-            request.getNewCommand();
-            switch (request.getType()) {
-                case STORY_GAME:
-                    storyGame(request);
-                    break;
-                case CUSTOM_GAME:
-                    /*custom game menu*/
-            }
-        } while (!request.getType().equals(RequestType.EXIT));
+    private void modeHandler() {
+        switch (state) {
+            case MULTI1:
+                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER,
+                        BattleMode.DEATH_MATCH, account, opponent, 0));
+                break;
+            case MULTI2:
+                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER,
+                        BattleMode.CAPTURE_FLAG_1, account, opponent, 1));
+                break;
+            default:
+                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER,
+                        BattleMode.CAPTURE_FLAG_2, account, opponent, state - MULTI1));
+        }
     }
 
-    private void storyGame(AccountRequest request) {
-        int level = selectStoryModeLevel(request);
+    private void storyGame() {
+        int level = state;
         ArtificialIntelligence artificialIntelligence = new ArtificialIntelligence();
         Account ai_player = artificialIntelligence.getAccount(level);
         RequestType type = artificialIntelligence.getType(level);
@@ -136,21 +75,6 @@ public class AccountController extends Thread {
                 BattleController.getInstance().main(new Battle(BattleKind.SINGLE_PLAYER,
                         BattleMode.CAPTURE_FLAG_2, account, ai_player, 5, 500));     //must "ASK"
         }
-    }
-
-    private int selectStoryModeLevel(AccountRequest request) {
-        boolean isFinish = false;
-        do {
-            view.showStoryGameKinds();
-            request.getNewCommand();
-            if (request.getStoryModeLevel() != -1)
-                return request.getStoryModeLevel();
-            if (request.getType() == RequestType.EXIT) {
-                isFinish = true;
-            }
-        }
-        while (!isFinish);
-        return -1;
     }
 
     //-----------------------------------------------------------------save
@@ -218,7 +142,7 @@ public class AccountController extends Thread {
 
     @Override
     public void run() {
-//        enterBattle();
+        enterBattle();
     }
 
     public void setState(int state) {

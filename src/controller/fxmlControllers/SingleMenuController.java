@@ -28,9 +28,9 @@ public class SingleMenuController extends MultiMenuController implements Initial
         fLabel.setText("DeathMatch\ndivsefid");
         sLabel.setText("SaveFlag\nzahhak");
         tLabel.setText("CaptureFlag\narash");
-        first.setOnMouseClicked(mouseEvent -> enterBattle(AccountController.states[0]));
-        second.setOnMouseClicked(mouseEvent -> enterBattle(AccountController.states[1]));
-        third.setOnMouseClicked(mouseEvent -> enterBattle(AccountController.states[2]));
+        first.setOnMouseClicked(mouseEvent -> enterBattle(AccountController.SINGLE1));
+        second.setOnMouseClicked(mouseEvent -> enterBattle(AccountController.SINGLE2));
+        third.setOnMouseClicked(mouseEvent -> enterBattle(AccountController.SINGLE3));
         back.setOnAction(actionEvent -> Game.getInstance().loadPage(fLabel, "/view/fxmls/battleMenu.fxml"));
     }
 

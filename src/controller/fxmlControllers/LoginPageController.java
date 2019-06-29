@@ -2,7 +2,6 @@ package controller.fxmlControllers;
 
 import Main.Main;
 import controller.logicController.GameController;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,8 +9,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import models.Enums.ErrorType;
+import models.Game;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -69,7 +68,7 @@ public class LoginPageController implements Initializable {
         }
         label.setText(text);
         label.setVisible(true);
-        disappearLabel();
+        disappearLabel(label);
     }
 
     private void initializeThread() {
@@ -80,20 +79,19 @@ public class LoginPageController implements Initializable {
         gameController.start();
     }
 
-    private void disappearLabel() {
+    static void disappearLabel(Label l) {
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                label.setVisible(false);
+                l.setVisible(false);
             }
         };
         timer.schedule(task, DISAPPEARING_LABEL_DELAY);
     }
 
-    public void showLeaderboard() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/leaderboard.fxml"));
-        label.getScene().setRoot(loader.load());
+    public void showLeaderboard() {
+        Game.getInstance().loadPage(label, "/view/fxmls/leaderboard.fxml");
     }
 
 }

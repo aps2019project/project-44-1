@@ -46,3 +46,8 @@
 .gridPane {
 
 }
+
+#error{
+    -fx-font-family: Andalus;
+    -fx-font-size: 22;
+}

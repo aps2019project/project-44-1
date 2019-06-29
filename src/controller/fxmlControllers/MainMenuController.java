@@ -5,6 +5,8 @@ import controller.logicController.AccountController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import models.Enums.ErrorType;
 import models.Game;
 
 import java.io.IOException;
@@ -19,6 +21,7 @@ public class MainMenuController implements Initializable {
     public Button logoutButton;
     public Button exitButton;
     public Button historyButton;
+    public Label error;
     private AccountController accountController = AccountController.getInstance();
 
     @Override
@@ -57,7 +60,10 @@ public class MainMenuController implements Initializable {
     }
 
     private void goToBattle() {
-//        accountController.enterBattle();
+        if (!accountController.getAccount().isReadyToPlay()) {
+            appearLabel(ErrorType.MAIN_DECK_IS_NOT_VALID.getMessage());
+            return;
+        }
         Game.getInstance().loadPage(exitButton,"/view/fxmls/battleMenu.fxml");
     }
 
@@ -67,6 +73,13 @@ public class MainMenuController implements Initializable {
 
     private void showMatchHistories() {
         Game.getInstance().loadPage(exitButton, "/view/fxmls/matchHistories.fxml");
+    }
+
+    private void appearLabel(String text) {
+        error.setText(text);
+        error.setStyle("-fx-background-color: rgba(255, 212, 134, 0.48)");
+        error.setVisible(true);
+        LoginPageController.disappearLabel(error);
     }
 
 }

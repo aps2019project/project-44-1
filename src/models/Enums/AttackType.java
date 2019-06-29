@@ -14,4 +14,5 @@ public enum AttackType {
             return "Ranged";
         }
     }
+
 }
