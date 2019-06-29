@@ -25,6 +25,8 @@ public class MultiMenuController implements Initializable {
     public Button back;
     public ComboBox<String> choice;
     public TextField number;
+    private static final String error = "invalid flags number";
+    private static final String flag_bound = "[1-5]";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -37,8 +39,8 @@ public class MultiMenuController implements Initializable {
     private void craftTextField() {
         number.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
             if (!t1) {
-                if (!number.getText().matches("[1-5]")) {
-                    number.setText("invalid flags number");
+                if (!number.getText().matches(flag_bound)) {
+                    number.setText(error);
                 }
 
             }
@@ -100,6 +102,8 @@ public class MultiMenuController implements Initializable {
                 enterBattle(AccountController.MULTI2, accounts.getSelectionModel().getSelectedItem());
                 break;
             case 2:
+                if (!number.getText().matches(flag_bound))
+                    return;
                 enterBattle(AccountController.MULTI1 + Integer.parseInt(number.getText()),
                         accounts.getSelectionModel().getSelectedItem());
         }
@@ -119,7 +123,7 @@ public class MultiMenuController implements Initializable {
 
     private void startThread(int state, String... userName) {
         accountController.setState(state);
-        if (userName != null) {
+        if (userName.length != 0) {
             accountController.setOpponent(Game.getAccount(userName[0]));
         }
         accountController.setDaemon(true);
