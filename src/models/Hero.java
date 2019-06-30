@@ -1,25 +1,12 @@
 package models;
 
-import models.Enums.AttackType;
-
-import java.lang.reflect.GenericArrayType;
 import java.util.ArrayList;
 
 public class Hero extends Card {
     private boolean isDisarmed;
     private boolean isStunned;
     private ArrayList<Buffs> buffs = new ArrayList<>();
-
-
-    @Override
-    public String toString() {
-        return " : Name : " + this.getName() +
-                " - AP : " + this.getAP() +
-                " - HP : " + this.getHP() +
-//                " - Class : " + this.getAttackType().getNameType() +
-                " - Special power: " + "\tin game id : " + this.getInGameID();
-        // TODO: 30/04/2019 get special power in string
-    }
+    private int specialPowerCoolDown;
 
     public boolean isDisarmed() {
         return isDisarmed;
@@ -43,13 +30,6 @@ public class Hero extends Card {
         }
     }
 
-    String getHeroInfoInBattle() {
-        return "Hero:\n" +
-                "Name : " + this.getName() + "\n" +
-                "Cost : " + this.getCost() + "\n" +
-                "Desc : ";// TODO: 06/05/2019 getdesc for hero
-    }
-
     @Override
     protected Hero clone() {
         Hero newHero = new Hero();
@@ -64,6 +44,10 @@ public class Hero extends Card {
         newHero.setNeededMana(this.getNeededMana());
         newHero.setAttackType(this.getAttackType());
         return newHero;
+    }
+
+    public void setSpecialPowerCoolDown(int specialPowerCoolDown) {
+        this.specialPowerCoolDown = specialPowerCoolDown;
     }
 
 }

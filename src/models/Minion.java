@@ -1,29 +1,7 @@
 package models;
 
 public class Minion extends Card {
-
-    @Override
-    public String toString() {
-        return " : Type : " + this.getClass().getName() +
-                " : Name : " + this.getName() +
-//                " - Class : " + this.getAttackType().getNameType() +
-                " - AP : " + this.getAP() +
-                " - HP : " + this.getHP() +
-                " - MP : " + this.getNeededMana() +
-                " - Special power: ";
-        // TODO: 30/04/2019 get special power in string
-    }
-
-    String getMinionInfoInBattle() {
-        return "Minion:\n" +
-                "Name : " + this.getName() + "\n" +
-                "HP : " + this.getHP() + "\n" + "AP : " + this.getAP() +
-                "\n" + "MP : " + this.getNeededMana() + "\n" +
-                "Range:" +// TODO: 06/05/2019
-                "Combo-ability:" +// TODO: 06/05/2019
-                "Cost : " + this.getCost() + "\n" +
-                "Desc : ";// TODO: 06/05/2019 get desc for hero
-    }
+    private String specialPowerActivation;
 
     @Override
     protected Minion clone() {
@@ -39,6 +17,10 @@ public class Minion extends Card {
         minion.setName(this.getName());
         minion.setNeededMana(this.getNeededMana());
         return minion;
+    }
+
+    public void setSpecialPowerActivation(String specialPowerActivation) {
+        this.specialPowerActivation = specialPowerActivation;
     }
 
 }

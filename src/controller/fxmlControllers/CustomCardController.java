@@ -1,9 +1,17 @@
 package controller.fxmlControllers;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.stream.JsonReader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import models.Game;
+import models.*;
+import models.Enums.AttackType;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -104,18 +112,102 @@ public class CustomCardController implements Initializable {
         LoginPageController.disappearLabel(message);
     }
 
-    private void backEnd() {
-        new Thread(() -> {
-
-        }).start();
-    }
-
     private String getCAError() {
         String s = "invalid";
         if (type.getSelectionModel().getSelectedIndex() == 0)
             s += "special power \ncooldown";
         else s += "special power \nactivation";
         return s + "!!!";
+    }
+
+    //-------------------------------------------------------------------------------
+    private void backEnd() {
+        new Thread(() -> {
+
+            Gson gson = new Gson();
+            JsonReader reader = null;
+            switch (type.getSelectionModel().getSelectedIndex()) {
+                case 0:
+                    try {
+                        reader = new JsonReader(new FileReader("src\\models\\customHeroes.json"));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    JsonArray array = gson.fromJson(reader, JsonArray.class);
+                    Hero hero = getHero();
+                    Hero[] heroes = gson.fromJson(array, Hero[].class);
+                    write(gson, hero, heroes, "src\\models\\customHeroes.json");
+                    break;
+                case 1:
+                    try {
+                        reader = new JsonReader(new FileReader("src\\models\\customMinions.json"));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    array = gson.fromJson(reader, JsonArray.class);
+                    Minion minion = getMinion();
+                    Minion[] minions = gson.fromJson(array, Minion[].class);
+                    write(gson, minion, minions, "src\\models\\customMinions.json");
+                    break;
+                case 2:
+            }
+        }).start();
+    }
+
+    private void write(Gson gson, Card card, Card[] cards, final String path) {
+        Shop shop = Shop.getInstance();
+        shop.getCards().add(card);
+        try {
+            FileWriter writer = new FileWriter(path);
+            Card[] cards1;
+            if (cards != null) {
+                int length = cards.length;
+                cards1 = getCards(card, length);
+                System.arraycopy(cards, 0, cards1, 0, length);
+                cards1[length - 1] = card;
+            } else {
+                cards1 = getCards(card, 0);
+                cards1[0] = card;
+            }
+            writer.write(gson.toJson(cards1));
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Card[] getCards(Card card, int length) {
+        Card[] cards1;
+        if (card instanceof Hero)
+            cards1 = new Hero[length + 1];
+        else
+            cards1 = new Minion[length + 1];
+        return cards1;
+    }
+
+    private Hero getHero() {
+        Hero hero = new Hero();
+        fielder(hero);
+        hero.setSpecialPowerCoolDown(Integer.parseInt(cool_active.getText()));
+        return hero;
+    }
+
+    private Minion getMinion() {
+        Minion minion = new Minion();
+        fielder(minion);
+        minion.setSpecialPowerActivation(cool_active.getText());
+        return minion;
+    }
+
+    private void fielder(Card card) {
+        card.setName(name.getText());
+        card.setRange(Integer.parseInt(range.getText()));
+        card.setCost(Integer.parseInt(cost.getText()));
+        card.setAP(Integer.parseInt(AP.getText()));
+        card.setHP(Integer.parseInt(HP.getText()));
+        card.setAttackType(AttackType.valueOf(attackType.getSelectionModel().getSelectedItem()));
+        card.setSpecialPower(specialPower.getText());
     }
 
 }

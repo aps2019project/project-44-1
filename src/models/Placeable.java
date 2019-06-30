@@ -8,7 +8,7 @@ public class Placeable implements Comparable<Placeable> {
     private int cost;
     private String path;
 
-    void setCost(int cost) {
+    public void setCost(int cost) {
         this.cost = cost;
     }
 

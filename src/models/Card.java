@@ -35,7 +35,7 @@ public class Card extends Placeable implements Fight, Cloneable {
         return HP;
     }
 
-    void setHP(int HP) {
+    public void setHP(int HP) {
         this.HP = HP;
     }
 
@@ -43,7 +43,7 @@ public class Card extends Placeable implements Fight, Cloneable {
         return AP;
     }
 
-    void setAP(int AP) {
+    public void setAP(int AP) {
         this.AP = AP;
     }
 
