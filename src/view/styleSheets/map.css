@@ -1,0 +1,5 @@
+#background{
+    -fx-background-image: url("../images/midground.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+}

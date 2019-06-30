@@ -6,21 +6,27 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import models.*;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ShopFxmlController implements Initializable {
 
     public Button back;
-    public FlowPane pane;
+    public FlowPane pane;       //shop flowPane
     public Label money;
     public FlowPane collectionPane;
     public Label message;
+    public ScrollPane shop;
+    public TextField search;
     private ShopController shopController = ShopController.getInstance();
 
     @Override
@@ -28,6 +34,19 @@ public class ShopFxmlController implements Initializable {
         shopController.setShopFxmlController(this);
         back.setOnAction(actionEvent -> Game.getInstance().loadPage(back, "/view/fxmls/mainMenu.fxml"));
         craftGraphics();
+        search.setOnKeyPressed(actionEvent -> {
+            if (actionEvent.getCode() == KeyCode.ENTER)
+                searchInShop();
+        });
+    }
+
+    private void searchInShop() {
+        Placeable p = shopController.getShop().getCard(search.getText());
+        if (p != null) {
+            ArrayList<Placeable> cards = shopController.getShop().getCards();
+            double x = cards.indexOf(p) + 2;
+            shop.setVvalue(x / cards.size());
+        }
     }
 
     private void craftGraphics() {
@@ -54,29 +73,35 @@ public class ShopFxmlController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/cardInShop.fxml"));
             loader.setController(inShopController);
             AnchorPane anchorPane = loader.load();
-            specifyImageAndText((Card) c, anchorPane);
+            specifyImageAndText((Card) c, anchorPane, c instanceof Spell);
             flowPane.getChildren().add(anchorPane);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void specifyImageAndText(Card c, AnchorPane loader) {
+    private void specifyImageAndText(Card c, AnchorPane loader, boolean isSpell) {
         for (Node n : loader.getChildren()) {
             if (n instanceof ImageView)
-                getImageView(((ImageView) n), c.getPath());
+                getImageView(((ImageView) n), c.getPath(), isSpell);
             if (n instanceof Label) {
                 getLabelText(c, (Label) n);
             }
         }
     }
 
-    private void getImageView(ImageView view, String url) {
+    private void getImageView(ImageView view, String url, boolean isSpell) {
         Image image;
         if (url == null) {
             image = getImage();
         } else
             image = new Image(url);
+        if (isSpell) {
+            view.setFitHeight(70);
+            view.setFitWidth(70);
+            view.setX(60);
+            view.setY(70);
+        }
         view.setImage(image);
         view.setScaleX(2);
         view.setScaleY(2);
