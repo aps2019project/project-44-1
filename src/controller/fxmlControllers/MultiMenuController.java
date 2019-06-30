@@ -26,7 +26,7 @@ public class MultiMenuController implements Initializable {
     public ComboBox<String> choice;
     public TextField number;
     private static final String error = "invalid flags number";
-    private static final String flag_bound = "[1-5]";
+    private static final String flag_bound = "[1-9]";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

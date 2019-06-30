@@ -1,0 +1,21 @@
+#pane {
+    -fx-background-image: url('../images/background@2x1.jpg');
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+}
+
+#back {
+    -fx-background-image: url("../images/button_back_corner@2x.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+#finish {
+    -fx-background-image: url("../images/button_confirm_glow.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-family: Andalus;
+    -fx-font-size: 20;
+}

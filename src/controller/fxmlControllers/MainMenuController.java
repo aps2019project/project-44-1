@@ -22,6 +22,7 @@ public class MainMenuController implements Initializable {
     public Button exitButton;
     public Button historyButton;
     public Label error;
+    public Button customCard;
     private AccountController accountController = AccountController.getInstance();
 
     @Override
@@ -33,6 +34,7 @@ public class MainMenuController implements Initializable {
         saveButton.setOnAction(actionEvent -> save());
         battleButton.setOnAction(actionEvent -> goToBattle());
         historyButton.setOnAction(actionEvent -> showMatchHistories());
+        customCard.setOnAction(actionEvent -> createCustomCard());
     }
 
     private void goToCollection() {
@@ -64,7 +66,7 @@ public class MainMenuController implements Initializable {
             appearLabel(ErrorType.MAIN_DECK_IS_NOT_VALID.getMessage());
             return;
         }
-        Game.getInstance().loadPage(exitButton,"/view/fxmls/battleMenu.fxml");
+        Game.getInstance().loadPage(exitButton, "/view/fxmls/battleMenu.fxml");
     }
 
     private void logout() {
@@ -80,6 +82,10 @@ public class MainMenuController implements Initializable {
         error.setStyle("-fx-background-color: rgba(255, 212, 134, 0.48)");
         error.setVisible(true);
         LoginPageController.disappearLabel(error);
+    }
+
+    private void createCustomCard() {
+        Game.getInstance().loadPage(error, "/view/fxmls/customCard.fxml");
     }
 
 }
