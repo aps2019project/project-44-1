@@ -31,31 +31,29 @@ public class CustomCardController implements Initializable {
     }
 
     private void craftChoiceBox() {
-        type.getItems().addAll("HERO", "SPELL", "MINION");
+        type.getItems().addAll("HERO", "MINION", "SPELL");
         type.valueProperty().addListener((observableValue, s, t1) -> {
             if (t1.equals("HERO"))
-                heroState(true);
+                setState(true, false);
             else if (t1.equals("MINION"))
-                heroState(false);
+                setState(false, false);
             else
-                spellState();
+                setState(false, true);
         });
     }
 
-    private void heroState(boolean isHero) {
-        AP.setVisible(true);
-        HP.setVisible(true);
-        attackType.setVisible(true);
-        attackType.getItems().addAll("MELEE", "RANGED", "HYBRID");
-        range.setVisible(true);
-        cool_active.setVisible(true);
+    private void setState(boolean isHero, boolean isSpell) {
+        AP.setVisible(!isSpell);
+        HP.setVisible(!isSpell);
+        attackType.setVisible(!isSpell);
+        if (attackType.getItems().size() == 0)
+            attackType.getItems().addAll("MELEE", "RANGED", "HYBRID");
+        range.setVisible(!isSpell);
+        cool_active.setVisible(!isSpell);
         if (isHero) {
             cool_active.setPromptText("special power activation");
         } else
             cool_active.setPromptText("special power cooldown");
-    }
-
-    private void spellState() {
     }
 
     private void checkFinish() {
@@ -63,33 +61,40 @@ public class CustomCardController implements Initializable {
             return;
         if (wrongInfo(cost, "invalid cost!!!", "^\\d+$"))
             return;
-        if (type.getSelectionModel().getSelectedItem().equals("")) {
+        if (type.getSelectionModel().getSelectedItem() == null) {
             appearLabel("select card type!!!");
             return;
         }
-        if (wrongInfo(AP, "invalid AP!!!", "^\\d+$"))
+        if (notSpellChecks())
             return;
-        if (wrongInfo(HP, "invalid HP!!!", "^\\d+$"))
-            return;
-        if (attackType.getSelectionModel().getSelectedItem().equals("")) {
-            appearLabel("select attackType!!!");
-            return;
-        }
         appearLabel("card created successfully!!!");
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        backEnd();
         Game.getInstance().loadPage(finish, "/view/fxmls/mainMenu.fxml");
+    }
+
+    private boolean notSpellChecks() {
+        if (type.getSelectionModel().getSelectedIndex() != 2) {
+            if (wrongInfo(AP, "invalid AP!!!", "^\\d+$"))
+                return true;
+            if (wrongInfo(HP, "invalid HP!!!", "^\\d+$"))
+                return true;
+            if (attackType.getSelectionModel().getSelectedItem() == null) {
+                appearLabel("select attackType!!!");
+                return true;
+            }
+            if (wrongInfo(range, "invalid range!!!", "^\\d+$"))
+                return true;
+            return wrongInfo(cool_active, getCAError(), "^\\d+$");
+        }
+        return false;
     }
 
     private boolean wrongInfo(TextField tf, String error, String regex) {
         if (tf.getText().matches(regex)) {
-            return true;
+            return false;
         }
         appearLabel(error);
-        return false;
+        return true;
     }
 
     private void appearLabel(String text) {
@@ -97,6 +102,20 @@ public class CustomCardController implements Initializable {
         message.setStyle("-fx-background-color: rgba(255, 212, 134, 0.48)");
         message.setVisible(true);
         LoginPageController.disappearLabel(message);
+    }
+
+    private void backEnd() {
+        new Thread(() -> {
+
+        }).start();
+    }
+
+    private String getCAError() {
+        String s = "invalid";
+        if (type.getSelectionModel().getSelectedIndex() == 0)
+            s += "special power \ncooldown";
+        else s += "special power \nactivation";
+        return s + "!!!";
     }
 
 }
