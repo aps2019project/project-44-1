@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import models.*;
 import models.Enums.AttackType;
+import models.Enums.SpecialPowerActivation;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -121,7 +122,7 @@ public class CustomCardController implements Initializable {
     }
 
     //-------------------------------------------------------------------------------
-    private void backEnd() {
+    public void backEnd() {
         new Thread(() -> {
 
             Gson gson = new Gson();
@@ -196,7 +197,7 @@ public class CustomCardController implements Initializable {
     private Minion getMinion() {
         Minion minion = new Minion();
         fielder(minion);
-        minion.setSpecialPowerActivation(cool_active.getText());
+//        minion.setSpecialPowerActivation(SpecialPowerActivation.valueOf(cool_active.getText()));
         return minion;
     }
 
@@ -207,7 +208,7 @@ public class CustomCardController implements Initializable {
         card.setAP(Integer.parseInt(AP.getText()));
         card.setHP(Integer.parseInt(HP.getText()));
         card.setAttackType(AttackType.valueOf(attackType.getSelectionModel().getSelectedItem()));
-        card.setSpecialPower(specialPower.getText());
+//        card.setSpecialPower(specialPower.getText());
     }
 
 }

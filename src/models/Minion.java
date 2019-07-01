@@ -1,7 +1,6 @@
 package models;
 
 public class Minion extends Card {
-    private String specialPowerActivation;
 
     @Override
     protected Minion clone() {
@@ -17,10 +16,6 @@ public class Minion extends Card {
         minion.setName(this.getName());
         minion.setNeededMana(this.getNeededMana());
         return minion;
-    }
-
-    public void setSpecialPowerActivation(String specialPowerActivation) {
-        this.specialPowerActivation = specialPowerActivation;
     }
 
 }

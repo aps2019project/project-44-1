@@ -228,17 +228,6 @@ public class Battle implements Goal, Fight {
         return null;
     }
 
-    public String getCardInfo(String cardID) {
-        Placeable card = getCard(cardID);
-        if (card instanceof Hero)
-            return ((Hero) card).getHeroInfoInBattle();
-        else if (card instanceof Minion)
-            return ((Minion) card).getMinionInfoInBattle();
-        else if (card instanceof Spell)
-            return ((Spell) card).getSpellInfoInBattle();
-        return null;
-    }
-
     public void castSpell(int x, int y, Spell spell) {
         ArrayList<Card> effectedCards = map.getEffectedCards(x, y, spell);
     }

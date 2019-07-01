@@ -117,11 +117,7 @@ class BattleController {
     }
 
     private void showCardInfo(BattleRequest request) {
-        String cardID = request.getCardID();
-        if (battle.getCard(cardID) != null)
-            view.sout(battle.getCardInfo(cardID));
-        else
-            view.printError(ErrorType.CARD_NOT_FOUND_IN_BATTLE);
+        view.printError(ErrorType.CARD_NOT_FOUND_IN_BATTLE);
     }
 
     private void selectCard(BattleRequest request) {

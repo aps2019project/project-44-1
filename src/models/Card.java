@@ -19,7 +19,7 @@ public class Card extends Placeable implements Fight, Cloneable {
         this.owner = owner;
     }
 
-    void setSpecialPowerActivation(SpecialPowerActivation specialPowerActivation) {
+    public void setSpecialPowerActivation(SpecialPowerActivation specialPowerActivation) {
         this.specialPowerActivation = specialPowerActivation;
     }
 
