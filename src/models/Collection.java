@@ -36,7 +36,9 @@ public class Collection implements Comparable<Placeable> {
         return decks.get(deckName) != null;
     }
 
-    public void createDeck(String deckName) {
+    public void createDeck(String deckName) throws Exceptions.DuplicateNameForDeck {
+        if (isUsedDeckName(deckName))
+            throw new Exceptions.DuplicateNameForDeck();
         decks.put(deckName, new Deck(deckName));
     }
 

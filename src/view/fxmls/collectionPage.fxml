@@ -3,58 +3,43 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-          prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="controller.fxmlControllers.CollectionFxmlController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.fxmlControllers.CollectionFxmlController">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints/>
-        <RowConstraints maxHeight="48.33332824707031" minHeight="10.0" percentHeight="15.0"
-                        prefHeight="13.000000953674316" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="92.99999904632568" minHeight="10.0" percentHeight="15.0"
-                        prefHeight="92.99999904632568" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints />
+        <RowConstraints maxHeight="48.33332824707031" minHeight="10.0" percentHeight="15.0" prefHeight="13.000000953674316" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="92.99999904632568" minHeight="10.0" percentHeight="15.0" prefHeight="92.99999904632568" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
-    <ScrollPane fx:id="allCardsScrollPane" prefHeight="245.0" prefWidth="300.0" GridPane.columnSpan="2"
-                GridPane.rowIndex="3" GridPane.rowSpan="3">
-        <FlowPane fx:id="allCardsFlowPane" prefHeight="248.0" prefWidth="299.0"/>
+    <ScrollPane fx:id="allCardsScrollPane" prefHeight="245.0" prefWidth="300.0" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="3">
+        <FlowPane fx:id="collectionCardsFlowPane" prefHeight="248.0" prefWidth="299.0" />
     </ScrollPane>
-    <Button id="backButton" fx:id="backButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#backAction"
-            prefHeight="98.0" prefWidth="261.0" stylesheets="@../styleSheets/collection.css" GridPane.rowIndex="1"
-            GridPane.valignment="TOP"/>
-    <Button fx:id="addCardToDeckButton" mnemonicParsing="false" styleClass="collectionButtons"
-            stylesheets="@../styleSheets/collection.css" text="add to deck" GridPane.rowIndex="6"/>
-    <ComboBox fx:id="decks" stylesheets="@../styleSheets/collection.css" GridPane.columnIndex="4"
-              GridPane.halignment="CENTER" GridPane.rowIndex="2">
+    <Button id="backButton" fx:id="backButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#backAction" prefHeight="98.0" prefWidth="261.0" stylesheets="@../styleSheets/collection.css" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+    <Button fx:id="addCardToDeckButton" mnemonicParsing="false" styleClass="collectionButtons" stylesheets="@../styleSheets/collection.css" text="add to deck" GridPane.rowIndex="6" />
+    <ComboBox fx:id="decks" stylesheets="@../styleSheets/collection.css" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2">
     </ComboBox>
-    <Button fx:id="createDeckButton" mnemonicParsing="false" styleClass="collectionButtons"
-            stylesheets="@../styleSheets/collection.css" text="create deck" GridPane.columnIndex="3"
-            GridPane.halignment="CENTER" GridPane.rowIndex="2"/>
-    <Button fx:id="setMainDeckButton" mnemonicParsing="false" styleClass="collectionButtons"
-            stylesheets="@../styleSheets/collection.css" text="set as main deck" GridPane.columnIndex="2"
-            GridPane.halignment="CENTER" GridPane.rowIndex="2"/>
-    <Button fx:id="removeFromDeckButton" mnemonicParsing="false" styleClass="collectionButtons"
-            stylesheets="@../styleSheets/collection.css" text="remove from deck" GridPane.columnIndex="3"
-            GridPane.rowIndex="6"/>
-    <Button fx:id="deleteDeckButton" mnemonicParsing="false" styleClass="collectionButtons"
-            stylesheets="@../styleSheets/collection.css" text="delete deck" GridPane.columnIndex="4"
-            GridPane.rowIndex="6"/>
-    <ScrollPane fx:id="deckCardsScrollPane" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3"
-                GridPane.rowSpan="3">
-        <FlowPane fx:id="deckCardsFlowPane" prefHeight="240.0" prefWidth="294.0"/>
+    <Button fx:id="createDeckButton" mnemonicParsing="false" styleClass="collectionButtons" stylesheets="@../styleSheets/collection.css" text="create deck" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+    <Button fx:id="setMainDeckButton" mnemonicParsing="false" styleClass="collectionButtons" stylesheets="@../styleSheets/collection.css" text="set as main deck" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+    <Button fx:id="removeFromDeckButton" mnemonicParsing="false" styleClass="collectionButtons" stylesheets="@../styleSheets/collection.css" text="remove from deck" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+    <Button fx:id="deleteDeckButton" mnemonicParsing="false" styleClass="collectionButtons" stylesheets="@../styleSheets/collection.css" text="delete deck" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+    <ScrollPane fx:id="deckCardsScrollPane" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="3">
+        <FlowPane fx:id="deckCardsFlowPane" prefHeight="240.0" prefWidth="294.0" />
     </ScrollPane>
+   <TextField fx:id="searchBox" prefHeight="35.0" prefWidth="240.0" promptText="search" style="-fx-background-color: gray;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 </GridPane>

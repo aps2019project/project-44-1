@@ -37,9 +37,9 @@ public class CollectionController {
 
     private void createDeck(CollectionRequest request) {
         String deckName = request.getDeckName();
-        if (!collection.isUsedDeckName(deckName)) {
+        try {
             collection.createDeck(deckName);
-        } else {
+        } catch (Exceptions.DuplicateNameForDeck duplicateNameForDeck) {
             view.printError(ErrorType.DUPLICATE_DECK);
         }
     }
