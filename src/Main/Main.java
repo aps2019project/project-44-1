@@ -7,7 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import javax.sound.sampled.*;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class Main extends Application {
     private static Parent mainMenu;
@@ -26,6 +30,7 @@ public class Main extends Application {
     //---------------------------------------------------- windows are loaded
 
     public static void main(String[] args) {
+        play();
         launch(args);
         System.exit(0);
     }
@@ -53,6 +58,28 @@ public class Main extends Application {
 
     public static Parent getMainMenu() {
         return mainMenu;
+    }
+
+    private static void play(){
+        Thread thread = new Thread(() -> {
+            try {
+                InputStream audioSrc = new FileInputStream("src\\view\\mainmenu_v2c_looping.wav");
+                InputStream bufferedIn = new BufferedInputStream(audioSrc);
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioStream);
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+                clip.start();
+                do {
+                    Thread.sleep(15);
+                } while (clip.isRunning());
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.setDaemon(true);
+        thread.setName("player");
+        thread.start();
     }
 
 }
