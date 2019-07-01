@@ -42,7 +42,11 @@ public class CollectionFxmlController implements Initializable {
         selectMainDeckBtn();
         addCardToDeckBtn();
         createDeckBtnOnAction();
-        searchBox.setOnAction(event -> {
+        searchActionHandler();
+    }
+
+    private void searchActionHandler() {
+        searchBox.setOnKeyPressed(event -> {
             if (!searchBox.getText().isEmpty()) {
                 collectionCardsFlowPane.getChildren().clear();
                 String choice = searchBox.getText();
@@ -85,9 +89,8 @@ public class CollectionFxmlController implements Initializable {
                 return;
             for (CardContainer cardContainer : collectionCards) {
                 if (cardContainer.getCheckBox().isSelected()) {
+                    setCardContainer(cardContainer.getCard(),deckCardsFlowPane,deckCards);
                     collection.getDeck(decks.getValue()).addToDeck(cardContainer.getCard());
-                    deckCardsFlowPane.getChildren().add(cardContainer.getAnchorPane());
-                    deckCards.add(cardContainer);
                 }
             }
         });
