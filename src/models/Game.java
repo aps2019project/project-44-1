@@ -105,7 +105,11 @@ public class Game {
         test.getCollection().addCardToCollection(Shop.getInstance().getCard("tajdanaei"));
         test.getCollection().addCardToCollection(Shop.getInstance().getCard("Madness"));
         Game.getAccounts().add(test);
-        test.getCollection().createDeck("test");
+        try {
+            test.getCollection().createDeck("test");
+        } catch (Exceptions.DuplicateNameForDeck duplicateNameForDeck) {
+            duplicateNameForDeck.printStackTrace();
+        }
         test.getCollection().addToDeck(1, "test");
         test.getCollection().addToDeck(4, "test");
         test.getCollection().addToDeck(4, "test");
@@ -142,7 +146,11 @@ public class Game {
         test.getCollection().addCardToCollection(Shop.getInstance().getCard("tajdanaei"));
         test.getCollection().addCardToCollection(Shop.getInstance().getCard("Madness"));
         Game.getAccounts().add(test);
-        test.getCollection().createDeck("test");
+        try {
+            test.getCollection().createDeck("test");
+        } catch (Exceptions.DuplicateNameForDeck duplicateNameForDeck) {
+            duplicateNameForDeck.printStackTrace();
+        }
         test.getCollection().addToDeck(1, "test");
         test.getCollection().addToDeck(4, "test");
         test.getCollection().addToDeck(4, "test");
