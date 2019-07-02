@@ -31,7 +31,7 @@ public class RecordController implements Initializable {
         EventHandler<ActionEvent> eventHandler = e -> view.setImage(getImage());
         animation = new Timeline(new KeyFrame(Duration.millis(100), eventHandler));
         animation.setCycleCount(Timeline.INDEFINITE);
-        File folder = new File("src\\view\\images");
+        File folder = new File("src\\view\\record");
         listOfFiles = folder.listFiles();
         back.setOnAction(actionEvent -> Game.getInstance().loadPage(back, "view/fxmls/mainMenu.fxml"));
         play.setOnAction(actionEvent -> player());
@@ -47,7 +47,7 @@ public class RecordController implements Initializable {
 
     private Image getImage() {
         index++;
-        if (index >= 16) {
+        if (index >= listOfFiles.length) {
             animation.stop();
             index = 0;
         }
