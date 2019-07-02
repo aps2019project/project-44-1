@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.fxmlControllers.RecordController" fx:id="pane">
+    <ImageView fitHeight="289.0" fitWidth="523.0" layoutX="45.0" layoutY="53.0" pickOnBounds="true"
+               preserveRatio="true" fx:id="view"/>
+    <Button layoutX="264.0" layoutY="351.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="72.0" text="play"
+            fx:id="play"/>
+    <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="72.0" text="back" fx:id="back"/>
+</AnchorPane>
