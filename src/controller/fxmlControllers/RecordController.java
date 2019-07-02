@@ -1,6 +1,6 @@
 package controller.fxmlControllers;
 
-import javafx.animation.FadeTransition;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -16,8 +16,6 @@ import models.Game;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class RecordController implements Initializable {
     public Button back;
@@ -26,14 +24,13 @@ public class RecordController implements Initializable {
     public AnchorPane pane;
     private int index = 0;
     private File[] listOfFiles;
-
+    private Timeline animation;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        view.setY(50);
-        view.setY(50);
-        view.setFitWidth(500);
-        view.setFitHeight(500);
+        EventHandler<ActionEvent> eventHandler = e -> view.setImage(getImage());
+        animation = new Timeline(new KeyFrame(Duration.millis(100), eventHandler));
+        animation.setCycleCount(Timeline.INDEFINITE);
         File folder = new File("src\\view\\images");
         listOfFiles = folder.listFiles();
         back.setOnAction(actionEvent -> Game.getInstance().loadPage(back, "view/fxmls/mainMenu.fxml"));
@@ -41,19 +38,28 @@ public class RecordController implements Initializable {
     }
 
     private void player() {
-        EventHandler<ActionEvent> eventHandler = e -> {
-            pane.getChildren().remove(view);
-            pane.getChildren().add(getImage());
-        };
-        Timeline animation = new Timeline(new KeyFrame(Duration.millis(30), eventHandler));
-        animation.setCycleCount(2);
-        animation.play();
-
+        if (animation.getStatus().equals(Animation.Status.RUNNING))
+            animation.pause();
+        else {
+            animation.play();
+        }
     }
 
-    private ImageView getImage() {
+    private Image getImage() {
         index++;
-        return new ImageView(new Image(listOfFiles[index].getPath().substring(4)));
+        if (index >= 16) {
+            animation.stop();
+            index = 0;
+        }
+        Image i = null;
+        try {
+
+            i = new Image(listOfFiles[index].getPath().substring(4));
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            System.out.println(index);
+        }
+        return i;
     }
 
 }
