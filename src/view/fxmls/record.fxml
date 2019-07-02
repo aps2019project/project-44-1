@@ -27,4 +27,9 @@
          <Font name="System Bold Italic" size="20.0" />
       </font>
    </TitledPane>
+   <Label layoutX="520.0" layoutY="416.0" prefHeight="70.0" prefWidth="278.0" text="&lt;--- click to see game replay" textFill="#d249cb">
+      <font>
+         <Font name="System Bold Italic" size="20.0" />
+      </font>
+   </Label>
 </AnchorPane>

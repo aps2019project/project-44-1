@@ -84,7 +84,7 @@ public class RecordController implements Initializable {
             message.setText("your reward : " + reward);
         } else {
             anchorPane.setBackground(new Background(new BackgroundImage(new
-                    Image("view\\images\\7280d9d7-0594-4d20-9909-ab42b9af058d.jpg"), BackgroundRepeat.NO_REPEAT,
+                    Image("view\\images\\b8438acd7759c6c582630658b0898ec3.jpg"), BackgroundRepeat.NO_REPEAT,
                     BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
             message.setVisible(false);
         }
