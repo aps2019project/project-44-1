@@ -1,0 +1,11 @@
+#back{
+    -fx-background-image: url("../images/button_back_corner@2x.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+}
+
+#play{
+    -fx-background-image: url("../images/download.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+}

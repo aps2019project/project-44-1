@@ -25,7 +25,7 @@ public class LeaderboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        back.setOnAction(event -> Game.getInstance().loadPage(table, "/view/fxmls/loginPage.fxml"));
+        back.setOnAction(event -> Game.getInstance().loadPage(table, "/view/fxmls/record.fxml"));
         populateTable();
     }
 
