@@ -19,7 +19,7 @@ public class Player implements Move {
     private Card nextCardInHand;
     private Card selectedCard;
 
-    Player(Deck deck, String name) throws CloneNotSupportedException {
+    Player(Deck deck, String name) {
         this.deck = deck.clone();
         this.name = name;
         for (Card card : this.deck.getCards()) {

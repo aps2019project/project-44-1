@@ -93,9 +93,8 @@ public class AccountController extends Thread {
 
     private void write(Gson gson, Account[] accounts) throws IOException {
         FileWriter writer;
-        Account[] accounts2;
         writer = new FileWriter("src/models/accountSaves.json");
-        accounts2 = getAccounts(accounts);
+        Account[] accounts2 = getAccounts(accounts);
         writer.write(gson.toJson(accounts2));
         writer.flush();
         writer.close();

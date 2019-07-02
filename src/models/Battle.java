@@ -29,16 +29,12 @@ public class Battle implements Goal, Fight {
         this.flagNumber = flagNumber;
         if (prize.length == 1)
             this.prize = prize[0];
-        try {
-            this.firstPlayer = new Player(first.getCollection().getMainDeck(),
-                    first.getUsername());
-            this.firstPlayer.setMyMap(map);
-            this.secondPlayer = new Player(second.getCollection().getMainDeck(),
-                    second.getUsername());
-            this.secondPlayer.setMyMap(map);
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        this.firstPlayer = new Player(first.getCollection().getMainDeck(),
+                first.getUsername());
+        this.firstPlayer.setMyMap(map);
+        this.secondPlayer = new Player(second.getCollection().getMainDeck(),
+                second.getUsername());
+        this.secondPlayer.setMyMap(map);
         if (!battleMode.equals(BattleMode.DEATH_MATCH))
             putFlags();
         putHeroes();
@@ -131,34 +127,6 @@ public class Battle implements Goal, Fight {
             cell.setPlaceable((Card) card);
         else cell.setItem((Item) card);
     }
-
-    @Override
-    public String toString() {
-        // if (this.getBattleMode() == BattleMode.DEATH_MATCH) {
-        int HP1 = 0, HP2 = 0;
-        for (Card c : map.getAllCardsInMap()) {
-            if (c instanceof Hero) {
-                if (HP1 == 0)
-                    HP1 = c.getHP();
-                else HP2 = c.getHP();
-            }
-        }
-//        System.out.println(Arrays.toString(map.getAllCardsInMap().toArray()));
-        return "HP of first player Hero is " + HP1 + "\n" +
-                "HP of second player Hero is " + HP2;
-        //} else if (this.battleMode == BattleMode.CAPTURE_FLAG_1) {
-//
-//        }
-//
-//        ArrayList<Cell> cells = new ArrayList<>();      //^_^
-//        Card card;
-//        getMap().getFlags().forEach(f -> cells.add(f.getMyCell()));
-//        if (cells.size() == 1 && getBattleMode() == BattleMode.CAPTURE_FLAG_1) {
-//            card = getMap().getFlags().get(0).getCarrier();       //type2
-//        }
-//        if (cells.size() > 1 && getBattleMode() == BattleMode.CAPTURE_FLAG_2)
-//            getMap().getFlags().forEach(Item::getCarrier);       //type3
-    }       //#TODO
 
     /**
      * method to handle all actions must occur at end of turn
