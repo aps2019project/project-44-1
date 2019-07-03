@@ -86,15 +86,6 @@ public class Game {
         }
     }
 
-    @Override
-    public String toString() {
-        return "1.login\n" +
-                "2.creat account\n" +
-                "3.show leaderboard\n" +
-                "4.Help\n" +
-                "5.Exit";
-    }
-
     static {
         Account test = new Account("test", "1234");
         test.getCollection().addCardToCollection(Shop.getInstance().getCard("divsefid"));

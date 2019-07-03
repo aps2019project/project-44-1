@@ -2,8 +2,6 @@ package controller.fxmlControllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -12,12 +10,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import models.Game;
 import view.fxmls.wrapperClasses.Leader;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LeaderboardController implements Initializable {
-    @FXML
     public TableView<Leader> table;
     public TableColumn<Leader, String> username;
     public TableColumn<Leader, Integer> wins;
@@ -25,7 +21,7 @@ public class LeaderboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        back.setOnAction(event -> Game.getInstance().loadPage(table, "/view/fxmls/record.fxml"));
+        back.setOnAction(event -> Game.getInstance().loadPage(table, "/view/fxmls/loginPage.fxml"));
         populateTable();
     }
 

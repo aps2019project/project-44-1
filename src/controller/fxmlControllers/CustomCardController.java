@@ -17,15 +17,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CustomCardController implements Initializable {
+    private final String minionPath = "src\\models\\customMinions.json";
+    private final String heroPath = "src\\models\\customHeroes.json";
     public TextField name;
     public ComboBox<String> type;
-    public TextField target;
-    public TextField buffs;
     public TextField AP;
     public TextField HP;
     public ComboBox<String> attackType;
     public TextField range;
-    public TextField specialPower;
     public TextField cool_active;
     public TextField cost;
     public Button finish;
@@ -121,70 +120,77 @@ public class CustomCardController implements Initializable {
         return s + "!!!";
     }
 
+    /**
+     * here a daemon thread writes the info into a json file, and add the card to the shop
+     */
     //-------------------------------------------------------------------------------
     public void backEnd() {
         new Thread(() -> {
 
             Gson gson = new Gson();
-            JsonReader reader = null;
+            JsonReader reader = null;   //we sure that this order never changes
+            Shop shop = Shop.getInstance();
             switch (type.getSelectionModel().getSelectedIndex()) {
-                case 0:
-                    try {
-                        reader = new JsonReader(new FileReader("src\\models\\customHeroes.json"));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    JsonArray array = gson.fromJson(reader, JsonArray.class);
+                case 0:     //hero
+                    JsonArray array = getJsonElements(gson, reader, heroPath);
                     Hero hero = getHero();
                     Hero[] heroes = gson.fromJson(array, Hero[].class);
-                    write(gson, hero, heroes, "src\\models\\customHeroes.json");
-                    break;
-                case 1:
-                    try {
-                        reader = new JsonReader(new FileReader("src\\models\\customMinions.json"));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                    shop.getCards().add(hero);
+                    Hero[] heroes1;
+                    int length = heroes.length;
+                    if (length != 0) {
+
+                        heroes1 = new Hero[length + 1];
+                        System.arraycopy(heroes, 0, heroes1, 0, length);
+                        heroes1[length - 1] = hero;
+                    } else {
+                        heroes1 = new Hero[1];
+                        heroes1[0] = hero;
                     }
-                    array = gson.fromJson(reader, JsonArray.class);
-                    Minion minion = getMinion();
-                    Minion[] minions = gson.fromJson(array, Minion[].class);
-                    write(gson, minion, minions, "src\\models\\customMinions.json");
+                    write(gson, heroes1, heroPath);
                     break;
-                case 2:
+                case 1:     //minion
+                    JsonArray array1 = getJsonElements(gson, reader, minionPath);
+                    Minion minion = getMinion();
+                    Minion[] minions = gson.fromJson(array1, Minion[].class);
+                    shop.getCards().add(minion);
+                    Minion[] minions1;
+                    length = minions.length;
+                    if (length != 0) {
+                        minions1 = new Minion[length + 1];
+                        System.arraycopy(minions, 0, minions1, 0, length);
+                        minions1[length - 1] = minion;
+                    } else {
+                        minions1 = new Minion[1];
+                        minions1[0] = minion;
+                    }
+                    write(gson, minions1, minionPath);
+                    break;
+                case 2:     //spell
             }
+
         }).start();
     }
 
-    private void write(Gson gson, Card card, Card[] cards, final String path) {
-        Shop shop = Shop.getInstance();
-        shop.getCards().add(card);
+    private JsonArray getJsonElements(Gson gson, JsonReader reader, String heroPath) {
         try {
-            FileWriter writer = new FileWriter(path);
-            Card[] cards1;
-            if (cards != null) {
-                int length = cards.length;
-                cards1 = getCards(card, length);
-                System.arraycopy(cards, 0, cards1, 0, length);
-                cards1[length - 1] = card;
-            } else {
-                cards1 = getCards(card, 0);
-                cards1[0] = card;
-            }
-            writer.write(gson.toJson(cards1));
+            reader = new JsonReader(new FileReader(heroPath));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return gson.fromJson(reader, JsonArray.class);
+    }
+
+    private void write(Gson gson, Card[] cards, String path) {
+        FileWriter writer;
+        try {
+            writer = new FileWriter(path);
+            writer.write(gson.toJson(cards));
             writer.flush();
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private Card[] getCards(Card card, int length) {
-        Card[] cards1;
-        if (card instanceof Hero)
-            cards1 = new Hero[length + 1];
-        else
-            cards1 = new Minion[length + 1];
-        return cards1;
     }
 
     private Hero getHero() {
@@ -197,7 +203,11 @@ public class CustomCardController implements Initializable {
     private Minion getMinion() {
         Minion minion = new Minion();
         fielder(minion);
-//        minion.setSpecialPowerActivation(SpecialPowerActivation.valueOf(cool_active.getText()));
+        try {
+            minion.setSpecialPowerActivation(SpecialPowerActivation.valueOf(cool_active.getText()));
+        } catch (IllegalArgumentException e) {
+            appearLabel("invalid \nSpecialPowerActivation!!!");
+        }
         return minion;
     }
 
@@ -208,7 +218,6 @@ public class CustomCardController implements Initializable {
         card.setAP(Integer.parseInt(AP.getText()));
         card.setHP(Integer.parseInt(HP.getText()));
         card.setAttackType(AttackType.valueOf(attackType.getSelectionModel().getSelectedItem()));
-//        card.setSpecialPower(specialPower.getText());
     }
 
 }
