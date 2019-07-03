@@ -30,6 +30,8 @@ public class CustomCardController implements Initializable {
     public Button finish;
     public Button back;
     public Label message;
+    public ComboBox<String> specialPower;
+    private Shop shop = Shop.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -58,6 +60,13 @@ public class CustomCardController implements Initializable {
             attackType.getItems().addAll("MELEE", "RANGED", "HYBRID");
         range.setVisible(!isSpell);
         cool_active.setVisible(!isSpell);
+        specialPower.setVisible(!isSpell);
+        if (specialPower.getItems().size() == 0) {
+            for (Placeable p : shop.getCards()) {
+                if (p instanceof Spell)
+                    specialPower.getItems().add(p.getName());
+            }
+        }
         if (isHero) {
             cool_active.setPromptText("special power activation");
         } else
@@ -92,6 +101,10 @@ public class CustomCardController implements Initializable {
             }
             if (wrongInfo(range, "invalid range!!!", "^\\d+$"))
                 return true;
+            if (specialPower.getSelectionModel().getSelectedItem() == null) {
+                appearLabel("select specialPower!!!");
+                return true;
+            }
             return wrongInfo(cool_active, getCAError(), "^\\d+$");
         }
         return false;
@@ -129,7 +142,6 @@ public class CustomCardController implements Initializable {
 
             Gson gson = new Gson();
             JsonReader reader = null;   //we sure that this order never changes
-            Shop shop = Shop.getInstance();
             switch (type.getSelectionModel().getSelectedIndex()) {
                 case 0:     //hero
                     JsonArray array = getJsonElements(gson, reader, heroPath);
@@ -218,6 +230,7 @@ public class CustomCardController implements Initializable {
         card.setAP(Integer.parseInt(AP.getText()));
         card.setHP(Integer.parseInt(HP.getText()));
         card.setAttackType(AttackType.valueOf(attackType.getSelectionModel().getSelectedItem()));
+        card.setSpecialPower(specialPower.getSelectionModel().getSelectedItem());
     }
 
 }
