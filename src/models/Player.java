@@ -44,7 +44,7 @@ public class Player implements Move {
     }
 
     public Card getNextCardInHand() {
-        if (nextCardInHand == null) {
+        if (nextCardInHand != null) {
             return nextCardInHand;
         }
         return null;

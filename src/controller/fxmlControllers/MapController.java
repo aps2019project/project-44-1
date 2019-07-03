@@ -17,6 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -77,28 +78,30 @@ public class MapController implements Initializable {
     }
 
     private void setImages() {
-        File folder = new File("src\\view\\generalPortrait");
+        File folder = new File("src/view/images/generalPortrait");
         File[] listOfFiles = folder.listFiles();
         Random random = new Random();
         int x = random.nextInt(5);
         try {
-            firstPlayer.setImage(new Image(listOfFiles[x].getPath()));
+            firstPlayer.setImage(new Image(listOfFiles[x].getPath().substring(4)));
             x = random.nextInt(5);
-            secondPlayer.setImage(new Image(listOfFiles[x].getPath()));
+            secondPlayer.setImage(new Image(listOfFiles[x].getPath().substring(4)));
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-        setHandImages(battleController.getBattle().getCurrentPlayer().getHand(),
-                battleController.getBattle().getCurrentPlayer().getNextCardInHand());
+        System.out.println(Arrays.toString(battleController.getBattle().getCurrentPlayer().getHand()));
+        System.out.println(battleController.getBattle().getCurrentPlayer().getNextCardInHand());
+//        setHandImages(battleController.getBattle().getCurrentPlayer().getHand(),
+//                battleController.getBattle().getCurrentPlayer().getNextCardInHand());
     }
 
     private void setHandImages(Card[] cards, Card next) {
-        nextInHand.setImage(new Image(next.getPath()));
-        first.setImage(new Image(cards[0].getPath()));
-        second.setImage(new Image(cards[1].getPath()));
-        third.setImage(new Image(cards[2].getPath()));
-        fourth.setImage(new Image(cards[3].getPath()));
-        fifth.setImage(new Image(cards[4].getPath()));
+        nextInHand.setImage(new Image(next.getPath().substring(4)));
+        first.setImage(new Image(cards[0].getPath().substring(4)));
+        second.setImage(new Image(cards[1].getPath().substring(4)));
+        third.setImage(new Image(cards[2].getPath().substring(4)));
+        fourth.setImage(new Image(cards[3].getPath().substring(4)));
+        fifth.setImage(new Image(cards[4].getPath().substring(4)));
     }
 
     public void screenShot() {
