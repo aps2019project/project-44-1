@@ -37,7 +37,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/fxmls/record.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/fxmls/loginPage.fxml"));
         Main.setStage(primaryStage);
         primaryStage.setTitle("DUELYST");
         Scene scene = new Scene(root, 850, 500);
