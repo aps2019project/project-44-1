@@ -1,9 +1,13 @@
 package controller.fxmlControllers;
 
+import controller.logicController.BattleController;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import models.Game;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -15,17 +19,47 @@ import java.util.ResourceBundle;
 
 public class MapController implements Initializable {
 
-    public GridPane pane;
+    public GridPane map;
     public TextField cheat;
+    public Button exit;
+    public Button save;
+    public Button graveyard;
+    public Button endTurn;
+    public ImageView first;
+    public ImageView second;
+    public ImageView third;
+    public ImageView fourth;
+    public ImageView fifth;
+    public ImageView nextInHand;
+    public ImageView firstPlayer;
+    public ImageView secondPlayer;
     private boolean playing = true;
+    private BattleController battleController = BattleController.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         screenShot();
+        initializeButtons();
+        setImages();
         cheat.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode().equals(KeyCode.ENTER))
                 applyCheat(cheat.getText());
         });
+    }
+
+    private void initializeButtons() {
+        exit.setOnAction(actionEvent -> {
+            playing = false;
+            battleController.gameHistory();
+            Game.getInstance().loadPage(exit, "/view/fxmls/mainMenu.fxml");
+        });
+        save.setOnAction(actionEvent -> battleController.save());
+        graveyard.setOnAction(actionEvent -> battleController.enterGraveyard());
+        endTurn.setOnAction(actionEvent -> battleController.endTurn());
+    }
+
+    private void setImages() {
+
     }
 
     public void screenShot() {
@@ -35,7 +69,7 @@ public class MapController implements Initializable {
                 try {
                     Robot r = new Robot();
                     Dimension d = new Dimension();
-                    d.setSize(pane.getWidth(), pane.getHeight());
+                    d.setSize(map.getWidth(), map.getHeight());
                     Rectangle capture = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
                     BufferedImage Image = r.createScreenCapture(capture);
                     ImageIO.write(Image, "jpg", new File("src\\view\\record\\Shot" + (index++) + ".jpg"));

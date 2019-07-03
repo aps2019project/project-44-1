@@ -1,5 +1,12 @@
-#background{
+#background {
     -fx-background-image: url("../images/midground.png");
     -fx-background-size: 100% 100%;
     -fx-background-repeat: no-repeat;
+}
+
+.intro {
+    -fx-background-image: url("../images/button_secondary@2x.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: transparent;
 }

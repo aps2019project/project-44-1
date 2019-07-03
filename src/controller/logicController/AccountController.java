@@ -44,15 +44,15 @@ public class AccountController extends Thread {
     private void modeHandler() {
         switch (state) {
             case MULTI1:
-                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER,
+                BattleController.getInstance().setBattle(new Battle(BattleKind.MULTI_PLAYER,
                         BattleMode.DEATH_MATCH, account, opponent, 0));
                 break;
             case MULTI2:
-                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER,
+                BattleController.getInstance().setBattle(new Battle(BattleKind.MULTI_PLAYER,
                         BattleMode.CAPTURE_FLAG_1, account, opponent, 1));
                 break;
             default:
-                BattleController.getInstance().main(new Battle(BattleKind.MULTI_PLAYER,
+                BattleController.getInstance().setBattle(new Battle(BattleKind.MULTI_PLAYER,
                         BattleMode.CAPTURE_FLAG_2, account, opponent, state - MULTI1));
         }
     }
@@ -64,15 +64,15 @@ public class AccountController extends Thread {
         RequestType type = artificialIntelligence.getType(level);
         switch (type) {
             case CAPTURE_FLAG1:
-                BattleController.getInstance().main(new Battle(BattleKind.SINGLE_PLAYER,
+                BattleController.getInstance().setBattle(new Battle(BattleKind.SINGLE_PLAYER,
                         BattleMode.CAPTURE_FLAG_1, account, ai_player, 1, 1000));
                 break;
             case DEATH_MATCH:
-                BattleController.getInstance().main(new Battle(BattleKind.SINGLE_PLAYER,
+                BattleController.getInstance().setBattle(new Battle(BattleKind.SINGLE_PLAYER,
                         BattleMode.DEATH_MATCH, account, ai_player, 0, 500));
                 break;
             case CAPTURE_FLAG2:
-                BattleController.getInstance().main(new Battle(BattleKind.SINGLE_PLAYER,
+                BattleController.getInstance().setBattle(new Battle(BattleKind.SINGLE_PLAYER,
                         BattleMode.CAPTURE_FLAG_2, account, ai_player, 5, 500));     //must "ASK"
         }
     }

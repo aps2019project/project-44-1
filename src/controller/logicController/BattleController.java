@@ -8,7 +8,7 @@ import view.View;
 
 import static models.Enums.ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK;
 
-class BattleController {
+public class BattleController {
     private static BattleController battleController = new BattleController();
     private Battle battle;
     private View view = View.getInstance();
@@ -16,67 +16,15 @@ class BattleController {
     private BattleController() {
     }
 
-    static BattleController getInstance() {
+    public static BattleController getInstance() {
         return battleController;
     }
 
-    void main(Battle battle) {
+    public void setBattle(Battle battle) {
         this.battle = battle;
-        boolean isFinish = false;
-        battle.getCurrentPlayer().setMana(Player.turnBeginMana[0]);
-        do {
-            View.getInstance().showMap(this.battle);
-            BattleRequest request = new BattleRequest();
-            request.getNewCommand();
-            switch (request.getType()) {
-                case EXIT:
-                    isFinish = true;
-                    break;
-                case HELP:                   //#TODO eazzz
-                    helpInBattle();
-                    break;
-                case SHOW_GAME_INFO:         //#TODO eazzz
-                    showGameInfo();
-                    break;
-                case SHOW_MY_MINIONS:
-                    showMyMinions();
-                    break;
-                case SHOW_OPPONENT_MINIONS:
-                    showOpponentMinions();
-                    break;
-                case SHOW_CARD_INFO:
-                    showCardInfo(request);
-                    break;
-                case SELECT_CARD:
-                    selectCard(request);
-                    break;
-                case SHOW_MY_HAND:
-                    showHand();
-                    break;
-                case INSERT_CARD_FROM_HAND_TO_MAP:
-                    insertCard(request);
-                    break;
-                case END_TURN:
-                    endTurn();
-                    break;
-                case SHOW_COLLECTABLES:
-                    showCollectables();
-                    break;
-                case SHOW_NEXT_CARD:
-                    showNextCard();
-                    break;
-                case ENTER_GRAVEYARD:
-                    enterGraveyard(request);
-            }
-            if (battle.finishChecker(battle)) {
-                isFinish = true;
-                gameHistory();
-            }
-        }
-        while (!isFinish);
     }
 
-    private void gameHistory() {
+    public void gameHistory() {
         if (battle.isFirstPlayerWon()) {
             battle.getFirst().increaseWins();
             battle.getFirst().increaseMoney(battle.getPrize());
@@ -100,24 +48,6 @@ class BattleController {
                     false);
             battle.getFirst().addMatchHistory(matchHistory);
         }
-    }
-
-    private void showGameInfo() {
-        view.sout("player1 Mana : " + battle.getFirstPlayer().getMana() +
-                "\nplayer2 Mana : " + battle.getSecondPlayer().getMana());
-        view.sout(battle.toString());
-    }
-
-    private void showMyMinions() {
-        view.showMyMinions(battle.getMyCardsInMap());
-    }
-
-    private void showOpponentMinions() {
-        view.showOpponentMinions(battle.getOpponentCardsInMap());
-    }
-
-    private void showCardInfo(BattleRequest request) {
-        view.printError(ErrorType.CARD_NOT_FOUND_IN_BATTLE);
     }
 
     private void selectCard(BattleRequest request) {
@@ -173,14 +103,7 @@ class BattleController {
                 request.getLocationX(), request.getLocationY());
     }
 
-    private void showHand() {
-        for (Card c : battle.getCurrentPlayer().getHand()) {
-            view.sout(c.toString() + "\n");
-        }
-        showNextCard();
-    }
-
-    private void endTurn() {
+    public void endTurn() {
         if (battle.getBattleKind().equals(BattleKind.SINGLE_PLAYER)) {
             battle.turnHandler();
             ArtificialIntelligence.aiAction(this.battle);
@@ -188,53 +111,7 @@ class BattleController {
         battle.turnHandler();
     }
 
-    private void showCollectables() {
-
-    }
-
-    private void showNextCard() {
-        Card card = battle.getCurrentPlayer().getNextCardInHand();
-        if (card != null) {
-            view.sout("next card in hand will be : " + card.toString());
-        } else view.sout("no card will be added to your hand!!!");
-    }
-
-    private void enterGraveyard(BattleRequest request) {
-        while (true) {
-            request.getNewCommand();
-            if (request.getType().equals("show card info in graveyard")) {
-                showCardInfo(request);
-            }
-            if (request.getType().equals("show cards in graveyard")) {
-                showCardsInGraveyard();
-            }
-            if (request.getType().equals("exit")) {
-                break;
-            }
-            if (request.getType().equals("show menu")) {
-                showMenuInGraveyard();
-            }
-        }
-        // not sure about this
-    }
-
-    private void helpInBattle() {
-        view.sout("1.Game Info  \n2.show my minions \nshow opponent minions \n show card inf");
-    }       //#TODO
-
-    private void showMenuInGraveyard() {
-
-    }
-
-    private void showMenuInSelectCollectable() {
-
-    }
-
-    private void showCardsInGraveyard() {
-
-    }
-
-    private void showCollectableInfo(BattleRequest request) {
+    public void enterGraveyard() {
 
     }
 
@@ -281,6 +158,10 @@ class BattleController {
             }
         }
         while (!isFinish && battle.finishChecker(battle));
+    }
+
+    public void save() {
+
     }
 
 }
