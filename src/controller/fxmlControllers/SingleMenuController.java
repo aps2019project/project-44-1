@@ -22,9 +22,9 @@ public class SingleMenuController extends MultiMenuController implements Initial
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        first.setImage(new Image("view/images/general_portrait_image_f1.png"));
-        second.setImage(new Image("view/images/general_portrait_image_f2.png"));
-        third.setImage(new Image("view/images/general_portrait_image_f3.png"));
+        first.setImage(new Image("view/images/generalPortrait/general_portrait_image_f1.png"));
+        second.setImage(new Image("view/images/generalPortrait/general_portrait_image_f2.png"));
+        third.setImage(new Image("view/images/generalPortrait/general_portrait_image_f3.png"));
         fLabel.setText("DeathMatch\ndivsefid");
         sLabel.setText("SaveFlag\nzahhak");
         tLabel.setText("CaptureFlag\narash");

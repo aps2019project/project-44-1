@@ -4,9 +4,11 @@ import controller.logicController.BattleController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import models.Card;
 import models.Game;
 
 import javax.imageio.ImageIO;
@@ -15,6 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class MapController implements Initializable {
@@ -45,6 +48,19 @@ public class MapController implements Initializable {
             if (keyEvent.getCode().equals(KeyCode.ENTER))
                 applyCheat(cheat.getText());
         });
+        deletePastRecord();
+    }
+
+    private void deletePastRecord() {
+        File folder = new File("src\\view\\record");
+        try {
+            for (File f : folder.listFiles()) {
+                if (!f.delete())
+                    throw new IOException();
+            }
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initializeButtons() {
@@ -59,7 +75,28 @@ public class MapController implements Initializable {
     }
 
     private void setImages() {
+        File folder = new File("src\\view\\generalPortrait");
+        File[] listOfFiles = folder.listFiles();
+        Random random = new Random();
+        int x = random.nextInt(5);
+        try {
+            firstPlayer.setImage(new Image(listOfFiles[x].getPath()));
+            x = random.nextInt(5);
+            secondPlayer.setImage(new Image(listOfFiles[x].getPath()));
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        setHandImages(battleController.getBattle().getCurrentPlayer().getHand(),
+                battleController.getBattle().getCurrentPlayer().getNextCardInHand());
+    }
 
+    private void setHandImages(Card[] cards, Card next) {
+        nextInHand.setImage(new Image(next.getPath()));
+        first.setImage(new Image(cards[0].getPath()));
+        second.setImage(new Image(cards[1].getPath()));
+        third.setImage(new Image(cards[2].getPath()));
+        fourth.setImage(new Image(cards[3].getPath()));
+        fifth.setImage(new Image(cards[4].getPath()));
     }
 
     public void screenShot() {

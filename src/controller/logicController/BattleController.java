@@ -24,6 +24,10 @@ public class BattleController {
         this.battle = battle;
     }
 
+    public Battle getBattle() {
+        return battle;
+    }
+
     public void gameHistory() {
         if (battle.isFirstPlayerWon()) {
             battle.getFirst().increaseWins();
