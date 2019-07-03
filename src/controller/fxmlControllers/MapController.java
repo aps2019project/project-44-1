@@ -54,9 +54,11 @@ public class MapController implements Initializable {
     private void deletePastRecord() {
         File folder = new File("src\\view\\record");
         try {
-            for (File f : folder.listFiles()) {
-                if (!f.delete())
-                    throw new IOException();
+            if (folder.listFiles() != null) {
+                for (File f : folder.listFiles()) {
+                    if (!f.delete())
+                        throw new IOException();
+                }
             }
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
