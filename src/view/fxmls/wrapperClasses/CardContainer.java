@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import models.Card;
 import models.Placeable;
 import models.Shop;
+import models.Spell;
 
 
 public class CardContainer {
@@ -67,8 +68,12 @@ public class CardContainer {
         imageView = new ImageView(new Image(c.getPath()));
         imageView.setFitHeight(191);
         imageView.setFitWidth(235);
-        imageView.setLayoutX(58);
-        imageView.setLayoutY(10);
+        imageView.setX(40);
+        imageView.setY(10);
+        if (!(c instanceof Spell)) {
+            imageView.setScaleX(1.5);
+            imageView.setScaleY(1.5);
+        }
 
         anchorPane.getChildren().addAll(manaLabel, attackPointLabel, healthPointLabel, nameLabel, checkBox, imageView);
 

@@ -85,17 +85,23 @@ public class AccountController extends Thread {
             reader = new JsonReader(new FileReader("src\\models\\accountSaves.json"));
             JsonArray array = gson.fromJson(reader, JsonArray.class);
             Account[] accounts = gson.fromJson(array, Account[].class);
-            write(gson, accounts);
+            if (!savedBefore(accounts))
+                write(gson, accounts, true);
+            else
+                write(gson, accounts, false);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void write(Gson gson, Account[] accounts) throws IOException {
+    private void write(Gson gson, Account[] accounts, boolean containsNew) throws IOException {
         FileWriter writer;
         writer = new FileWriter("src/models/accountSaves.json");
-        Account[] accounts2 = getAccounts(accounts);
-        writer.write(gson.toJson(accounts2));
+        if (containsNew) {
+            Account[] accounts2 = getAccounts(accounts);
+            writer.write(gson.toJson(accounts2));
+        } else
+            writer.write(gson.toJson(accounts));
         writer.flush();
         writer.close();
     }
@@ -111,6 +117,16 @@ public class AccountController extends Thread {
             accounts2[0] = account;
         }
         return accounts2;
+    }
+
+    private boolean savedBefore(Account[] accounts) {
+        for (int i = 0; i < accounts.length; i++) {
+            if (accounts[i].getUsername().equals(account.getUsername())) {
+                accounts[i] = account;
+                return true;
+            }
+        }
+        return false;
     }
 
     //----------------------------------------------------------------------

@@ -16,6 +16,7 @@ import models.*;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class ShopFxmlController implements Initializable {
@@ -64,6 +65,10 @@ public class ShopFxmlController implements Initializable {
             return;
         }
         Collection collection = account.getCollection();
+//        System.out.println(Arrays.toString(collection.getCollectionCards().toArray()));
+        for (Placeable p:collection.getCollectionCards()) {
+            System.out.println(p instanceof Card);
+        }
         for (Placeable c : collection.getCollectionCards()) {
             fillPanes(c, collectionPane, false);
         }
@@ -102,10 +107,10 @@ public class ShopFxmlController implements Initializable {
         } else
             image = new Image(url);
         if (isSpell) {
-            view.setFitHeight(20);
+            view.setFitHeight(70);
             view.setFitWidth(70);
             view.setX(60);
-            view.setY(20);
+            view.setY(70);
         }
         view.setImage(image);
         view.setScaleX(1.5);
