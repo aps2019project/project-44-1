@@ -10,11 +10,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 
 public class Game {
 
     private static ArrayList<Account> accounts = new ArrayList<>();
     private static Game game = new Game();
+    private HashMap<String, Account> onlineAccounts = new HashMap<>();
 
     private Game() {
         fillAccounts();
@@ -84,6 +86,26 @@ public class Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public HashMap<String, Account> getOnlineAccounts() {
+        return onlineAccounts;
+    }
+
+    public boolean isOnline(String username) {
+        return onlineAccounts.containsKey(username);
+    }
+
+    public void addToOnlineAccounts(Account account) {
+        onlineAccounts.put(account.getUsername(), account);
+    }
+
+    public void removeFromOnlineAccounts(Account account) {
+        onlineAccounts.remove(account.getUsername());
+    }
+
+    public void removeFromOnlineAccounts(String username) {
+        onlineAccounts.remove(username);
     }
 
     static {

@@ -42,4 +42,5 @@
         <FlowPane fx:id="deckCardsFlowPane" prefHeight="240.0" prefWidth="294.0" />
     </ScrollPane>
    <TextField fx:id="searchBox" prefHeight="35.0" prefWidth="240.0" promptText="search" style="-fx-background-color: gray;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+   <Button fx:id="importDeckButton" mnemonicParsing="false" prefHeight="126.0" prefWidth="233.0" styleClass="collectionButtons" stylesheets="@../styleSheets/collection.css" text="import Deck" GridPane.columnIndex="3" GridPane.rowIndex="6" />
 </GridPane>

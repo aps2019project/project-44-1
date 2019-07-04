@@ -1,6 +1,7 @@
 package controller.fxmlControllers;
 
 import Main.Main;
+import client.RequestSender;
 import controller.logicController.GameController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -10,8 +11,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import models.Enums.ErrorType;
 import models.Game;
+import server.Environment;
+import server.Request;
+import server.RequestType;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -39,44 +47,36 @@ public class LoginPageController implements Initializable {
     }
 
     public void handleSubmit() {
-        submitButton.setOnAction(event -> loginAction());
+        if (usernameTextField.getText().isEmpty() || passwordTextField.getText().isEmpty())
+            return;
+        submitButton.setOnAction(event -> {
+            if (submitButton.getText().equals("LOG IN"))
+                loginAction();
+            else
+                signUpAction();
+        });
+    }
+
+    private void signUpAction() {
+        Request request = new Request(Environment.LOGIN_PAGE);
+        request.setRequestType(RequestType.SIGN_UP);
+        request.setUsername(usernameTextField.getText());
+        request.setPassword(passwordTextField.getText());
+        RequestSender.getInstance().sendRequest(request);
     }
 
     private void loginAction() {
-        if (!gameController.isAlive())
-            initializeThread();
-        synchronized (gameController) {
-            gameController.notify();
-        }
-        try {
-            gameController.getGraphicState(usernameTextField.getText(), passwordTextField.getText(),
-                    submitButton.getText().equals("LOG IN"));
-            Thread.sleep(5);            //it's a trick to wait for receive logic process results
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        String labelText = gameController.getLabelText();
-        if (labelText != null) {
-            appearLabel(labelText);
-        }
+        Request request = new Request(Environment.LOGIN_PAGE);
+        request.setRequestType(RequestType.SIGN_IN);
+        request.setUsername(usernameTextField.getText());
+        request.setPassword(passwordTextField.getText());
+        RequestSender.getInstance().sendRequest(request);
     }
 
-    private void appearLabel(String text) {
-        if (text.equals(ErrorType.NO_ERROR.getMessage())) {
-            Main.getStage().getScene().setRoot(Main.getMainMenu());
-            return;
-        }
+    public void appearLabel(String text) {
         label.setText(text);
         label.setVisible(true);
         disappearLabel(label);
-    }
-
-    private void initializeThread() {
-        gameController.setName("gameController");
-        gameController.setDaemon(true);
-        gameController.getGraphicState(usernameTextField.getText(), passwordTextField.getText(),
-                submitButton.getText().equals("LOG IN"));
-        gameController.start();
     }
 
     static void disappearLabel(Label l) {

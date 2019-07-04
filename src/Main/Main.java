@@ -1,5 +1,8 @@
 package Main;
 
+import client.RequestSender;
+import client.ResponseHandler;
+import controller.fxmlControllers.LoginPageController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,15 +10,19 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.sound.sampled.*;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.Socket;
 
 public class Main extends Application {
     private static Parent mainMenu;
     private static Stage stage;
+    private static LoginPageController loginPageController;
 
 
     static {
@@ -30,14 +37,31 @@ public class Main extends Application {
     //---------------------------------------------------- windows are loaded
 
     public static void main(String[] args) {
-        play();
+//        play();
+        connectToServer();
         launch(args);
         System.exit(0);
     }
 
+
+    private static void connectToServer() {
+        try {
+            InetAddress ip = InetAddress.getByName("localhost");
+            Socket socket = new Socket(ip, 8000);
+            ResponseHandler responseHandler = new ResponseHandler(socket.getInputStream());
+            RequestSender requestSender = new RequestSender(socket.getOutputStream());
+            responseHandler.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/fxmls/loginPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/fxmls/loginPage.fxml"));
+        Parent root = fxmlLoader.load();
+        loginPageController = fxmlLoader.getController();
+
         Main.setStage(primaryStage);
         primaryStage.setTitle("DUELYST");
         Scene scene = new Scene(root, 850, 500);
@@ -82,4 +106,7 @@ public class Main extends Application {
         thread.start();
     }
 
+    public static LoginPageController getLoginPageController() {
+        return loginPageController;
+    }
 }

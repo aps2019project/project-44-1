@@ -77,12 +77,6 @@ public class GameController extends Thread {
         }
     }
 
-    public void getGraphicState(String username, String password, boolean isLoginRequest) {
-        this.password = password;
-        this.username = username;
-        this.isLoginRequest = isLoginRequest;
-    }
-
     public String getLabelText() {
         return labelText;
     }
