@@ -118,23 +118,6 @@ public class Collection implements Comparable<Placeable> {
         return sortedDecks;
     }
 
-    @Override
-    public String toString() {
-        return "1.show\n" +
-                "2.search [card name | item name]\n" +
-                "3.create deck [deck name]\n" +
-                "4.delete deck [deck nAme]\n" +
-                "5.add [card id | card id | hero id] to deck [deck name]\n" +
-                "6.remove [card id | card id| hero id] from deck [deck name]\n" +
-                "7.validate deck [deck name]\n" +
-                "8.select deck [deck name]\n" +
-                "9.show all decks\n" +
-                "10.show deck [deck name]\n" +
-                "11.save\n" +
-                "12.help\n" +
-                "13.exit\n";
-    }
-
     void deleteCardFromCollection(int cardID) {
         Placeable card = getCard(cardID);
         cardHashMap.remove(cardID);
@@ -164,10 +147,10 @@ public class Collection implements Comparable<Placeable> {
         return maxItems - this.getNumberOfItemsInCollection() > 0;
     }
 
-    // TODO: 03/05/2019 decide to use CollectionIDGenerator or ID field in card
     void addCardToCollection(Placeable card) {
-        card.setID(collectionIDGenerator());
-        cardHashMap.put(collectionIDGenerator(), card);
+        int x = collectionIDGenerator();
+        card.setID(x);
+        cardHashMap.put(x, card);
     }
 
     private int collectionIDGenerator() {
@@ -179,30 +162,13 @@ public class Collection implements Comparable<Placeable> {
         return -1;
     }
 
-    int searchInCollection(String cardName) {
-        for (Placeable card : cardHashMap.values()) {
-            if (card.getName().equals(cardName)) {
-                return getCardIDInCollection(cardName);
-            }
-        }
-        return -1;
-    }
-
-    private int getCardIDInCollection(String cardName) {
+    public int getCardIDInCollection(String cardName) {
         for (int i = 0; i < 100000; i++) {
             if (cardHashMap.get(i) != null && cardHashMap.get(i).getName().equals(cardName)) {
                 return i;
             }
         }
         return -1;
-    }
-
-    public HashMap<Integer, Placeable> getCardHashMap() {
-        return cardHashMap;
-    }
-
-    public void setCardHashMap(HashMap<Integer, Placeable> cardHashMap) {
-        this.cardHashMap = cardHashMap;
     }
 
 }

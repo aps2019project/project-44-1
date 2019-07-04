@@ -49,8 +49,8 @@ public class ShopFxmlController implements Initializable {
         Placeable p = shopController.getShop().getCard(search.getText());
         if (p != null) {
             ArrayList<Placeable> cards = shopController.getShop().getCards();
-            double x = cards.indexOf(p) + 2;
-            shop.setVvalue(x / cards.size());
+            double x = (double) (cards.indexOf(p) + 1) / cards.size();
+            shop.setVvalue(x);
         }
     }
 
@@ -102,14 +102,14 @@ public class ShopFxmlController implements Initializable {
         } else
             image = new Image(url);
         if (isSpell) {
-            view.setFitHeight(70);
+            view.setFitHeight(20);
             view.setFitWidth(70);
             view.setX(60);
-            view.setY(70);
+            view.setY(20);
         }
         view.setImage(image);
-        view.setScaleX(2);
-        view.setScaleY(2);
+        view.setScaleX(1.5);
+        view.setScaleY(1.5);
     }
 
     private Image getImage() {

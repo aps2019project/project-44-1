@@ -29,7 +29,7 @@ public class ShopController {
 
     public void sellCard(String cardName, AnchorPane pane) {
         cardName = cardName.split("\n")[0];
-        boolean isDone = shop.sell(shop.getCard(cardName).getID());
+        boolean isDone = shop.sell(shop.getAccount().getCollection().getCardIDInCollection(cardName));
         if (isDone) {
             viewMessage("you sold\n" + cardName);
             shopFxmlController.collectionPane.getChildren().remove(pane);

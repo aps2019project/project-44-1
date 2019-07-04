@@ -114,10 +114,6 @@ public class AccountController extends Thread {
     }
 
     //----------------------------------------------------------------------
-    public void enterCollection() {
-        CollectionController.getInstance().setCollection(this.account.getCollection());
-    }
-
     public void enterShop() {
         ShopController.getInstance().getShop().setAccount(account);
     }

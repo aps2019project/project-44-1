@@ -60,7 +60,7 @@ public class Main extends Application {
         return mainMenu;
     }
 
-    private static void play(){
+    private static void play() {
         Thread thread = new Thread(() -> {
             try {
                 InputStream audioSrc = new FileInputStream("src\\view\\mainmenu_v2c_looping.wav");
