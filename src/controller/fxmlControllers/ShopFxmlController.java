@@ -31,6 +31,11 @@ public class ShopFxmlController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            money.setText(String.valueOf(shopController.getShop().getAccount().getMoney()));
+        } catch (NullPointerException e) {
+
+        }
         shopController.setShopFxmlController(this);
         back.setOnAction(actionEvent -> Game.getInstance().loadPage(back, "/view/fxmls/mainMenu.fxml"));
         craftGraphics();
