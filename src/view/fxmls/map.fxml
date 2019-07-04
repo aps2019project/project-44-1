@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" stylesheets="@../styleSheets/map.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.fxmlControllers.MapController">
+<BorderPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" stylesheets="@../styleSheets/map.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <GridPane fx:id="map" prefHeight="311.0" prefWidth="848.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -37,68 +37,54 @@
       </GridPane>
    </center>
    <left>
-      <Pane prefHeight="311.0" prefWidth="118.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="exit" layoutX="8.0" layoutY="196.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" styleClass="intro" text="exit" textFill="#e2fa07">
-               <font>
+       <Pane prefHeight="311.0" prefWidth="118.0" BorderPane.alignment="CENTER">
+           <Button fx:id="exit" layoutX="1.0" layoutY="227.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="117.0" styleClass="intro" text="exit" textFill="#e2fa07">
+              <font>
                   <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="endTurn" layoutX="11.0" layoutY="14.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="90.0" styleClass="intro" text="end turn" textFill="#cee80c">
-               <font>
+              </font>
+           </Button>
+           <Button fx:id="save" layoutY="135.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="119.0" styleClass="intro" text="save" textFill="#e5fd0a">
+              <font>
                   <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="save" layoutX="10.0" layoutY="97.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="92.0" styleClass="intro" text="save" textFill="#e5fd0a">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
+              </font>
+           </Button>
+       </Pane>
    </left>
    <right>
-      <Pane prefHeight="311.0" prefWidth="162.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="graveyard" layoutX="49.0" layoutY="75.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="105.0" styleClass="intro" text="graveyard" textFill="#e5f507">
-               <font>
+       <Pane prefHeight="314.0" prefWidth="159.0" BorderPane.alignment="CENTER">
+           <Button fx:id="graveyard" layoutX="14.0" layoutY="131.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="134.0" styleClass="intro" text="graveyard" textFill="#e5f507">
+              <font>
                   <Font size="14.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
+              </font>
+           </Button>
+           <Button fx:id="endTurn" layoutX="15.0" layoutY="215.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="132.0" styleClass="intro" text="end turn" textFill="#cee80c">
+              <font>
+                  <Font size="14.0" />
+              </font>
+           </Button>
+       </Pane>
    </right>
    <bottom>
-      <Pane prefHeight="100.0" prefWidth="850.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox prefHeight="103.0" prefWidth="850.0">
-               <children>
-                  <ImageView fx:id="nextInHand" fitHeight="103.0" fitWidth="140.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="first" fitHeight="100.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="second" fitHeight="99.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="third" fitHeight="100.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="fourth" fitHeight="101.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="fifth" fitHeight="100.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </HBox>
-         </children>
-      </Pane>
+       <Pane prefHeight="100.0" prefWidth="850.0" BorderPane.alignment="CENTER">
+           <HBox prefHeight="103.0" prefWidth="850.0">
+               <ImageView fx:id="nextInHand" fitHeight="103.0" fitWidth="140.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" />
+               <ImageView fx:id="first" fitHeight="100.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+               <ImageView fx:id="second" fitHeight="99.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+               <ImageView fx:id="third" fitHeight="100.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+               <ImageView fx:id="fourth" fitHeight="101.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+               <ImageView fx:id="fifth" fitHeight="100.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+           </HBox>
+       </Pane>
    </bottom>
    <top>
-      <Pane prefHeight="86.0" prefWidth="850.0" BorderPane.alignment="CENTER">
-         <children>
-            <TitledPane fx:id="cheatBox" alignment="CENTER" animated="false" contentDisplay="CENTER" expanded="false" layoutX="313.0" layoutY="-1.0" prefHeight="89.0" prefWidth="202.0" text="cheat box">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TextField fx:id="cheat" layoutY="15.0" prefHeight="33.0" prefWidth="200.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </TitledPane>
-            <ImageView fx:id="firstPlayer" fitHeight="86.0" fitWidth="145.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="secondPlayer" fitHeight="86.0" fitWidth="146.0" layoutX="704.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
-      </Pane>
+       <Pane prefHeight="86.0" prefWidth="850.0" BorderPane.alignment="CENTER">
+           <TitledPane fx:id="cheatBox" alignment="CENTER" animated="false" contentDisplay="CENTER" expanded="false" layoutX="313.0" layoutY="-1.0" prefHeight="89.0" prefWidth="202.0" text="cheat box">
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                   <TextField fx:id="cheat" layoutY="15.0" prefHeight="33.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
+               </AnchorPane>
+           </TitledPane>
+           <ImageView fx:id="firstPlayer" fitHeight="132.0" fitWidth="162.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true" />
+           <ImageView fx:id="secondPlayer" fitHeight="117.0" fitWidth="170.0" layoutX="680.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+       </Pane>
    </top>
 </BorderPane>

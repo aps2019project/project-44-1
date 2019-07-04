@@ -38,7 +38,6 @@ public class MainMenuController implements Initializable {
     }
 
     private void goToCollection() {
-//        accountController.enterCollection();
         try {
             CollectionFxmlController.setCollection(accountController.getAccount().getCollection());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/collectionPage.fxml"));

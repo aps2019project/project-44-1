@@ -42,11 +42,11 @@ public class CollectionFxmlController implements Initializable {
         selectMainDeckBtn();
         addCardToDeckBtn();
         createDeckBtnOnAction();
-        searchActionHandler();
+        craftSearchBox();
     }
 
-    private void searchActionHandler() {
-        searchBox.setOnKeyPressed(event -> {
+    private void craftSearchBox() {
+        searchBox.setOnAction(event -> {
             if (!searchBox.getText().isEmpty()) {
                 collectionCardsFlowPane.getChildren().clear();
                 String choice = searchBox.getText();
@@ -212,7 +212,6 @@ public class CollectionFxmlController implements Initializable {
         return true;
 
     }
-
 
     private void makeAlert(String headerText, String contentText) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

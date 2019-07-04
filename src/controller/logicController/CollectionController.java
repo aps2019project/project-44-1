@@ -148,12 +148,4 @@ public class CollectionController {
         }
     }
 
-    public boolean isForwardedFromShop() {
-        return forwardedFromShop;
-    }
-
-    public void setForwardedFromShop(boolean forwardedFromShop) {
-        this.forwardedFromShop = forwardedFromShop;
-    }
-
 }

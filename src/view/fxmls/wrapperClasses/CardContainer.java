@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import models.Card;
 import models.Placeable;
+import models.Shop;
 
 
 public class CardContainer {
@@ -29,20 +30,21 @@ public class CardContainer {
     }
 
 
-    private CardContainer(int mana, int ap, int hp, String name) {
-        manaLabel = new Label(Integer.toString(mana));
+    private CardContainer(String name) {
+        Card c = (Card) Shop.getInstance().getCard(name);
+        manaLabel = new Label(Integer.toString(c.getNeededMana()));
         manaLabel.setStyle("-fx-font-size: 24px;-fx-text-fill: black;-fx-text-alignment: center;-fx-text-overrun: ELLIPSIS;-fx-alignment: center;" +
                 "-fx-pref-width: 51;-fx-pref-height: 39;-fx-font-weight: bold");
         manaLabel.setLayoutX(4.5);
         manaLabel.setLayoutY(17);
 
-        attackPointLabel = new Label(Integer.toString(ap));
+        attackPointLabel = new Label(Integer.toString(c.getAP()));
         attackPointLabel.setStyle("-fx-font-size: 27px;-fx-text-fill: #efff09;-fx-text-alignment: center;-fx-text-overrun: ELLIPSIS;-fx-alignment: center;" +
                 "-fx-pref-width: 60;-fx-pref-height: 50;-fx-font-weight: bold");
         attackPointLabel.setLayoutX(49);
         attackPointLabel.setLayoutY(214);
 
-        healthPointLabel = new Label(Integer.toString(hp));
+        healthPointLabel = new Label(Integer.toString(c.getHP()));
         healthPointLabel.setStyle("-fx-font-size: 27px;-fx-text-fill: red;-fx-text-alignment: center;-fx-text-overrun: ELLIPSIS;-fx-alignment: center;" +
                 "-fx-pref-width: 60;-fx-pref-height: 50;-fx-font-weight: bold");
         healthPointLabel.setLayoutX(200);
@@ -62,11 +64,7 @@ public class CardContainer {
         checkBox.setLayoutY(390);
         checkBox.setStyle("-fx-font-size: 20");
 
-
-        //todo according to the name of hero can take a image
-        imageView = new ImageView(new Image("/view/images/cardGifs/boss_protector_breathing.gif"));
-
-
+        imageView = new ImageView(new Image(c.getPath()));
         imageView.setFitHeight(191);
         imageView.setFitWidth(235);
         imageView.setLayoutX(58);
@@ -77,12 +75,12 @@ public class CardContainer {
     }
 
     public CardContainer(Card card) {
-        this(card.getNeededMana(), card.getAP(), card.getHP(), card.getName());
+        this(card.getName());
         this.card = card;
     }
 
     public CardContainer(Placeable placeable) {
-        this(placeable.getNeededMana(), 0, 0, placeable.getName());
+        this(placeable.getName());
         this.card = placeable;
     }
 
