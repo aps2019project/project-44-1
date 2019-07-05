@@ -13,9 +13,11 @@ public class RequestHandler extends Thread {
     private JsonStreamParser parser;
     private ResponseSender responseSender;
     private Gson gson = new Gson();
+    private Socket currentSocket;
 
     public RequestHandler(Socket socket) {
         try {
+            currentSocket = socket;
             parser = new JsonStreamParser(new BufferedReader(new InputStreamReader(socket.getInputStream())));
             responseSender = new ResponseSender(socket.getOutputStream());
         } catch (IOException e) {
@@ -32,6 +34,7 @@ public class RequestHandler extends Thread {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            Main.getSockets().remove(currentSocket);
         }
     }
 

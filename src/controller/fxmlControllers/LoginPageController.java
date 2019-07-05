@@ -35,16 +35,12 @@ public class LoginPageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         logInButton.setOnAction(event -> submitButton.setText("LOG IN"));
         signUpButton.setOnAction(event -> submitButton.setText("SIGN UP"));
-        handleSubmit();
+        submitButton.setOnAction(event -> action(submitButton.getText().equals("LOG IN")));
     }
 
-    public void handleSubmit() {
+    private void action(boolean isLogin) {
         if (usernameTextField.getText().isEmpty() || passwordTextField.getText().isEmpty())
             return;
-        submitButton.setOnAction(event -> signUpAction(submitButton.getText().equals("LOG IN")));
-    }
-
-    private void signUpAction(boolean isLogin) {
         Request request = new Request(Environment.LOGIN_PAGE);
         if (isLogin)
             request.setRequestType(RequestType.SIGN_IN);

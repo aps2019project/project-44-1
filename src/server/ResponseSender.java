@@ -9,11 +9,10 @@ import java.io.OutputStreamWriter;
 
 public class ResponseSender {
     private BufferedWriter bufferedWriter;
-    private Gson gson;
+    private Gson gson = new Gson();
 
     public ResponseSender(OutputStream outputStream) {
         this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
-        gson = new Gson();
     }
 
     public void sendResponse(Response response){
@@ -24,4 +23,5 @@ public class ResponseSender {
             e.printStackTrace();
         }
     }
+
 }

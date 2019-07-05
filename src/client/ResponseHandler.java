@@ -9,21 +9,25 @@ import server.Response;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.SocketException;
 
 public class ResponseHandler extends Thread {
     private JsonStreamParser jsonStreamParser;
-    private Gson gson;
+    private Gson gson = new Gson();
 
     public ResponseHandler(InputStream inputStream) {
         this.jsonStreamParser = new JsonStreamParser(new BufferedReader(new InputStreamReader(inputStream)));
-        this.gson = new Gson();
     }
 
     @Override
     public void run() {
-        while (jsonStreamParser.hasNext()) {
-            Response response = gson.fromJson(jsonStreamParser.next(), Response.class);
-            new Thread(() -> handleResponse(response)).start();
+        try {
+            while (jsonStreamParser.hasNext()) {
+                Response response = gson.fromJson(jsonStreamParser.next(), Response.class);
+                new Thread(() -> handleResponse(response)).start();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

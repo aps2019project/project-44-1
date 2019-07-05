@@ -18,4 +18,8 @@ public class Main {
         }
     }
 
+    public static ArrayList<Socket> getSockets() {
+        return sockets;
+    }
+
 }

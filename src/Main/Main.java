@@ -22,6 +22,7 @@ public class Main extends Application {
     private static Parent mainMenu;
     private static Stage stage;
     private static LoginPageController loginPageController;
+    private static Socket socket;
 
 
     static {
@@ -45,9 +46,10 @@ public class Main extends Application {
     private static void connectToServer() {
         try {
             InetAddress ip = InetAddress.getByName("localhost");
-            Socket socket = new Socket(ip, 8000);
+            socket = new Socket(ip, 8000);
             ResponseHandler responseHandler = new ResponseHandler(socket.getInputStream());
             RequestSender.getInstance().setBufferedWriter(socket.getOutputStream());
+            responseHandler.setDaemon(true);
             responseHandler.start();
         } catch (IOException e) {
             e.printStackTrace();
@@ -59,7 +61,23 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/fxmls/loginPage.fxml"));
         Parent root = fxmlLoader.load();
         loginPageController = fxmlLoader.getController();
+        graphicStarter(primaryStage, root);
+        disconnectOnClose(primaryStage);
+        primaryStage.show();
+    }
 
+    private void disconnectOnClose(Stage primaryStage) {
+        primaryStage.setOnCloseRequest(act -> {
+            try {
+                if (socket != null)
+                    socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private void graphicStarter(Stage primaryStage, Parent root) {
         Main.setStage(primaryStage);
         primaryStage.setTitle("DUELYST");
         Scene scene = new Scene(root, 850, 500);
@@ -67,7 +85,6 @@ public class Main extends Application {
         scene.getStylesheets().add("/view/styleSheets/login.css");
         scene.getStylesheets().add("/view/styleSheets/mainMenu.css");
         primaryStage.setScene(scene);
-        primaryStage.show();
     }
 
     public static Stage getStage() {
