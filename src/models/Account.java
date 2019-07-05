@@ -32,7 +32,7 @@ public class Account implements Comparable<Account> {
         return username;
     }
 
-    String getPassword() {
+    public String getPassword() {
         return password;
     }
 

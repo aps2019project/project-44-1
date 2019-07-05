@@ -1,12 +1,14 @@
 package controller.logicController;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.stream.JsonReader;
 import javafx.scene.Node;
 import models.*;
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
+import view.fxmls.wrapperClasses.Serial;
 import view.request.RequestType;
 
 import java.io.FileReader;
@@ -79,7 +81,7 @@ public class AccountController extends Thread {
 
     //-----------------------------------------------------------------save
     public void save() {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().registerTypeAdapter(Account.class, new Serial()).create();
         JsonReader reader;
         try {
             reader = new JsonReader(new FileReader("src\\models\\accountSaves.json"));
