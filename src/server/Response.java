@@ -28,4 +28,5 @@ public class Response {
     public void setResponseType(ResponseType responseType) {
         this.responseType = responseType;
     }
+
 }

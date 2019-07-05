@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.sound.sampled.*;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -37,19 +36,18 @@ public class Main extends Application {
     //---------------------------------------------------- windows are loaded
 
     public static void main(String[] args) {
-//        play();
+        play();
         connectToServer();
         launch(args);
         System.exit(0);
     }
-
 
     private static void connectToServer() {
         try {
             InetAddress ip = InetAddress.getByName("localhost");
             Socket socket = new Socket(ip, 8000);
             ResponseHandler responseHandler = new ResponseHandler(socket.getInputStream());
-            RequestSender requestSender = new RequestSender(socket.getOutputStream());
+            RequestSender.getInstance().setBufferedWriter(socket.getOutputStream());
             responseHandler.start();
         } catch (IOException e) {
             e.printStackTrace();
@@ -109,4 +107,5 @@ public class Main extends Application {
     public static LoginPageController getLoginPageController() {
         return loginPageController;
     }
+
 }

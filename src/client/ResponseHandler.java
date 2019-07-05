@@ -3,12 +3,8 @@ package client;
 import Main.Main;
 import com.google.gson.Gson;
 import com.google.gson.JsonStreamParser;
-import controller.fxmlControllers.LoginPageController;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import server.Response;
-import server.ResponseType;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -73,4 +69,5 @@ public class ResponseHandler extends Thread {
     private void handleShopResponse(Response response) {
 
     }
+
 }

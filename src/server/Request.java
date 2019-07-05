@@ -102,4 +102,5 @@ public class Request {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

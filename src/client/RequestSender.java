@@ -9,19 +9,16 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
 public class RequestSender {
-    private static RequestSender REQUEST_SENDER;
+    private static RequestSender REQUEST_SENDER = new RequestSender();
     private BufferedWriter bufferedWriter;
-    private Gson gson;
+    private Gson gson = new Gson();
 
 
     public static RequestSender getInstance() {
         return REQUEST_SENDER;
     }
 
-    public RequestSender(OutputStream outputStream) {
-        this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
-        this.gson = new Gson();
-        REQUEST_SENDER = this;
+    private RequestSender() {
     }
 
     public void sendRequest(Request request) {
@@ -32,4 +29,9 @@ public class RequestSender {
             e.printStackTrace();
         }
     }
+
+    public void setBufferedWriter(OutputStream outputStream) {
+        this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
+    }
+
 }
