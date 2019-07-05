@@ -1,16 +1,13 @@
 package controller.logicController;
 
-import models.Account;
-import models.Enums.ErrorType;
 import models.Game;
+import server.Environment;
+import server.Response;
+import server.ResponseSender;
+import server.ResponseType;
 
-public class GameController extends Thread {
+public class GameController {
     private static GameController gameController = new GameController();
-    private Game game = Game.getInstance();
-    private String username;
-    private String password;
-    private boolean isLoginRequest;
-    private String labelText = null;
 
     private GameController() {
     }
@@ -19,66 +16,32 @@ public class GameController extends Thread {
         return gameController;
     }
 
-    private boolean login() {
-        Account account = Game.getAccount(username);
-        if (account != null) {
-            if (game.isValidPassword(account, password)) {
-                showMessage(ErrorType.NO_ERROR);
-                AccountController.getInstance().setAccount(account);
-            } else {
-                showMessage(ErrorType.INVALID_PASSWORD);
-            }
-        } else {
-            showMessage(ErrorType.INVALID_USERNAME);
-        }
-        return false;
-    }
-
-    private void createAccount() {
-        if (username.equals("")) {
-            showMessage(ErrorType.INVALID_USERNAME);
-            return;
-        }
-        if (password.equals("")) {
-            showMessage(ErrorType.INVALID_PASSWORD);
-            return;
-        }
-        if (!game.isUsedUsername(username)) {
-            game.createAccount(username, password);
-            showMessage(ErrorType.ACCOUNT_CREATED);
-        } else {
-            showMessage(ErrorType.USED_BEFORE_USERNAME);
-        }
-    }
-
-    private void showMessage(ErrorType errorType) {
-        labelText = errorType.getMessage();
-    }
-
-    @Override
-    public void run() {
-        decide();
-    }
-
-    private synchronized void decide() {
-        while (true) {
-            try {
-                if (isLoginRequest) {
-                    if (login())
-                        return;
-                } else
-                    createAccount();
-                if (Thread.holdsLock(this)) {
-                    wait();
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    public void signIn(String username, String password, ResponseSender responseSender) {
+        Response response = new Response(Environment.LOGIN_PAGE);
+        if (!Game.getInstance().isUsedUsername(username))
+            response.setResponseType(ResponseType.INVALID_USERNAME);
+        else {
+            if (Game.getInstance().isOnline(username))
+                response.setResponseType(ResponseType.REQUESTED_ACCOUNT_IS_ONLINE);
+            else if (!Game.getInstance().isValidPassword(Game.getAccount(username), password))
+                response.setResponseType(ResponseType.INVALID_PASSWORD);
+            else {
+                response.setResponseType(ResponseType.SUCCESSFUL_SIGN_IN);
+                Game.getInstance().addToOnlineAccounts(Game.getAccount(username));
             }
         }
+        responseSender.sendResponse(response);
     }
 
-    public String getLabelText() {
-        return labelText;
+    public void signUp(String username, String password, ResponseSender responseSender) {
+        Response response = new Response(Environment.LOGIN_PAGE);
+        if (Game.getInstance().isUsedUsername(username)) {
+            response.setResponseType(ResponseType.DUPLICATE_USERNAME);
+        } else {
+            Game.getInstance().createAccount(username, password);
+            response.setResponseType(ResponseType.SUCCESSFUL_SIGN_UP);
+        }
+        responseSender.sendResponse(response);
     }
 
 }

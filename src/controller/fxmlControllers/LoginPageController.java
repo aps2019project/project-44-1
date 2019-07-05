@@ -44,12 +44,12 @@ public class LoginPageController implements Initializable {
         submitButton.setOnAction(event -> signUpAction(submitButton.getText().equals("LOG IN")));
     }
 
-    private void signUpAction(boolean isSignUp) {
+    private void signUpAction(boolean isLogin) {
         Request request = new Request(Environment.LOGIN_PAGE);
-        if (isSignUp)
-            request.setRequestType(RequestType.SIGN_UP);
-        else
+        if (isLogin)
             request.setRequestType(RequestType.SIGN_IN);
+        else
+            request.setRequestType(RequestType.SIGN_UP);
         request.setUsername(usernameTextField.getText());
         request.setPassword(passwordTextField.getText());
         RequestSender.getInstance().sendRequest(request);
