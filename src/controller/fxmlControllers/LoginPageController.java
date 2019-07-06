@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import models.Game;
 import server.Environment;
 import server.Request;
 import server.RequestType;
@@ -71,13 +72,15 @@ public class LoginPageController implements Initializable {
     }
 
     public void showLeaderboard() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/cardInShop.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/leaderboard.fxml"));
         loader.setController(controller);
         try {
             label.getScene().setRoot(loader.load());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        controller.back.setOnAction(event -> Game.getInstance().loadPage(controller.table, "/view/fxmls/loginPage.fxml"));
+        controller.sendRequest();
     }
 
     public static LeaderboardController getController() {

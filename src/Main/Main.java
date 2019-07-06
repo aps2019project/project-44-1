@@ -25,7 +25,6 @@ public class Main extends Application {
     private static Parent mainMenu;
     private static Stage stage;
     private static LoginPageController loginPageController;
-    private static Socket socket;
     private static ResponseHandler clientResponseHandler;
 
 
@@ -50,7 +49,7 @@ public class Main extends Application {
     private static void connectToServer() {
         try {
             InetAddress ip = InetAddress.getByName("localhost");
-            socket = new Socket(ip, 8000);
+            Socket socket = new Socket(ip, 8000);
             ResponseHandler responseHandler = new ResponseHandler(socket.getInputStream());
             clientResponseHandler = responseHandler;
             RequestSender.getInstance().setBufferedWriter(socket.getOutputStream());

@@ -1,7 +1,6 @@
 package models;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -78,7 +77,6 @@ public class Game {
 
     private void fillAccounts() {
         Gson gson = new Gson();
-        GsonBuilder gsonBuilder = new GsonBuilder();
         JsonReader reader;
         try {
             reader = new JsonReader(new FileReader("src\\models\\accountSaves.json"));

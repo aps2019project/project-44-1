@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonStreamParser;
 import controller.fxmlControllers.LoginPageController;
 import controller.logicController.GameController;
+import javafx.application.Platform;
 import models.Game;
 
 import java.io.BufferedReader;
@@ -80,7 +81,7 @@ public class RequestHandler extends Thread {
             currentSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             Main.getSockets().remove(currentSocket);
         }
 
@@ -99,7 +100,8 @@ public class RequestHandler extends Thread {
     }
 
     private void handleLeaderboardRequest() {
-        LoginPageController.getController().showTable(Game.getInstance().getSortedAccounts());
+        responseSender.sendResponse(new Response(Environment.LEADER_BOARD));
+//        Platform.runLater(() -> LoginPageController.getController().showTable(Game.getInstance().getSortedAccounts()));
     }
 
 }

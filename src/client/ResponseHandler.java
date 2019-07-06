@@ -4,17 +4,21 @@ import Main.Main;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonStreamParser;
+import controller.fxmlControllers.LoginPageController;
 import javafx.application.Platform;
+import models.Game;
 import server.Response;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.SocketException;
+
+import static server.ResponseType.SUCCESSFUL_SIGN_IN;
 
 public class ResponseHandler extends Thread {
     private JsonStreamParser jsonStreamParser;
     private Gson gson = new Gson();
+    private Response response;
 
     public ResponseHandler(InputStream inputStream) {
         this.jsonStreamParser = new JsonStreamParser(new BufferedReader(new InputStreamReader(inputStream)));
@@ -24,55 +28,54 @@ public class ResponseHandler extends Thread {
     public void run() {
         try {
             while (jsonStreamParser.hasNext()) {
-                Response response = gson.fromJson(jsonStreamParser.next(), Response.class);
-                new Thread(() -> handleResponse(response)).start();
+                this.response = gson.fromJson(jsonStreamParser.next(), Response.class);
+                new Thread(this::handleResponse).start();
             }
         } catch (JsonIOException ignored) {
 
         }
     }
 
-    private void handleResponse(Response response) {
+    private void handleResponse() {
         switch (response.getEnvironment()) {
             case LOGIN_PAGE:
-                handleLoginPageResponse(response);
+                handleLoginPageResponse();
                 break;
             case COLLECTION:
-                handleCollectionResponse(response);
+                handleCollectionResponse();
                 break;
             case BATTLE:
-                handleBattleResponse(response);
+                handleBattleResponse();
                 break;
             case SHOP:
-                handleShopResponse(response);
+                handleShopResponse();
+                break;
+            case LEADER_BOARD:
+                handleLeaderboardResponse();
         }
     }
 
-    private void handleLoginPageResponse(Response response) {
-        switch (response.getResponseType()) {
-            case DUPLICATE_USERNAME:
-            case INVALID_USERNAME:
-            case REQUESTED_ACCOUNT_IS_ONLINE:
-            case INVALID_PASSWORD:
-            case SUCCESSFUL_SIGN_UP:
-                Platform.runLater(() -> Main.getLoginPageController().appearLabel(response.getResponseType().getMessage()));
-                break;
-            case SUCCESSFUL_SIGN_IN:
-                Platform.runLater(() -> Main.getStage().getScene().setRoot(Main.getMainMenu()));
-                break;
-        }
+    private void handleLoginPageResponse() {
+        if (response.getResponseType().equals(SUCCESSFUL_SIGN_IN))
+            Platform.runLater(() -> Main.getStage().getScene().setRoot(Main.getMainMenu()));
+        else
+            Platform.runLater(() -> Main.getLoginPageController().appearLabel(response.getResponseType().getMessage()));
     }
 
-    private void handleCollectionResponse(Response response) {
+    private void handleCollectionResponse() {
 
     }
 
-    private void handleBattleResponse(Response response) {
+    private void handleBattleResponse() {
 
     }
 
-    private void handleShopResponse(Response response) {
+    private void handleShopResponse() {
 
+    }
+
+    private void handleLeaderboardResponse() {
+        Platform.runLater(() -> LoginPageController.getController().showTable(Game.getInstance().getSortedAccounts()));
     }
 
 }
