@@ -17,7 +17,6 @@ public class RequestHandler extends Thread {
     private ResponseSender responseSender;
     private Gson gson = new Gson();
     private Socket currentSocket;
-    private Request request;
 
     public RequestHandler(Socket socket) {
         try {
@@ -33,7 +32,7 @@ public class RequestHandler extends Thread {
     public void run() {
         try {
             while (parser.hasNext()) {
-                request = gson.fromJson(parser.next(), Request.class);
+                Request request = gson.fromJson(parser.next(), Request.class);
                 new Thread(() -> handleRequest(request)).start();
             }
         } catch (Exception e) {
@@ -53,14 +52,14 @@ public class RequestHandler extends Thread {
                 handleCollectionRequest();
                 break;
             case LOGIN_PAGE:
-                handleLoginPageRequest();
+                handleLoginPageRequest(request);
                 break;
             case LEADER_BOARD:
                 handleLeaderboardRequest();
         }
     }
 
-    private void handleLoginPageRequest() {
+    private void handleLoginPageRequest(Request request) {
         GameController controller = GameController.getInstance();
         switch (request.getRequestType()) {
             case SIGN_IN:
@@ -70,19 +69,21 @@ public class RequestHandler extends Thread {
                 controller.signUp(request.getUsername(), request.getPassword(), responseSender);
                 break;
             case CLOSE_CONNECTION:
-                closeConnection();
+                closeConnection(request);
         }
     }
 
-    private void closeConnection() {
+    private void closeConnection(Request request) {
         try {
+            this.interrupt();
             responseSender.closeBufferedWriter();
-            interrupt();
             currentSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             Main.getSockets().remove(currentSocket);
+            Main.removeFromOnlineAccounts(request.getOuthToken());
+            System.out.println(request.getOuthToken());
         }
 
     }

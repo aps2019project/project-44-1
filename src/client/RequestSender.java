@@ -1,5 +1,6 @@
 package client;
 
+import Main.Main;
 import com.google.gson.Gson;
 import server.Request;
 
@@ -22,6 +23,7 @@ public class RequestSender {
     }
 
     public void sendRequest(Request request) {
+        request.setOuthToken(Main.getToken());
         try {
             bufferedWriter.write(gson.toJson(request));
             bufferedWriter.flush();

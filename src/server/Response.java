@@ -11,6 +11,7 @@ public class Response {
     private String deckToRemove;
     private String deckToRemoveCardFrom;
     private ArrayList<String> cardsToRemoveFromDeck;
+    private String authToken;
 
     public Response(Environment environment) {
         this.environment = environment;
@@ -29,4 +30,11 @@ public class Response {
         this.responseType = responseType;
     }
 
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
+    }
 }

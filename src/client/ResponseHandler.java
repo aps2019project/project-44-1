@@ -7,6 +7,7 @@ import com.google.gson.JsonStreamParser;
 import controller.fxmlControllers.LoginPageController;
 import javafx.application.Platform;
 import models.Game;
+import server.Request;
 import server.Response;
 
 import java.io.BufferedReader;
@@ -56,9 +57,10 @@ public class ResponseHandler extends Thread {
     }
 
     private void handleLoginPageResponse() {
-        if (response.getResponseType().equals(SUCCESSFUL_SIGN_IN))
+        if (response.getResponseType().equals(SUCCESSFUL_SIGN_IN)) {
             Platform.runLater(() -> Main.getStage().getScene().setRoot(Main.getMainMenu()));
-        else
+            Main.setToken(response.getAuthToken());
+        } else
             Platform.runLater(() -> Main.getLoginPageController().appearLabel(response.getResponseType().getMessage()));
     }
 

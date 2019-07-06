@@ -26,6 +26,7 @@ public class Main extends Application {
     private static Stage stage;
     private static LoginPageController loginPageController;
     private static ResponseHandler clientResponseHandler;
+    private static String token;
 
 
     static {
@@ -135,4 +136,11 @@ public class Main extends Application {
         return loginPageController;
     }
 
+    public static String getToken() {
+        return token;
+    }
+
+    public static void setToken(String token) {
+        Main.token = token;
+    }
 }

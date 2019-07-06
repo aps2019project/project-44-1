@@ -1,10 +1,10 @@
 package controller.logicController;
 
 import models.Game;
-import server.Environment;
-import server.Response;
-import server.ResponseSender;
-import server.ResponseType;
+import server.*;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class GameController {
     private static GameController gameController = new GameController();
@@ -28,7 +28,10 @@ public class GameController {
                 response.setResponseType(ResponseType.INVALID_PASSWORD);
             else {
                 response.setResponseType(ResponseType.SUCCESSFUL_SIGN_IN);
-                game.addToOnlineAccounts(Game.getAccount(username));
+                //make auth token
+                String token = org.apache.commons.codec.digest.DigestUtils.sha256Hex(username + password + LocalDateTime.now().toString());
+                response.setAuthToken(token);
+                Main.addToOnlineAccounts(token,Game.getAccount(username));
             }
         }
         responseSender.sendResponse(response);
