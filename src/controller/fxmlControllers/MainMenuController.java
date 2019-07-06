@@ -1,6 +1,7 @@
 package controller.fxmlControllers;
 
 import Main.Main;
+import client.RequestSender;
 import controller.logicController.AccountController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,6 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import models.Enums.ErrorType;
 import models.Game;
+import server.Environment;
+import server.Request;
+import server.RequestType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -53,7 +57,9 @@ public class MainMenuController implements Initializable {
     }
 
     private void save() {
-        accountController.save();
+        Request request = new Request(Environment.MAIN_MENU);
+        request.setRequestType(RequestType.SAVE);
+        RequestSender.getInstance().sendRequest(request);
     }
 
     private void exit() {

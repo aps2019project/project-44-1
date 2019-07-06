@@ -3,6 +3,7 @@ package server;
 public enum RequestType {
     SIGN_UP,
     SIGN_IN,
+    SAVE,
     ENTER_SHOP,
     LOG_OUT,
     BUY,

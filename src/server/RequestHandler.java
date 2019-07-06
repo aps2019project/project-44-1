@@ -2,6 +2,7 @@ package server;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonStreamParser;
+import controller.logicController.AccountController;
 import controller.logicController.GameController;
 import models.Game;
 
@@ -107,8 +108,12 @@ public class RequestHandler extends Thread {
     }
 
     private void handleMainMenuRequest() {
-        if (request.getRequestType() == RequestType.LOG_OUT) {
-            Game.getInstance().getOnlineAccounts().remove(request.getUsername());
+        switch (request.getRequestType()) {
+            case LOG_OUT:
+                Game.getInstance().getOnlineAccounts().remove(request.getUsername());
+                break;
+            case SAVE:
+                AccountController.getInstance().save();
         }
     }
 
