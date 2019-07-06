@@ -4,7 +4,6 @@ import models.Game;
 import server.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class GameController {
     private static GameController gameController = new GameController();
@@ -31,7 +30,8 @@ public class GameController {
                 //make auth token
                 String token = org.apache.commons.codec.digest.DigestUtils.sha256Hex(username + password + LocalDateTime.now().toString());
                 response.setAuthToken(token);
-                Main.addToOnlineAccounts(token,Game.getAccount(username));
+                Main.addToOnlineAccounts(token, Game.getAccount(username));
+                AccountController.getInstance().setAccount(Game.getAccount(username));
             }
         }
         responseSender.sendResponse(response);
@@ -47,6 +47,5 @@ public class GameController {
         }
         responseSender.sendResponse(response);
     }
-
 
 }

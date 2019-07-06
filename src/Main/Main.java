@@ -67,12 +67,8 @@ public class Main extends Application {
         Parent root = fxmlLoader.load();
         loginPageController = fxmlLoader.getController();
         graphicStarter(primaryStage, root);
-        disconnectOnClose(primaryStage);
-        primaryStage.show();
-    }
-
-    private void disconnectOnClose(Stage primaryStage) {
         primaryStage.setOnCloseRequest(act -> closeConnection());
+        primaryStage.show();
     }
 
     public static void closeConnection() {
@@ -143,4 +139,5 @@ public class Main extends Application {
     public static void setToken(String token) {
         Main.token = token;
     }
+
 }

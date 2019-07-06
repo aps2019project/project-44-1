@@ -2,9 +2,7 @@ package server;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonStreamParser;
-import controller.fxmlControllers.LoginPageController;
 import controller.logicController.GameController;
-import javafx.application.Platform;
 import models.Game;
 
 import java.io.BufferedReader;
@@ -17,6 +15,7 @@ public class RequestHandler extends Thread {
     private ResponseSender responseSender;
     private Gson gson = new Gson();
     private Socket currentSocket;
+    private Request request;
 
     public RequestHandler(Socket socket) {
         try {
@@ -32,15 +31,15 @@ public class RequestHandler extends Thread {
     public void run() {
         try {
             while (parser.hasNext()) {
-                Request request = gson.fromJson(parser.next(), Request.class);
-                new Thread(() -> handleRequest(request)).start();
+                request = gson.fromJson(parser.next(), Request.class);
+                new Thread(this::handleRequest).start();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void handleRequest(Request request) {
+    private void handleRequest() {
         switch (request.getEnvironment()) {
             case SHOP:
                 handleShopRequest();
@@ -56,6 +55,9 @@ public class RequestHandler extends Thread {
                 break;
             case LEADER_BOARD:
                 handleLeaderboardRequest();
+                break;
+            case MAIN_MENU:
+                handleMainMenuRequest();
         }
     }
 
@@ -102,7 +104,12 @@ public class RequestHandler extends Thread {
 
     private void handleLeaderboardRequest() {
         responseSender.sendResponse(new Response(Environment.LEADER_BOARD));
-//        Platform.runLater(() -> LoginPageController.getController().showTable(Game.getInstance().getSortedAccounts()));
+    }
+
+    private void handleMainMenuRequest() {
+        if (request.getRequestType() == RequestType.LOG_OUT) {
+            Game.getInstance().getOnlineAccounts().remove(request.getUsername());
+        }
     }
 
 }

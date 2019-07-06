@@ -5,5 +5,6 @@ public enum Environment {
     SHOP,
     COLLECTION,
     BATTLE,
-    LEADER_BOARD
+    LEADER_BOARD,
+    MAIN_MENU
 }

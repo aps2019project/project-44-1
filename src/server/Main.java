@@ -3,7 +3,6 @@ package server;
 import models.Account;
 import models.Game;
 
-import javax.management.ObjectName;
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
@@ -37,13 +36,14 @@ public class Main {
         Main.onlineAccounts = onlineAccounts;
     }
 
-    public static void addToOnlineAccounts(String outhToken,Account account){
-        onlineAccounts.put(outhToken,account);
+    public static void addToOnlineAccounts(String outhToken, Account account) {
+        onlineAccounts.put(outhToken, account);
         Game.getInstance().addToOnlineAccounts(account);
     }
 
-    public static void removeFromOnlineAccounts(String outhToken){
+    public static void removeFromOnlineAccounts(String outhToken) {
         Game.getInstance().removeFromOnlineAccounts(onlineAccounts.get(outhToken));
         onlineAccounts.remove(outhToken);
     }
+
 }

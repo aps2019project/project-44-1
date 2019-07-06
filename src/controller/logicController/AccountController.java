@@ -1,5 +1,6 @@
 package controller.logicController;
 
+import client.RequestSender;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -8,6 +9,8 @@ import javafx.scene.Node;
 import models.*;
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
+import server.Environment;
+import server.Request;
 import view.fxmls.wrapperClasses.Serial;
 import view.request.RequestType;
 
@@ -141,6 +144,10 @@ public class AccountController extends Thread {
     }
 
     public void logout(Node node) {
+        Request request = new Request(Environment.MAIN_MENU);
+        request.setUsername(account.getUsername());
+        request.setRequestType(server.RequestType.LOG_OUT);
+        RequestSender.getInstance().sendRequest(request);
         account = null;
         Game.getInstance().loadPage(node, "/view/fxmls/loginPage.fxml");
     }

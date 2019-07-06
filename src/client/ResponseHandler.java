@@ -5,9 +5,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonStreamParser;
 import controller.fxmlControllers.LoginPageController;
+import controller.logicController.AccountController;
 import javafx.application.Platform;
 import models.Game;
-import server.Request;
 import server.Response;
 
 import java.io.BufferedReader;

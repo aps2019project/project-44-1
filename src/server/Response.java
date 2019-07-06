@@ -21,7 +21,6 @@ public class Response {
         return responseType;
     }
 
-
     public Environment getEnvironment() {
         return environment;
     }
@@ -37,4 +36,5 @@ public class Response {
     public void setAuthToken(String authToken) {
         this.authToken = authToken;
     }
+
 }
