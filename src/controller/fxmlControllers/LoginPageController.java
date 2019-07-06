@@ -1,17 +1,18 @@
 package controller.fxmlControllers;
 
 import client.RequestSender;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import models.Game;
 import server.Environment;
 import server.Request;
 import server.RequestType;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -27,6 +28,7 @@ public class LoginPageController implements Initializable {
     public Label label;
     public Button leaderboard;
     private static final int DISAPPEARING_LABEL_DELAY = 1000;
+    private static LeaderboardController controller = new LeaderboardController();
 
     /**
      * incredibly runs twice!!!
@@ -69,7 +71,17 @@ public class LoginPageController implements Initializable {
     }
 
     public void showLeaderboard() {
-        Game.getInstance().loadPage(label, "/view/fxmls/leaderboard.fxml");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/cardInShop.fxml"));
+        loader.setController(controller);
+        try {
+            label.getScene().setRoot(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static LeaderboardController getController() {
+        return controller;
     }
 
 }
