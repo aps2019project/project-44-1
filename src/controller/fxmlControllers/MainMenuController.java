@@ -57,7 +57,7 @@ public class MainMenuController implements Initializable {
     }
 
     private void exit() {
-        System.exit(0);
+        Main.closeConnection();
     }
 
     private void goToBattle() {

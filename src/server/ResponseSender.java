@@ -24,4 +24,8 @@ public class ResponseSender {
         }
     }
 
+    public void closeBufferedWriter() throws IOException {
+        this.bufferedWriter.close();
+    }
+
 }

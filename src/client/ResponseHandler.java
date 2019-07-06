@@ -2,6 +2,7 @@ package client;
 
 import Main.Main;
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonStreamParser;
 import javafx.application.Platform;
 import server.Response;
@@ -26,8 +27,8 @@ public class ResponseHandler extends Thread {
                 Response response = gson.fromJson(jsonStreamParser.next(), Response.class);
                 new Thread(() -> handleResponse(response)).start();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (JsonIOException ignored) {
+
         }
     }
 

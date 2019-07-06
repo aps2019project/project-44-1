@@ -10,8 +10,6 @@ public enum ResponseType {
     INVALID_PASSWORD("Invalid password!!!"),
     REQUESTED_ACCOUNT_IS_ONLINE("This account is online now. Try another!!!"),
     SUCCESSFUL_SIGN_IN("Signed in successfully")
-
-
     ;
     private String message;
 

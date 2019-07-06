@@ -34,4 +34,8 @@ public class RequestSender {
         this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
     }
 
+    public void closeBufferedWriter() throws IOException {
+        bufferedWriter.close();
+    }
+
 }

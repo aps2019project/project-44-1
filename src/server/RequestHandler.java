@@ -34,7 +34,6 @@ public class RequestHandler extends Thread {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Main.getSockets().remove(currentSocket);
         }
     }
 
@@ -62,7 +61,23 @@ public class RequestHandler extends Thread {
                 break;
             case SIGN_UP:
                 controller.signUp(request.getUsername(), request.getPassword(), responseSender);
+                break;
+            case CLOSE_CONNECTION:
+                closeConnection();
         }
+    }
+
+    private void closeConnection() {
+        try {
+            responseSender.closeBufferedWriter();
+            interrupt();
+            currentSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            Main.getSockets().remove(currentSocket);
+        }
+
     }
 
     private void handleCollectionRequest(Request request) {

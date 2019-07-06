@@ -9,6 +9,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import server.Environment;
+import server.Request;
+import server.RequestType;
 
 import javax.sound.sampled.*;
 import java.io.BufferedInputStream;
@@ -23,6 +26,7 @@ public class Main extends Application {
     private static Stage stage;
     private static LoginPageController loginPageController;
     private static Socket socket;
+    private static ResponseHandler clientResponseHandler;
 
 
     static {
@@ -48,6 +52,7 @@ public class Main extends Application {
             InetAddress ip = InetAddress.getByName("localhost");
             socket = new Socket(ip, 8000);
             ResponseHandler responseHandler = new ResponseHandler(socket.getInputStream());
+            clientResponseHandler = responseHandler;
             RequestSender.getInstance().setBufferedWriter(socket.getOutputStream());
             responseHandler.setDaemon(true);
             responseHandler.start();
@@ -67,14 +72,20 @@ public class Main extends Application {
     }
 
     private void disconnectOnClose(Stage primaryStage) {
-        primaryStage.setOnCloseRequest(act -> {
-            try {
-                if (socket != null)
-                    socket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        primaryStage.setOnCloseRequest(act -> closeConnection());
+    }
+
+    public static void closeConnection() {
+        Request request = new Request(Environment.LOGIN_PAGE);
+        request.setRequestType(RequestType.CLOSE_CONNECTION);
+        RequestSender.getInstance().sendRequest(request);
+        try {
+            RequestSender.getInstance().closeBufferedWriter();
+            clientResponseHandler.interrupt();
+            System.exit(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void graphicStarter(Stage primaryStage, Parent root) {
