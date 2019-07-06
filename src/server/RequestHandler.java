@@ -2,7 +2,9 @@ package server;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonStreamParser;
+import controller.fxmlControllers.LoginPageController;
 import controller.logicController.GameController;
+import models.Game;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,6 +16,7 @@ public class RequestHandler extends Thread {
     private ResponseSender responseSender;
     private Gson gson = new Gson();
     private Socket currentSocket;
+    private Request request;
 
     public RequestHandler(Socket socket) {
         try {
@@ -29,7 +32,7 @@ public class RequestHandler extends Thread {
     public void run() {
         try {
             while (parser.hasNext()) {
-                Request request = gson.fromJson(parser.next(), Request.class);
+                request = gson.fromJson(parser.next(), Request.class);
                 new Thread(() -> handleRequest(request)).start();
             }
         } catch (Exception e) {
@@ -40,20 +43,23 @@ public class RequestHandler extends Thread {
     private void handleRequest(Request request) {
         switch (request.getEnvironment()) {
             case SHOP:
-                handleShopRequest(request);
+                handleShopRequest();
                 break;
             case BATTLE:
-                handleBattleRequest(request);
+                handleBattleRequest();
                 break;
             case COLLECTION:
-                handleCollectionRequest(request);
+                handleCollectionRequest();
                 break;
             case LOGIN_PAGE:
-                handleLoginPageRequest(request);
+                handleLoginPageRequest();
+                break;
+            case LEADER_BOARD:
+                handleLeaderboardRequest();
         }
     }
 
-    private void handleLoginPageRequest(Request request) {
+    private void handleLoginPageRequest() {
         GameController controller = GameController.getInstance();
         switch (request.getRequestType()) {
             case SIGN_IN:
@@ -80,16 +86,20 @@ public class RequestHandler extends Thread {
 
     }
 
-    private void handleCollectionRequest(Request request) {
+    private void handleCollectionRequest() {
 
     }
 
-    private void handleBattleRequest(Request request) {
+    private void handleBattleRequest() {
 
     }
 
-    private void handleShopRequest(Request request) {
+    private void handleShopRequest() {
 
+    }
+
+    private void handleLeaderboardRequest() {
+        LoginPageController.getController().showTable(Game.getInstance().getSortedAccounts());
     }
 
 }

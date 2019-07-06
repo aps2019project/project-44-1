@@ -13,6 +13,7 @@ public enum RequestType {
     ADD_CARD_TO_DECK,
     REMOVE_DECK,
     ENTER_BATTLE,
+    SHOW_LEADER_BOARD,
     //close the client connection with server
     CLOSE_CONNECTION,
 
