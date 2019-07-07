@@ -14,6 +14,7 @@ import server.Request;
 import server.RequestType;
 import view.fxmls.wrapperClasses.CardContainer;
 
+import javax.print.DocFlavor;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -80,14 +81,6 @@ public class CollectionFxmlController implements Initializable {
                 request.setRequestType(RequestType.CREATE_DECK);
                 request.setDeckToAdd(result.get());
                 RequestSender.getInstance().sendRequest(request);
-                //todo
-                try {
-                    collection.createDeck(result.get());
-                    decks.getItems().add(result.get());
-                } catch (Exceptions.DuplicateNameForDeck duplicateNameForDeck) {
-                    makeAlert("Error while making deck", "This name was used before!");
-                }
-                //todo
             }
         });
     }
@@ -145,10 +138,10 @@ public class CollectionFxmlController implements Initializable {
         deleteDeckButton.setOnAction(event -> {
             if (decks.getValue() == null)
                 return;
-            collection.deleteDeck(decks.getValue());
-            decks.getItems().remove(decks.getValue());
-            deckCardsFlowPane.getChildren().clear();
-            decks.setValue(null);
+            Request request = new Request(Environment.COLLECTION);
+            request.setRequestType(RequestType.REMOVE_DECK);
+            request.setDeckToRemove(decks.getValue());
+            RequestSender.getInstance().sendRequest(request);
         });
     }
 
@@ -206,7 +199,7 @@ public class CollectionFxmlController implements Initializable {
 
 
 
-    private void makeAlert(String headerText, String contentText) {
+    public void makeAlert(String headerText, String contentText) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(headerText);

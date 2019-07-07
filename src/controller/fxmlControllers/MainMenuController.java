@@ -2,6 +2,7 @@ package controller.fxmlControllers;
 
 import Main.Main;
 import client.RequestSender;
+import client.ResponseHandler;
 import controller.logicController.AccountController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -46,6 +47,7 @@ public class MainMenuController implements Initializable {
             CollectionFxmlController.setCollection(accountController.getAccount().getCollection());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/collectionPage.fxml"));
             Main.getStage().getScene().setRoot(loader.load());
+            ResponseHandler.getInstance().setCollectionController(loader.getController());
         } catch (IOException e) {
             e.printStackTrace();
         }

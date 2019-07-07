@@ -10,6 +10,7 @@ import controller.logicController.CollectionController;
 import controller.logicController.AccountController;
 import javafx.application.Platform;
 import models.Game;
+import models.Placeable;
 import server.Response;
 
 import java.io.BufferedReader;
@@ -19,12 +20,21 @@ import java.io.InputStreamReader;
 import static server.ResponseType.SUCCESSFUL_SIGN_IN;
 
 public class ResponseHandler extends Thread {
+    private static ResponseHandler RESPONSE_HANDLER = new ResponseHandler();
     private JsonStreamParser jsonStreamParser;
     private Gson gson = new Gson();
     private Response response;
+    private CollectionFxmlController collectionController;
 
-    public ResponseHandler(InputStream inputStream) {
-        this.jsonStreamParser = new JsonStreamParser(new BufferedReader(new InputStreamReader(inputStream)));
+    public static ResponseHandler getInstance() {
+        return RESPONSE_HANDLER;
+    }
+
+    public void setJsonStreamParser(InputStream inputStream) {
+        jsonStreamParser = new JsonStreamParser(new BufferedReader(new InputStreamReader(inputStream)));
+    }
+
+    private ResponseHandler() {
     }
 
     @Override
@@ -67,15 +77,48 @@ public class ResponseHandler extends Thread {
     }
 
     private void handleCollectionResponse() {
-        switch (response.getResponseType()){
+        switch (response.getResponseType()) {
             case CREATE_DECK_SUCCESSFULLY:
-                createNewDeck();
+                Platform.runLater(() -> collectionController.decks.getItems().add(response.getDeckToAdd()));
+                break;
+            case SUCCESSFULLY_REMOVE_DECK:
+                removeDeck(response.getDeckToRemove());
+                break;
+            case DUPLICATE_DECK:
+                Platform.runLater(() -> collectionController.makeAlert("Error while making deck", "This name was used before!"));
+                break;
+            case MORE_THAN_ONE_HERO_ERROR:
+            case MORE_THAN_20_NORMAL_CARD_ERROR:
+            case MORE_THAN_ONE_ITEM_ERROR:
+                Platform.runLater(() -> collectionController.makeAlert("Error while adding cards to deck", response.getResponseType().getMessage()));
+                break;
+            case SUCCESSFULLY_MOVE_CARD_TO_DECK:
+                addCardToDeck();
+                break;
+            case SUCCESSFULLY_REMOVE_CARD_FROM_DECK:
+                removeCardFromDeck();
+                break;
+            case MAIN_DECK_SELECTED:
+                Platform.runLater(() -> collectionController.makeAlert("new main deck selected", null));
                 break;
         }
 
     }
 
-    private void createNewDeck() {
+    private void removeCardFromDeck() {
+
+    }
+
+    private void addCardToDeck() {
+
+    }
+
+    private void removeDeck(String deckToRemove) {
+        Platform.runLater(() -> {
+            collectionController.decks.getItems().remove(deckToRemove);
+            collectionController.deckCardsFlowPane.getChildren().clear();
+            collectionController.decks.setValue(null);
+        });
 
     }
 
@@ -90,5 +133,10 @@ public class ResponseHandler extends Thread {
     private void handleLeaderboardResponse() {
         Platform.runLater(() -> LoginPageController.getController().showTable(Game.getInstance().getSortedAccounts()));
     }
+
+    public void setCollectionController(CollectionFxmlController collectionController) {
+        this.collectionController = collectionController;
+    }
+
 
 }

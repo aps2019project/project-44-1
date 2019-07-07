@@ -51,7 +51,8 @@ public class Main extends Application {
         try {
             InetAddress ip = InetAddress.getByName("localhost");
             Socket socket = new Socket(ip, 8000);
-            ResponseHandler responseHandler = new ResponseHandler(socket.getInputStream());
+            ResponseHandler responseHandler = ResponseHandler.getInstance();
+            ResponseHandler.getInstance().setJsonStreamParser(socket.getInputStream());
             clientResponseHandler = responseHandler;
             RequestSender.getInstance().setBufferedWriter(socket.getOutputStream());
             responseHandler.setDaemon(true);
