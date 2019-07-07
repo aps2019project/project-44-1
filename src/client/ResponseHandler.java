@@ -6,16 +6,14 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonStreamParser;
 import controller.fxmlControllers.CollectionFxmlController;
 import controller.fxmlControllers.LoginPageController;
-import controller.logicController.CollectionController;
-import controller.logicController.AccountController;
+import controller.fxmlControllers.MainMenuController;
+import controller.fxmlControllers.ShopFxmlController;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.input.KeyCode;
 import models.Game;
-import models.Placeable;
 import server.Response;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -103,20 +101,6 @@ public class ResponseHandler extends Thread {
             case MAIN_DECK_SELECTED:
                 Platform.runLater(() -> collectionController.makeAlert("new main deck selected", null));
                 break;
-            case ENTER_COLLECTION:
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        CollectionFxmlController.setCollection(response.getCollection());
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/collectionPage.fxml"));
-                        try {
-                            Main.getStage().getScene().setRoot(loader.load());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        ResponseHandler.getInstance().setCollectionController(loader.getController());
-                    }
-                });
         }
 
     }
@@ -143,7 +127,10 @@ public class ResponseHandler extends Thread {
     }
 
     private void handleShopResponse() {
-
+        switch (response.getResponseType()) {
+            case ENTER_SHOP:
+                Platform.runLater(this::initializeShop);
+        }
     }
 
     private void handleLeaderboardResponse() {
@@ -154,5 +141,16 @@ public class ResponseHandler extends Thread {
         this.collectionController = collectionController;
     }
 
+    private void initializeShop() {
+        ShopFxmlController controller = MainMenuController.getShopFxmlController();
+        controller.money.setText(String.valueOf(shopController.getShop().getAccount().getMoney()));
+        shopController.setShopFxmlController(this);
+        controller.back.setOnAction(actionEvent -> Game.getInstance().loadPage(controller.back, "/view/fxmls/mainMenu.fxml"));
+        controller.craftGraphics();
+        controller.search.setOnKeyPressed(actionEvent -> {
+            if (actionEvent.getCode() == KeyCode.ENTER)
+                controller.searchInShop();
+        });
+    }
 
 }

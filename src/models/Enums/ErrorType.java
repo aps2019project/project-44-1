@@ -1,13 +1,9 @@
 package models.Enums;
 
 public enum ErrorType {
-    USED_BEFORE_USERNAME("This username is taken. Try another"),
-    INVALID_USERNAME("invalid username!!!"),
-    INVALID_PASSWORD("invalid password!!!"),
     INVALID_COMMAND("invalid command!!!"),
     ERROR_WITHOUT_MESSAGE("empty command"),
     CARD_NOT_FOUND_IN_COLLECTION("card not found in collection"),
-    DUPLICATE_DECK("creation failed, this deck already exists"),
     DECK_NOT_FOUND("deck not found in collection"),
     FULL_DECK("deck is full"),
     HERO_SET_BEFORE("hero has been set before"),
@@ -26,8 +22,7 @@ public enum ErrorType {
     DEST_IS_UNAVAILABLE_FOR_ATTACK("opponent minion is unavailable for attack"),
     INVALID_DEST_ID("Invalid card id"),
     CARD_CANT_MOVE("this card has been moved this turn"),
-    ACCOUNT_CREATED("account created successfully!");
-
+    ALL_CARDS_HAVE_BEEN_SOLD("all of this type have been sold!!!");
 
     private String message;
 

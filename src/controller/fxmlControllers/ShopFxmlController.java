@@ -2,7 +2,6 @@ package controller.fxmlControllers;
 
 import controller.logicController.ShopController;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,15 +9,14 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import models.*;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
-public class ShopFxmlController implements Initializable {
+public class ShopFxmlController {
 
     public Button back;
     public FlowPane pane;       //shop flowPane
@@ -27,34 +25,21 @@ public class ShopFxmlController implements Initializable {
     public Label message;
     public ScrollPane shop;
     public TextField search;
-    private ShopController shopController = ShopController.getInstance();
+    private ArrayList<String> remainingCards;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        try {
-            money.setText(String.valueOf(shopController.getShop().getAccount().getMoney()));
-        } catch (NullPointerException e) {
 
-        }
-        shopController.setShopFxmlController(this);
-        back.setOnAction(actionEvent -> Game.getInstance().loadPage(back, "/view/fxmls/mainMenu.fxml"));
-        craftGraphics();
-        search.setOnKeyPressed(actionEvent -> {
-            if (actionEvent.getCode() == KeyCode.ENTER)
-                searchInShop();
-        });
-    }
-
-    private void searchInShop() {
+    public void searchInShop() {
+        remainingCards.ind(search.getText()).
         Placeable p = shopController.getShop().getCard(search.getText());
         if (p != null) {
             ArrayList<Placeable> cards = shopController.getShop().getCards();
             double x = (double) (cards.indexOf(p) + 1) / cards.size();
+            double d = shop.getVmax() - shop.getVmin();
             shop.setVvalue(x);
         }
     }
 
-    private void craftGraphics() {
+    public void craftGraphics() {
         Shop shop = Shop.getInstance();
         for (Placeable c : shop.getCards()) {
             fillPanes(c, pane, true);

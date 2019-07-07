@@ -8,13 +8,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Shop {
     private static Shop shop = new Shop();
     private ArrayList<Placeable> cards;
     private Account account;
+    private HashMap<String, Integer> remainingCard = new HashMap<>();
+    private static final int primaryCardNumber = 10;
 
     private Shop() {
+        for (Placeable c : cards) {
+            remainingCard.put(c.getName(), primaryCardNumber);
+        }
     }
 
     {
@@ -62,6 +68,7 @@ public class Shop {
         if (card != null) {
             account.getCollection().deleteCardFromCollection(cardID);
             account.increaseMoney(card.getCost());
+            remainingCard.put(card.getName(), remainingCard.get(card.getName()) + 1);
             return true;
         }
         return false;
@@ -75,6 +82,8 @@ public class Shop {
         if (haveEnoughMoneyToBuyCard(card, account)) {
             if (card instanceof Item && !account.getCollection().canBuyItem()) {
                 return ErrorType.MAX_ITEMS_IN_COLLECTION_REACHED;
+            } else if (remainingCard.get(cardName) <= 0) {
+                return ErrorType.ALL_CARDS_HAVE_BEEN_SOLD;
             } else {
                 account.getCollection().addCardToCollection(card);
                 account.decreaseMoney(card.getCost());
@@ -108,6 +117,10 @@ public class Shop {
 
     public Account getAccount() {
         return account;
+    }
+
+    public HashMap<String, Integer> getRemainingCard() {
+        return remainingCard;
     }
 
 }

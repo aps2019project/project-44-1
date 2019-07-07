@@ -1,8 +1,7 @@
 package server;
 
-import models.Collection;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Response {
     private ResponseType responseType;
@@ -17,7 +16,7 @@ public class Response {
     private ArrayList<String> cardsToAddToDeck;
     private ArrayList<String> cardsToRemoveFromDeck;
     private String authToken;
-    private Collection collection;
+    private HashMap<String,Integer> remainingCardsInShop;
 
     public Response(Environment environment) {
         this.environment = environment;
@@ -42,7 +41,6 @@ public class Response {
     public void setAuthToken(String authToken) {
         this.authToken = authToken;
     }
-
 
     public void setEnvironment(Environment environment) {
         this.environment = environment;
@@ -120,11 +118,12 @@ public class Response {
         this.cardsToAddToDeck = cardsToAddToDeck;
     }
 
-    public Collection getCollection() {
-        return collection;
+    public HashMap<String, Integer> getRemainingCardsInShop() {
+        return remainingCardsInShop;
     }
 
-    public void setCollection(Collection collection) {
-        this.collection = collection;
+    public void setRemainingCardsInShop(HashMap<String, Integer> remainingCardsInShop) {
+        this.remainingCardsInShop = remainingCardsInShop;
     }
+
 }

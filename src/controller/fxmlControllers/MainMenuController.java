@@ -29,6 +29,7 @@ public class MainMenuController implements Initializable {
     public Label error;
     public Button customCard;
     private AccountController accountController = AccountController.getInstance();
+    private static ShopFxmlController shopFxmlController = new ShopFxmlController();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,7 +50,16 @@ public class MainMenuController implements Initializable {
     }
 
     private void goToShop() {
-        accountController.enterShop();
+        Request request = new Request(Environment.MAIN_MENU);
+        request.setRequestType(RequestType.ENTER_SHOP);
+        RequestSender.getInstance().sendRequest(request);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/shop.fxml"));
+        loader.setController(shopFxmlController);
+        try {
+            exitButton.getScene().setRoot(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Game.getInstance().loadPage(exitButton, "/view/fxmls/shop.fxml");
     }
 
@@ -88,6 +98,10 @@ public class MainMenuController implements Initializable {
 
     private void createCustomCard() {
         Game.getInstance().loadPage(error, "/view/fxmls/customCard.fxml");
+    }
+
+    public static ShopFxmlController getShopFxmlController() {
+        return shopFxmlController;
     }
 
 }
