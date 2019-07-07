@@ -32,20 +32,26 @@ public class CardContainer {
 
 
     private CardContainer(String name) {
-        Card c = (Card) Shop.getInstance().getCard(name);
+        Placeable c = Shop.getInstance().getCard(name);
         manaLabel = new Label(Integer.toString(c.getNeededMana()));
         manaLabel.setStyle("-fx-font-size: 24px;-fx-text-fill: black;-fx-text-alignment: center;-fx-text-overrun: ELLIPSIS;-fx-alignment: center;" +
                 "-fx-pref-width: 51;-fx-pref-height: 39;-fx-font-weight: bold");
         manaLabel.setLayoutX(4.5);
         manaLabel.setLayoutY(17);
 
-        attackPointLabel = new Label(Integer.toString(c.getAP()));
+        if (c instanceof Card)
+            attackPointLabel = new Label(Integer.toString(((Card) c).getAP()));
+        else
+            attackPointLabel = new Label(Integer.toString(0));
         attackPointLabel.setStyle("-fx-font-size: 27px;-fx-text-fill: #efff09;-fx-text-alignment: center;-fx-text-overrun: ELLIPSIS;-fx-alignment: center;" +
                 "-fx-pref-width: 60;-fx-pref-height: 50;-fx-font-weight: bold");
         attackPointLabel.setLayoutX(49);
         attackPointLabel.setLayoutY(214);
 
-        healthPointLabel = new Label(Integer.toString(c.getHP()));
+        if (c instanceof Card)
+            healthPointLabel = new Label(Integer.toString(((Card) c).getHP()));
+        else
+            healthPointLabel = new Label(Integer.toString(0));
         healthPointLabel.setStyle("-fx-font-size: 27px;-fx-text-fill: red;-fx-text-alignment: center;-fx-text-overrun: ELLIPSIS;-fx-alignment: center;" +
                 "-fx-pref-width: 60;-fx-pref-height: 50;-fx-font-weight: bold");
         healthPointLabel.setLayoutX(200);
@@ -75,7 +81,9 @@ public class CardContainer {
             imageView.setScaleY(1.5);
         }
 
-        anchorPane.getChildren().addAll(manaLabel, attackPointLabel, healthPointLabel, nameLabel, checkBox, imageView);
+
+        anchorPane.getChildren().addAll(manaLabel, attackPointLabel, healthPointLabel, nameLabel, checkBox,imageView);
+
 
     }
 

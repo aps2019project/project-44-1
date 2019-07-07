@@ -9,11 +9,13 @@ import controller.fxmlControllers.LoginPageController;
 import controller.logicController.CollectionController;
 import controller.logicController.AccountController;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import models.Game;
 import models.Placeable;
 import server.Response;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -101,6 +103,20 @@ public class ResponseHandler extends Thread {
             case MAIN_DECK_SELECTED:
                 Platform.runLater(() -> collectionController.makeAlert("new main deck selected", null));
                 break;
+            case ENTER_COLLECTION:
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        CollectionFxmlController.setCollection(response.getCollection());
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/collectionPage.fxml"));
+                        try {
+                            Main.getStage().getScene().setRoot(loader.load());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        ResponseHandler.getInstance().setCollectionController(loader.getController());
+                    }
+                });
         }
 
     }

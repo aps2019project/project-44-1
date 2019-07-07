@@ -1,5 +1,7 @@
 package server;
 
+import models.Collection;
+
 import java.util.ArrayList;
 
 public class Response {
@@ -15,6 +17,7 @@ public class Response {
     private ArrayList<String> cardsToAddToDeck;
     private ArrayList<String> cardsToRemoveFromDeck;
     private String authToken;
+    private Collection collection;
 
     public Response(Environment environment) {
         this.environment = environment;
@@ -115,5 +118,13 @@ public class Response {
 
     public void setCardsToAddToDeck(ArrayList<String> cardsToAddToDeck) {
         this.cardsToAddToDeck = cardsToAddToDeck;
+    }
+
+    public Collection getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
     }
 }

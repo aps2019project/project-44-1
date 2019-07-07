@@ -95,27 +95,27 @@ public class RequestHandler extends Thread {
     private void handleCollectionRequest(Request request) {
         Collection collection = Main.getOnlineAccounts().get(request.getOuthToken()).getCollection();
         CollectionController controller = new CollectionController(collection);
-        switch (request.getRequestType()){
+        switch (request.getRequestType()) {
             case CREATE_DECK:
-                controller.createDeck(request.getDeckToAdd(),responseSender);
+                controller.createDeck(request.getDeckToAdd(), responseSender);
                 break;
             case ADD_CARD_TO_DECK:
-                controller.addCardToDeck(request,responseSender);
+                controller.addCardToDeck(request, responseSender);
                 break;
             case REMOVE_DECK:
-                controller.deleteDeck(request,responseSender);
+                controller.deleteDeck(request, responseSender);
                 break;
             case REMOVE_CARD_FROM_DECK:
-                controller.removeCardFromDeck(request,responseSender);
+                controller.removeCardFromDeck(request, responseSender);
                 break;
             case SELECT_MAIN_DECK:
-                controller.selectMainDeck(request,responseSender);
+                controller.selectMainDeck(request, responseSender);
                 break;
             case IMPORT_DECK:
-                controller.importDeck(request.getImportedDeck(),responseSender);
+                controller.importDeck(request.getImportedDeck(), responseSender);
                 break;
             case EXPORT_DECK:
-                controller.exportDeck(request.getExportedDeck(),responseSender);
+                controller.exportDeck(request.getExportedDeck(), responseSender);
                 break;
 
         }
@@ -141,7 +141,18 @@ public class RequestHandler extends Thread {
                 break;
             case SAVE:
                 AccountController.getInstance().save();
+                break;
+            case ENTER_COLLECTION:
+                sendCollection(request);
+                break;
         }
+    }
+
+    private void sendCollection(Request request) {
+        Response response = new Response(Environment.COLLECTION);
+        response.setResponseType(ResponseType.ENTER_COLLECTION);
+        response.setCollection(Main.getOnlineAccounts().get(request.getOuthToken()).getCollection());
+        responseSender.sendResponse(response);
     }
 
 }

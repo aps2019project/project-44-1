@@ -43,14 +43,9 @@ public class MainMenuController implements Initializable {
     }
 
     private void goToCollection() {
-        try {
-            CollectionFxmlController.setCollection(accountController.getAccount().getCollection());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/collectionPage.fxml"));
-            Main.getStage().getScene().setRoot(loader.load());
-            ResponseHandler.getInstance().setCollectionController(loader.getController());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            Request request = new Request(Environment.MAIN_MENU);
+            request.setRequestType(RequestType.ENTER_COLLECTION);
+            RequestSender.getInstance().sendRequest(request);
     }
 
     private void goToShop() {
