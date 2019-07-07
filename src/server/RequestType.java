@@ -10,12 +10,14 @@ public enum RequestType {
     SELL,
     SELECT_MAIN_DECK,
     CREATE_DECK,
-    DELETE_CARD_FROM_DECK,
+    REMOVE_CARD_FROM_DECK,
     ADD_CARD_TO_DECK,
     REMOVE_DECK,
     ENTER_BATTLE,
     SHOW_LEADER_BOARD,
     //close the client connection with server
     CLOSE_CONNECTION,
+    IMPORT_DECK,
+    EXPORT_DECK,
 
 }

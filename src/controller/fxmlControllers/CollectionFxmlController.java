@@ -1,6 +1,7 @@
 package controller.fxmlControllers;
 
 import Main.Main;
+import client.RequestSender;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import models.*;
+import server.Environment;
+import server.Request;
+import server.RequestType;
 import view.fxmls.wrapperClasses.CardContainer;
 
 import java.io.IOException;
@@ -72,27 +76,44 @@ public class CollectionFxmlController implements Initializable {
             dialog.setContentText("Please enter deck name: ");
             Optional<String> result = dialog.showAndWait();
             if (result.isPresent() && !result.get().isEmpty()) {
+                Request request = new Request(Environment.COLLECTION);
+                request.setRequestType(RequestType.CREATE_DECK);
+                request.setDeckToAdd(result.get());
+                RequestSender.getInstance().sendRequest(request);
+                //todo
                 try {
                     collection.createDeck(result.get());
                     decks.getItems().add(result.get());
                 } catch (Exceptions.DuplicateNameForDeck duplicateNameForDeck) {
                     makeAlert("Error while making deck", "This name was used before!");
                 }
+                //todo
             }
-
         });
     }
 
     private void addCardToDeckBtn() {
         addCardToDeckButton.setOnAction(event -> {
-            if (decks.getValue() == null || !checkSelectedCards())
+            Request request = new Request(Environment.COLLECTION);
+            request.setRequestType(RequestType.ADD_CARD_TO_DECK);
+            request.setDeckToAddCardTo(decks.getValue());
+
+            ArrayList<String> selectedCards = new ArrayList<>();
+
+            if (decks.getValue() == null)
                 return;
+
             for (CardContainer cardContainer : collectionCards) {
                 if (cardContainer.getCheckBox().isSelected()) {
-                    setCardContainer(cardContainer.getCard(),deckCardsFlowPane,deckCards);
+                    selectedCards.add(cardContainer.getCard().getName());
+                    //todo
+                    setCardContainer(cardContainer.getCard(), deckCardsFlowPane, deckCards);
                     collection.getDeck(decks.getValue()).addToDeck(cardContainer.getCard());
+                    //todo
                 }
             }
+            request.setCardsToAddToDeck(selectedCards);
+            RequestSender.getInstance().sendRequest(request);
         });
     }
 
@@ -183,35 +204,7 @@ public class CollectionFxmlController implements Initializable {
         }
     }
 
-    private boolean checkSelectedCards() {
-        int heroCounter = 0;
-        int itemCounter = 0;
-        int normalCardCounter = 0;
-        for (CardContainer cardContainer : collectionCards) {
-            if (cardContainer.getCheckBox().isSelected()) {
-                if (cardContainer.getCard() instanceof Hero)
-                    heroCounter++;
-                if (cardContainer.getCard() instanceof Item)
-                    itemCounter++;
-                if (cardContainer.getCard() instanceof Minion || cardContainer.getCard() instanceof Spell)
-                    normalCardCounter++;
-            }
-        }
-        if (heroCounter > 1 || (heroCounter == 1 && !collection.canAddHero(collection.getDeck(decks.getValue())))) {
-            makeAlert("Error while adding cards to deck", "can not add more than one hero to deck");
-            return false;
-        }
-        if (itemCounter > 1 || (itemCounter == 1 && !collection.canAddItem(collection.getDeck(decks.getValue())))) {
-            makeAlert("Error while adding cards to deck", "can not add more than one item to deck");
-            return false;
-        }
-        if (collection.getDeck(decks.getValue()).getDeckCards().size() + normalCardCounter > 20) {
-            makeAlert("Error while adding cards to deck", "can not add more than 20 minion and spell to deck");
-            return false;
-        }
-        return true;
 
-    }
 
     private void makeAlert(String headerText, String contentText) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

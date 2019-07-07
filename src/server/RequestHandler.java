@@ -2,8 +2,10 @@ package server;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonStreamParser;
+import controller.logicController.CollectionController;
 import controller.logicController.AccountController;
 import controller.logicController.GameController;
+import models.Collection;
 import models.Game;
 
 import java.io.BufferedReader;
@@ -16,7 +18,6 @@ public class RequestHandler extends Thread {
     private ResponseSender responseSender;
     private Gson gson = new Gson();
     private Socket currentSocket;
-    private Request request;
 
     public RequestHandler(Socket socket) {
         try {
@@ -32,15 +33,15 @@ public class RequestHandler extends Thread {
     public void run() {
         try {
             while (parser.hasNext()) {
-                request = gson.fromJson(parser.next(), Request.class);
-                new Thread(this::handleRequest).start();
+                Request request = gson.fromJson(parser.next(), Request.class);
+                new Thread(() -> handleRequest(request)).start();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void handleRequest() {
+    private void handleRequest(Request request) {
         switch (request.getEnvironment()) {
             case SHOP:
                 handleShopRequest();
@@ -49,7 +50,7 @@ public class RequestHandler extends Thread {
                 handleBattleRequest();
                 break;
             case COLLECTION:
-                handleCollectionRequest();
+                handleCollectionRequest(request);
                 break;
             case LOGIN_PAGE:
                 handleLoginPageRequest(request);
@@ -58,7 +59,7 @@ public class RequestHandler extends Thread {
                 handleLeaderboardRequest();
                 break;
             case MAIN_MENU:
-                handleMainMenuRequest();
+                handleMainMenuRequest(request);
         }
     }
 
@@ -91,7 +92,33 @@ public class RequestHandler extends Thread {
 
     }
 
-    private void handleCollectionRequest() {
+    private void handleCollectionRequest(Request request) {
+        Collection collection = Main.getOnlineAccounts().get(request.getOuthToken()).getCollection();
+        CollectionController controller = new CollectionController(collection);
+        switch (request.getRequestType()){
+            case CREATE_DECK:
+                controller.createDeck(request.getDeckToAdd(),responseSender);
+                break;
+            case ADD_CARD_TO_DECK:
+                controller.addCardToDeck(request,responseSender);
+                break;
+            case REMOVE_DECK:
+                controller.deleteDeck(request,responseSender);
+                break;
+            case REMOVE_CARD_FROM_DECK:
+                controller.removeCardFromDeck(request,responseSender);
+                break;
+            case SELECT_MAIN_DECK:
+                controller.selectMainDeck(request,responseSender);
+                break;
+            case IMPORT_DECK:
+                controller.importDeck(request.getImportedDeck(),responseSender);
+                break;
+            case EXPORT_DECK:
+                controller.exportDeck(request.getExportedDeck(),responseSender);
+                break;
+
+        }
 
     }
 
@@ -107,7 +134,7 @@ public class RequestHandler extends Thread {
         responseSender.sendResponse(new Response(Environment.LEADER_BOARD));
     }
 
-    private void handleMainMenuRequest() {
+    private void handleMainMenuRequest(Request request) {
         switch (request.getRequestType()) {
             case LOG_OUT:
                 Game.getInstance().getOnlineAccounts().remove(request.getUsername());

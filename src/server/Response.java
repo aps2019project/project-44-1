@@ -10,6 +10,9 @@ public class Response {
     private String mainDeck;
     private String deckToRemove;
     private String deckToRemoveCardFrom;
+    private String deckToAdd;
+    private String deckToAddCardTo;
+    private ArrayList<String> cardsToAddToDeck;
     private ArrayList<String> cardsToRemoveFromDeck;
     private String authToken;
 
@@ -37,4 +40,80 @@ public class Response {
         this.authToken = authToken;
     }
 
+
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+    }
+
+    public ArrayList<String> getCardsToSell() {
+        return cardsToSell;
+    }
+
+    public void setCardsToSell(ArrayList<String> cardsToSell) {
+        this.cardsToSell = cardsToSell;
+    }
+
+    public ArrayList<String> getCardsToBuy() {
+        return cardsToBuy;
+    }
+
+    public void setCardsToBuy(ArrayList<String> cardsToBuy) {
+        this.cardsToBuy = cardsToBuy;
+    }
+
+    public String getMainDeck() {
+        return mainDeck;
+    }
+
+    public void setMainDeck(String mainDeck) {
+        this.mainDeck = mainDeck;
+    }
+
+    public String getDeckToRemove() {
+        return deckToRemove;
+    }
+
+    public void setDeckToRemove(String deckToRemove) {
+        this.deckToRemove = deckToRemove;
+    }
+
+    public String getDeckToRemoveCardFrom() {
+        return deckToRemoveCardFrom;
+    }
+
+    public void setDeckToRemoveCardFrom(String deckToRemoveCardFrom) {
+        this.deckToRemoveCardFrom = deckToRemoveCardFrom;
+    }
+
+    public ArrayList<String> getCardsToRemoveFromDeck() {
+        return cardsToRemoveFromDeck;
+    }
+
+    public void setCardsToRemoveFromDeck(ArrayList<String> cardsToRemoveFromDeck) {
+        this.cardsToRemoveFromDeck = cardsToRemoveFromDeck;
+    }
+
+    public String getDeckToAdd() {
+        return deckToAdd;
+    }
+
+    public void setDeckToAdd(String deckToAdd) {
+        this.deckToAdd = deckToAdd;
+    }
+
+    public String getDeckToAddCardTo() {
+        return deckToAddCardTo;
+    }
+
+    public void setDeckToAddCardTo(String deckToAddCardTo) {
+        this.deckToAddCardTo = deckToAddCardTo;
+    }
+
+    public ArrayList<String> getCardsToAddToDeck() {
+        return cardsToAddToDeck;
+    }
+
+    public void setCardsToAddToDeck(ArrayList<String> cardsToAddToDeck) {
+        this.cardsToAddToDeck = cardsToAddToDeck;
+    }
 }

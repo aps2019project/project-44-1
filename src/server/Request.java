@@ -10,10 +10,16 @@ public class Request {
     private String password;
     private ArrayList<String> cardsToSell;
     private ArrayList<String> cardsToBuy;
+    private String deckToAdd;
     private String mainDeck;
     private String deckToRemove;
     private String deckToRemoveCardFrom;
+    private String deckToAddCardTo;
+    private String deckToValidate;
+    private String exportedDeck;
+    private String importedDeck;
     private ArrayList<String> cardsToRemoveFromDeck;
+    private ArrayList<String> cardsToAddToDeck;
 
     public Request(Environment environment) {
         this.environment = environment;
@@ -103,4 +109,51 @@ public class Request {
         this.password = password;
     }
 
+    public String getDeckToAdd() {
+        return deckToAdd;
+    }
+
+    public void setDeckToAdd(String deckToAdd) {
+        this.deckToAdd = deckToAdd;
+    }
+
+    public ArrayList<String> getCardsToAddToDeck() {
+        return cardsToAddToDeck;
+    }
+
+    public void setCardsToAddToDeck(ArrayList<String> cardsToAddToDeck) {
+        this.cardsToAddToDeck = cardsToAddToDeck;
+    }
+
+    public String getDeckToAddCardTo() {
+        return deckToAddCardTo;
+    }
+
+    public void setDeckToAddCardTo(String deckToAddCardTo) {
+        this.deckToAddCardTo = deckToAddCardTo;
+    }
+
+    public String getDeckToValidate() {
+        return deckToValidate;
+    }
+
+    public void setDeckToValidate(String deckToValidate) {
+        this.deckToValidate = deckToValidate;
+    }
+
+    public String getExportedDeck() {
+        return exportedDeck;
+    }
+
+    public void setExportedDeck(String exportedDeck) {
+        this.exportedDeck = exportedDeck;
+    }
+
+    public String getImportedDeck() {
+        return importedDeck;
+    }
+
+    public void setImportedDeck(String importedDeck) {
+        this.importedDeck = importedDeck;
+    }
 }

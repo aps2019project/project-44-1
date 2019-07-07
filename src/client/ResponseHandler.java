@@ -4,7 +4,9 @@ import Main.Main;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonStreamParser;
+import controller.fxmlControllers.CollectionFxmlController;
 import controller.fxmlControllers.LoginPageController;
+import controller.logicController.CollectionController;
 import controller.logicController.AccountController;
 import javafx.application.Platform;
 import models.Game;
@@ -65,6 +67,15 @@ public class ResponseHandler extends Thread {
     }
 
     private void handleCollectionResponse() {
+        switch (response.getResponseType()){
+            case CREATE_DECK_SUCCESSFULLY:
+                createNewDeck();
+                break;
+        }
+
+    }
+
+    private void createNewDeck() {
 
     }
 

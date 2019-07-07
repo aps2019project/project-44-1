@@ -3,24 +3,23 @@ package controller.logicController;
 import com.google.gson.Gson;
 import models.*;
 import models.Enums.ErrorType;
+import server.*;
 import view.request.CollectionRequest;
 import view.View;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class CollectionController {
-    private static CollectionController collectionController = new CollectionController();
     private Collection collection;
     private View view = View.getInstance();
     private boolean forwardedFromShop;
 
-    private CollectionController() {
+    public CollectionController(Collection collection) {
+        this.collection = collection;
     }
 
-    public static CollectionController getInstance() {
-        return collectionController;
-    }
 
     private void showCollectionItemsAndCards() {
         view.printCollectionItems(collection.getCollectionCards(), false);
@@ -35,22 +34,24 @@ public class CollectionController {
         }
     }
 
-    private void createDeck(CollectionRequest request) {
-        String deckName = request.getDeckName();
+    public void createDeck(String deckName, ResponseSender responseSender) {
+        Response response = new Response(Environment.COLLECTION);
+        response.setDeckToAdd(deckName);
         try {
             collection.createDeck(deckName);
+            response.setResponseType(ResponseType.CREATE_DECK_SUCCESSFULLY);
         } catch (Exceptions.DuplicateNameForDeck duplicateNameForDeck) {
-            view.printError(ErrorType.DUPLICATE_DECK);
+            response.setResponseType(ResponseType.DUPLICATE_DECK);
         }
+        responseSender.sendResponse(response);
     }
 
-    private void deleteDeck(CollectionRequest request) {
-        String deckName = request.getDeckName();
-        if (collection.isUsedDeckName(deckName)) {
-            collection.deleteDeck(deckName);
-        } else {
-            view.printError(ErrorType.DECK_NOT_FOUND);
-        }
+    public void deleteDeck(Request request, ResponseSender responseSender) {
+        collection.deleteDeck(request.getDeckToRemove());
+        Response response = new Response(Environment.COLLECTION);
+        response.setDeckToRemove(request.getDeckToRemove());
+        response.setResponseType(ResponseType.SUCCESSFULLY_REMOVE_DECK);
+        responseSender.sendResponse(response);
     }
 
     private void addCardToDeck(CollectionRequest request) {
@@ -97,11 +98,11 @@ public class CollectionController {
         }
     }
 
-    private void selectMainDeck(CollectionRequest request) {
-        String deckName = request.getDeckName();
-        if (checkDeck(deckName)) return;
-        collection.selectMainDeck(deckName);
-
+    public void selectMainDeck(Request request, ResponseSender responseSender) {
+        Response response = new Response(Environment.COLLECTION);
+        response.setResponseType(ResponseType.MAIN_DECK_SELECTED);
+        collection.selectMainDeck(request.getMainDeck());
+        responseSender.sendResponse(response);
     }
 
     private boolean checkDeck(String deckName) {
@@ -135,7 +136,7 @@ public class CollectionController {
         this.collection = collection;
     }
 
-    public void exportDeck(String deckName) {
+    public void exportDeck(String deckName, ResponseSender responseSender) {
         Deck deck = collection.getDeck(deckName);
         Gson gson = new Gson();
         try {
@@ -148,4 +149,53 @@ public class CollectionController {
         }
     }
 
+    public void addCardToDeck(Request request, ResponseSender responseSender) {
+        Response response = new Response(Environment.COLLECTION);
+        response.setDeckToAddCardTo(request.getDeckToAddCardTo());
+        ArrayList<String> cards = request.getCardsToAddToDeck();
+        Deck deck = collection.getDeck(request.getDeckToAddCardTo());
+        int heroCounter = 0;
+        int itemCounter = 0;
+        int normalCardCounter = 0;
+        for (String card : cards) {
+            if (collection.getCard(card) instanceof Hero)
+                heroCounter++;
+            if (collection.getCard(card) instanceof Item)
+                itemCounter++;
+            if (collection.getCard(card) instanceof Minion || collection.getCard(card) instanceof Spell)
+                normalCardCounter++;
+        }
+        if (heroCounter > 1 || (heroCounter == 1 && !collection.canAddHero(deck))) {
+            response.setResponseType(ResponseType.MORE_THAN_ONE_HERO_ERROR);
+        } else if (itemCounter > 1 || (itemCounter == 1 && !collection.canAddItem(deck))) {
+            response.setResponseType(ResponseType.MORE_THAN_ONE_ITEM_ERROR);
+
+        } else if (deck.getDeckCards().size() + normalCardCounter > 20) {
+            response.setResponseType(ResponseType.MORE_THAN_20_NORMAL_CARD_ERROR);
+        } else {
+            response.setResponseType(ResponseType.SUCCESSFULLY_MOVE_CARD_TO_DECK);
+            for (String card : cards) {
+                deck.addToDeck(collection.getCard(card));
+            }
+        }
+        //todo maybe need to add deck arraylist to the response
+        responseSender.sendResponse(response);
+    }
+
+    public void removeCardFromDeck(Request request, ResponseSender responseSender) {
+        Response response = new Response(Environment.COLLECTION);
+        response.setResponseType(ResponseType.SUCCESSFULLY_REMOVE_CARD_FROM_DECK);
+        response.setDeckToRemoveCardFrom(request.getDeckToRemoveCardFrom());
+        response.setCardsToRemoveFromDeck(request.getCardsToRemoveFromDeck());
+        ArrayList<String> cards = request.getCardsToRemoveFromDeck();
+        Deck deck = collection.getDeck(request.getDeckToRemoveCardFrom());
+        for (String card : cards) {
+            deck.removeFromDeck(card);
+        }
+        responseSender.sendResponse(response);
+    }
+
+    public void importDeck(String importedDeck, ResponseSender responseSender) {
+
+    }
 }

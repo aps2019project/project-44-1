@@ -54,6 +54,15 @@ public class Collection implements Comparable<Placeable> {
         return cardHashMap.get(cardID);
     }
 
+    public Placeable getCard(String cardName) {
+        for (Placeable card : cardHashMap.values()) {
+            if (card.getName().equals(cardName)) {
+                return card;
+            }
+        }
+        return null;
+    }
+
     public Deck getDeck(String deckName) {
         return decks.get(deckName);
     }
