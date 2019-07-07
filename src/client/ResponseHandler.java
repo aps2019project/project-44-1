@@ -6,10 +6,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonStreamParser;
 import controller.fxmlControllers.CollectionFxmlController;
 import controller.fxmlControllers.LoginPageController;
-import controller.fxmlControllers.MainMenuController;
-import controller.fxmlControllers.ShopFxmlController;
 import javafx.application.Platform;
-import javafx.scene.input.KeyCode;
 import models.Game;
 import server.Response;
 
@@ -142,15 +139,15 @@ public class ResponseHandler extends Thread {
     }
 
     private void initializeShop() {
-        ShopFxmlController controller = MainMenuController.getShopFxmlController();
-        controller.money.setText(String.valueOf(shopController.getShop().getAccount().getMoney()));
-        shopController.setShopFxmlController(this);
-        controller.back.setOnAction(actionEvent -> Game.getInstance().loadPage(controller.back, "/view/fxmls/mainMenu.fxml"));
-        controller.craftGraphics();
-        controller.search.setOnKeyPressed(actionEvent -> {
-            if (actionEvent.getCode() == KeyCode.ENTER)
-                controller.searchInShop();
-        });
+//        ShopFxmlController controller = MainMenuController.getShopFxmlController();
+//        controller.money.setText(String.valueOf(shopController.getShop().getAccount().getMoney()));
+//        shopController.setShopFxmlController(this);
+//        controller.back.setOnAction(actionEvent -> Game.getInstance().loadPage(controller.back, "/view/fxmls/mainMenu.fxml"));
+//        controller.craftGraphics();
+//        controller.search.setOnKeyPressed(actionEvent -> {
+//            if (actionEvent.getCode() == KeyCode.ENTER)
+//                controller.searchInShop();
+//        });
     }
 
 }

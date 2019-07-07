@@ -11,6 +11,7 @@ public enum ResponseType {
     REQUESTED_ACCOUNT_IS_ONLINE("This account is online now. Try another!!!"),
     SUCCESSFUL_SIGN_IN("Signed in successfully"),
     //collection responses
+    ENTER_COLLECTION("enter collection"),
     CREATE_DECK_SUCCESSFULLY("New deck created Successfully"),
     DUPLICATE_DECK("creation failed, this deck already exists"),
     MORE_THAN_ONE_HERO_ERROR("can not add more than one hero to deck"),

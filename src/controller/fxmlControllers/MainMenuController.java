@@ -2,7 +2,6 @@ package controller.fxmlControllers;
 
 import Main.Main;
 import client.RequestSender;
-import client.ResponseHandler;
 import controller.logicController.AccountController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -44,9 +43,9 @@ public class MainMenuController implements Initializable {
     }
 
     private void goToCollection() {
-            Request request = new Request(Environment.MAIN_MENU);
-            request.setRequestType(RequestType.ENTER_COLLECTION);
-            RequestSender.getInstance().sendRequest(request);
+        Request request = new Request(Environment.MAIN_MENU);
+        request.setRequestType(RequestType.ENTER_COLLECTION);
+        RequestSender.getInstance().sendRequest(request);
     }
 
     private void goToShop() {
