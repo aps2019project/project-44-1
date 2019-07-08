@@ -3,7 +3,6 @@ package controller.fxmlControllers;
 import Main.Main;
 import client.RequestSender;
 import controller.logicController.AccountController;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,7 +12,6 @@ import server.Environment;
 import server.Request;
 import server.RequestType;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -28,7 +26,6 @@ public class MainMenuController implements Initializable {
     public Label error;
     public Button customCard;
     private AccountController accountController = AccountController.getInstance();
-    private static ShopFxmlController shopFxmlController = new ShopFxmlController();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,16 +46,6 @@ public class MainMenuController implements Initializable {
     }
 
     private void goToShop() {
-        Request request = new Request(Environment.MAIN_MENU);
-        request.setRequestType(RequestType.ENTER_SHOP);
-        RequestSender.getInstance().sendRequest(request);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/shop.fxml"));
-        loader.setController(shopFxmlController);
-        try {
-            exitButton.getScene().setRoot(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         Game.getInstance().loadPage(exitButton, "/view/fxmls/shop.fxml");
     }
 
@@ -97,10 +84,6 @@ public class MainMenuController implements Initializable {
 
     private void createCustomCard() {
         Game.getInstance().loadPage(error, "/view/fxmls/customCard.fxml");
-    }
-
-    public static ShopFxmlController getShopFxmlController() {
-        return shopFxmlController;
     }
 
 }

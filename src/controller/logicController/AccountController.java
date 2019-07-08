@@ -135,9 +135,6 @@ public class AccountController extends Thread {
     }
 
     //----------------------------------------------------------------------
-    public void enterShop() {
-        ShopController.getInstance().getShop().setAccount(account);
-    }
 
     public void setAccount(Account account) {
         this.account = account;
