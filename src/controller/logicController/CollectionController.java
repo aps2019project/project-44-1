@@ -43,6 +43,7 @@ public class CollectionController {
         } catch (Exceptions.DuplicateNameForDeck duplicateNameForDeck) {
             response.setResponseType(ResponseType.DUPLICATE_DECK);
         }
+        response.setCollection(collection);
         responseSender.sendResponse(response);
     }
 
@@ -179,19 +180,19 @@ public class CollectionController {
             }
         }
         //todo maybe need to add deck arraylist to the response
+        response.setCollection(collection);
         responseSender.sendResponse(response);
     }
 
     public void removeCardFromDeck(Request request, ResponseSender responseSender) {
         Response response = new Response(Environment.COLLECTION);
         response.setResponseType(ResponseType.SUCCESSFULLY_REMOVE_CARD_FROM_DECK);
-        response.setDeckToRemoveCardFrom(request.getDeckToRemoveCardFrom());
-        response.setCardsToRemoveFromDeck(request.getCardsToRemoveFromDeck());
         ArrayList<String> cards = request.getCardsToRemoveFromDeck();
         Deck deck = collection.getDeck(request.getDeckToRemoveCardFrom());
         for (String card : cards) {
             deck.removeFromDeck(card);
         }
+        response.setCollection(collection);
         responseSender.sendResponse(response);
     }
 

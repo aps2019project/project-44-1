@@ -8,6 +8,7 @@ import controller.fxmlControllers.CollectionFxmlController;
 import controller.fxmlControllers.LoginPageController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import models.Game;
 import server.Response;
 
@@ -76,6 +77,8 @@ public class ResponseHandler extends Thread {
     }
 
     private void handleCollectionResponse() {
+        if (response.getCollection() != null)
+            CollectionFxmlController.setCollection(response.getCollection());
         switch (response.getResponseType()) {
             case CREATE_DECK_SUCCESSFULLY:
                 Platform.runLater(() -> collectionController.decks.getItems().add(response.getDeckToAdd()));
@@ -84,49 +87,41 @@ public class ResponseHandler extends Thread {
                 removeDeck(response.getDeckToRemove());
                 break;
             case DUPLICATE_DECK:
-                Platform.runLater(() -> collectionController.makeAlert("Error while making deck", "This name was used before!"));
+                Platform.runLater(() -> collectionController.makeAlert("Error while making deck", "This name was used before!", Alert.AlertType.ERROR));
                 break;
             case MORE_THAN_ONE_HERO_ERROR:
             case MORE_THAN_20_NORMAL_CARD_ERROR:
             case MORE_THAN_ONE_ITEM_ERROR:
-                Platform.runLater(() -> collectionController.makeAlert("Error while adding cards to deck", response.getResponseType().getMessage()));
+                Platform.runLater(() -> collectionController.makeAlert("Error while adding cards to deck", response.getResponseType().getMessage(), Alert.AlertType.ERROR));
                 break;
             case SUCCESSFULLY_MOVE_CARD_TO_DECK:
-                addCardToDeck();
-                break;
             case SUCCESSFULLY_REMOVE_CARD_FROM_DECK:
-                removeCardFromDeck();
+                Platform.runLater(() -> collectionController.updateDeckCards());
                 break;
             case MAIN_DECK_SELECTED:
-                Platform.runLater(() -> collectionController.makeAlert("new main deck selected", null));
+                Platform.runLater(() -> collectionController.makeAlert("new main deck selected", null, Alert.AlertType.INFORMATION));
                 break;
             case ENTER_COLLECTION:
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        CollectionFxmlController.setCollection(response.getCollection());
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/collectionPage.fxml"));
-                        try {
-                            Main.getStage().getScene().setRoot(loader.load());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        ResponseHandler.getInstance().setCollectionController(loader.getController());
-                    }
-                });
-
-
+                loadCollection();
         }
-
     }
 
-    private void removeCardFromDeck() {
-
+    private void loadCollection() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                CollectionFxmlController.setCollection(response.getCollection());
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/collectionPage.fxml"));
+                try {
+                    Main.getStage().getScene().setRoot(loader.load());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ResponseHandler.getInstance().setCollectionController(loader.getController());
+            }
+        });
     }
 
-    private void addCardToDeck() {
-
-    }
 
     private void removeDeck(String deckToRemove) {
         Platform.runLater(() -> {

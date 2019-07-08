@@ -82,8 +82,12 @@ public class Deck implements Cloneable {
                 cards.remove(card);
                 break;
             }
-
         }
+        if (hero != null && hero.getName().equals(name)){
+            hero = null;
+        }
+        if (item != null && item.getName().equals(name))
+            item = null;
     }
 
     /**

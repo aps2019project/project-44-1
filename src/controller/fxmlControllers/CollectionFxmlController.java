@@ -99,10 +99,6 @@ public class CollectionFxmlController implements Initializable {
             for (CardContainer cardContainer : collectionCards) {
                 if (cardContainer.getCheckBox().isSelected()) {
                     selectedCards.add(cardContainer.getCard().getName());
-                    //todo
-                    setCardContainer(cardContainer.getCard(), deckCardsFlowPane, deckCards);
-                    collection.getDeck(decks.getValue()).addToDeck(cardContainer.getCard());
-                    //todo
                 }
             }
             request.setCardsToAddToDeck(selectedCards);
@@ -114,7 +110,10 @@ public class CollectionFxmlController implements Initializable {
         setMainDeckButton.setOnAction(event -> {
             if (decks.getValue() == null)
                 return;
-            collection.selectMainDeck(decks.getValue());
+            Request request = new Request(Environment.COLLECTION);
+            request.setRequestType(RequestType.SELECT_MAIN_DECK);
+            request.setMainDeck(decks.getValue());
+            RequestSender.getInstance().sendRequest(request);
         });
     }
 
@@ -122,15 +121,18 @@ public class CollectionFxmlController implements Initializable {
         removeFromDeckButton.setOnAction(event -> {
             if (decks.getValue() == null)
                 return;
-            Deck selectedDeck = collection.getDeck(decks.getValue());
+            Request request = new Request(Environment.COLLECTION);
+            request.setRequestType(RequestType.REMOVE_CARD_FROM_DECK);
+            request.setDeckToRemoveCardFrom(decks.getValue());
+            ArrayList<String> cards = new ArrayList<>();
 
             for (CardContainer card : deckCards) {
                 if (card.getCheckBox().isSelected()) {
-                    selectedDeck.removeFromDeck(card.getCard());
-                    deckCardsFlowPane.getChildren().remove(card.getAnchorPane());
+                    cards.add(card.getCard().getName());
                 }
             }
-            deckCards.removeIf(cardContainer -> cardContainer.getCheckBox().isSelected());
+            request.setCardsToRemoveFromDeck(cards);
+            RequestSender.getInstance().sendRequest(request);
         });
     }
 
@@ -182,6 +184,15 @@ public class CollectionFxmlController implements Initializable {
         };
 
         decks.setOnAction(eventEventHandler);
+        addCardToDeckButton.setOnAction(eventEventHandler);
+    }
+
+    public void updateDeckCards(){
+        deckCardsFlowPane.getChildren().clear();
+        deckCards = new ArrayList<>();
+        for (Placeable card : collection.getDeck(decks.getValue()).getDeckCards()) {
+            setCardContainer(card, deckCardsFlowPane, deckCards);
+        }
     }
 
     public static void setCollection(Collection collection1) {
@@ -199,12 +210,17 @@ public class CollectionFxmlController implements Initializable {
 
 
 
-    public void makeAlert(String headerText, String contentText) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    public void makeAlert(String headerText, String contentText,Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
         alert.setTitle("Error");
         alert.setHeaderText(headerText);
         alert.setContentText(contentText);
         alert.showAndWait();
     }
+
+    public static Collection getCollection() {
+        return collection;
+    }
+
 
 }
