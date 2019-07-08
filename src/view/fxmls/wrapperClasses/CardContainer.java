@@ -102,8 +102,6 @@ public class CardContainer {
         checkBox.setLayoutX(21);
         checkBox.setLayoutY(390);
         checkBox.setStyle("-fx-font-size: 20");
-
-
         if (!(c instanceof Item)) {
             imageView = new ImageView(new Image(c.getPath()));
             imageView.setFitHeight(191);

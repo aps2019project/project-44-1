@@ -60,11 +60,9 @@ public class MainMenuController implements Initializable {
     }
 
     private void goToBattle() {
-        if (!accountController.getAccount().isReadyToPlay()) {
-            appearLabel(ErrorType.MAIN_DECK_IS_NOT_VALID.getMessage());
-            return;
-        }
-        Game.getInstance().loadPage(exitButton, "/view/fxmls/battleMenu.fxml");
+        Request request = new Request(Environment.MAIN_MENU);
+        request.setRequestType(RequestType.ENTER_BATTLE);
+        RequestSender.getInstance().sendRequest(request);
     }
 
     private void logout() {
@@ -75,7 +73,7 @@ public class MainMenuController implements Initializable {
         Game.getInstance().loadPage(exitButton, "/view/fxmls/matchHistories.fxml");
     }
 
-    private void appearLabel(String text) {
+    public void appearLabel(String text) {
         error.setText(text);
         error.setStyle("-fx-background-color: rgba(255, 212, 134, 0.48)");
         error.setVisible(true);
