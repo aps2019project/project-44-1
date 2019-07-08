@@ -22,7 +22,11 @@ public enum ResponseType {
     SUCCESSFULLY_REMOVE_CARD_FROM_DECK("Selected cards removed successfully"),
     MAIN_DECK_SELECTED("Main deck changed"),
     //shop responses
-    ENTER_SHOP("enter shop")
+    ENTER_SHOP("enter shop"),
+    //battle responses
+    MAIN_DECK_IS_NOT_VALID("selected deck is invalid"),
+    MAIN_DECK_IS_VALID("choose single player or multi player"),
+
     ;
     private String message;
 

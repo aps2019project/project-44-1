@@ -6,9 +6,11 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonStreamParser;
 import controller.fxmlControllers.CollectionFxmlController;
 import controller.fxmlControllers.LoginPageController;
+import controller.fxmlControllers.MainMenuController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import models.Enums.ErrorType;
 import models.Game;
 import server.Response;
 
@@ -25,6 +27,7 @@ public class ResponseHandler extends Thread {
     private Gson gson = new Gson();
     private Response response;
     private CollectionFxmlController collectionController;
+    private MainMenuController mainMenuController;
 
     public static ResponseHandler getInstance() {
         return RESPONSE_HANDLER;
@@ -70,10 +73,25 @@ public class ResponseHandler extends Thread {
 
     private void handleLoginPageResponse() {
         if (response.getResponseType().equals(SUCCESSFUL_SIGN_IN)) {
-            Platform.runLater(() -> Main.getStage().getScene().setRoot(Main.getMainMenu()));
+            loadMainMenu();
             Main.setToken(response.getAuthToken());
         } else
             Platform.runLater(() -> Main.getLoginPageController().appearLabel(response.getResponseType().getMessage()));
+    }
+
+    private void loadMainMenu() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/mainMenu.fxml"));
+                mainMenuController = loader.getController();
+                try {
+                    Main.getStage().getScene().setRoot(loader.load());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void handleCollectionResponse() {
@@ -122,7 +140,6 @@ public class ResponseHandler extends Thread {
         });
     }
 
-
     private void removeDeck(String deckToRemove) {
         Platform.runLater(() -> {
             collectionController.decks.getItems().remove(deckToRemove);
@@ -133,7 +150,28 @@ public class ResponseHandler extends Thread {
     }
 
     private void handleBattleResponse() {
+        switch (response.getResponseType()) {
+            case MAIN_DECK_IS_VALID:
+                loadBattleMenu();
+                break;
+            case MAIN_DECK_IS_NOT_VALID:
+                Platform.runLater(() -> mainMenuController.appearLabel(response.getResponseType().getMessage()));
+                break;
+        }
+    }
 
+    private void loadBattleMenu() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/battleMenu.fxml"));
+                try {
+                    Main.getStage().getScene().setRoot(loader.load());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void handleShopResponse() {

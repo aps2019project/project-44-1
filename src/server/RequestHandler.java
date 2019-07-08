@@ -145,7 +145,18 @@ public class RequestHandler extends Thread {
             case ENTER_COLLECTION:
                 sendCollection(request);
                 break;
+            case ENTER_BATTLE:
+                enterBattle(request);
         }
+    }
+
+    private void enterBattle(Request request) {
+        Response response = new Response(Environment.BATTLE);
+        if (Main.getOnlineAccounts().get(request.getOuthToken()).isReadyToPlay())
+            response.setResponseType(ResponseType.MAIN_DECK_IS_VALID);
+        else
+            response.setResponseType(ResponseType.MAIN_DECK_IS_NOT_VALID);
+        responseSender.sendResponse(response);
     }
 
     private void sendCollection(Request request) {

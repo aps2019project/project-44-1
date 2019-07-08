@@ -5,6 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import models.Card;
+import models.Placeable;
+import models.Shop;
+import models.Spell;
 import models.*;
 
 
@@ -54,7 +58,7 @@ public class CardContainer {
         healthPointLabel.setLayoutX(200);
         healthPointLabel.setLayoutY(214);
 
-        nameLabel = new Label(name+"\n"+c.getClass().getSimpleName());
+        nameLabel = new Label(name + "\n" + c.getClass().getSimpleName());
         nameLabel.setStyle("-fx-font-size: 18px;-fx-text-fill: white;-fx-text-alignment: center;-fx-text-overrun: ELLIPSIS;-fx-alignment: center;" +
                 "-fx-pref-width: 290;-fx-pref-height: 86;-fx-font-weight: bold");
         nameLabel.setLayoutX(6);
@@ -67,8 +71,6 @@ public class CardContainer {
         checkBox.setLayoutX(21);
         checkBox.setLayoutY(390);
         checkBox.setStyle("-fx-font-size: 20");
-
-
         if (!(c instanceof Item)) {
             imageView = new ImageView(new Image(c.getPath()));
             imageView.setFitHeight(191);
@@ -80,7 +82,7 @@ public class CardContainer {
                 imageView.setScaleY(1.5);
             }
             anchorPane.getChildren().addAll(manaLabel, attackPointLabel, healthPointLabel, nameLabel, checkBox, imageView);
-        }else {
+        } else {
             anchorPane.getChildren().addAll(manaLabel, attackPointLabel, healthPointLabel, nameLabel, checkBox);
         }
 
@@ -115,3 +117,4 @@ public class CardContainer {
 
 
 }
+
