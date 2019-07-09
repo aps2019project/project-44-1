@@ -22,13 +22,11 @@ public class MatchHistoriesController implements Initializable {
     public TableColumn<History, String> w_l;
     public TableColumn<History, String> time;
     public Button back;
-    private AccountController accountController = AccountController.getInstance();
-    private Account account;
+    private static Account account;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         back.setOnAction(event -> Game.getInstance().loadPage(table, "/view/fxmls/mainMenu.fxml"));
-        account = accountController.getAccount();
         populateTable();
     }
 
@@ -41,4 +39,7 @@ public class MatchHistoriesController implements Initializable {
         time.setCellValueFactory(new PropertyValueFactory<>("time"));
     }
 
+    public static void setAccount(Account account) {
+        MatchHistoriesController.account = account;
+    }
 }
