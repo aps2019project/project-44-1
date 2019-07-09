@@ -15,7 +15,6 @@ import models.Game;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import static models.Enums.BattleMode.*;
@@ -31,7 +30,7 @@ public class MultiMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        back.setOnAction(actionEvent -> Game.getInstance().loadPage(back, "/view/fxmls/battleMenu.fxml"));
+        back.setOnAction(actionEvent -> MainMenuController.loadPage("/view/fxmls/battleMenu.fxml"));
         populateList();
         craftComboBox();
         craftTextField();

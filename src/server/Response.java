@@ -30,7 +30,7 @@ public class Response {
     private String paneToRemoveID;
     private ErrorType shopErrorType;
     private ArrayList<Account> accounts;
-    private HashMap<String,Account> onlineAccounts;
+    private HashMap<String, Account> onlineAccounts;
 
     public Response(Environment environment) {
         this.environment = environment;

@@ -4,19 +4,18 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import server.Request;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 
 public class Game {
 
     private static ArrayList<Account> accounts = new ArrayList<>();
     private static Game game = new Game();
     private HashMap<String, Account> onlineAccounts = new HashMap<>();
+    private LinkedList<Request> requestedForBattle = new LinkedList<>();
 
     private Game() {
         fillAccounts();
@@ -106,6 +105,10 @@ public class Game {
 
     public void removeFromOnlineAccounts(String username) {
         onlineAccounts.remove(username);
+    }
+
+    public LinkedList<Request> getRequestedForBattle() {
+        return requestedForBattle;
     }
 
     static {

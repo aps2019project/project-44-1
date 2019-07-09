@@ -5,13 +5,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" stylesheets="@../styleSheets/battleMenu.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.fxmlControllers.BattleMenuController">
-   <Button fx:id="single" layoutX="70.0" layoutY="203.0" mnemonicParsing="false" prefHeight="194.0" prefWidth="221.0" text="singlePlayer" AnchorPane.bottomAnchor="103.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="559.0" AnchorPane.topAnchor="203.0" />
-   <Button fx:id="multi" layoutX="560.0" layoutY="203.0" mnemonicParsing="false" prefHeight="194.0" prefWidth="221.0" text="multiPlayer" AnchorPane.bottomAnchor="103.0" AnchorPane.leftAnchor="560.0" AnchorPane.rightAnchor="69.0" AnchorPane.topAnchor="203.0" />
-   <Button fx:id="back" layoutY="1.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="75.0" />
-   <Label alignment="CENTER" layoutX="180.0" layoutY="55.0" prefHeight="18.0" prefWidth="240.0" text="choose game mode" textAlignment="CENTER" textFill="#bd1919" AnchorPane.bottomAnchor="296.6" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="55.0">
-      <font>
-         <Font name="System Bold Italic" size="31.0" />
-      </font>
-   </Label>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
+            prefWidth="850.0" stylesheets="@../styleSheets/battleMenu.css" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.fxmlControllers.BattleMenuController">
+    <Button fx:id="single" layoutX="70.0" layoutY="203.0" mnemonicParsing="false" prefHeight="194.0" prefWidth="221.0"
+            text="singlePlayer" AnchorPane.bottomAnchor="103.0" AnchorPane.leftAnchor="70.0"
+            AnchorPane.rightAnchor="559.0" AnchorPane.topAnchor="203.0"/>
+    <Button fx:id="multi" layoutX="560.0" layoutY="203.0" mnemonicParsing="false" prefHeight="194.0" prefWidth="221.0"
+            text="multiPlayer" AnchorPane.bottomAnchor="103.0" AnchorPane.leftAnchor="560.0"
+            AnchorPane.rightAnchor="69.0" AnchorPane.topAnchor="203.0"/>
+    <Button fx:id="back" layoutY="1.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="75.0"/>
+    <Label alignment="CENTER" layoutX="180.0" layoutY="55.0" prefHeight="18.0" prefWidth="240.0" text="choose game mode"
+           textAlignment="CENTER" textFill="#bd1919" AnchorPane.bottomAnchor="296.6" AnchorPane.leftAnchor="180.0"
+           AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="55.0">
+        <font>
+            <Font name="System Bold Italic" size="31.0"/>
+        </font>
+    </Label>
 </AnchorPane>

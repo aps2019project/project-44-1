@@ -3,6 +3,7 @@ package controller.fxmlControllers;
 import Main.Main;
 import client.RequestSender;
 import controller.logicController.AccountController;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,6 +12,7 @@ import server.Environment;
 import server.Request;
 import server.RequestType;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -85,6 +87,15 @@ public class MainMenuController implements Initializable {
 
     private void createCustomCard() {
         Game.getInstance().loadPage(error, "/view/fxmls/customCard.fxml");
+    }
+
+    public static void loadPage(String url) {
+        FXMLLoader loader = new FXMLLoader(MainMenuController.class.getResource(url));
+        try {
+            Main.getStage().getScene().setRoot(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

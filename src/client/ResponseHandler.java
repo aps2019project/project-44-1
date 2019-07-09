@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonStreamParser;
 import controller.fxmlControllers.*;
-import controller.logicController.AccountController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -189,7 +188,6 @@ public class ResponseHandler extends Thread {
         switch (response.getResponseType()) {
             case MAIN_DECK_IS_VALID:
                 loadBattleMenu();
-                AccountController.getInstance().setAccount(response.getAccount());
                 break;
             case MAIN_DECK_IS_NOT_VALID:
                 Platform.runLater(() -> mainMenuController.appearLabel(response.getResponseType().getMessage()));
@@ -198,15 +196,12 @@ public class ResponseHandler extends Thread {
     }
 
     private void loadBattleMenu() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/battleMenu.fxml"));
-                try {
-                    Main.getStage().getScene().setRoot(loader.load());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        Platform.runLater(() -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/battleMenu.fxml"));
+            try {
+                Main.getStage().getScene().setRoot(loader.load());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }

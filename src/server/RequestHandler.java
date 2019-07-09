@@ -17,8 +17,6 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import static server.RequestType.*;
-
 public class RequestHandler extends Thread {
     private JsonStreamParser parser;
     private ResponseSender responseSender;
@@ -53,7 +51,7 @@ public class RequestHandler extends Thread {
                 handleShopRequest(request);
                 break;
             case BATTLE:
-                handleBattleRequest();
+                handleBattleRequest(request);
                 break;
             case COLLECTION:
                 handleCollectionRequest(request);
@@ -135,8 +133,15 @@ public class RequestHandler extends Thread {
 
     }
 
-    private void handleBattleRequest() {
+    private void handleBattleRequest(Request request) {
+        switch (request.getRequestType()) {
+            case ENTER_WAIT_PAGE_FOR_SECOND_PLAYER:
+                if (Game.getInstance().getRequestedForBattle().pollFirst() != null) {
 
+                }
+                Response response = new Response(Environment.BATTLE);
+                response.setOnlineAccounts(Game.getInstance().getOnlineAccounts());
+        }
     }
 
     private void handleShopRequest(Request request) {
@@ -193,7 +198,6 @@ public class RequestHandler extends Thread {
         }
     }
 
-
     private void showLeaderBoard() {
         Response response = new Response(Environment.LEADER_BOARD);
         response.setAccounts(Game.getInstance().getSortedAccounts());
@@ -238,11 +242,11 @@ public class RequestHandler extends Thread {
 
     private void enterBattle(Request request) {
         Response response = new Response(Environment.BATTLE);
-        if (Main.getOnlineAccounts().get(request.getOuthToken()).isReadyToPlay())
+        if (Main.getOnlineAccounts().get(request.getOuthToken()).isReadyToPlay()) {
             response.setResponseType(ResponseType.MAIN_DECK_IS_VALID);
-        else
+            AccountController.getInstance().setAccount(response.getAccount());
+        } else
             response.setResponseType(ResponseType.MAIN_DECK_IS_NOT_VALID);
-        response.setAccount(Main.getOnlineAccounts().get(request.getOuthToken()));
         responseSender.sendResponse(response);
     }
 
