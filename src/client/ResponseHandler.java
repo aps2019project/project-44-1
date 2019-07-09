@@ -92,6 +92,7 @@ public class ResponseHandler extends Thread {
     }
 
     private void logout() {
+        Main.setToken(null);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/loginPage.fxml"));
         try {
             Main.getStage().getScene().setRoot(loader.load());

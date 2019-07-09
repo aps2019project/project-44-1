@@ -24,9 +24,7 @@ public enum RequestType {
     IS_ONLINE,
     // Requests needed to start battle
     ENTER_WAIT_PAGE_FOR_SECOND_PLAYER,
-
     SHOW_MATCH_HISTORY,
-
     SEARCH_IN_SHOP,
     ACCOUNT_MONEY,
     GET_SHOP_CARDS,
