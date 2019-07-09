@@ -33,6 +33,7 @@ public enum ResponseType {
     MAIN_DECK_IS_VALID("choose single player or multi player"),
     //main menu responses
     SHOW_MATCH_HISTORY("show match history"),
+    LOG_OUT("");
 
 
     ;

@@ -65,7 +65,9 @@ public class MainMenuController implements Initializable {
     }
 
     private void logout() {
-        accountController.logout(exitButton);
+        Request request = new Request(Environment.MAIN_MENU);
+        request.setRequestType(RequestType.LOG_OUT);
+        RequestSender.getInstance().sendRequest(request);
     }
 
     private void showMatchHistories() {

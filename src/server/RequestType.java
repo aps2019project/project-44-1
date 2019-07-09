@@ -24,9 +24,6 @@ public enum RequestType {
     IS_ONLINE,
     // Requests needed to start battle
     ENTER_WAIT_PAGE_FOR_SECOND_PLAYER,
-    ENTER_FIRST_SINGLE_MODE,
-    ENTER_SECOND_SINGLE_MODE,
-    ENTER_THIRD_SINGLE_MODE,
 
     SHOW_MATCH_HISTORY,
 

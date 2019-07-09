@@ -17,8 +17,7 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import static server.RequestType.ACCOUNT_MONEY;
-import static server.RequestType.SHOW_LEADER_BOARD;
+import static server.RequestType.*;
 
 public class RequestHandler extends Thread {
     private JsonStreamParser parser;
@@ -95,7 +94,6 @@ public class RequestHandler extends Thread {
         } finally {
             Main.getSockets().remove(currentSocket);
             Main.removeFromOnlineAccounts(request.getOuthToken());
-            System.out.println(request.getOuthToken());
         }
 
     }
@@ -206,7 +204,7 @@ public class RequestHandler extends Thread {
     private void handleMainMenuRequest(Request request) {
         switch (request.getRequestType()) {
             case LOG_OUT:
-                Game.getInstance().getOnlineAccounts().remove(request.getUsername());
+                logout(request);
                 break;
             case SAVE:
                 AccountController.getInstance().save();
@@ -221,6 +219,13 @@ public class RequestHandler extends Thread {
                 showMatchHistory(request);
                 break;
         }
+    }
+
+    private void logout(Request request) {
+        Response response = new Response(Environment.MAIN_MENU);
+        response.setResponseType(ResponseType.LOG_OUT);
+        Main.removeFromOnlineAccounts(request.getOuthToken());
+        responseSender.sendResponse(response);
     }
 
     private void showMatchHistory(Request request) {

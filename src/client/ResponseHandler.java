@@ -85,8 +85,19 @@ public class ResponseHandler extends Thread {
                 MatchHistoriesController.setAccount(response.getAccount());
                 showMatchHistory();
                 break;
+            case LOG_OUT:
+                logout();
         }
 
+    }
+
+    private void logout() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/loginPage.fxml"));
+        try {
+            Main.getStage().getScene().setRoot(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showMatchHistory() {
