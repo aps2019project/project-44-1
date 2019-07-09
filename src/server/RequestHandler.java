@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class RequestHandler extends Thread {
     private JsonStreamParser parser;
@@ -128,20 +129,42 @@ public class RequestHandler extends Thread {
                 response.setCardToBuy(placeable);
                 responseSender.sendResponse(response);
                 break;
-
         }
-
     }
 
     private void handleBattleRequest(Request request) {
         switch (request.getRequestType()) {
-            case ENTER_WAIT_PAGE_FOR_SECOND_PLAYER:
-                if (Game.getInstance().getRequestedForBattle().pollFirst() != null) {
-
+            case MULTI_PLAYER:
+                LinkedList<Request> requestedForBattle = Game.getInstance().getRequestedForBattle();
+                if (startBattle(requestedForBattle, request)) {
+                    Response response = new Response(Environment.BATTLE);
+                    response.setResponseType(ResponseType.ENTER_MAP);
+                    responseSender.sendResponse(response);
                 }
-                Response response = new Response(Environment.BATTLE);
-                response.setOnlineAccounts(Game.getInstance().getOnlineAccounts());
+                break;
+            case REGRETED:
+                AccountController.getInstance().setRegreted(true);
+                break;
         }
+    }
+
+    private boolean startBattle(LinkedList<Request> requestLinkedList, Request request) {
+        if (requestLinkedList.size() == 0) {
+            requestLinkedList.add(request);
+            return false;
+        }
+        for (Request r : requestLinkedList) {
+            if (r.getState() == request.getState()) {
+                AccountController instance = AccountController.getInstance();
+                if (instance.isRegreted())
+                    return false;
+                instance.setState(request.getState());
+                instance.start();
+                return true;
+            }
+        }
+        requestLinkedList.offer(request);
+        return false;
     }
 
     private void handleShopRequest(Request request) {
@@ -258,4 +281,3 @@ public class RequestHandler extends Thread {
     }
 
 }
-

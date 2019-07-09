@@ -24,6 +24,7 @@ public enum ResponseType {
     GET_CARD("card is ready to get"),
     //shop responses
     ENTER_SHOP("enter shop"),
+    ENTER_MAP(""),
     ACCOUNT_MONEY(""),
     SEARCH_IN_SHOP(""),
     GET_SHOP_CARDS(""),

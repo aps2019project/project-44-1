@@ -21,7 +21,8 @@ public enum RequestType {
     IMPORT_DECK,
     EXPORT_DECK,
     GET_CARD,
-    IS_ONLINE,
+    MULTI_PLAYER,
+    REGRETED,
     // Requests needed to start battle
     ENTER_WAIT_PAGE_FOR_SECOND_PLAYER,
     SHOW_MATCH_HISTORY,

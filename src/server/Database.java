@@ -7,8 +7,8 @@ import kong.unirest.UnirestException;
 
 import java.util.HashMap;
 
-
 public class Database {
+
     private static final String baseAddress = "http://127.0.0.1:8080/";
     private static Gson gson = new Gson();
 
@@ -102,4 +102,5 @@ public class Database {
             //do something
         }
     }
+
 }

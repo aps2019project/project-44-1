@@ -23,6 +23,7 @@ public class Request {
     private ArrayList<String> cardsToAddToDeck;
     private String searchedString;
     private String paneToSellID;
+    private int state;
 
     public Request(Environment environment) {
         this.environment = environment;
@@ -178,6 +179,14 @@ public class Request {
 
     public void setPaneToSellID(String paneToSellID) {
         this.paneToSellID = paneToSellID;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 
 }

@@ -1,37 +1,40 @@
 package controller.fxmlControllers;
 
+import client.RequestSender;
 import controller.logicController.AccountController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
-import models.Account;
 import models.Enums.BattleMode;
 import models.Game;
+import server.Environment;
+import Main.Main;
+import server.Request;
+import server.RequestType;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static models.Enums.BattleMode.*;
 
 public class MultiMenuController implements Initializable {
-    public ListView<String> accounts;
+
     private AccountController accountController = AccountController.getInstance();
     public Button back;
     public ComboBox<String> choice;
     public TextField number;
+    public Label look;
+    public Button cancel;
     private static final String error = "invalid flags number";
     private static final String flag_bound = "[1-9]";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         back.setOnAction(actionEvent -> MainMenuController.loadPage("/view/fxmls/battleMenu.fxml"));
-        populateList();
+        cancel.setOnAction(actionEvent -> action());
         craftComboBox();
         craftTextField();
     }
@@ -42,7 +45,6 @@ public class MultiMenuController implements Initializable {
                 if (!number.getText().matches(flag_bound)) {
                     number.setText(error);
                 }
-
             }
         });
     }
@@ -50,6 +52,16 @@ public class MultiMenuController implements Initializable {
     private void craftComboBox() {
         choice.getItems().addAll(DEATH_MATCH.getMessage(),
                 BattleMode.CAPTURE_FLAG_1.getMessage(), BattleMode.CAPTURE_FLAG_2.getMessage());
+        coloring();
+        choice.valueProperty().addListener((observableValue, s, t1) -> {
+            if (t1.equals(CAPTURE_FLAG_2.getMessage()))
+                number.setDisable(false);
+            else
+                number.setDisable(true);
+        });
+    }
+
+    private void coloring() {
         choice.setCellFactory(new Callback<>() {
             @Override
             public ListCell<String> call(ListView<String> param) {
@@ -72,41 +84,39 @@ public class MultiMenuController implements Initializable {
                 };
             }
         });
-        choice.valueProperty().addListener((observableValue, s, t1) -> {
-            if (t1.equals(CAPTURE_FLAG_2.getMessage()))
-                number.setDisable(false);
-            else
-                number.setDisable(true);
-        });
     }
 
-    private void populateList() {
-        ArrayList<Account> arrayList = Game.getAccounts();
-        ObservableList<String> strings = FXCollections.observableArrayList();
-        Account account = accountController.getAccount();
-        for (Account a : arrayList) {
-            if (a.equals(account) || !a.isReadyToPlay())
-                continue;
-            strings.add(a.getUsername());
+    private void action() {
+        if (cancel.getText().equals("cancel")) {
+            regret();
         }
-        accounts.setItems(strings);
-        accounts.setOnMouseClicked(mouseEvent -> checkRequirement());
+        if (choice.getSelectionModel().getSelectedItem().equals(""))
+            return;
+        if (choice.getSelectionModel().getSelectedIndex() == 2 && number.getText().equals(""))
+            return;
+        search();
     }
 
-    private void checkRequirement() {
-        switch (choice.getSelectionModel().getSelectedIndex()) {
-            case 0:
-                enterBattle(AccountController.MULTI1, accounts.getSelectionModel().getSelectedItem());
-                break;
-            case 1:
-                enterBattle(AccountController.MULTI2, accounts.getSelectionModel().getSelectedItem());
-                break;
-            case 2:
-                if (!number.getText().matches(flag_bound))
-                    return;
-                enterBattle(AccountController.MULTI1 + Integer.parseInt(number.getText()),
-                        accounts.getSelectionModel().getSelectedItem());
-        }
+    private void search() {
+        look.setVisible(true);
+        cancel.setText("cancel");
+        number.setDisable(true);
+        choice.setDisable(true);
+        back.setDisable(true);
+        Request request = new Request(Environment.BATTLE);
+        request.setRequestType(RequestType.MULTI_PLAYER);
+
+        RequestSender.getInstance().sendRequest(request);
+    }
+
+    private void regret() {
+        look.setVisible(false);
+        cancel.setText("start");
+        choice.setDisable(false);
+        back.setDisable(false);
+        Request request = new Request(Environment.BATTLE);
+        request.setRequestType(RequestType.REGRETED);
+        RequestSender.getInstance().sendRequest(request);
     }
 
     void enterBattle(int state, String... userName) {
@@ -115,7 +125,7 @@ public class MultiMenuController implements Initializable {
         loader.setController(controller);
         startThread(state, userName);
         try {
-            back.getScene().setRoot(loader.load());
+            Main.getStage().getScene().setRoot(loader.load());
         } catch (IOException e) {
             e.printStackTrace();
         }

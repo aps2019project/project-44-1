@@ -28,6 +28,7 @@ public class AccountController extends Thread {
     public static final int SINGLE3 = 3;
     public static final int MULTI1 = 20;
     public static final int MULTI2 = 22;
+    private boolean regreted = false;
 
     private AccountController() {
     }
@@ -164,6 +165,14 @@ public class AccountController extends Thread {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public boolean isRegreted() {
+        return regreted;
+    }
+
+    public void setRegreted(boolean regreted) {
+        this.regreted = regreted;
     }
 
 }
