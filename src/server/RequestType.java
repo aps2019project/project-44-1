@@ -16,6 +16,7 @@ public enum RequestType {
     ENTER_BATTLE,
     SHOW_LEADER_BOARD,
     ENTER_COLLECTION,
+    SINGLE_PLAYER,
     //close the client connection with server
     CLOSE_CONNECTION,
     IMPORT_DECK,

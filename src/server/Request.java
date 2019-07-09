@@ -1,6 +1,8 @@
 package server;
 
 
+import controller.fxmlControllers.MapController;
+
 import java.util.ArrayList;
 
 public class Request {
@@ -24,6 +26,7 @@ public class Request {
     private String searchedString;
     private String paneToSellID;
     private int state;
+    private MapController mapController;
 
     public Request(Environment environment) {
         this.environment = environment;
@@ -187,6 +190,14 @@ public class Request {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public MapController getMapController() {
+        return mapController;
+    }
+
+    public void setMapController(MapController mapController) {
+        this.mapController = mapController;
     }
 
 }

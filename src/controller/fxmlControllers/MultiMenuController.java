@@ -1,6 +1,7 @@
 package controller.fxmlControllers;
 
 import client.RequestSender;
+import client.ResponseHandler;
 import controller.logicController.AccountController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,9 +31,12 @@ public class MultiMenuController implements Initializable {
     public Button cancel;
     private static final String error = "invalid flags number";
     private static final String flag_bound = "[1-9]";
+    private static final int MULTI1 = 20;
+    private static final int MULTI2 = 22;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ResponseHandler.getInstance().setMultiMenuController(this);
         back.setOnAction(actionEvent -> MainMenuController.loadPage("/view/fxmls/battleMenu.fxml"));
         cancel.setOnAction(actionEvent -> action());
         craftComboBox();
@@ -92,7 +96,7 @@ public class MultiMenuController implements Initializable {
         }
         if (choice.getSelectionModel().getSelectedItem().equals(""))
             return;
-        if (choice.getSelectionModel().getSelectedIndex() == 2 && number.getText().equals(""))
+        if (choice.getSelectionModel().getSelectedIndex() == 2 && !number.getText().matches(flag_bound))
             return;
         search();
     }
@@ -105,7 +109,7 @@ public class MultiMenuController implements Initializable {
         back.setDisable(true);
         Request request = new Request(Environment.BATTLE);
         request.setRequestType(RequestType.MULTI_PLAYER);
-
+        request.setState(getState());
         RequestSender.getInstance().sendRequest(request);
     }
 
@@ -119,16 +123,28 @@ public class MultiMenuController implements Initializable {
         RequestSender.getInstance().sendRequest(request);
     }
 
-    void enterBattle(int state, String... userName) {
+    private int getState() {
+        switch (choice.getSelectionModel().getSelectedIndex()) {
+            case 0:
+                return MULTI1;
+            case 1:
+                return MULTI2;
+            default:
+                return MULTI1 + Integer.parseInt(number.getText());
+        }
+    }
+
+    //-------------------------------------------=----------------=
+    public void enterBattle(int state, String... userName) {
         MapController controller = new MapController();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/map.fxml"));
         loader.setController(controller);
-        startThread(state, userName);
         try {
             Main.getStage().getScene().setRoot(loader.load());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        startThread(state, userName);
     }
 
     private void startThread(int state, String... userName) {

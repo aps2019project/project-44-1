@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class RequestHandler extends Thread {
@@ -133,6 +134,7 @@ public class RequestHandler extends Thread {
     }
 
     private void handleBattleRequest(Request request) {
+        AccountController accountController = AccountController.getInstance();
         switch (request.getRequestType()) {
             case MULTI_PLAYER:
                 LinkedList<Request> requestedForBattle = Game.getInstance().getRequestedForBattle();
@@ -142,8 +144,12 @@ public class RequestHandler extends Thread {
                     responseSender.sendResponse(response);
                 }
                 break;
+            case SINGLE_PLAYER:
+                accountController.setState(request.getState());
+                accountController.storyGame();
+                break;
             case REGRETED:
-                AccountController.getInstance().setRegreted(true);
+                accountController.setRegreted(true);
                 break;
         }
     }
@@ -153,17 +159,20 @@ public class RequestHandler extends Thread {
             requestLinkedList.add(request);
             return false;
         }
-        for (Request r : requestLinkedList) {
-            if (r.getState() == request.getState()) {
+        Iterator<Request> iterator = requestLinkedList.iterator();
+        while (iterator.hasNext()){
+            if (iterator.next().getState() == request.getState()) {
                 AccountController instance = AccountController.getInstance();
                 if (instance.isRegreted())
                     return false;
                 instance.setState(request.getState());
+                iterator.remove();
                 instance.start();
                 return true;
             }
         }
-        requestLinkedList.offer(request);
+        if (!requestLinkedList.offer(request))
+            throw new RuntimeException("could't offer to requested for battle linked list");
         return false;
     }
 

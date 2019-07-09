@@ -32,6 +32,7 @@ public class ResponseHandler extends Thread {
     private CollectionFxmlController collectionController;
     private ShopFxmlController shopFxmlController;
     private MainMenuController mainMenuController;
+    private MultiMenuController multiMenuController;
 
     public static ResponseHandler getInstance() {
         return RESPONSE_HANDLER;
@@ -87,17 +88,11 @@ public class ResponseHandler extends Thread {
             case LOG_OUT:
                 logout();
         }
-
     }
 
     private void logout() {
         Main.setToken(null);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/loginPage.fxml"));
-        try {
-            Main.getStage().getScene().setRoot(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        MainMenuController.loadPage("/view/fxmls/loginPage.fxml");
     }
 
     private void showMatchHistory() {
@@ -183,7 +178,7 @@ public class ResponseHandler extends Thread {
 
     }
 
-    //=============================================================
+    //=============================================================BATTLE
     private void handleBattleResponse() {
         switch (response.getResponseType()) {
             case MAIN_DECK_IS_VALID:
@@ -191,6 +186,9 @@ public class ResponseHandler extends Thread {
                 break;
             case MAIN_DECK_IS_NOT_VALID:
                 Platform.runLater(() -> mainMenuController.appearLabel(response.getResponseType().getMessage()));
+                break;
+            case ENTER_MAP:
+                Platform.runLater(() -> MainMenuController.loadPage("/view/fxmls/map.fxml"));
                 break;
         }
     }
@@ -294,6 +292,10 @@ public class ResponseHandler extends Thread {
 
     public void setShopFxmlController(ShopFxmlController shopFxmlController) {
         this.shopFxmlController = shopFxmlController;
+    }
+
+    public void setMultiMenuController(MultiMenuController multiMenuController) {
+        this.multiMenuController = multiMenuController;
     }
 
 }

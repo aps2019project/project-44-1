@@ -63,7 +63,7 @@ public class AccountController extends Thread {
         }
     }
 
-    private void storyGame() {
+    public void storyGame() {
         int level = state;
         ArtificialIntelligence artificialIntelligence = new ArtificialIntelligence();
         Account ai_player = artificialIntelligence.getAccount(level);

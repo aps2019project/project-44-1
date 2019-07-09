@@ -1,12 +1,18 @@
 package controller.fxmlControllers;
 
-import controller.logicController.AccountController;
+import Main.Main;
+import client.RequestSender;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import server.Environment;
+import server.Request;
+import server.RequestType;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -18,6 +24,10 @@ public class SingleMenuController extends MultiMenuController implements Initial
     public Label sLabel;
     public Label tLabel;
     public Button back;
+    private static final int SINGLE1 = 1;
+    private static final int SINGLE2 = 2;
+    private static final int SINGLE3 = 3;
+    private MapController controller = new MapController();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -27,22 +37,29 @@ public class SingleMenuController extends MultiMenuController implements Initial
         fLabel.setText("DeathMatch\ndivsefid");
         sLabel.setText("SaveFlag\nzahhak");
         tLabel.setText("CaptureFlag\narash");
-        first.setOnMouseClicked(mouseEvent -> enterFirstMode());
-        second.setOnMouseClicked(mouseEvent -> enterSecondMode());
-        third.setOnMouseClicked(mouseEvent -> enterThirdMode());
+        first.setOnMouseClicked(mouseEvent -> startBattle(SINGLE1));
+        second.setOnMouseClicked(mouseEvent -> startBattle(SINGLE2));
+        third.setOnMouseClicked(mouseEvent -> startBattle(SINGLE3));
         back.setOnAction(actionEvent -> MainMenuController.loadPage("/view/fxmls/battleMenu.fxml"));
     }
 
-    private void enterThirdMode() {
-        enterBattle(AccountController.SINGLE3);
+    private void startBattle(int state){
+        Request request = new Request(Environment.BATTLE);
+        request.setState(state);
+        request.setRequestType(RequestType.SINGLE_PLAYER);
+        request.setMapController(controller);
+        RequestSender.getInstance().sendRequest(request);
+        loadScreen();
     }
 
-    private void enterSecondMode() {
-        enterBattle(AccountController.SINGLE2);
-    }
-
-    private void enterFirstMode() {
-        enterBattle(AccountController.SINGLE1);
+    private void loadScreen() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/map.fxml"));
+        loader.setController(controller);
+        try {
+            Main.getStage().getScene().setRoot(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

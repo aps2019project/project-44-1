@@ -1,24 +1,15 @@
 package controller.fxmlControllers;
 
-import Main.Main;
-import client.RequestSender;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Account;
-import server.Environment;
-import server.Request;
-import server.RequestType;
 import view.fxmls.wrapperClasses.Leader;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,17 +35,8 @@ public class LeaderboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        back.setOnAction(event -> loadLoginPage());
+        back.setOnAction(event -> MainMenuController.loadPage("/view/fxmls/loginPage.fxml"));
         showTable();
-    }
-
-    private void loadLoginPage() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/loginPage.fxml"));
-        try {
-            Main.getStage().getScene().setRoot(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public static void setAccounts(ArrayList<Account> accounts) {
@@ -64,4 +46,5 @@ public class LeaderboardController implements Initializable {
     public static void setOnlineAccounts(HashMap<String, Account> onlineAccounts) {
         LeaderboardController.onlineAccounts = onlineAccounts;
     }
+
 }

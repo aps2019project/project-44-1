@@ -2,12 +2,10 @@ package controller.fxmlControllers;
 
 import Main.Main;
 import client.RequestSender;
-import controller.logicController.AccountController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import models.Game;
 import server.Environment;
 import server.Request;
 import server.RequestType;
@@ -26,7 +24,6 @@ public class MainMenuController implements Initializable {
     public Button historyButton;
     public Label error;
     public Button customCard;
-    private AccountController accountController = AccountController.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,7 +44,7 @@ public class MainMenuController implements Initializable {
     }
 
     private void goToShop() {
-        Game.getInstance().loadPage(exitButton, "/view/fxmls/shop.fxml");
+        loadPage("/view/fxmls/shop.fxml");
     }
 
     private void save() {
@@ -86,7 +83,7 @@ public class MainMenuController implements Initializable {
     }
 
     private void createCustomCard() {
-        Game.getInstance().loadPage(error, "/view/fxmls/customCard.fxml");
+        loadPage("/view/fxmls/customCard.fxml");
     }
 
     public static void loadPage(String url) {
