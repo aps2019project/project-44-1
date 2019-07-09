@@ -1,6 +1,5 @@
 package server;
 
-import javafx.scene.layout.AnchorPane;
 
 import java.util.ArrayList;
 
@@ -23,7 +22,7 @@ public class Request {
     private ArrayList<String> cardsToRemoveFromDeck;
     private ArrayList<String> cardsToAddToDeck;
     private String searchedString;
-//    private AnchorPane paneToSell;
+    private String paneToSellID;
 
     public Request(Environment environment) {
         this.environment = environment;
@@ -76,14 +75,6 @@ public class Request {
     public void setSearchedString(String searchedString) {
         this.searchedString = searchedString;
     }
-
-//    public AnchorPane getPaneToSell() {
-//        return paneToSell;
-//    }
-//
-//    public void setPaneToSell(AnchorPane paneToSell) {
-//        this.paneToSell = paneToSell;
-//    }
 
     public String getMainDeck() {
         return mainDeck;
@@ -180,4 +171,13 @@ public class Request {
     public void setImportedDeck(String importedDeck) {
         this.importedDeck = importedDeck;
     }
+
+    public String getPaneToSellID() {
+        return paneToSellID;
+    }
+
+    public void setPaneToSellID(String paneToSellID) {
+        this.paneToSellID = paneToSellID;
+    }
+
 }

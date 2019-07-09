@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Main {
+
     private static ArrayList<Socket> sockets = new ArrayList<>();
     private static HashMap<String, Account> onlineAccounts = new HashMap<>();
 
@@ -30,10 +31,6 @@ public class Main {
 
     public static HashMap<String, Account> getOnlineAccounts() {
         return onlineAccounts;
-    }
-
-    public static void setOnlineAccounts(HashMap<String, Account> onlineAccounts) {
-        Main.onlineAccounts = onlineAccounts;
     }
 
     public static void addToOnlineAccounts(String outhToken, Account account) {

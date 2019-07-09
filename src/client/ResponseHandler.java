@@ -11,8 +11,8 @@ import controller.fxmlControllers.MainMenuController;
 import controller.logicController.AccountController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import models.Game;
 import javafx.scene.control.Label;
 import models.*;
 import server.Response;
@@ -26,13 +26,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static models.Enums.ErrorType.NO_ERROR;
-import static server.RequestType.*;
 import static server.ResponseType.*;
-import static server.ResponseType.ACCOUNT_MONEY;
-import static server.ResponseType.ENTER_COLLECTION;
-import static server.ResponseType.GET_SHOP_CARDS;
-import static server.ResponseType.SEARCH_IN_SHOP;
-
 
 public class ResponseHandler extends Thread {
     private static ResponseHandler RESPONSE_HANDLER = new ResponseHandler();
@@ -108,6 +102,7 @@ public class ResponseHandler extends Thread {
         });
     }
 
+    //============================================================COLLECTION
     private void handleCollectionResponse() {
         if (response.getCollection() != null)
             CollectionFxmlController.setCollection(response.getCollection());
@@ -144,7 +139,6 @@ public class ResponseHandler extends Thread {
         });
     }
 
-
     private void removeDeck(String deckToRemove) {
         Platform.runLater(() -> {
             collectionController.decks.getItems().remove(deckToRemove);
@@ -154,6 +148,7 @@ public class ResponseHandler extends Thread {
 
     }
 
+    //=============================================================
     private void handleBattleResponse() {
         switch (response.getResponseType()) {
             case MAIN_DECK_IS_VALID:
@@ -180,18 +175,28 @@ public class ResponseHandler extends Thread {
         });
     }
 
+    //=============================================================SHOP
     private void handleShopResponse() {
-        if (ACCOUNT_MONEY.equals(response.getResponseType())) {
-            Platform.runLater(() -> shopFxmlController.money.setText(String.valueOf(response.getMoney())));
-        } else if (SEARCH_IN_SHOP.equals(response.getResponseType())) {
-            Platform.runLater(() -> shopFxmlController.shop.setVvalue(response.getvValue()));
-        } else if (GET_SHOP_CARDS.equals(response.getResponseType())) {
-            Platform.runLater(this::getShopCards);
-        } else if (SUCCESSFULL_SELL.equals(response.getResponseType())) {
-            Platform.runLater(this::sold);
-        } else if (NO_ERROR.equals(response.getResponseType())) {
-            Platform.runLater(this::bought);
-        } else Platform.runLater(() -> viewMessage(((ResponseType) response.getResponseType()).getMessage()));
+        switch (response.getResponseType()) {
+            case ACCOUNT_MONEY:
+                Platform.runLater(() -> shopFxmlController.money.setText(String.valueOf(response.getMoney())));
+                break;
+            case SEARCH_IN_SHOP:
+                Platform.runLater(() -> shopFxmlController.shop.setVvalue(response.getvValue()));
+                break;
+            case GET_SHOP_CARDS:
+                Platform.runLater(this::getShopCards);
+                break;
+            case SUCCESSFULL_SELL:
+                Platform.runLater(this::sold);
+                break;
+            default:
+                if (response.getShopErrorType().equals(NO_ERROR))
+                    Platform.runLater(this::bought);
+                else
+                    Platform.runLater(() -> viewMessage(response.getResponseType().getMessage()));
+                break;
+        }
     }
 
     private void bought() {
@@ -203,7 +208,12 @@ public class ResponseHandler extends Thread {
 
     private void sold() {
         viewMessage("you sold\n" + response.getCardToSell());
-//        shopFxmlController.collectionPane.getChildren().remove(response.getPaneToRemove());
+        for (Node n : shopFxmlController.collectionPane.getChildren()) {
+            if (n.getId().equals(response.getPaneToRemoveID())) {
+                shopFxmlController.collectionPane.getChildren().remove(n);
+                break;
+            }
+        }
         shopFxmlController.money.setText(String.valueOf(response.getMoney()));
     }
 
@@ -220,18 +230,6 @@ public class ResponseHandler extends Thread {
         }
     }
 
-    private void handleLeaderboardResponse() {
-        Platform.runLater(() -> LoginPageController.getController().showTable(Game.getInstance().getSortedAccounts()));
-    }
-
-    public void setCollectionController(CollectionFxmlController collectionController) {
-        this.collectionController = collectionController;
-    }
-
-    public void setShopFxmlController(ShopFxmlController shopFxmlController) {
-        this.shopFxmlController = shopFxmlController;
-    }
-
     private void viewMessage(String message) {
         Label message1 = shopFxmlController.message;
         message1.setText(message);
@@ -242,6 +240,20 @@ public class ResponseHandler extends Thread {
                 message1.setVisible(false);
             }
         }, 1000);
+    }
+
+    //=============================================================
+    private void handleLeaderboardResponse() {
+        Platform.runLater(() -> LoginPageController.getController().showTable(Game.getInstance().getSortedAccounts(),
+                Game.getInstance().getOnlineAccounts()));
+    }
+
+    public void setCollectionController(CollectionFxmlController collectionController) {
+        this.collectionController = collectionController;
+    }
+
+    public void setShopFxmlController(ShopFxmlController shopFxmlController) {
+        this.shopFxmlController = shopFxmlController;
     }
 
 }

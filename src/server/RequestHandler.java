@@ -157,21 +157,24 @@ public class RequestHandler extends Thread {
                 break;
             case BUY:
                 String cardName = request.getCardToBuy().split("\n")[0];
-                ErrorType error = shop.buy(cardName);
-//                response.setResponseType(error);
+                response.setShopErrorType(shop.buy(cardName));
                 response.setMoney(account.getMoney());
                 response.setCardToBuy(shop.getCard(cardName));
                 break;
             case SELL:
-                cardName = request.getCardToSell().split("\n")[0];
-                if (shop.sell(account.getCollection().getCardIDInCollection(cardName))) {
-                    response.setResponseType(ResponseType.SUCCESSFULL_SELL);
-                    response.setMoney(account.getMoney());
-//                    response.setPaneToRemove(request.getPaneToSell());
-                    response.setCardToSell(cardName);
-                }
+                sell(request, response, shop, account);
         }
         responseSender.sendResponse(response);
+    }
+
+    private void sell(Request request, Response response, Shop shop, Account account) {
+        String cardName = request.getCardToSell().split("\n")[0];
+        if (shop.sell(account.getCollection().getCardIDInCollection(cardName))) {
+            response.setResponseType(ResponseType.SUCCESSFULL_SELL);
+            response.setMoney(account.getMoney());
+            response.setPaneToRemoveID(request.getPaneToSellID());
+            response.setCardToSell(cardName);
+        }
     }
 
     private void getShopCards(Request request, Response response, Shop instance) {
@@ -190,7 +193,6 @@ public class RequestHandler extends Thread {
             response.setvValue(x);
         }
     }
-
 
     private void handleLeaderboardRequest() {
         responseSender.sendResponse(new Response(Environment.LEADER_BOARD));

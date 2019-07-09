@@ -30,7 +30,6 @@ public class CardContainer {
         checkBox = new CheckBox();
     }
 
-
     private CardContainer(String name) {
         Request request = new Request(Environment.COLLECTION);
         request.setRequestType(RequestType.GET_CARD);

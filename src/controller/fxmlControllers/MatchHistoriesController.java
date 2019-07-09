@@ -3,7 +3,6 @@ package controller.fxmlControllers;
 import controller.logicController.AccountController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -17,7 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MatchHistoriesController implements Initializable {
-    @FXML
+
     public TableView<History> table;
     public TableColumn<History, String> opponent;
     public TableColumn<History, String> w_l;

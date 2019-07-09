@@ -1,8 +1,13 @@
 package view.fxmls.wrapperClasses;
 
 import models.Account;
+import server.Environment;
+import server.Request;
+import server.RequestType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * a class that they made us to declare it; AGAINST OUR WISH :)))
@@ -10,10 +15,12 @@ import java.util.ArrayList;
 public class Leader {
     private String username;
     private int wins;
+    private String online;
 
-    private Leader(String username, int wins) {
+    private Leader(String username, int wins, String online) {
         this.username = username;
         this.wins = wins;
+        this.online = online;
     }
 
     public String getUsername() {
@@ -24,20 +31,21 @@ public class Leader {
         this.username = username;
     }
 
-    public int getWins() {
-        return wins;
-    }
-
-    public void setWins(int wins) {
-        this.wins = wins;
-    }
-
-    public static ArrayList<Leader> accountToLeader(ArrayList<Account> accounts) {
+    public static ArrayList<Leader> accountToLeader(ArrayList<Account> accounts, HashMap<String, Account> onlineAccounts) {
         ArrayList<Leader> leaders = new ArrayList<>();
         for (Account a : accounts) {
-            leaders.add(new Leader(a.getUsername(), a.getWins()));
+            String username = a.getUsername();
+            leaders.add(new Leader(username, a.getWins(), isOnline(onlineAccounts, username)));
         }
         return leaders;
+    }
+
+    private static String isOnline(HashMap<String, Account> onlineAccounts, String username) {
+        for (Map.Entry<String, Account> o : onlineAccounts.entrySet()) {
+            if (o.getValue().getUsername().equals(username))
+                return "online";
+        }
+        return "offline";
     }
 
 }

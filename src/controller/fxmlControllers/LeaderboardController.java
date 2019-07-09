@@ -14,11 +14,13 @@ import server.RequestType;
 import view.fxmls.wrapperClasses.Leader;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class LeaderboardController {
     public TableView<Leader> table;
     public TableColumn<Leader, String> username;
     public TableColumn<Leader, Integer> wins;
+    public TableColumn<Leader, String> online;
     public Button back;
 
     public void sendRequest() {
@@ -27,12 +29,13 @@ public class LeaderboardController {
         RequestSender.getInstance().sendRequest(request);
     }
 
-    public void showTable(ArrayList<Account> accounts) {
+    public void showTable(ArrayList<Account> accounts, HashMap<String, Account> onlineAccounts) {
         ObservableList<Leader> list = FXCollections.observableArrayList();
-        list.addAll(Leader.accountToLeader(accounts));
+        list.addAll(Leader.accountToLeader(accounts, onlineAccounts));
         table.setItems(list);
         username.setCellValueFactory(new PropertyValueFactory<>("username"));
         wins.setCellValueFactory(new PropertyValueFactory<>("wins"));
+        online.setCellValueFactory(new PropertyValueFactory<>("online"));
     }
 
 }

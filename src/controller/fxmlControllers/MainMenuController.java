@@ -6,7 +6,6 @@ import controller.logicController.AccountController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import models.Enums.ErrorType;
 import models.Game;
 import server.Environment;
 import server.Request;

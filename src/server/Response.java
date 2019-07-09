@@ -1,11 +1,8 @@
 package server;
 
-import javafx.scene.layout.AnchorPane;
-import models.Account;
-import javafx.scene.layout.AnchorPane;
-import models.Card;
 import models.Account;
 import models.Collection;
+import models.Enums.ErrorType;
 import models.Placeable;
 
 import java.util.ArrayList;
@@ -29,8 +26,9 @@ public class Response {
     private int money;
     private double vValue;
     private ArrayList<Placeable> shopCards;
-//    private AnchorPane paneToRemove;
     private Account account;
+    private String paneToRemoveID;
+    private ErrorType shopErrorType;
 
     public Response(Environment environment) {
         this.environment = environment;
@@ -172,14 +170,6 @@ public class Response {
         this.shopCards = shopCards;
     }
 
-//    public AnchorPane getPaneToRemove() {
-//        return paneToRemove;
-//    }
-//
-//    public void setPaneToRemove(AnchorPane paneToRemove) {
-//        this.paneToRemove = paneToRemove;
-//    }
-
     public Account getAccount() {
         return account;
     }
@@ -187,4 +177,21 @@ public class Response {
     public void setAccount(Account account) {
         this.account = account;
     }
+
+    public String getPaneToRemoveID() {
+        return paneToRemoveID;
+    }
+
+    public void setPaneToRemoveID(String paneToRemoveID) {
+        this.paneToRemoveID = paneToRemoveID;
+    }
+
+    public ErrorType getShopErrorType() {
+        return shopErrorType;
+    }
+
+    public void setShopErrorType(ErrorType shopErrorType) {
+        this.shopErrorType = shopErrorType;
+    }
+
 }

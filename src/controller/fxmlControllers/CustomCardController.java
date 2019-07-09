@@ -31,7 +31,7 @@ public class CustomCardController implements Initializable {
     public Button back;
     public Label message;
     public ComboBox<String> specialPower;
-    private Shop shop = new Shop();
+    private Shop shop = Shop.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
