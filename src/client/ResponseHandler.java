@@ -28,6 +28,7 @@ import java.util.TimerTask;
 import static models.Enums.ErrorType.NO_ERROR;
 import static server.RequestType.*;
 import static server.ResponseType.*;
+import static server.ResponseType.ACCOUNT_MONEY;
 import static server.ResponseType.ENTER_COLLECTION;
 
 

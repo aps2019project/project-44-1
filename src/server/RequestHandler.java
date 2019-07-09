@@ -158,7 +158,7 @@ public class RequestHandler extends Thread {
             case BUY:
                 String cardName = request.getCardToBuy().split("\n")[0];
                 ErrorType error = shop.buy(cardName);
-                response.setResponseType(error);
+//                response.setResponseType(error);
                 response.setMoney(account.getMoney());
                 response.setCardToBuy(shop.getCard(cardName));
                 break;
@@ -167,7 +167,7 @@ public class RequestHandler extends Thread {
                 if (shop.sell(account.getCollection().getCardIDInCollection(cardName))) {
                     response.setResponseType(ResponseType.SUCCESSFULL_SELL);
                     response.setMoney(account.getMoney());
-                    response.setPaneToRemove(request.getPaneToSell());
+//                    response.setPaneToRemove(request.getPaneToSell());
                     response.setCardToSell(cardName);
                 }
         }

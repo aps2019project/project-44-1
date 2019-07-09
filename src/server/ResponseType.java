@@ -27,8 +27,7 @@ public enum ResponseType {
     ACCOUNT_MONEY(""),
     SEARCH_IN_SHOP(""),
     GET_SHOP_CARDS(""),
-    SUCCESSFULL_SELL("you bought\n")
-    ENTER_SHOP("enter shop"),
+    SUCCESSFULL_SELL("you bought\n"),
     //battle responses
     MAIN_DECK_IS_NOT_VALID("selected deck is invalid"),
     MAIN_DECK_IS_VALID("choose single player or multi player"),

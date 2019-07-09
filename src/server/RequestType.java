@@ -4,6 +4,7 @@ public enum RequestType {
     SIGN_UP,
     SIGN_IN,
     SAVE,
+    ENTER_SHOP,
     LOG_OUT,
     BUY,
     SELL,
@@ -12,12 +13,9 @@ public enum RequestType {
     REMOVE_CARD_FROM_DECK,
     ADD_CARD_TO_DECK,
     REMOVE_DECK,
-    GET_SHOP_CARDS,
     ENTER_BATTLE,
-    SEARCH_IN_SHOP,
     SHOW_LEADER_BOARD,
     ENTER_COLLECTION,
-    ACCOUNT_MONEY,
     //close the client connection with server
     CLOSE_CONNECTION,
     IMPORT_DECK,
@@ -28,5 +26,11 @@ public enum RequestType {
     ENTER_FIRST_SINGLE_MODE,
     ENTER_SECOND_SINGLE_MODE,
     ENTER_THIRD_SINGLE_MODE,
+
+    SEARCH_IN_SHOP,
+    ACCOUNT_MONEY,
+    GET_SHOP_CARDS,
+    ;
+
 
 }
