@@ -7,6 +7,8 @@ import controller.logicController.AccountController;
 import controller.logicController.GameController;
 import models.Collection;
 import models.Game;
+import models.Placeable;
+import models.Shop;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -117,6 +119,13 @@ public class RequestHandler extends Thread {
             case EXPORT_DECK:
                 controller.exportDeck(request.getExportedDeck(), responseSender);
                 break;
+            case GET_CARD:
+                Placeable placeable = Shop.getInstance().getCard(request.getCardToBuy());
+                Response response = new Response(Environment.COLLECTION);
+                response.setResponseType(ResponseType.GET_CARD);
+                response.setCardToBuy(placeable);
+                responseSender.sendResponse(response);
+                break;
 
         }
 
@@ -156,6 +165,7 @@ public class RequestHandler extends Thread {
             response.setResponseType(ResponseType.MAIN_DECK_IS_VALID);
         else
             response.setResponseType(ResponseType.MAIN_DECK_IS_NOT_VALID);
+        response.setAccount(Main.getOnlineAccounts().get(request.getOuthToken()));
         responseSender.sendResponse(response);
     }
 

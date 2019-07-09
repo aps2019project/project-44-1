@@ -1,5 +1,7 @@
 package server;
 
+import javafx.scene.layout.AnchorPane;
+
 import java.util.ArrayList;
 
 public class Request {
@@ -8,8 +10,8 @@ public class Request {
     private String outhToken;
     private String username;
     private String password;
-    private ArrayList<String> cardsToSell;
-    private ArrayList<String> cardsToBuy;
+    private String cardToSell;
+    private String cardToBuy;
     private String deckToAdd;
     private String mainDeck;
     private String deckToRemove;
@@ -20,6 +22,8 @@ public class Request {
     private String importedDeck;
     private ArrayList<String> cardsToRemoveFromDeck;
     private ArrayList<String> cardsToAddToDeck;
+    private String searchedString;
+//    private AnchorPane paneToSell;
 
     public Request(Environment environment) {
         this.environment = environment;
@@ -45,21 +49,41 @@ public class Request {
         this.outhToken = outhToken;
     }
 
-    public ArrayList<String> getCardsToSell() {
-        return cardsToSell;
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 
-    public void setCardsToSell(ArrayList<String> cardsToSell) {
-        this.cardsToSell = cardsToSell;
+    public String getCardToSell() {
+        return cardToSell;
     }
 
-    public ArrayList<String> getCardsToBuy() {
-        return cardsToBuy;
+    public void setCardToSell(String cardToSell) {
+        this.cardToSell = cardToSell;
     }
 
-    public void setCardsToBuy(ArrayList<String> cardsToBuy) {
-        this.cardsToBuy = cardsToBuy;
+    public String getCardToBuy() {
+        return cardToBuy;
     }
+
+    public void setCardToBuy(String cardToBuy) {
+        this.cardToBuy = cardToBuy;
+    }
+
+    public String getSearchedString() {
+        return searchedString;
+    }
+
+    public void setSearchedString(String searchedString) {
+        this.searchedString = searchedString;
+    }
+
+//    public AnchorPane getPaneToSell() {
+//        return paneToSell;
+//    }
+//
+//    public void setPaneToSell(AnchorPane paneToSell) {
+//        this.paneToSell = paneToSell;
+//    }
 
     public String getMainDeck() {
         return mainDeck;

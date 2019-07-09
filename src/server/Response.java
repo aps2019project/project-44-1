@@ -1,6 +1,9 @@
 package server;
 
+import javafx.scene.layout.AnchorPane;
+import models.Account;
 import models.Collection;
+import models.Placeable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,8 +11,8 @@ import java.util.HashMap;
 public class Response {
     private ResponseType responseType;
     private Environment environment;
-    private ArrayList<String> cardsToSell;
-    private ArrayList<String> cardsToBuy;
+    private String cardToSell;
+    private Placeable cardToBuy;
     private String mainDeck;
     private String deckToRemove;
     private String deckToRemoveCardFrom;
@@ -20,6 +23,11 @@ public class Response {
     private String authToken;
     private HashMap<String, Integer> remainingCardsInShop;
     private Collection collection;
+    private int money;
+    private double vValue;
+    private ArrayList<Placeable> shopCards;
+//    private AnchorPane paneToRemove;
+    private Account account;
 
     public Response(Environment environment) {
         this.environment = environment;
@@ -49,20 +57,20 @@ public class Response {
         this.environment = environment;
     }
 
-    public ArrayList<String> getCardsToSell() {
-        return cardsToSell;
+    public String getCardToSell() {
+        return cardToSell;
     }
 
-    public void setCardsToSell(ArrayList<String> cardsToSell) {
-        this.cardsToSell = cardsToSell;
+    public void setCardToSell(String cardToSell) {
+        this.cardToSell = cardToSell;
     }
 
-    public ArrayList<String> getCardsToBuy() {
-        return cardsToBuy;
+    public Placeable getCardToBuy() {
+        return cardToBuy;
     }
 
-    public void setCardsToBuy(ArrayList<String> cardsToBuy) {
-        this.cardsToBuy = cardsToBuy;
+    public void setCardToBuy(Placeable cardToBuy) {
+        this.cardToBuy = cardToBuy;
     }
 
     public String getMainDeck() {
@@ -137,4 +145,43 @@ public class Response {
         this.collection = collection;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public double getvValue() {
+        return vValue;
+    }
+
+    public void setvValue(double vValue) {
+        this.vValue = vValue;
+    }
+
+    public ArrayList<Placeable> getShopCards() {
+        return shopCards;
+    }
+
+    public void setShopCards(ArrayList<Placeable> shopCards) {
+        this.shopCards = shopCards;
+    }
+
+//    public AnchorPane getPaneToRemove() {
+//        return paneToRemove;
+//    }
+//
+//    public void setPaneToRemove(AnchorPane paneToRemove) {
+//        this.paneToRemove = paneToRemove;
+//    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }

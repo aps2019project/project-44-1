@@ -21,6 +21,7 @@ public enum ResponseType {
     SUCCESSFULLY_REMOVE_DECK("Selected deck deleted successfully"),
     SUCCESSFULLY_REMOVE_CARD_FROM_DECK("Selected cards removed successfully"),
     MAIN_DECK_SELECTED("Main deck changed"),
+    GET_CARD("card is ready to get"),
     //shop responses
     ENTER_SHOP("enter shop"),
     //battle responses
