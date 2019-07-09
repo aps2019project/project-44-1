@@ -11,7 +11,7 @@ public class Account implements Comparable<Account> {
     private Collection collection = new Collection();
     private ArrayList<MatchHistory> histories = new ArrayList<>();
 
-    Account(String username, String password) {
+    public Account(String username, String password) {
         this.username = username;
         this.password = password;
     }

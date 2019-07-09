@@ -29,6 +29,8 @@ public class Response {
     private Account account;
     private String paneToRemoveID;
     private ErrorType shopErrorType;
+    private ArrayList<Account> accounts;
+    private HashMap<String,Account> onlineAccounts;
 
     public Response(Environment environment) {
         this.environment = environment;
@@ -194,4 +196,19 @@ public class Response {
         this.shopErrorType = shopErrorType;
     }
 
+    public ArrayList<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(ArrayList<Account> accounts) {
+        this.accounts = accounts;
+    }
+
+    public HashMap<String, Account> getOnlineAccounts() {
+        return onlineAccounts;
+    }
+
+    public void setOnlineAccounts(HashMap<String, Account> onlineAccounts) {
+        this.onlineAccounts = onlineAccounts;
+    }
 }

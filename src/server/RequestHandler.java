@@ -17,6 +17,9 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import static server.RequestType.ACCOUNT_MONEY;
+import static server.RequestType.SHOW_LEADER_BOARD;
+
 public class RequestHandler extends Thread {
     private JsonStreamParser parser;
     private ResponseSender responseSender;
@@ -59,9 +62,6 @@ public class RequestHandler extends Thread {
             case LOGIN_PAGE:
                 handleLoginPageRequest(request);
                 break;
-            case LEADER_BOARD:
-                handleLeaderboardRequest();
-                break;
             case MAIN_MENU:
                 handleMainMenuRequest(request);
         }
@@ -78,6 +78,10 @@ public class RequestHandler extends Thread {
                 break;
             case CLOSE_CONNECTION:
                 closeConnection(request);
+                break;
+            case SHOW_LEADER_BOARD:
+                showLeaderBoard();
+                break;
         }
     }
 
@@ -191,8 +195,12 @@ public class RequestHandler extends Thread {
         }
     }
 
-    private void handleLeaderboardRequest() {
-        responseSender.sendResponse(new Response(Environment.LEADER_BOARD));
+
+    private void showLeaderBoard() {
+        Response response = new Response(Environment.LEADER_BOARD);
+        response.setAccounts(Game.getInstance().getSortedAccounts());
+        response.setOnlineAccounts(Main.getOnlineAccounts());
+        responseSender.sendResponse(response);
     }
 
     private void handleMainMenuRequest(Request request) {
@@ -211,6 +219,7 @@ public class RequestHandler extends Thread {
                 break;
             case SHOW_MATCH_HISTORY:
                 showMatchHistory(request);
+                break;
         }
     }
 

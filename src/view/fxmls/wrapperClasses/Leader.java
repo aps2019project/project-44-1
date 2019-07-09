@@ -60,5 +60,4 @@ public class Leader {
     public void setOnline(String online) {
         this.online = online;
     }
-
 }

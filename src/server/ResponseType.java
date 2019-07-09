@@ -34,6 +34,7 @@ public enum ResponseType {
     //main menu responses
     SHOW_MATCH_HISTORY("show match history"),
 
+
     ;
     private String message;
 

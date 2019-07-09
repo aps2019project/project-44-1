@@ -29,7 +29,7 @@ public class LoginPageController implements Initializable {
     public Label label;
     public Button leaderboard;
     private static final int DISAPPEARING_LABEL_DELAY = 1000;
-    private static LeaderboardController controller = new LeaderboardController();
+
 
     /**
      * incredibly runs twice!!!
@@ -72,19 +72,10 @@ public class LoginPageController implements Initializable {
     }
 
     public void showLeaderboard() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/leaderboard.fxml"));
-        loader.setController(controller);
-        try {
-            label.getScene().setRoot(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        controller.back.setOnAction(event -> Game.getInstance().loadPage(controller.table, "/view/fxmls/loginPage.fxml"));
-        controller.sendRequest();
+        Request request = new Request(Environment.LOGIN_PAGE);
+        request.setRequestType(RequestType.SHOW_LEADER_BOARD);
+        RequestSender.getInstance().sendRequest(request);
     }
 
-    public static LeaderboardController getController() {
-        return controller;
-    }
 
 }

@@ -9,7 +9,7 @@ public class Deck implements Cloneable {
     private ArrayList<Card> cards = new ArrayList<>();
     private String name;
 
-    Deck(String deckName) {
+    public Deck(String deckName) {
         this.name = deckName;
     }
 

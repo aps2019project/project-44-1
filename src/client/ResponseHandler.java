@@ -269,8 +269,16 @@ public class ResponseHandler extends Thread {
 
     //=============================================================
     private void handleLeaderboardResponse() {
-        Platform.runLater(() -> LoginPageController.getController().showTable(Game.getInstance().getSortedAccounts(),
-                Game.getInstance().getOnlineAccounts()));
+        LeaderboardController.setAccounts(response.getAccounts());
+        LeaderboardController.setOnlineAccounts(response.getOnlineAccounts());
+        Platform.runLater(() -> {
+            try {
+                Main.getStage().getScene().setRoot(new FXMLLoader(getClass().
+                        getResource("/view/fxmls/leaderboard.fxml")).load());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void setCollectionController(CollectionFxmlController collectionController) {
