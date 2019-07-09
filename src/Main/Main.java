@@ -41,7 +41,7 @@ public class Main extends Application {
     //---------------------------------------------------- windows are loaded
 
     public static void main(String[] args) {
-        play();
+//        play();
         connectToServer();
         launch(args);
         System.exit(0);

@@ -1,6 +1,7 @@
 package controller.fxmlControllers;
 
-import controller.logicController.ShopController;
+import client.RequestSender;
+import client.ResponseHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -13,9 +14,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import models.*;
+import server.Environment;
+import server.Request;
+import server.RequestType;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ShopFxmlController implements Initializable {
@@ -27,16 +30,13 @@ public class ShopFxmlController implements Initializable {
     public Label message;
     public ScrollPane shop;
     public TextField search;
-    private ShopController shopController = ShopController.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            money.setText(String.valueOf(shopController.getShop().getAccount().getMoney()));
-        } catch (NullPointerException e) {
-
-        }
-        shopController.setShopFxmlController(this);
+        ResponseHandler.getInstance().setShopFxmlController(this);
+        Request request = new Request(Environment.SHOP);
+        request.setRequestType(RequestType.ACCOUNT_MONEY);
+        RequestSender.getInstance().sendRequest(request);
         back.setOnAction(actionEvent -> Game.getInstance().loadPage(back, "/view/fxmls/mainMenu.fxml"));
         craftGraphics();
         search.setOnKeyPressed(actionEvent -> {
@@ -46,30 +46,16 @@ public class ShopFxmlController implements Initializable {
     }
 
     private void searchInShop() {
-        Placeable p = shopController.getShop().getCard(search.getText());
-        if (p != null) {
-            ArrayList<Placeable> cards = shopController.getShop().getCards();
-            double x = (double) (cards.indexOf(p) + 1) / cards.size();
-            shop.setVvalue(x);
-        }
+        Request request = new Request(Environment.SHOP);
+        request.setRequestType(RequestType.SEARCH_IN_SHOP);
+        request.setSearchedString(search.getText());
+        RequestSender.getInstance().sendRequest(request);
     }
 
     private void craftGraphics() {
-        Shop shop = Shop.getInstance();
-        for (Placeable c : shop.getCards()) {
-            fillPanes(c, pane, true);
-        }
-        Account account = shop.getAccount();
-        if (account == null) {
-            return;
-        }
-        Collection collection = account.getCollection();
-        for (Placeable p : collection.getCollectionCards()) {
-            System.out.println(p instanceof Card);
-        }
-        for (Placeable c : collection.getCollectionCards()) {
-            fillPanes(c, collectionPane, false);
-        }
+        Request request = new Request(Environment.SHOP);
+        request.setRequestType(RequestType.GET_SHOP_CARDS);
+        RequestSender.getInstance().sendRequest(request);
     }
 
     public void fillPanes(Placeable c, FlowPane flowPane, boolean buy) {
