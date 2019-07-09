@@ -23,6 +23,11 @@ public enum ResponseType {
     MAIN_DECK_SELECTED("Main deck changed"),
     //shop responses
     ENTER_SHOP("enter shop"),
+    ACCOUNT_MONEY(""),
+    SEARCH_IN_SHOP(""),
+    GET_SHOP_CARDS(""),
+    SUCCESSFULL_SELL("you bought\n")
+    ENTER_SHOP("enter shop"),
     //battle responses
     MAIN_DECK_IS_NOT_VALID("selected deck is invalid"),
     MAIN_DECK_IS_VALID("choose single player or multi player"),

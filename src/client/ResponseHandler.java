@@ -6,21 +6,27 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonStreamParser;
 import controller.fxmlControllers.CollectionFxmlController;
 import controller.fxmlControllers.LoginPageController;
+import controller.fxmlControllers.ShopFxmlController;
 import controller.fxmlControllers.MainMenuController;
 import controller.logicController.AccountController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
-import models.Enums.ErrorType;
-import models.Game;
+import javafx.scene.control.Label;
+import models.*;
 import server.Response;
+import server.ResponseType;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import static server.ResponseType.SUCCESSFUL_SIGN_IN;
+import static models.Enums.ErrorType.NO_ERROR;
+import static server.RequestType.*;
+import static server.ResponseType.*;
 
 public class ResponseHandler extends Thread {
     private static ResponseHandler RESPONSE_HANDLER = new ResponseHandler();
@@ -28,6 +34,7 @@ public class ResponseHandler extends Thread {
     private Gson gson = new Gson();
     private Response response;
     private CollectionFxmlController collectionController;
+    private ShopFxmlController shopFxmlController;
     private MainMenuController mainMenuController;
 
     public static ResponseHandler getInstance() {
@@ -77,7 +84,7 @@ public class ResponseHandler extends Thread {
             loadMainMenu();
             Main.setToken(response.getAuthToken());
         } else
-            Platform.runLater(() -> Main.getLoginPageController().appearLabel(response.getResponseType().getMessage()));
+            Platform.runLater(() -> Main.getLoginPageController().appearLabel(((ResponseType) response.getResponseType()).getMessage()));
     }
 
     private void loadMainMenu() {
@@ -98,30 +105,20 @@ public class ResponseHandler extends Thread {
     private void handleCollectionResponse() {
         if (response.getCollection() != null)
             CollectionFxmlController.setCollection(response.getCollection());
-        switch (response.getResponseType()) {
-            case CREATE_DECK_SUCCESSFULLY:
-                Platform.runLater(() -> collectionController.decks.getItems().add(response.getDeckToAdd()));
-                break;
-            case SUCCESSFULLY_REMOVE_DECK:
-                removeDeck(response.getDeckToRemove());
-                break;
-            case DUPLICATE_DECK:
-                Platform.runLater(() -> collectionController.makeAlert("Error while making deck", "This name was used before!", Alert.AlertType.ERROR));
-                break;
-            case MORE_THAN_ONE_HERO_ERROR:
-            case MORE_THAN_20_NORMAL_CARD_ERROR:
-            case MORE_THAN_ONE_ITEM_ERROR:
-                Platform.runLater(() -> collectionController.makeAlert("Error while adding cards to deck", response.getResponseType().getMessage(), Alert.AlertType.ERROR));
-                break;
-            case SUCCESSFULLY_MOVE_CARD_TO_DECK:
-            case SUCCESSFULLY_REMOVE_CARD_FROM_DECK:
-                Platform.runLater(() -> collectionController.updateDeckCards());
-                break;
-            case MAIN_DECK_SELECTED:
-                Platform.runLater(() -> collectionController.makeAlert("new main deck selected", null, Alert.AlertType.INFORMATION));
-                break;
-            case ENTER_COLLECTION:
-                loadCollection();
+        if (CREATE_DECK_SUCCESSFULLY.equals(response.getResponseType())) {
+            Platform.runLater(() -> collectionController.decks.getItems().add(response.getDeckToAdd()));
+        } else if (SUCCESSFULLY_REMOVE_DECK.equals(response.getResponseType())) {
+            removeDeck(response.getDeckToRemove());
+        } else if (DUPLICATE_DECK.equals(response.getResponseType())) {
+            Platform.runLater(() -> collectionController.makeAlert("Error while making deck", "This name was used before!", Alert.AlertType.ERROR));
+        } else if (MORE_THAN_ONE_HERO_ERROR.equals(response.getResponseType()) || MORE_THAN_20_NORMAL_CARD_ERROR.equals(response.getResponseType()) || MORE_THAN_ONE_ITEM_ERROR.equals(response.getResponseType())) {
+            Platform.runLater(() -> collectionController.makeAlert("Error while adding cards to deck", ((ResponseType) response.getResponseType()).getMessage(), Alert.AlertType.ERROR));
+        } else if (SUCCESSFULLY_MOVE_CARD_TO_DECK.equals(response.getResponseType()) || SUCCESSFULLY_REMOVE_CARD_FROM_DECK.equals(response.getResponseType())) {
+            Platform.runLater(() -> collectionController.updateDeckCards());
+        } else if (MAIN_DECK_SELECTED.equals(response.getResponseType())) {
+            Platform.runLater(() -> collectionController.makeAlert("new main deck selected", null, Alert.AlertType.INFORMATION));
+        } else if (ENTER_COLLECTION.equals(response.getResponseType())) {
+            loadCollection();
         }
     }
 
@@ -140,6 +137,7 @@ public class ResponseHandler extends Thread {
             }
         });
     }
+
 
     private void removeDeck(String deckToRemove) {
         Platform.runLater(() -> {
@@ -177,9 +175,42 @@ public class ResponseHandler extends Thread {
     }
 
     private void handleShopResponse() {
-        switch (response.getResponseType()) {
-            case ENTER_SHOP:
-                Platform.runLater(this::initializeShop);
+        if (ACCOUNT_MONEY.equals(response.getResponseType())) {
+            Platform.runLater(() -> shopFxmlController.money.setText(String.valueOf(response.getMoney())));
+        } else if (SEARCH_IN_SHOP.equals(response.getResponseType())) {
+            Platform.runLater(() -> shopFxmlController.shop.setVvalue(response.getvValue()));
+        } else if (GET_SHOP_CARDS.equals(response.getResponseType())) {
+            Platform.runLater(this::getShopCards);
+        } else if (SUCCESSFULL_SELL.equals(response.getResponseType())) {
+            Platform.runLater(this::sold);
+        } else if (NO_ERROR.equals(response.getResponseType())) {
+            Platform.runLater(this::bought);
+        } else Platform.runLater(() -> viewMessage(((ResponseType) response.getResponseType()).getMessage()));
+    }
+
+    private void bought() {
+        Placeable cardToBuy = response.getCardToBuy();
+        viewMessage("you bought \n" + cardToBuy.getName());
+        shopFxmlController.fillPanes(cardToBuy, shopFxmlController.collectionPane, false);
+        shopFxmlController.money.setText(String.valueOf(response.getMoney()));
+    }
+
+    private void sold() {
+        viewMessage("you sold\n" + response.getCardToSell());
+        shopFxmlController.collectionPane.getChildren().remove(response.getPaneToRemove());
+        shopFxmlController.money.setText(String.valueOf(response.getMoney()));
+    }
+
+    private void getShopCards() {
+        for (Placeable c : response.getShopCards()) {
+            shopFxmlController.fillPanes(c, shopFxmlController.pane, true);
+        }
+        Collection collection = response.getCollection();
+        for (Placeable p : collection.getCollectionCards()) {
+            System.out.println(p instanceof Card);
+        }
+        for (Placeable c : collection.getCollectionCards()) {
+            shopFxmlController.fillPanes(c, shopFxmlController.collectionPane, false);
         }
     }
 
@@ -191,16 +222,20 @@ public class ResponseHandler extends Thread {
         this.collectionController = collectionController;
     }
 
-    private void initializeShop() {
-//        ShopFxmlController controller = MainMenuController.getShopFxmlController();
-//        controller.money.setText(String.valueOf(shopController.getShop().getAccount().getMoney()));
-//        shopController.setShopFxmlController(this);
-//        controller.back.setOnAction(actionEvent -> Game.getInstance().loadPage(controller.back, "/view/fxmls/mainMenu.fxml"));
-//        controller.craftGraphics();
-//        controller.search.setOnKeyPressed(actionEvent -> {
-//            if (actionEvent.getCode() == KeyCode.ENTER)
-//                controller.searchInShop();
-//        });
+    public void setShopFxmlController(ShopFxmlController shopFxmlController) {
+        this.shopFxmlController = shopFxmlController;
+    }
+
+    private void viewMessage(String message) {
+        Label message1 = shopFxmlController.message;
+        message1.setText(message);
+        message1.setVisible(true);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                message1.setVisible(false);
+            }
+        }, 1000);
     }
 
 }

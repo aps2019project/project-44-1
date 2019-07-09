@@ -1,16 +1,19 @@
 package server;
 
+import javafx.scene.layout.AnchorPane;
+import models.Card;
 import models.Account;
 import models.Collection;
+import models.Placeable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Response {
-    private ResponseType responseType;
+    private Enum responseType;
     private Environment environment;
-    private ArrayList<String> cardsToSell;
-    private ArrayList<String> cardsToBuy;
+    private String cardToSell;
+    private Placeable cardToBuy;
     private String mainDeck;
     private String deckToRemove;
     private String deckToRemoveCardFrom;
@@ -21,13 +24,17 @@ public class Response {
     private String authToken;
     private HashMap<String, Integer> remainingCardsInShop;
     private Collection collection;
+    private int money;
+    private double vValue;
+    private ArrayList<Placeable> shopCards;
+    private AnchorPane paneToRemove;
     private Account account;
 
     public Response(Environment environment) {
         this.environment = environment;
     }
 
-    public ResponseType getResponseType() {
+    public Enum getResponseType() {
         return responseType;
     }
 
@@ -35,7 +42,7 @@ public class Response {
         return environment;
     }
 
-    public void setResponseType(ResponseType responseType) {
+    public void setResponseType(Enum responseType) {
         this.responseType = responseType;
     }
 
@@ -49,22 +56,6 @@ public class Response {
 
     public void setEnvironment(Environment environment) {
         this.environment = environment;
-    }
-
-    public ArrayList<String> getCardsToSell() {
-        return cardsToSell;
-    }
-
-    public void setCardsToSell(ArrayList<String> cardsToSell) {
-        this.cardsToSell = cardsToSell;
-    }
-
-    public ArrayList<String> getCardsToBuy() {
-        return cardsToBuy;
-    }
-
-    public void setCardsToBuy(ArrayList<String> cardsToBuy) {
-        this.cardsToBuy = cardsToBuy;
     }
 
     public String getMainDeck() {
@@ -137,6 +128,54 @@ public class Response {
 
     public void setCollection(Collection collection) {
         this.collection = collection;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public double getvValue() {
+        return vValue;
+    }
+
+    public void setvValue(double vValue) {
+        this.vValue = vValue;
+    }
+
+    public ArrayList<Placeable> getShopCards() {
+        return shopCards;
+    }
+
+    public void setShopCards(ArrayList<Placeable> shopCards) {
+        this.shopCards = shopCards;
+    }
+
+    public AnchorPane getPaneToRemove() {
+        return paneToRemove;
+    }
+
+    public void setPaneToRemove(AnchorPane paneToRemove) {
+        this.paneToRemove = paneToRemove;
+    }
+
+    public String getCardToSell() {
+        return cardToSell;
+    }
+
+    public void setCardToSell(String cardToSell) {
+        this.cardToSell = cardToSell;
+    }
+
+    public Placeable getCardToBuy() {
+        return cardToBuy;
+    }
+
+    public void setCardToBuy(Placeable cardToBuy) {
+        this.cardToBuy = cardToBuy;
     }
 
     public Account getAccount() {

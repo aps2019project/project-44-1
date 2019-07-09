@@ -56,6 +56,9 @@ public class Shop {
         this.cards = cards;
     }
 
+    /**
+     * use this method as server's shop, but get new instances for clients
+     */
     public static Shop getInstance() {
         return shop;
     }
@@ -87,6 +90,7 @@ public class Shop {
             } else {
                 account.getCollection().addCardToCollection(card);
                 account.decreaseMoney(card.getCost());
+                remainingCard.put(card.getName(), remainingCard.get(card.getName()) - 1);
                 return ErrorType.NO_ERROR;
             }
         } else {
