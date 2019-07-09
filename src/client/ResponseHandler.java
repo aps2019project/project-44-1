@@ -30,6 +30,8 @@ import static server.RequestType.*;
 import static server.ResponseType.*;
 import static server.ResponseType.ACCOUNT_MONEY;
 import static server.ResponseType.ENTER_COLLECTION;
+import static server.ResponseType.GET_SHOP_CARDS;
+import static server.ResponseType.SEARCH_IN_SHOP;
 
 
 public class ResponseHandler extends Thread {
