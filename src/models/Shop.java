@@ -17,7 +17,7 @@ public class Shop {
     private HashMap<String, Integer> remainingCard = new HashMap<>();
     private static final int primaryCardNumber = 10;
 
-    private Shop() {
+    public Shop() {
         for (Placeable c : cards) {
             remainingCard.put(c.getName(), primaryCardNumber);
         }

@@ -32,7 +32,7 @@ public class CardInShopController implements Initializable {
             } else {
                 request.setRequestType(RequestType.SELL);
                 request.setCardToSell(name.getText());
-                request.setPaneToSell(pane);
+//                request.setPaneToSell(pane);
             }
             RequestSender.getInstance().sendRequest(request);
         });

@@ -4,10 +4,7 @@ import Main.Main;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonStreamParser;
-import controller.fxmlControllers.CollectionFxmlController;
-import controller.fxmlControllers.LoginPageController;
-import controller.fxmlControllers.ShopFxmlController;
-import controller.fxmlControllers.MainMenuController;
+import controller.fxmlControllers.*;
 import controller.logicController.AccountController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -82,7 +79,34 @@ public class ResponseHandler extends Thread {
                 break;
             case LEADER_BOARD:
                 handleLeaderboardResponse();
+                break;
+            case MAIN_MENU:
+                handleMainMenu();
         }
+    }
+
+    private void handleMainMenu() {
+        switch (response.getResponseType()){
+            case SHOW_MATCH_HISTORY:
+                MatchHistoriesController.setAccount(response.getAccount());
+                showMatchHistory();
+                break;
+        }
+
+    }
+
+    private void showMatchHistory() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/matchHistories.fxml"));
+                try {
+                    Main.getStage().getScene().setRoot(loader.load());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void handleLoginPageResponse() {

@@ -33,7 +33,7 @@ public class Main extends Application {
         try {
             FXMLLoader.load(Main.class.getResource("/view/fxmls/loginPage.fxml"));
             mainMenu = FXMLLoader.load(Main.class.getResource("/view/fxmls/mainMenu.fxml"));
-            FXMLLoader.load(Main.class.getResource("/view/fxmls/shop.fxml"));
+//            FXMLLoader.load(Main.class.getResource("/view/fxmls/shop.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

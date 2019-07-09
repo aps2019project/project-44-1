@@ -2,6 +2,7 @@ package controller.fxmlControllers;
 
 import Main.Main;
 import client.RequestSender;
+import com.sun.javafx.stage.EmbeddedWindow;
 import controller.logicController.AccountController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -70,7 +71,9 @@ public class MainMenuController implements Initializable {
     }
 
     private void showMatchHistories() {
-        Game.getInstance().loadPage(exitButton, "/view/fxmls/matchHistories.fxml");
+        Request request = new Request(Environment.MAIN_MENU);
+        request.setRequestType(RequestType.SHOW_MATCH_HISTORY);
+        RequestSender.getInstance().sendRequest(request);
     }
 
     public void appearLabel(String text) {

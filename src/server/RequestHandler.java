@@ -5,6 +5,7 @@ import com.google.gson.JsonStreamParser;
 import controller.logicController.CollectionController;
 import controller.logicController.AccountController;
 import controller.logicController.GameController;
+import javafx.css.Match;
 import models.Collection;
 import models.Game;
 import models.Placeable;
@@ -209,7 +210,18 @@ public class RequestHandler extends Thread {
                 break;
             case ENTER_BATTLE:
                 enterBattle(request);
+                break;
+            case SHOW_MATCH_HISTORY:
+                showMatchHistory(request);
         }
+    }
+
+    private void showMatchHistory(Request request) {
+        Response response = new Response(Environment.MAIN_MENU);
+        response.setResponseType(ResponseType.SHOW_MATCH_HISTORY);
+        response.setAccount(Main.getOnlineAccounts().get(request.getOuthToken()));
+        responseSender.sendResponse(response);
+
     }
 
     private void enterBattle(Request request) {
