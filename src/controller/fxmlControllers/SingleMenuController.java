@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import models.Game;
+import server.Request;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,10 +29,22 @@ public class SingleMenuController extends MultiMenuController implements Initial
         fLabel.setText("DeathMatch\ndivsefid");
         sLabel.setText("SaveFlag\nzahhak");
         tLabel.setText("CaptureFlag\narash");
-        first.setOnMouseClicked(mouseEvent -> enterBattle(AccountController.SINGLE1));
-        second.setOnMouseClicked(mouseEvent -> enterBattle(AccountController.SINGLE2));
-        third.setOnMouseClicked(mouseEvent -> enterBattle(AccountController.SINGLE3));
+        first.setOnMouseClicked(mouseEvent -> enterFirstMode());
+        second.setOnMouseClicked(mouseEvent -> enterSecondMode());
+        third.setOnMouseClicked(mouseEvent -> enterThirdMode());
         back.setOnAction(actionEvent -> Game.getInstance().loadPage(fLabel, "/view/fxmls/battleMenu.fxml"));
+    }
+
+    private void enterThirdMode() {
+        enterBattle(AccountController.SINGLE3);
+    }
+
+    private void enterSecondMode() {
+        enterBattle(AccountController.SINGLE2);
+    }
+
+    private void enterFirstMode() {
+        enterBattle(AccountController.SINGLE1);
     }
 
 }

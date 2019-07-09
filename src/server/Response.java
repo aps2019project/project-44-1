@@ -1,5 +1,6 @@
 package server;
 
+import models.Account;
 import models.Collection;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Response {
     private String authToken;
     private HashMap<String, Integer> remainingCardsInShop;
     private Collection collection;
+    private Account account;
 
     public Response(Environment environment) {
         this.environment = environment;
@@ -137,4 +139,11 @@ public class Response {
         this.collection = collection;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }

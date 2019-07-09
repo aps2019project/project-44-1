@@ -20,5 +20,10 @@ public enum RequestType {
     CLOSE_CONNECTION,
     IMPORT_DECK,
     EXPORT_DECK,
+    // Requests needed to start battle
+    ENTER_WAIT_PAGE_FOR_SECOND_PLAYER,
+    ENTER_FIRST_SINGLE_MODE,
+    ENTER_SECOND_SINGLE_MODE,
+    ENTER_THIRD_SINGLE_MODE,
 
 }

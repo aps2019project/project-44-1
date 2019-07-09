@@ -7,6 +7,7 @@ import com.google.gson.JsonStreamParser;
 import controller.fxmlControllers.CollectionFxmlController;
 import controller.fxmlControllers.LoginPageController;
 import controller.fxmlControllers.MainMenuController;
+import controller.logicController.AccountController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -153,6 +154,7 @@ public class ResponseHandler extends Thread {
         switch (response.getResponseType()) {
             case MAIN_DECK_IS_VALID:
                 loadBattleMenu();
+                AccountController.getInstance().setAccount(response.getAccount());
                 break;
             case MAIN_DECK_IS_NOT_VALID:
                 Platform.runLater(() -> mainMenuController.appearLabel(response.getResponseType().getMessage()));

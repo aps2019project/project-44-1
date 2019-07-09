@@ -156,6 +156,7 @@ public class RequestHandler extends Thread {
             response.setResponseType(ResponseType.MAIN_DECK_IS_VALID);
         else
             response.setResponseType(ResponseType.MAIN_DECK_IS_NOT_VALID);
+        response.setAccount(Main.getOnlineAccounts().get(request.getOuthToken()));
         responseSender.sendResponse(response);
     }
 
