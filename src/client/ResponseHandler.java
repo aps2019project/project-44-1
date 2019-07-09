@@ -80,7 +80,7 @@ public class ResponseHandler extends Thread {
     }
 
     private void handleMainMenu() {
-        switch (response.getResponseType()){
+        switch (response.getResponseType()) {
             case SHOW_MATCH_HISTORY:
                 MatchHistoriesController.setAccount(response.getAccount());
                 showMatchHistory();
@@ -203,7 +203,8 @@ public class ResponseHandler extends Thread {
     private void handleShopResponse() {
         switch (response.getResponseType()) {
             case ACCOUNT_MONEY:
-                Platform.runLater(() -> shopFxmlController.money.setText(String.valueOf(response.getMoney())));
+                int money = response.getMoney();
+                Platform.runLater(() -> shopFxmlController.money.setText(String.valueOf(money)));
                 break;
             case SEARCH_IN_SHOP:
                 Platform.runLater(() -> shopFxmlController.shop.setVvalue(response.getvValue()));

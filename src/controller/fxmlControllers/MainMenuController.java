@@ -2,7 +2,6 @@ package controller.fxmlControllers;
 
 import Main.Main;
 import client.RequestSender;
-import com.sun.javafx.stage.EmbeddedWindow;
 import controller.logicController.AccountController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

@@ -22,7 +22,6 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 public class Main extends Application {
-    private static Parent mainMenu;
     private static Stage stage;
     private static LoginPageController loginPageController;
     private static ResponseHandler clientResponseHandler;
@@ -32,8 +31,6 @@ public class Main extends Application {
     static {
         try {
             FXMLLoader.load(Main.class.getResource("/view/fxmls/loginPage.fxml"));
-            mainMenu = FXMLLoader.load(Main.class.getResource("/view/fxmls/mainMenu.fxml"));
-//            FXMLLoader.load(Main.class.getResource("/view/fxmls/shop.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,7 +38,7 @@ public class Main extends Application {
     //---------------------------------------------------- windows are loaded
 
     public static void main(String[] args) {
-//        play();
+        play();
         connectToServer();
         launch(args);
         System.exit(0);
@@ -101,10 +98,6 @@ public class Main extends Application {
 
     private static void setStage(Stage stage) {
         Main.stage = stage;
-    }
-
-    public static Parent getMainMenu() {
-        return mainMenu;
     }
 
     private static void play() {

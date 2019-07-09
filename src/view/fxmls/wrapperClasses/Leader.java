@@ -1,9 +1,6 @@
 package view.fxmls.wrapperClasses;
 
 import models.Account;
-import server.Environment;
-import server.Request;
-import server.RequestType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,6 +43,22 @@ public class Leader {
                 return "online";
         }
         return "offline";
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public void setWins(int wins) {
+        this.wins = wins;
+    }
+
+    public String getOnline() {
+        return online;
+    }
+
+    public void setOnline(String online) {
+        this.online = online;
     }
 
 }
