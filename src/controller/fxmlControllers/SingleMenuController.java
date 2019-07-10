@@ -55,12 +55,12 @@ public class SingleMenuController implements Initializable {
 
     private void loadScreen() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/map.fxml"));
-        loader.setController(controller);
         try {
             Main.getStage().getScene().setRoot(loader.load());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        loader.setController(controller);
     }
 
 }

@@ -17,6 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -55,7 +56,7 @@ public class MapController implements Initializable {
         File folder = new File("src\\view\\record");
         try {
             if (folder.listFiles() != null) {
-                for (File f : folder.listFiles()) {
+                for (File f : Objects.requireNonNull(folder.listFiles())) {
                     if (!f.delete())
                         throw new IOException();
                 }
@@ -82,7 +83,7 @@ public class MapController implements Initializable {
         Random random = new Random();
         int x = random.nextInt(5);
         try {
-            firstPlayer.setImage(new Image(listOfFiles[x].getPath().substring(4)));
+            firstPlayer.setImage(new Image(Objects.requireNonNull(listOfFiles)[x].getPath().substring(4)));
             x = random.nextInt(5);
             secondPlayer.setImage(new Image(listOfFiles[x].getPath().substring(4)));
         } catch (NullPointerException e) {
@@ -103,7 +104,7 @@ public class MapController implements Initializable {
         fifth.setImage(new Image(cards[4].getPath().substring(4)));
     }
 
-    public void screenShot() {
+    private void screenShot() {
         Thread thread = new Thread(() -> {
             int index = 0;
             while (playing) {
@@ -121,7 +122,7 @@ public class MapController implements Initializable {
             }
         });
         thread.setName("recorder");
-        thread.setDaemon(true);
+//        thread.setDaemon(true);
         thread.start();
     }
 

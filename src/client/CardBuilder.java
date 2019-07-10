@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 public class CardBuilder {
     private ArrayList<Placeable> cards;
+
     {
         Gson gson = new Gson();
         JsonReader reader = null;
@@ -53,7 +54,9 @@ public class CardBuilder {
         }
         return null;
     }
+
     public ArrayList<Placeable> getCards() {
         return cards;
     }
+
 }
