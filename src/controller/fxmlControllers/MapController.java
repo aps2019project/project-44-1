@@ -4,12 +4,13 @@ import controller.logicController.BattleController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import models.Card;
-import models.Game;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -37,11 +38,16 @@ public class MapController implements Initializable {
     public ImageView nextInHand;
     public ImageView firstPlayer;
     public ImageView secondPlayer;
+    public Button send;
+    public VBox chatBox;
+    public TextField message;
+    public TitledPane gChat;
     private boolean playing = true;
     private BattleController battleController = BattleController.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        deletePastRecord();
         screenShot();
         initializeButtons();
         setImages();
@@ -49,7 +55,6 @@ public class MapController implements Initializable {
             if (keyEvent.getCode().equals(KeyCode.ENTER))
                 applyCheat(cheat.getText());
         });
-        deletePastRecord();
     }
 
     private void deletePastRecord() {
@@ -60,7 +65,7 @@ public class MapController implements Initializable {
                     if (!f.delete())
                         throw new IOException();
                 }
-            }
+            } else folder.mkdir();
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
@@ -70,7 +75,7 @@ public class MapController implements Initializable {
         exit.setOnAction(actionEvent -> {
             playing = false;
             battleController.gameHistory();
-            Game.getInstance().loadPage(exit, "/view/fxmls/mainMenu.fxml");
+            MainMenuController.loadPage("/view/fxmls/mainMenu.fxml");
         });
         save.setOnAction(actionEvent -> battleController.save());
         graveyard.setOnAction(actionEvent -> battleController.enterGraveyard());
@@ -107,14 +112,15 @@ public class MapController implements Initializable {
     private void screenShot() {
         Thread thread = new Thread(() -> {
             int index = 0;
+            Dimension d = new Dimension();
+            d.setSize(map.getWidth(), map.getHeight());
+            Rectangle capture = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
             while (playing) {
                 try {
                     Robot r = new Robot();
-                    Dimension d = new Dimension();
-                    d.setSize(map.getWidth(), map.getHeight());
-                    Rectangle capture = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
                     BufferedImage Image = r.createScreenCapture(capture);
-                    ImageIO.write(Image, "jpg", new File("src\\view\\record\\Shot" + (index++) + ".jpg"));
+                    ImageIO.write(Image, "jpg", new File("src\\view\\record\\Shot"
+                            + (index++) + ".jpg"));
                     r.setAutoDelay(100);
                 } catch (AWTException | IOException ex) {
                     ex.printStackTrace();
@@ -122,11 +128,10 @@ public class MapController implements Initializable {
             }
         });
         thread.setName("recorder");
-//        thread.setDaemon(true);
         thread.start();
     }
 
-    public void setPlaying(boolean playing) {
+    public synchronized void setPlaying(boolean playing) {
         this.playing = playing;
     }
 
