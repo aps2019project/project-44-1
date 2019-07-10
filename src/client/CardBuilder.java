@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import models.*;
+import server.Environment;
+import server.Request;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -57,6 +59,13 @@ public class CardBuilder {
 
     public ArrayList<Placeable> getCards() {
         return cards;
+    }
+
+    public void addCard(Placeable placeable) {
+        cards.add(placeable);
+        Request request = new Request(Environment.CUSTOM_CARD);
+        request.setCustomCard(placeable);
+        RequestSender.getInstance().sendRequest(request);
     }
 
 }

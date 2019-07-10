@@ -1,5 +1,6 @@
 package controller.fxmlControllers;
 
+import client.CardBuilder;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.stream.JsonReader;
@@ -31,7 +32,7 @@ public class CustomCardController implements Initializable {
     public Button back;
     public Label message;
     public ComboBox<String> specialPower;
-    private Shop shop = Shop.getInstance();
+    private CardBuilder cardBuilder = new CardBuilder();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -62,7 +63,7 @@ public class CustomCardController implements Initializable {
         cool_active.setVisible(!isSpell);
         specialPower.setVisible(!isSpell);
         if (specialPower.getItems().size() == 0) {
-            for (Placeable p : shop.getCards()) {
+            for (Placeable p : cardBuilder.getCards()) {
                 if (p instanceof Spell)
                     specialPower.getItems().add(p.getName());
             }
@@ -147,7 +148,7 @@ public class CustomCardController implements Initializable {
                     JsonArray array = getJsonElements(gson, reader, heroPath);
                     Hero hero = getHero();
                     Hero[] heroes = gson.fromJson(array, Hero[].class);
-                    shop.getCards().add(hero);
+                    cardBuilder.addCard(hero);
                     Hero[] heroes1;
                     int length = heroes.length;
                     if (length != 0) {
@@ -165,7 +166,7 @@ public class CustomCardController implements Initializable {
                     JsonArray array1 = getJsonElements(gson, reader, minionPath);
                     Minion minion = getMinion();
                     Minion[] minions = gson.fromJson(array1, Minion[].class);
-                    shop.getCards().add(minion);
+                    cardBuilder.addCard(minion);
                     Minion[] minions1;
                     length = minions.length;
                     if (length != 0) {

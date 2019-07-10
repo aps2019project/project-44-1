@@ -64,6 +64,9 @@ public class RequestHandler extends Thread {
                 break;
             case MAIN_MENU:
                 handleMainMenuRequest(request);
+                break;
+            case CUSTOM_CARD:
+                customCard(request);
         }
     }
 
@@ -304,6 +307,13 @@ public class RequestHandler extends Thread {
         response.setResponseType(ResponseType.ENTER_COLLECTION);
         response.setCollection(Main.getOnlineAccounts().get(request.getOuthToken()).getCollection());
         responseSender.sendResponse(response);
+    }
+
+    private void customCard(Request request) {
+        Shop instance = Shop.getInstance();
+        Placeable customCard = request.getCustomCard();
+        instance.getCards().add(customCard);
+        instance.getRemainingCard().put(customCard.getName(), Shop.primaryCardNumber);
     }
 
 }

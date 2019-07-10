@@ -6,5 +6,6 @@ public enum Environment {
     COLLECTION,
     BATTLE,
     LEADER_BOARD,
-    MAIN_MENU
+    MAIN_MENU,
+    CUSTOM_CARD
 }

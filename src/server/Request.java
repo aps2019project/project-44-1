@@ -1,6 +1,7 @@
 package server;
 
 import models.Enums.BattleMode;
+import models.Placeable;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class Request {
     private BattleMode battleMode;
     private int flagNumbers;
     private int state;
+    private Placeable customCard;
 
     public Request(Environment environment) {
         this.environment = environment;
@@ -207,4 +209,13 @@ public class Request {
     public int getState() {
         return state;
     }
+
+    public void setCustomCard(Placeable customCard) {
+        this.customCard = customCard;
+    }
+
+    public Placeable getCustomCard() {
+        return customCard;
+    }
+
 }
