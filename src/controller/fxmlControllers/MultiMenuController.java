@@ -87,7 +87,7 @@ public class MultiMenuController implements Initializable {
         if (cancel.getText().equals(canc)) {
             regret();
         }
-        if (choice.getSelectionModel().getSelectedItem().equals(""))
+        if (choice.getSelectionModel().getSelectedItem() == null)
             return;
         if (choice.getSelectionModel().getSelectedIndex() == 2 && !number.getText().matches(flag_bound))
             return;

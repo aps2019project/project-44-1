@@ -9,61 +9,45 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="419.0"
-          prefWidth="600.0" styleClass="backGround" xmlns="http://javafx.com/javafx/11.0.1"
-          xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="419.0" prefWidth="600.0" styleClass="backGround" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.fxmlControllers.MainMenuController">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.3333740234375" minWidth="10.0" percentWidth="5.0"
-                           prefWidth="16.66665554046631"/>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.20001220703125" minWidth="10.0" percentWidth="35.0"
-                           prefWidth="86.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="515.999979654948" minWidth="10.0"
-                           prefWidth="483.79999999999995"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.3333740234375" minWidth="10.0" percentWidth="5.0" prefWidth="16.66665554046631" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.20001220703125" minWidth="10.0" percentWidth="35.0" prefWidth="86.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="515.999979654948" minWidth="10.0" prefWidth="483.79999999999995" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="254.66664123535156" minHeight="10.0" percentHeight="15.0"
-                        prefHeight="92.66665267944336" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="315.99998474121094" minHeight="10.0" percentHeight="65.0"
-                        prefHeight="315.99998474121094" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="254.66664123535156" minHeight="10.0" prefHeight="39.20001525878905"
-                        vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="254.66664123535156" minHeight="10.0" percentHeight="15.0" prefHeight="92.66665267944336" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="315.99998474121094" minHeight="10.0" percentHeight="65.0" prefHeight="315.99998474121094" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="254.66664123535156" minHeight="10.0" prefHeight="39.20001525878905" vgrow="SOMETIMES" />
     </rowConstraints>
     <stylesheets>
-        <URL value="@../styleSheets/mainMenu.css"/>
+        <URL value="@../styleSheets/mainMenu.css" />
     </stylesheets>
-    <GridPane prefHeight="173.0" prefWidth="203.0" styleClass="gridPane" stylesheets="@../styleSheets/mainMenu.css"
-              GridPane.columnIndex="1" GridPane.rowIndex="1">
+    <GridPane prefHeight="173.0" prefWidth="203.0" styleClass="gridPane" stylesheets="@../styleSheets/mainMenu.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
-        <Button fx:id="battleButton" mnemonicParsing="false" stylesheets="@../styleSheets/mainMenu.css" text="BATTLE"/>
-        <Button fx:id="collectionButton" mnemonicParsing="false" stylesheets="@../styleSheets/mainMenu.css"
-                text="COLLECTION" GridPane.rowIndex="1"/>
-        <Button fx:id="shopButton" mnemonicParsing="false" stylesheets="@../styleSheets/mainMenu.css" text="SHOP"
-                GridPane.rowIndex="2"/>
-        <Button fx:id="logoutButton" mnemonicParsing="false" stylesheets="@../styleSheets/mainMenu.css" text="LOG OUT"
-                GridPane.rowIndex="3"/>
-        <Button fx:id="customCard" mnemonicParsing="false" text="Custom Card" GridPane.rowIndex="7"/>
-        <Button fx:id="saveButton" mnemonicParsing="false" stylesheets="@../styleSheets/mainMenu.css" text="SAVE"
-                GridPane.rowIndex="4"/>
-        <Button fx:id="exitButton" mnemonicParsing="false" stylesheets="@../styleSheets/mainMenu.css" text="EXIT"
-                GridPane.rowIndex="5"/>
-        <Button fx:id="historyButton" mnemonicParsing="false" text="MatchHistories" GridPane.rowIndex="6"/>
+        <Button fx:id="battleButton" mnemonicParsing="false" stylesheets="@../styleSheets/mainMenu.css" text="BATTLE" />
+        <Button fx:id="collectionButton" mnemonicParsing="false" stylesheets="@../styleSheets/mainMenu.css" text="COLLECTION" GridPane.rowIndex="1" />
+        <Button fx:id="shopButton" mnemonicParsing="false" stylesheets="@../styleSheets/mainMenu.css" text="SHOP" GridPane.rowIndex="2" />
+        <Button fx:id="logoutButton" mnemonicParsing="false" stylesheets="@../styleSheets/mainMenu.css" text="LOG OUT" GridPane.rowIndex="3" />
+      <Button fx:id="customCard" mnemonicParsing="false" text="Custom Card" GridPane.rowIndex="7" />
+        <Button fx:id="saveButton" mnemonicParsing="false" stylesheets="@../styleSheets/mainMenu.css" text="SAVE" GridPane.rowIndex="4" />
+        <Button fx:id="exitButton" mnemonicParsing="false" stylesheets="@../styleSheets/mainMenu.css" text="EXIT" GridPane.rowIndex="5" />
+      <Button fx:id="historyButton" mnemonicParsing="false" text="MatchHistories" GridPane.rowIndex="6" />
     </GridPane>
-    <ImageView fitHeight="46.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1"
-               GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
-        <Image url="@../images/brand_duelyst@2x.png"/>
+    <ImageView fitHeight="46.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+        <Image url="@../images/brand_duelyst@2x.png" />
     </ImageView>
-    <Label fx:id="error" alignment="CENTER" prefHeight="98.0" prefWidth="360.0" GridPane.columnIndex="2"
-           GridPane.rowIndex="1"/>
+   <Label fx:id="error" alignment="CENTER" prefHeight="98.0" prefWidth="360.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
 </GridPane>

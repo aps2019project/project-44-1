@@ -31,7 +31,7 @@ public class ResponseHandler extends Thread {
     private Response response;
     private CollectionFxmlController collectionController;
     private ShopFxmlController shopFxmlController;
-    private MainMenuController mainMenuController = new MainMenuController();
+    private MainMenuController mainMenuController;
     private MapController mapController;
 
     public static ResponseHandler getInstance() {
@@ -122,12 +122,12 @@ public class ResponseHandler extends Thread {
             @Override
             public void run() {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/mainMenu.fxml"));
-                loader.setController(mainMenuController);
                 try {
                     Main.getStage().getScene().setRoot(loader.load());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                mainMenuController = loader.getController();
             }
         });
     }
