@@ -42,7 +42,7 @@ public class CustomCardController implements Initializable {
     }
 
     private void craftChoiceBox() {
-        type.getItems().addAll("HERO", "MINION", "SPELL");
+        type.getItems().addAll("HERO", "MINION");
         type.valueProperty().addListener((observableValue, s, t1) -> {
             if (t1.equals("HERO"))
                 setState(true, false);
@@ -106,7 +106,15 @@ public class CustomCardController implements Initializable {
                 appearLabel("select specialPower!!!");
                 return true;
             }
-            return wrongInfo(cool_active, getCAError(), "^\\d+$");
+            if (type.getSelectionModel().getSelectedIndex() == 0)
+                return wrongInfo(cool_active, getCAError(), "^\\d+$");
+            else if (type.getSelectionModel().getSelectedIndex() == 1) {
+                try {
+                    SpecialPowerActivation.valueOf(cool_active.getText());
+                } catch (IllegalArgumentException e) {
+                    appearLabel("invalid \nSpecialPowerActivation!!!");
+                }
+            }
         }
         return false;
     }
@@ -138,9 +146,8 @@ public class CustomCardController implements Initializable {
      * here a daemon thread writes the info into a json file, and add the card to the shop
      */
     //-------------------------------------------------------------------------------
-    public void backEnd() {
+    private void backEnd() {
         new Thread(() -> {
-
             Gson gson = new Gson();
             JsonReader reader = null;   //we sure that this order never changes
             switch (type.getSelectionModel().getSelectedIndex()) {
@@ -152,7 +159,6 @@ public class CustomCardController implements Initializable {
                     Hero[] heroes1;
                     int length = heroes.length;
                     if (length != 0) {
-
                         heroes1 = new Hero[length + 1];
                         System.arraycopy(heroes, 0, heroes1, 0, length);
                         heroes1[length - 1] = hero;
@@ -181,7 +187,6 @@ public class CustomCardController implements Initializable {
                     break;
                 case 2:     //spell
             }
-
         }).start();
     }
 
@@ -219,7 +224,7 @@ public class CustomCardController implements Initializable {
         try {
             minion.setSpecialPowerActivation(SpecialPowerActivation.valueOf(cool_active.getText()));
         } catch (IllegalArgumentException e) {
-            appearLabel("invalid \nSpecialPowerActivation!!!");
+            e.printStackTrace();
         }
         return minion;
     }
@@ -232,6 +237,7 @@ public class CustomCardController implements Initializable {
         card.setHP(Integer.parseInt(HP.getText()));
         card.setAttackType(AttackType.valueOf(attackType.getSelectionModel().getSelectedItem()));
         card.setSpecialPower(specialPower.getSelectionModel().getSelectedItem());
+        card.setPath("view/images/cardGifs/boss_grym_breathing.gif");
     }
 
 }

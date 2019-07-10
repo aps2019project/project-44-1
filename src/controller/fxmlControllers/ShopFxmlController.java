@@ -53,18 +53,18 @@ public class ShopFxmlController implements Initializable {
         });
     }
 
-
     private void searchInShop() {
         Request request = new Request(Environment.SHOP);
         request.setRequestType(RequestType.SEARCH_IN_SHOP);
         request.setSearchedString(search.getText());
         RequestSender.getInstance().sendRequest(request);
     }
-    public void fillPanes(String name,FlowPane flowPane,boolean buy){
-        this.fillPanes(builder.getCard(name),flowPane,buy);
+
+    public void fillPanes(String name, FlowPane flowPane, boolean buy) {
+        this.fillPanes(builder.getCard(name), flowPane, buy);
     }
 
-    public void fillPanes(Placeable c, FlowPane flowPane, boolean buy) {
+    private void fillPanes(Placeable c, FlowPane flowPane, boolean buy) {
         if (!(c instanceof Card))
             return;
         try {
@@ -150,8 +150,8 @@ public class ShopFxmlController implements Initializable {
         ShopFxmlController.account = account;
     }
 
-    public void backAction() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/mainMenu.fxml"));
+    public static void backAction() {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/fxmls/mainMenu.fxml"));
         try {
             Main.getStage().getScene().setRoot(loader.load());
             ResponseHandler.getInstance().setMainMenuController(loader.getController());
@@ -159,4 +159,5 @@ public class ShopFxmlController implements Initializable {
             e.printStackTrace();
         }
     }
+
 }

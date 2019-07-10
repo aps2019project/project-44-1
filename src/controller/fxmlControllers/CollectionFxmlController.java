@@ -1,11 +1,8 @@
 package controller.fxmlControllers;
 
-import Main.Main;
 import client.RequestSender;
-import client.ResponseHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
@@ -15,7 +12,6 @@ import server.Request;
 import server.RequestType;
 import view.fxmls.wrapperClasses.CardContainer;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -187,7 +183,7 @@ public class CollectionFxmlController implements Initializable {
         addCardToDeckButton.setOnAction(eventEventHandler);
     }
 
-    public void updateDeckCards(){
+    public void updateDeckCards() {
         deckCardsFlowPane.getChildren().clear();
         deckCards = new ArrayList<>();
         for (Placeable card : collection.getDeck(decks.getValue()).getDeckCards()) {
@@ -200,18 +196,11 @@ public class CollectionFxmlController implements Initializable {
     }
 
     public void backAction() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/mainMenu.fxml"));
-        try {
-            Main.getStage().getScene().setRoot(loader.load());
-            ResponseHandler.getInstance().setMainMenuController(loader.getController());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ShopFxmlController.backAction();
     }
 
 
-
-    public void makeAlert(String headerText, String contentText,Alert.AlertType alertType) {
+    public void makeAlert(String headerText, String contentText, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle("Error");
         alert.setHeaderText(headerText);
