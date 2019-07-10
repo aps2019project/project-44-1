@@ -30,20 +30,26 @@ public class ShopFxmlController implements Initializable {
     public Label message;
     public ScrollPane shop;
     public TextField search;
+    Account account;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        back.setOnAction(actionEvent -> Game.getInstance().loadPage(back, "/view/fxmls/mainMenu.fxml"));
+        money.setText(Integer.toString(account.getMoney()));
+
         ResponseHandler.getInstance().setShopFxmlController(this);
         Request request = new Request(Environment.SHOP);
         request.setRequestType(RequestType.ACCOUNT_MONEY);
         RequestSender.getInstance().sendRequest(request);
-        back.setOnAction(actionEvent -> Game.getInstance().loadPage(back, "/view/fxmls/mainMenu.fxml"));
+
         craftGraphics();
         search.setOnKeyPressed(actionEvent -> {
             if (actionEvent.getCode() == KeyCode.ENTER)
                 searchInShop();
         });
     }
+
+
 
     private void searchInShop() {
         Request request = new Request(Environment.SHOP);

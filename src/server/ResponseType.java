@@ -31,9 +31,11 @@ public enum ResponseType {
     //battle responses
     MAIN_DECK_IS_NOT_VALID("selected deck is invalid"),
     MAIN_DECK_IS_VALID("choose single player or multi player"),
+    ENTER_WAIT_PAGE(""),
     //main menu responses
     SHOW_MATCH_HISTORY("show match history"),
     LOG_OUT("");
+
 
 
     ;

@@ -27,7 +27,5 @@ public class BattleMenuController implements Initializable {
         Request request = new Request(Environment.BATTLE);
         request.setRequestType(RequestType.ENTER_WAIT_PAGE_FOR_SECOND_PLAYER);
         RequestSender.getInstance().sendRequest(request);
-        MainMenuController.loadPage("/view/fxmls/MultiMenu.fxml");
     }
-
 }

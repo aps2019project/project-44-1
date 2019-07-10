@@ -136,11 +136,11 @@ public class RequestHandler extends Thread {
     private void handleBattleRequest(Request request) {
         switch (request.getRequestType()) {
             case ENTER_WAIT_PAGE_FOR_SECOND_PLAYER:
-                if (Game.getInstance().getRequestedForBattle().pollFirst() != null) {
-
-                }
                 Response response = new Response(Environment.BATTLE);
-                response.setOnlineAccounts(Game.getInstance().getOnlineAccounts());
+                response.setResponseType(ResponseType.ENTER_WAIT_PAGE);
+                responseSender.sendResponse(response);
+                OpponentFinder.addToWaitingAccounts(Main.getOnlineAccounts().get(request.getOuthToken()),responseSender);
+
         }
     }
 
@@ -242,11 +242,11 @@ public class RequestHandler extends Thread {
 
     private void enterBattle(Request request) {
         Response response = new Response(Environment.BATTLE);
-        if (Main.getOnlineAccounts().get(request.getOuthToken()).isReadyToPlay()) {
+        if (Main.getOnlineAccounts().get(request.getOuthToken()).isReadyToPlay())
             response.setResponseType(ResponseType.MAIN_DECK_IS_VALID);
-            AccountController.getInstance().setAccount(response.getAccount());
-        } else
+        else
             response.setResponseType(ResponseType.MAIN_DECK_IS_NOT_VALID);
+        response.setAccount(Main.getOnlineAccounts().get(request.getOuthToken()));
         responseSender.sendResponse(response);
     }
 

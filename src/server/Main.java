@@ -17,6 +17,8 @@ public class Main {
         ServerSocket server = new ServerSocket(8000);
         Socket socket;
         System.out.println("server is running...");
+        OpponentFinder opponentFinder = new OpponentFinder();
+        opponentFinder.start();
         while (true) {
             socket = server.accept();
             sockets.add(socket);

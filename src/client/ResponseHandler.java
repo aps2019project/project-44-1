@@ -192,6 +192,8 @@ public class ResponseHandler extends Thread {
             case MAIN_DECK_IS_NOT_VALID:
                 Platform.runLater(() -> mainMenuController.appearLabel(response.getResponseType().getMessage()));
                 break;
+            case ENTER_WAIT_PAGE:
+                //todo load wait page
         }
     }
 
@@ -211,7 +213,7 @@ public class ResponseHandler extends Thread {
         switch (response.getResponseType()) {
             case ACCOUNT_MONEY:
                 int money = response.getMoney();
-                Platform.runLater(() -> shopFxmlController.money.setText(String.valueOf(money)));
+//                Platform.runLater(() -> );
                 break;
             case SEARCH_IN_SHOP:
                 Platform.runLater(() -> shopFxmlController.shop.setVvalue(response.getvValue()));
