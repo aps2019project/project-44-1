@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SingleMenuController extends MultiMenuController implements Initializable {
+public class SingleMenuController implements Initializable {
     public ImageView first;
     public ImageView second;
     public ImageView third;

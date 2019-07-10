@@ -32,7 +32,6 @@ public class ResponseHandler extends Thread {
     private CollectionFxmlController collectionController;
     private ShopFxmlController shopFxmlController;
     private MainMenuController mainMenuController;
-    private MultiMenuController multiMenuController;
 
     public static ResponseHandler getInstance() {
         return RESPONSE_HANDLER;
@@ -292,10 +291,6 @@ public class ResponseHandler extends Thread {
 
     public void setShopFxmlController(ShopFxmlController shopFxmlController) {
         this.shopFxmlController = shopFxmlController;
-    }
-
-    public void setMultiMenuController(MultiMenuController multiMenuController) {
-        this.multiMenuController = multiMenuController;
     }
 
 }

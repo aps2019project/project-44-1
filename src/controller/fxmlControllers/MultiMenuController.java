@@ -1,21 +1,15 @@
 package controller.fxmlControllers;
 
 import client.RequestSender;
-import client.ResponseHandler;
-import controller.logicController.AccountController;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import models.Enums.BattleMode;
-import models.Game;
 import server.Environment;
-import Main.Main;
 import server.Request;
 import server.RequestType;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,7 +17,6 @@ import static models.Enums.BattleMode.*;
 
 public class MultiMenuController implements Initializable {
 
-    private AccountController accountController = AccountController.getInstance();
     public Button back;
     public ComboBox<String> choice;
     public TextField number;
@@ -36,7 +29,6 @@ public class MultiMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ResponseHandler.getInstance().setMultiMenuController(this);
         back.setOnAction(actionEvent -> MainMenuController.loadPage("/view/fxmls/battleMenu.fxml"));
         cancel.setOnAction(actionEvent -> action());
         craftComboBox();
@@ -132,28 +124,6 @@ public class MultiMenuController implements Initializable {
             default:
                 return MULTI1 + Integer.parseInt(number.getText());
         }
-    }
-
-    //-------------------------------------------=----------------=
-    public void enterBattle(int state, String... userName) {
-        MapController controller = new MapController();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/map.fxml"));
-        loader.setController(controller);
-        try {
-            Main.getStage().getScene().setRoot(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        startThread(state, userName);
-    }
-
-    private void startThread(int state, String... userName) {
-        accountController.setState(state);
-        if (userName.length != 0) {
-            accountController.setOpponent(Game.getAccount(userName[0]));
-        }
-        accountController.setDaemon(true);
-        accountController.start();
     }
 
 }

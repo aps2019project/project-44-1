@@ -18,36 +18,24 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class AccountController extends Thread {
+public class AccountController{
     private static AccountController accountController = new AccountController();
     private Account account;
     private Account opponent = null;
     private int state;
-    public static final int SINGLE1 = 1;
-    public static final int SINGLE2 = 2;
-    public static final int SINGLE3 = 3;
-    public static final int MULTI1 = 20;
-    public static final int MULTI2 = 22;
+    private static final int MULTI1 = 20;
+    private static final int MULTI2 = 22;
     private boolean regreted = false;
 
     private AccountController() {
     }
 
     public static AccountController getInstance() {
-        accountController.setDaemon(true);
         return accountController;
     }
 
     //------------------------------------------------------------Battle
-    private void enterBattle() {
-        if (state >= MULTI1) {
-            modeHandler();
-        } else {
-            storyGame();
-        }
-    }
-
-    private void modeHandler() {
+    public void modeHandler() {
         switch (state) {
             case MULTI1:
                 BattleController.getInstance().setBattle(new Battle(BattleKind.MULTI_PLAYER,
@@ -156,11 +144,6 @@ public class AccountController extends Thread {
 
     public void setOpponent(Account opponent) {
         this.opponent = opponent;
-    }
-
-    @Override
-    public void run() {
-        enterBattle();
     }
 
     public void setState(int state) {

@@ -166,14 +166,16 @@ public class RequestHandler extends Thread {
             return false;
         }
         Iterator<Request> iterator = requestLinkedList.iterator();
-        while (iterator.hasNext()){
-            if (iterator.next().getState() == request.getState()) {
+        while (iterator.hasNext()) {
+            Request next = iterator.next();
+            if (next.getState() == request.getState()) {
                 AccountController instance = AccountController.getInstance();
                 if (instance.isRegreted())
                     return false;
                 instance.setState(request.getState());
+                instance.setOpponent(Game.getInstance().getOnlineAccounts().get(next.getOuthToken()));
                 iterator.remove();
-                instance.start();
+                instance.modeHandler();
                 return true;
             }
         }
