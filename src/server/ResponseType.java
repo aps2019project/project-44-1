@@ -28,7 +28,7 @@ public enum ResponseType {
     BUY_CARD(""),
     NOT_FOUND_CARD(""),
     SEARCH_IN_SHOP(""),
-    SUCCESSFULL_SELL("you bought\n"),
+    SUCCESSFUL_SELL("you bought\n"),
     SINGLE_PLAYER(""),
     //battle responses
     MAIN_DECK_IS_NOT_VALID("selected deck is invalid"),

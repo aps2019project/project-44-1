@@ -1,8 +1,11 @@
 package controller.fxmlControllers;
 
+import Main.Main;
 import client.RequestSender;
+import client.ResponseHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
@@ -12,6 +15,7 @@ import server.Request;
 import server.RequestType;
 import view.fxmls.wrapperClasses.CardContainer;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -196,7 +200,13 @@ public class CollectionFxmlController implements Initializable {
     }
 
     public void backAction() {
-        MainMenuController.loadPage("/view/fxmls/mainMenu.fxml");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/mainMenu.fxml"));
+        try {
+            Main.getStage().getScene().setRoot(loader.load());
+            ResponseHandler.getInstance().setMainMenuController(loader.getController());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

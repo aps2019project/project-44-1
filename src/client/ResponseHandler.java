@@ -107,7 +107,13 @@ public class ResponseHandler extends Thread {
 
     private void logout() {
         Main.setToken(null);
-        Platform.runLater(() -> MainMenuController.loadPage("/view/fxmls/loginPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/loginPage.fxml"));
+        try {
+            Main.getStage().getScene().setRoot(loader.load());
+            Main.setLoginPageController(loader.getController());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showMatchHistory() {
@@ -139,10 +145,10 @@ public class ResponseHandler extends Thread {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/mainMenu.fxml"));
                 try {
                     Main.getStage().getScene().setRoot(loader.load());
+                    mainMenuController = loader.getController();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                mainMenuController = loader.getController();
             }
         });
     }
@@ -176,10 +182,10 @@ public class ResponseHandler extends Thread {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/collectionPage.fxml"));
                 try {
                     Main.getStage().getScene().setRoot(loader.load());
+                    collectionController = loader.getController();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                ResponseHandler.getInstance().setCollectionController(loader.getController());
             }
         });
     }
@@ -226,7 +232,7 @@ public class ResponseHandler extends Thread {
             case SEARCH_IN_SHOP:
                 Platform.runLater(() -> shopFxmlController.shop.setVvalue(response.getvValue()));
                 break;
-            case SUCCESSFULL_SELL:
+            case SUCCESSFUL_SELL:
                 Platform.runLater(this::sold);
                 Platform.runLater(() -> shopFxmlController.money.setText(response.getMoney()));
                 break;
@@ -296,4 +302,11 @@ public class ResponseHandler extends Thread {
         this.mapController = mapController;
     }
 
+    public MainMenuController getMainMenuController() {
+        return mainMenuController;
+    }
+
+    public void setMainMenuController(MainMenuController mainMenuController) {
+        this.mainMenuController = mainMenuController;
+    }
 }

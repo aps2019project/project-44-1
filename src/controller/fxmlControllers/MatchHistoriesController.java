@@ -1,8 +1,11 @@
 package controller.fxmlControllers;
 
+import Main.Main;
+import client.ResponseHandler;
 import controller.logicController.AccountController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -12,6 +15,7 @@ import models.Account;
 import models.Game;
 import view.fxmls.wrapperClasses.History;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,7 +30,7 @@ public class MatchHistoriesController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        back.setOnAction(event -> Game.getInstance().loadPage(table, "/view/fxmls/mainMenu.fxml"));
+        back.setOnAction(event -> loadMainMenu());
         populateTable();
     }
 
@@ -41,5 +45,15 @@ public class MatchHistoriesController implements Initializable {
 
     public static void setAccount(Account account) {
         MatchHistoriesController.account = account;
+    }
+
+    public void loadMainMenu() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/mainMenu.fxml"));
+        try {
+            Main.getStage().getScene().setRoot(loader.load());
+            ResponseHandler.getInstance().setMainMenuController(loader.getController());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

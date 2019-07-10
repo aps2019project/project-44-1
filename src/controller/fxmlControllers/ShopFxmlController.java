@@ -1,5 +1,6 @@
 package controller.fxmlControllers;
 
+import Main.Main;
 import client.CardBuilder;
 import client.RequestSender;
 import client.ResponseHandler;
@@ -19,6 +20,7 @@ import server.Environment;
 import server.Request;
 import server.RequestType;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -36,7 +38,7 @@ public class ShopFxmlController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        back.setOnAction(actionEvent -> Game.getInstance().loadPage(back, "/view/fxmls/mainMenu.fxml"));
+        back.setOnAction(actionEvent -> backAction());
         money.setText(Integer.toString(account.getMoney()));
         for (Placeable c : builder.getCards()) {
             fillPanes(c, pane, true);
@@ -146,5 +148,15 @@ public class ShopFxmlController implements Initializable {
 
     public static void setAccount(Account account) {
         ShopFxmlController.account = account;
+    }
+
+    public void backAction() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/mainMenu.fxml"));
+        try {
+            Main.getStage().getScene().setRoot(loader.load());
+            ResponseHandler.getInstance().setMainMenuController(loader.getController());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

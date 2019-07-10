@@ -181,7 +181,7 @@ public class RequestHandler extends Thread {
                 instance.setState(request.getState());
                 instance.setOpponent(Game.getInstance().getOnlineAccounts().get(next.getOuthToken()));
                 iterator.remove();
-                instance.modeHandler();
+                instance. modeHandler();
                 return true;
             }
         }
@@ -213,8 +213,8 @@ public class RequestHandler extends Thread {
 
     private void sell(Request request, Response response, Shop shop, Account account) {
         String cardName = request.getCardToSell().split("\n")[0];
-        if (shop.sell(account.getCollection().getCardIDInCollection(cardName), account)) {
-            response.setResponseType(ResponseType.SUCCESSFULL_SELL);
+        if (shop.sell(account.getCollection().getCardIDInCollection(cardName),account)) {
+            response.setResponseType(ResponseType.SUCCESSFUL_SELL);
             response.setMoney(Integer.toString(account.getMoney()));
             response.setPaneToRemoveID(request.getPaneToSellID());
             response.setCardToSell(cardName);

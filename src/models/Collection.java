@@ -44,6 +44,8 @@ public class Collection implements Comparable<Placeable> {
 
     public void deleteDeck(String deckName) {
         decks.remove(deckName);
+        if (mainDeck.getName().equals(deckName))
+            mainDeck = null;
     }
 
     public void addToDeck(int cardID, String deckName) {

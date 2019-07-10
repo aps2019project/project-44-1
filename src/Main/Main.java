@@ -27,14 +27,6 @@ public class Main extends Application {
     private static ResponseHandler clientResponseHandler;
     private static String token;
 
-
-    static {
-        try {
-            FXMLLoader.load(Main.class.getResource("/view/fxmls/loginPage.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     //---------------------------------------------------- windows are loaded
 
     public static void main(String[] args) {
@@ -124,6 +116,10 @@ public class Main extends Application {
 
     public static LoginPageController getLoginPageController() {
         return loginPageController;
+    }
+
+    public static void setLoginPageController(LoginPageController loginPageController) {
+        Main.loginPageController = loginPageController;
     }
 
     public static String getToken() {
