@@ -7,6 +7,7 @@ import controller.logicController.CollectionController;
 import controller.logicController.AccountController;
 import controller.logicController.GameController;
 import models.Collection;
+import models.Enums.ErrorType;
 import models.Game;
 import models.Placeable;
 import models.Shop;
@@ -195,18 +196,14 @@ public class RequestHandler extends Thread {
         Shop shop = Shop.getInstance();
         Account account = Main.getOnlineAccounts().get(request.getOuthToken());
         switch (request.getRequestType()) {
-            case ACCOUNT_MONEY:
-                response.setMoney(account.getMoney());
-                response.setResponseType(ResponseType.ACCOUNT_MONEY);
-                break;
             case SEARCH_IN_SHOP:
                 searchInShop(request, response, shop);
                 break;
             case BUY:
                 String cardName = request.getCardToBuy().split("\n")[0];
-                response.setResponseType(ResponseType.ACCOUNT_MONEY);
+                response.setResponseType(ResponseType.BUY_CARD);
                 response.setShopErrorType(shop.buy(cardName,account));
-                response.setMoney(account.getMoney());
+                response.setMoney(Integer.toString(account.getMoney()));
                 response.setCardToBuy(shop.getCard(cardName));
                 break;
             case SELL:
@@ -219,7 +216,7 @@ public class RequestHandler extends Thread {
         String cardName = request.getCardToSell().split("\n")[0];
         if (shop.sell(account.getCollection().getCardIDInCollection(cardName),account)) {
             response.setResponseType(ResponseType.SUCCESSFULL_SELL);
-            response.setMoney(account.getMoney());
+            response.setMoney(Integer.toString(account.getMoney()));
             response.setPaneToRemoveID(request.getPaneToSellID());
             response.setCardToSell(cardName);
         }
@@ -232,6 +229,9 @@ public class RequestHandler extends Thread {
             double x = (double) (cards.indexOf(p) + 1) / cards.size();
             response.setResponseType(ResponseType.SEARCH_IN_SHOP);
             response.setvValue(x);
+        }else {
+            response.setResponseType(ResponseType.NOT_FOUND_CARD);
+            response.setShopErrorType(ErrorType.NO_ERROR);
         }
     }
 

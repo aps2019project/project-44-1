@@ -25,9 +25,9 @@ public enum ResponseType {
     //shop responses
     ENTER_SHOP("enter shop"),
     ENTER_MAP(""),
-    ACCOUNT_MONEY(""),
+    BUY_CARD(""),
+    NOT_FOUND_CARD(""),
     SEARCH_IN_SHOP(""),
-    GET_SHOP_CARDS(""),
     SUCCESSFULL_SELL("you bought\n"),
     SINGLE_PLAYER(""),
     //battle responses

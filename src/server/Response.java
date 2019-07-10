@@ -23,7 +23,7 @@ public class Response {
     private String authToken;
     private HashMap<String, Integer> remainingCardsInShop;
     private Collection collection;
-    private int money;
+    private String money;
     private double vValue;
     private ArrayList<Placeable> shopCards;
     private Account account;
@@ -148,11 +148,11 @@ public class Response {
         this.collection = collection;
     }
 
-    public int getMoney() {
+    public String getMoney() {
         return money;
     }
 
-    public void setMoney(int money) {
+    public void setMoney(String money) {
         this.money = money;
     }
 

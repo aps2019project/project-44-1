@@ -214,20 +214,19 @@ public class ResponseHandler extends Thread {
     //=============================================================SHOP
     private void handleShopResponse() {
         switch (response.getResponseType()) {
-            case ACCOUNT_MONEY:
-                int money = response.getMoney();
-                Platform.runLater(() -> shopFxmlController.money.setText(String.valueOf(money)));
+            case BUY_CARD:
+                Platform.runLater(this::bought);
+                Platform.runLater(() -> shopFxmlController.money.setText(response.getMoney()));
                 break;
             case SEARCH_IN_SHOP:
                 Platform.runLater(() -> shopFxmlController.shop.setVvalue(response.getvValue()));
                 break;
             case SUCCESSFULL_SELL:
                 Platform.runLater(this::sold);
+                Platform.runLater(() -> shopFxmlController.money.setText(response.getMoney()));
                 break;
             default:
-                if (response.getShopErrorType().equals(NO_ERROR))
-                    Platform.runLater(this::bought);
-                else
+                if (response.getShopErrorType() != null && !response.getShopErrorType().equals(NO_ERROR))
                     Platform.runLater(() -> viewMessage(response.getResponseType().getMessage()));
                 break;
         }
@@ -236,7 +235,7 @@ public class ResponseHandler extends Thread {
     private void bought() {
         Placeable cardToBuy = response.getCardToBuy();
         viewMessage("you bought \n" + cardToBuy.getName());
-        shopFxmlController.fillPanes(cardToBuy, shopFxmlController.collectionPane, false);
+        shopFxmlController.fillPanes(cardToBuy.getName(), shopFxmlController.collectionPane, false);
         shopFxmlController.money.setText(String.valueOf(response.getMoney()));
     }
 

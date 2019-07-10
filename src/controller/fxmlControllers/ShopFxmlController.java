@@ -58,6 +58,9 @@ public class ShopFxmlController implements Initializable {
         request.setSearchedString(search.getText());
         RequestSender.getInstance().sendRequest(request);
     }
+    public void fillPanes(String name,FlowPane flowPane,boolean buy){
+        this.fillPanes(builder.getCard(name),flowPane,buy);
+    }
 
     public void fillPanes(Placeable c, FlowPane flowPane, boolean buy) {
         if (!(c instanceof Card))
