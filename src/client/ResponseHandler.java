@@ -21,6 +21,7 @@ import java.io.InputStreamReader;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static models.Enums.ErrorType.ALL_CARDS_HAVE_BEEN_SOLD;
 import static models.Enums.ErrorType.NO_ERROR;
 import static server.ResponseType.*;
 
@@ -215,6 +216,10 @@ public class ResponseHandler extends Thread {
     private void handleShopResponse() {
         switch (response.getResponseType()) {
             case BUY_CARD:
+                if (response.getShopErrorType().equals(ALL_CARDS_HAVE_BEEN_SOLD)) {
+                    Platform.runLater(() -> viewMessage(ALL_CARDS_HAVE_BEEN_SOLD.getMessage()));
+                    return;
+                }
                 Platform.runLater(this::bought);
                 Platform.runLater(() -> shopFxmlController.money.setText(response.getMoney()));
                 break;

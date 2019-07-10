@@ -22,7 +22,7 @@ public enum ErrorType {
     DEST_IS_UNAVAILABLE_FOR_ATTACK("opponent minion is unavailable for attack"),
     INVALID_DEST_ID("Invalid card id"),
     CARD_CANT_MOVE("this card has been moved this turn"),
-    ALL_CARDS_HAVE_BEEN_SOLD("all of this type have been sold!!!");
+    ALL_CARDS_HAVE_BEEN_SOLD("all of this type \nhave been sold!!!");
 
     private String message;
 

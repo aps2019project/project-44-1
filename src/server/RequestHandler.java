@@ -2,7 +2,6 @@ package server;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonStreamParser;
-import controller.fxmlControllers.MainMenuController;
 import controller.logicController.CollectionController;
 import controller.logicController.AccountController;
 import controller.logicController.GameController;
@@ -202,7 +201,7 @@ public class RequestHandler extends Thread {
             case BUY:
                 String cardName = request.getCardToBuy().split("\n")[0];
                 response.setResponseType(ResponseType.BUY_CARD);
-                response.setShopErrorType(shop.buy(cardName,account));
+                response.setShopErrorType(shop.buy(cardName, account));
                 response.setMoney(Integer.toString(account.getMoney()));
                 response.setCardToBuy(shop.getCard(cardName));
                 break;
@@ -214,7 +213,7 @@ public class RequestHandler extends Thread {
 
     private void sell(Request request, Response response, Shop shop, Account account) {
         String cardName = request.getCardToSell().split("\n")[0];
-        if (shop.sell(account.getCollection().getCardIDInCollection(cardName),account)) {
+        if (shop.sell(account.getCollection().getCardIDInCollection(cardName), account)) {
             response.setResponseType(ResponseType.SUCCESSFULL_SELL);
             response.setMoney(Integer.toString(account.getMoney()));
             response.setPaneToRemoveID(request.getPaneToSellID());
@@ -229,7 +228,7 @@ public class RequestHandler extends Thread {
             double x = (double) (cards.indexOf(p) + 1) / cards.size();
             response.setResponseType(ResponseType.SEARCH_IN_SHOP);
             response.setvValue(x);
-        }else {
+        } else {
             response.setResponseType(ResponseType.NOT_FOUND_CARD);
             response.setShopErrorType(ErrorType.NO_ERROR);
         }
