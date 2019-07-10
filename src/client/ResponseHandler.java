@@ -238,7 +238,7 @@ public class ResponseHandler extends Thread {
                 break;
             default:
                 if (response.getShopErrorType() != null && !response.getShopErrorType().equals(NO_ERROR))
-                    Platform.runLater(() -> viewMessage(response.getResponseType().getMessage()));
+                    Platform.runLater(() -> viewMessage(response.getShopErrorType().getMessage()));
                 break;
         }
     }

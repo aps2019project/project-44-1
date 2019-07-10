@@ -24,8 +24,6 @@ public class MultiMenuController implements Initializable {
     public Button cancel;
     private static final String error = "invalid flags number";
     private static final String flag_bound = "[1-9]";
-    private static final int MULTI1 = 20;
-    private static final int MULTI2 = 22;
     private static final String canc = "cancel";
 
     @Override
@@ -101,8 +99,10 @@ public class MultiMenuController implements Initializable {
         choice.setDisable(true);
         back.setDisable(true);
         Request request = new Request(Environment.BATTLE);
-        request.setRequestType(RequestType.MULTI_PLAYER);
-        request.setState(getState());
+        request.setRequestType(RequestType.WAIT_FOR_SECOND_PLAYER);
+        request.setBattleMode(getBattleMode());
+        if (getBattleMode().equals(CAPTURE_FLAG_2))
+            request.setFlagNumbers(Integer.parseInt(number.getText()));
         RequestSender.getInstance().sendRequest(request);
     }
 
@@ -116,14 +116,14 @@ public class MultiMenuController implements Initializable {
         RequestSender.getInstance().sendRequest(request);
     }
 
-    private int getState() {
+    private BattleMode getBattleMode() {
         switch (choice.getSelectionModel().getSelectedIndex()) {
             case 0:
-                return MULTI1;
+                return DEATH_MATCH;
             case 1:
-                return MULTI2;
+                return CAPTURE_FLAG_1;
             default:
-                return MULTI1 + Integer.parseInt(number.getText());
+                return CAPTURE_FLAG_2;
         }
     }
 

@@ -1,5 +1,7 @@
 package server;
 
+import models.Enums.BattleMode;
+
 import java.util.ArrayList;
 
 public class Request {
@@ -22,6 +24,8 @@ public class Request {
     private ArrayList<String> cardsToAddToDeck;
     private String searchedString;
     private String paneToSellID;
+    private BattleMode battleMode;
+    private int flagNumbers;
     private int state;
 
     public Request(Environment environment) {
@@ -180,12 +184,27 @@ public class Request {
         this.paneToSellID = paneToSellID;
     }
 
-    public int getState() {
-        return state;
+    public BattleMode getBattleMode() {
+        return battleMode;
+    }
+
+    public void setBattleMode(BattleMode battleMode) {
+        this.battleMode = battleMode;
+    }
+
+    public int getFlagNumbers() {
+        return flagNumbers;
+    }
+
+    public void setFlagNumbers(int flagNumbers) {
+        this.flagNumbers = flagNumbers;
     }
 
     public void setState(int state) {
         this.state = state;
     }
 
+    public int getState() {
+        return state;
+    }
 }

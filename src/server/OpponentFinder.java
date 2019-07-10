@@ -7,19 +7,21 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class OpponentFinder extends Thread {
-    private static final Queue<Account> waitingAccounts = new LinkedList<>();
+    private static final Queue<Account> waitingAccountsForDeathMatch = new LinkedList<>();
+    private static final Queue<Account> waitingAccountsForSaveFlag = new LinkedList<>();
+    private static HashMap<Integer,Account> waitingAccountsForCaptureFlag = new HashMap<>();
     private static HashMap<Account, ResponseSender> responseSenders = new HashMap<>();
 
     @Override
     public void run() {
         while (true) {
-            synchronized (waitingAccounts) {
-                if (waitingAccounts.size() >= 2) {
-                    Account first = waitingAccounts.poll();
-                    Account second = waitingAccounts.poll();
-                    startBattle(first,second);
-                }
-            }
+//            synchronized (waitingAccounts) {
+//                if (waitingAccounts.size() >= 2) {
+//                    Account first = waitingAccounts.poll();
+//                    Account second = waitingAccounts.poll();
+//                    startBattle(first,second);
+//                }
+//            }
         }
     }
 
@@ -32,13 +34,33 @@ public class OpponentFinder extends Thread {
         responseSenders.remove(second);
     }
 
-    public static synchronized void addToWaitingAccounts(Account account, ResponseSender responseSender) {
-        waitingAccounts.add(account);
+    public static synchronized void addToWaitingAccounts(Request request, ResponseSender responseSender) {
+        Account account = Main.getOnlineAccounts().get(request.getOuthToken());
+        switch (request.getBattleMode()){
+            case DEATH_MATCH:
+                waitingAccountsForDeathMatch.add(account);
+                break;
+            case CAPTURE_FLAG_1:
+                waitingAccountsForSaveFlag.add(account);
+                break;
+            case CAPTURE_FLAG_2:
+                waitingAccountsForCaptureFlag.put(request.getFlagNumbers(),account);
+        }
         responseSenders.put(account, responseSender);
     }
 
-    public static synchronized void deleteFromWaitingAccounts(Account account) {
-        waitingAccounts.remove(account);
+    public static synchronized void deleteFromWaitingAccounts(Request request) {
+        Account account = Main.getOnlineAccounts().get(request.getOuthToken());
+        switch (request.getBattleMode()){
+            case DEATH_MATCH:
+                waitingAccountsForDeathMatch.remove(account);
+                break;
+            case CAPTURE_FLAG_1:
+                waitingAccountsForSaveFlag.remove(account);
+                break;
+            case CAPTURE_FLAG_2:
+                waitingAccountsForCaptureFlag.remove(request.getFlagNumbers(),account);
+        }
         responseSenders.remove(account);
     }
 

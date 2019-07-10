@@ -148,11 +148,11 @@ public class RequestHandler extends Thread {
             case REGRETED:
                 accountController.setRegreted(true);
                 break;
-            case ENTER_WAIT_PAGE_FOR_SECOND_PLAYER:
+            case WAIT_FOR_SECOND_PLAYER:
                 Response response = new Response(Environment.BATTLE);
                 response.setResponseType(ResponseType.ENTER_WAIT_PAGE);
                 responseSender.sendResponse(response);
-                OpponentFinder.addToWaitingAccounts(Main.getOnlineAccounts().get(request.getOuthToken()), responseSender);
+                OpponentFinder.addToWaitingAccounts(request, responseSender);
 
         }
     }
@@ -174,16 +174,16 @@ public class RequestHandler extends Thread {
         Iterator<Request> iterator = requestLinkedList.iterator();
         while (iterator.hasNext()) {
             Request next = iterator.next();
-            if (next.getState() == request.getState()) {
-                AccountController instance = AccountController.getInstance();
-                if (instance.isRegreted())
-                    return false;
-                instance.setState(request.getState());
-                instance.setOpponent(Game.getInstance().getOnlineAccounts().get(next.getOuthToken()));
-                iterator.remove();
-                instance. modeHandler();
-                return true;
-            }
+//            if (next.getState() == request.getState()) {
+//                AccountController instance = AccountController.getInstance();
+//                if (instance.isRegreted())
+//                    return false;
+//                instance.setState(request.getState());
+//                instance.setOpponent(Game.getInstance().getOnlineAccounts().get(next.getOuthToken()));
+//                iterator.remove();
+//                instance. modeHandler();
+//                return true;
+//            }
         }
         if (!requestLinkedList.offer(request))
             throw new RuntimeException("could't offer to requested for battle linked list");
@@ -200,8 +200,12 @@ public class RequestHandler extends Thread {
                 break;
             case BUY:
                 String cardName = request.getCardToBuy().split("\n")[0];
-                response.setResponseType(ResponseType.BUY_CARD);
                 response.setShopErrorType(shop.buy(cardName, account));
+                if (!response.getShopErrorType().equals(ErrorType.NO_ERROR))
+                    response.setResponseType(ResponseType.UNSUCCESSFUL_BUY);
+                else
+                    response.setResponseType(ResponseType.BUY_CARD);
+
                 response.setMoney(Integer.toString(account.getMoney()));
                 response.setCardToBuy(shop.getCard(cardName));
                 break;
@@ -213,7 +217,7 @@ public class RequestHandler extends Thread {
 
     private void sell(Request request, Response response, Shop shop, Account account) {
         String cardName = request.getCardToSell().split("\n")[0];
-        if (shop.sell(account.getCollection().getCardIDInCollection(cardName),account)) {
+        if (shop.sell(account.getCollection().getCardIDInCollection(cardName), account)) {
             response.setResponseType(ResponseType.SUCCESSFUL_SELL);
             response.setMoney(Integer.toString(account.getMoney()));
             response.setPaneToRemoveID(request.getPaneToSellID());

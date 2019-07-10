@@ -24,7 +24,7 @@ public enum RequestType {
     MULTI_PLAYER,
     REGRETED,
     // Requests needed to start battle
-    ENTER_WAIT_PAGE_FOR_SECOND_PLAYER,
+    WAIT_FOR_SECOND_PLAYER,
     SHOW_MATCH_HISTORY,
     SEARCH_IN_SHOP,
     ACCOUNT_MONEY,
