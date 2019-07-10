@@ -18,7 +18,8 @@ public class Serial implements JsonSerializer<Account> {
         return object;
     }
 
-    private void collectionSerialize(Account account, JsonSerializationContext jsonSerializationContext, JsonObject object, JsonObject jsonObject) {
+    private void collectionSerialize(Account account, JsonSerializationContext jsonSerializationContext, JsonObject object,
+                                     JsonObject jsonObject) {
         HashSet<String> hashSet = new HashSet<>();
         for (Deck d : account.getCollection().getSortedDecks()) {
             ArrayList<String> ar = new ArrayList<>();

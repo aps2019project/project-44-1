@@ -12,7 +12,6 @@ public class OpponentFinder extends Thread {
 
     @Override
     public void run() {
-
         while (true) {
             synchronized (waitingAccounts) {
                 if (waitingAccounts.size() >= 2) {
@@ -22,8 +21,6 @@ public class OpponentFinder extends Thread {
                 }
             }
         }
-
-
     }
 
     private void startBattle(Account first, Account second) {
@@ -44,4 +41,5 @@ public class OpponentFinder extends Thread {
         waitingAccounts.remove(account);
         responseSenders.remove(account);
     }
+
 }

@@ -2,6 +2,7 @@ package controller.fxmlControllers;
 
 import Main.Main;
 import client.RequestSender;
+import client.ResponseHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -47,8 +48,8 @@ public class SingleMenuController implements Initializable {
         Request request = new Request(Environment.BATTLE);
         request.setState(state);
         request.setRequestType(RequestType.SINGLE_PLAYER);
-//        request.setMapController(controller);
         RequestSender.getInstance().sendRequest(request);
+        ResponseHandler.getInstance().setMapController(controller);
         loadScreen();
     }
 

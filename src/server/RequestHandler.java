@@ -134,15 +134,10 @@ public class RequestHandler extends Thread {
     }
 
     private void handleBattleRequest(Request request) {
-        AccountController accountController = AccountController.getInstance();
+        AccountController accountController = new AccountController();
         switch (request.getRequestType()) {
             case MULTI_PLAYER:
-                LinkedList<Request> requestedForBattle = Game.getInstance().getRequestedForBattle();
-                if (startBattle(requestedForBattle, request)) {
-                    Response response = new Response(Environment.BATTLE);
-                    response.setResponseType(ResponseType.ENTER_MAP);
-                    responseSender.sendResponse(response);
-                }
+                multiRequest(request);
                 break;
             case SINGLE_PLAYER:
                 accountController.setState(request.getState());
@@ -155,8 +150,17 @@ public class RequestHandler extends Thread {
                 Response response = new Response(Environment.BATTLE);
                 response.setResponseType(ResponseType.ENTER_WAIT_PAGE);
                 responseSender.sendResponse(response);
-                OpponentFinder.addToWaitingAccounts(Main.getOnlineAccounts().get(request.getOuthToken()),responseSender);
+                OpponentFinder.addToWaitingAccounts(Main.getOnlineAccounts().get(request.getOuthToken()), responseSender);
 
+        }
+    }
+
+    private void multiRequest(Request request) {
+        LinkedList<Request> requestedForBattle = Game.getInstance().getRequestedForBattle();
+        if (startBattle(requestedForBattle, request)) {
+            Response response = new Response(Environment.BATTLE);
+            response.setResponseType(ResponseType.ENTER_MAP);
+            responseSender.sendResponse(response);
         }
     }
 

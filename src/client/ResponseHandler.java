@@ -31,7 +31,8 @@ public class ResponseHandler extends Thread {
     private Response response;
     private CollectionFxmlController collectionController;
     private ShopFxmlController shopFxmlController;
-    private MainMenuController mainMenuController;
+    private MainMenuController mainMenuController = new MainMenuController();
+    private MapController mapController;
 
     public static ResponseHandler getInstance() {
         return RESPONSE_HANDLER;
@@ -121,7 +122,7 @@ public class ResponseHandler extends Thread {
             @Override
             public void run() {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/mainMenu.fxml"));
-                mainMenuController = loader.getController();
+                loader.setController(mainMenuController);
                 try {
                     Main.getStage().getScene().setRoot(loader.load());
                 } catch (IOException e) {
@@ -193,14 +194,7 @@ public class ResponseHandler extends Thread {
     }
 
     private void loadBattleMenu() {
-        Platform.runLater(() -> {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/battleMenu.fxml"));
-            try {
-                Main.getStage().getScene().setRoot(loader.load());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        Platform.runLater(() -> MainMenuController.loadPage("/view/fxmls/battleMenu.fxml"));
     }
 
     //=============================================================SHOP
@@ -291,6 +285,14 @@ public class ResponseHandler extends Thread {
 
     public void setShopFxmlController(ShopFxmlController shopFxmlController) {
         this.shopFxmlController = shopFxmlController;
+    }
+
+    public MapController getMapController() {
+        return mapController;
+    }
+
+    public void setMapController(MapController mapController) {
+        this.mapController = mapController;
     }
 
 }

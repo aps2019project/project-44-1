@@ -27,8 +27,8 @@ public class AccountController{
     private static final int MULTI2 = 22;
     private boolean regreted = false;
 
-    private AccountController() {
-    }
+//    private AccountController() {
+//    }
 
     public static AccountController getInstance() {
         return accountController;
@@ -51,7 +51,7 @@ public class AccountController{
         }
     }
 
-    public void storyGame() {
+    public void storyGame() {// TODO: 7/10/2019 edit here
         int level = state;
         ArtificialIntelligence artificialIntelligence = new ArtificialIntelligence();
         Account ai_player = artificialIntelligence.getAccount(level);

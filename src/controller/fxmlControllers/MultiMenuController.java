@@ -26,6 +26,7 @@ public class MultiMenuController implements Initializable {
     private static final String flag_bound = "[1-9]";
     private static final int MULTI1 = 20;
     private static final int MULTI2 = 22;
+    private static final String canc = "cancel";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -83,7 +84,7 @@ public class MultiMenuController implements Initializable {
     }
 
     private void action() {
-        if (cancel.getText().equals("cancel")) {
+        if (cancel.getText().equals(canc)) {
             regret();
         }
         if (choice.getSelectionModel().getSelectedItem().equals(""))
@@ -95,7 +96,7 @@ public class MultiMenuController implements Initializable {
 
     private void search() {
         look.setVisible(true);
-        cancel.setText("cancel");
+        cancel.setText(canc);
         number.setDisable(true);
         choice.setDisable(true);
         back.setDisable(true);

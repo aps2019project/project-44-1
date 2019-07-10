@@ -4,7 +4,6 @@ public enum RequestType {
     SIGN_UP,
     SIGN_IN,
     SAVE,
-    ENTER_SHOP,
     LOG_OUT,
     BUY,
     SELL,
@@ -31,6 +30,5 @@ public enum RequestType {
     ACCOUNT_MONEY,
     GET_SHOP_CARDS,
     ;
-
 
 }
