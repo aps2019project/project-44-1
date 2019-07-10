@@ -1,16 +1,12 @@
 package view.fxmls.wrapperClasses;
 
 import client.CardBuilder;
-import client.RequestSender;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import models.*;
-import server.Environment;
-import server.Request;
-import server.RequestType;
 
 public class CardContainer {
     private AnchorPane anchorPane = new AnchorPane();
