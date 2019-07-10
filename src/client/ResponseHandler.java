@@ -107,7 +107,7 @@ public class ResponseHandler extends Thread {
 
     private void logout() {
         Main.setToken(null);
-        MainMenuController.loadPage("/view/fxmls/loginPage.fxml");
+        Platform.runLater(() -> MainMenuController.loadPage("/view/fxmls/loginPage.fxml"));
     }
 
     private void showMatchHistory() {
