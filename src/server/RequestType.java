@@ -29,6 +29,7 @@ public enum RequestType {
     SEARCH_IN_SHOP,
     ACCOUNT_MONEY,
     GET_SHOP_CARDS,
+    ENTER_SHOP,
     ;
 
 }

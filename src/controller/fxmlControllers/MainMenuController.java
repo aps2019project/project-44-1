@@ -44,7 +44,9 @@ public class MainMenuController implements Initializable {
     }
 
     private void goToShop() {
-        loadPage("/view/fxmls/shop.fxml");
+        Request request = new Request(Environment.MAIN_MENU);
+        request.setRequestType(RequestType.ENTER_SHOP);
+        RequestSender.getInstance().sendRequest(request);
     }
 
     private void save() {

@@ -87,6 +87,20 @@ public class ResponseHandler extends Thread {
                 break;
             case LOG_OUT:
                 logout();
+                break;
+            case ENTER_SHOP:
+                loadShop();
+        }
+    }
+
+    private void loadShop() {
+        ShopFxmlController.setAccount(response.getAccount());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/shop.fxml"));
+        try {
+            Main.getStage().getScene().setRoot(loader.load());
+            shopFxmlController = loader.getController();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -207,9 +221,6 @@ public class ResponseHandler extends Thread {
             case SEARCH_IN_SHOP:
                 Platform.runLater(() -> shopFxmlController.shop.setVvalue(response.getvValue()));
                 break;
-            case GET_SHOP_CARDS:
-                Platform.runLater(this::getShopCards);
-                break;
             case SUCCESSFULL_SELL:
                 Platform.runLater(this::sold);
                 break;
@@ -238,19 +249,6 @@ public class ResponseHandler extends Thread {
             }
         }
         shopFxmlController.money.setText(String.valueOf(response.getMoney()));
-    }
-
-    private void getShopCards() {
-        for (Placeable c : response.getShopCards()) {
-            shopFxmlController.fillPanes(c, shopFxmlController.pane, true);
-        }
-        Collection collection = response.getCollection();
-        for (Placeable p : collection.getCollectionCards()) {
-            System.out.println(p instanceof Card);
-        }
-        for (Placeable c : collection.getCollectionCards()) {
-            shopFxmlController.fillPanes(c, shopFxmlController.collectionPane, false);
-        }
     }
 
     private void viewMessage(String message) {

@@ -1,5 +1,6 @@
 package controller.fxmlControllers;
 
+import client.CardBuilder;
 import client.RequestSender;
 import client.ResponseHandler;
 import javafx.fxml.FXMLLoader;
@@ -30,19 +31,20 @@ public class ShopFxmlController implements Initializable {
     public Label message;
     public ScrollPane shop;
     public TextField search;
-    Account account;
+    private static Account account;
+    private CardBuilder builder = new CardBuilder();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         back.setOnAction(actionEvent -> Game.getInstance().loadPage(back, "/view/fxmls/mainMenu.fxml"));
         money.setText(Integer.toString(account.getMoney()));
+        for (Placeable c : builder.getCards()) {
+            fillPanes(c, pane, true);
+        }
+        for (Placeable c : account.getCollection().getCollectionCards()) {
+            fillPanes(builder.getCard(c.getName()), collectionPane, false);
+        }
 
-        ResponseHandler.getInstance().setShopFxmlController(this);
-        Request request = new Request(Environment.SHOP);
-        request.setRequestType(RequestType.ACCOUNT_MONEY);
-        RequestSender.getInstance().sendRequest(request);
-
-        craftGraphics();
         search.setOnKeyPressed(actionEvent -> {
             if (actionEvent.getCode() == KeyCode.ENTER)
                 searchInShop();
@@ -50,17 +52,10 @@ public class ShopFxmlController implements Initializable {
     }
 
 
-
     private void searchInShop() {
         Request request = new Request(Environment.SHOP);
         request.setRequestType(RequestType.SEARCH_IN_SHOP);
         request.setSearchedString(search.getText());
-        RequestSender.getInstance().sendRequest(request);
-    }
-
-    private void craftGraphics() {
-        Request request = new Request(Environment.SHOP);
-        request.setRequestType(RequestType.GET_SHOP_CARDS);
         RequestSender.getInstance().sendRequest(request);
     }
 
@@ -142,4 +137,11 @@ public class ShopFxmlController implements Initializable {
         return s;
     }
 
+    public static Account getAccount() {
+        return account;
+    }
+
+    public static void setAccount(Account account) {
+        ShopFxmlController.account = account;
+    }
 }

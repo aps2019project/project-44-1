@@ -2,6 +2,7 @@ package server;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonStreamParser;
+import controller.fxmlControllers.MainMenuController;
 import controller.logicController.CollectionController;
 import controller.logicController.AccountController;
 import controller.logicController.GameController;
@@ -200,12 +201,10 @@ public class RequestHandler extends Thread {
             case SEARCH_IN_SHOP:
                 searchInShop(request, response, shop);
                 break;
-            case GET_SHOP_CARDS:
-                getShopCards(request, response, shop);
-                break;
             case BUY:
                 String cardName = request.getCardToBuy().split("\n")[0];
-                response.setShopErrorType(shop.buy(cardName));
+                response.setResponseType(ResponseType.ACCOUNT_MONEY);
+                response.setShopErrorType(shop.buy(cardName,account));
                 response.setMoney(account.getMoney());
                 response.setCardToBuy(shop.getCard(cardName));
                 break;
@@ -217,19 +216,12 @@ public class RequestHandler extends Thread {
 
     private void sell(Request request, Response response, Shop shop, Account account) {
         String cardName = request.getCardToSell().split("\n")[0];
-        if (shop.sell(account.getCollection().getCardIDInCollection(cardName))) {
+        if (shop.sell(account.getCollection().getCardIDInCollection(cardName),account)) {
             response.setResponseType(ResponseType.SUCCESSFULL_SELL);
             response.setMoney(account.getMoney());
             response.setPaneToRemoveID(request.getPaneToSellID());
             response.setCardToSell(cardName);
         }
-    }
-
-    private void getShopCards(Request request, Response response, Shop instance) {
-        response.setShopCards(instance.getCards());
-        response.setResponseType(ResponseType.GET_SHOP_CARDS);
-        response.setCollection(Main.getOnlineAccounts().get(request.getOuthToken()).getCollection());
-        responseSender.sendResponse(response);
     }
 
     private void searchInShop(Request request, Response response, Shop instance) {
@@ -266,7 +258,16 @@ public class RequestHandler extends Thread {
             case SHOW_MATCH_HISTORY:
                 showMatchHistory(request);
                 break;
+            case ENTER_SHOP:
+                enterShop(request);
         }
+    }
+
+    private void enterShop(Request request) {
+        Response response = new Response(Environment.MAIN_MENU);
+        response.setResponseType(ResponseType.ENTER_SHOP);
+        response.setAccount(Main.getOnlineAccounts().get(request.getOuthToken()));
+        responseSender.sendResponse(response);
     }
 
     private void logout(Request request) {

@@ -66,7 +66,7 @@ public class Shop {
     /**
      * sell() returns true when the selling is done completely and return false in the other case
      */
-    public boolean sell(int cardID) {
+    public boolean sell(int cardID,Account account) {
         Placeable card = account.getCollection().getCard(cardID);
         if (card != null) {
             account.getCollection().deleteCardFromCollection(cardID);
@@ -80,7 +80,7 @@ public class Shop {
     /**
      * it's better to throw exceptions
      */
-    public ErrorType buy(String cardName) {
+    public ErrorType buy(String cardName,Account account) {
         Placeable card = getCard(cardName);
         if (haveEnoughMoneyToBuyCard(card, account)) {
             if (card instanceof Item && !account.getCollection().canBuyItem()) {
