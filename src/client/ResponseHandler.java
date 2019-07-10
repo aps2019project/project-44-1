@@ -247,7 +247,6 @@ public class ResponseHandler extends Thread {
                 break;
             }
         }
-        shopFxmlController.money.setText(String.valueOf(response.getMoney()));
     }
 
     private void viewMessage(String message) {
