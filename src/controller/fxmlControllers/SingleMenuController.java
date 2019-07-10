@@ -47,7 +47,7 @@ public class SingleMenuController implements Initializable {
         Request request = new Request(Environment.BATTLE);
         request.setState(state);
         request.setRequestType(RequestType.SINGLE_PLAYER);
-        request.setMapController(controller);
+//        request.setMapController(controller);
         RequestSender.getInstance().sendRequest(request);
         loadScreen();
     }

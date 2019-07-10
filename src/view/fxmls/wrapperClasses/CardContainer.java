@@ -1,5 +1,6 @@
 package view.fxmls.wrapperClasses;
 
+import client.CardBuilder;
 import client.RequestSender;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -20,6 +21,7 @@ public class CardContainer {
     private ImageView imageView;
     private CheckBox checkBox;
     private Placeable card;
+    private static CardBuilder builder = new CardBuilder();
 
     {
         anchorPane.setStyle("-fx-background-image: url('/view/images/neutral_unit@2x.png'),url('/view/images/icon_mana.png');" +
@@ -30,12 +32,12 @@ public class CardContainer {
         checkBox = new CheckBox();
     }
 
-    private CardContainer(String name) {
-        Request request = new Request(Environment.COLLECTION);
-        request.setRequestType(RequestType.GET_CARD);
-        request.setCardToBuy(name);
-        RequestSender.getInstance().sendRequest(request);
-    }
+//    private CardContainer(String name) {
+//        Request request = new Request(Environment.COLLECTION);
+//        request.setRequestType(RequestType.GET_CARD);
+//        request.setCardToBuy(name);
+//        RequestSender.getInstance().sendRequest(request);
+//    }
 
     public CardContainer(Card card) {
         this(card.getName());
@@ -63,7 +65,8 @@ public class CardContainer {
         return card;
     }
 
-    public void createContainer(Placeable c) {
+    public CardContainer(String name) {
+        Placeable c = builder.getCard(name);
         manaLabel = new Label(Integer.toString(c.getNeededMana()));
         manaLabel.setStyle("-fx-font-size: 24px;-fx-text-fill: black;-fx-text-alignment: center;-fx-text-overrun: ELLIPSIS;-fx-alignment: center;" +
                 "-fx-pref-width: 51;-fx-pref-height: 39;-fx-font-weight: bold");

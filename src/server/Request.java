@@ -26,7 +26,7 @@ public class Request {
     private String searchedString;
     private String paneToSellID;
     private int state;
-    private MapController mapController;
+//    private MapController mapController;
 
     public Request(Environment environment) {
         this.environment = environment;
@@ -192,12 +192,12 @@ public class Request {
         this.state = state;
     }
 
-    public MapController getMapController() {
-        return mapController;
-    }
-
-    public void setMapController(MapController mapController) {
-        this.mapController = mapController;
-    }
+//    public MapController getMapController() {
+//        return mapController;
+//    }
+//
+//    public void setMapController(MapController mapController) {
+//        this.mapController = mapController;
+//    }
 
 }
