@@ -29,7 +29,7 @@ public class Deck implements Cloneable {
         this.hero = hero;
     }
 
-    ArrayList<Card> getCards() {
+    public ArrayList<Card> getCards() {
         return cards;
     }
 
@@ -152,5 +152,6 @@ public class Deck implements Cloneable {
         }
         return newCards;
     }
+
 
 }

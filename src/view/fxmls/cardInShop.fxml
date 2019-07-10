@@ -5,26 +5,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="297.0" stylesheets="@../styleSheets/cardInShop.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" >
-    <Label fx:id="mana" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="17.0" prefHeight="39.0" prefWidth="51.0" text="0" textAlignment="CENTER">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="440.0" prefWidth="297.0" stylesheets="@../styleSheets/cardInShop.css"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="mana" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="17.0" prefHeight="39.0"
+           prefWidth="51.0" text="0" textAlignment="CENTER">
         <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="System Bold" size="24.0"/>
         </font>
     </Label>
-    <Label fx:id="AP" alignment="CENTER" layoutX="49.0" layoutY="214.0" prefHeight="50.0" prefWidth="60.0" text="0" textAlignment="CENTER" textFill="#efff09">
+    <Label fx:id="AP" alignment="CENTER" layoutX="49.0" layoutY="214.0" prefHeight="50.0" prefWidth="60.0" text="0"
+           textAlignment="CENTER" textFill="#efff09">
         <font>
-            <Font name="System Bold" size="27.0" />
+            <Font name="System Bold" size="27.0"/>
         </font>
     </Label>
-    <Label fx:id="HP" alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="214.0" prefHeight="50.0" prefWidth="60.0" text="0" textAlignment="CENTER" textFill="RED">
+    <Label fx:id="HP" alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="214.0" prefHeight="50.0"
+           prefWidth="60.0" text="0" textAlignment="CENTER" textFill="RED">
         <font>
-            <Font name="System Bold" size="27.0" />
+            <Font name="System Bold" size="27.0"/>
         </font>
     </Label>
-    <Label fx:id="name" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="279.0" prefHeight="86.0" prefWidth="290.0" text="NAME" textAlignment="CENTER" textFill="WHITE">
+    <Label fx:id="name" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="279.0" prefHeight="86.0"
+           prefWidth="290.0" text="NAME" textAlignment="CENTER" textFill="WHITE">
         <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="System Bold" size="18.0"/>
         </font>
     </Label>
-   <ImageView fx:id="imageView" fitHeight="191.0" fitWidth="235.0" layoutX="58.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="imageView" fitHeight="191.0" fitWidth="235.0" layoutX="58.0" layoutY="10.0" pickOnBounds="true"
+               preserveRatio="true"/>
 </AnchorPane>

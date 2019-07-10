@@ -171,7 +171,7 @@ public class CollectionController {
         } else if (itemCounter > 1 || (itemCounter == 1 && !collection.canAddItem(deck))) {
             response.setResponseType(ResponseType.MORE_THAN_ONE_ITEM_ERROR);
 
-        } else if (deck.getDeckCards().size() + normalCardCounter > 20) {
+        } else if (deck.getCards().size() + normalCardCounter > 20) {
             response.setResponseType(ResponseType.MORE_THAN_20_NORMAL_CARD_ERROR);
         } else {
             response.setResponseType(ResponseType.SUCCESSFULLY_MOVE_CARD_TO_DECK);
@@ -179,7 +179,6 @@ public class CollectionController {
                 deck.addToDeck(collection.getCard(card));
             }
         }
-        //todo maybe need to add deck arraylist to the response
         response.setCollection(collection);
         responseSender.sendResponse(response);
     }
