@@ -1,5 +1,6 @@
 package server;
 
+import client.RequestSender;
 import com.google.gson.Gson;
 import com.google.gson.JsonStreamParser;
 import controller.logicController.CollectionController;
@@ -12,6 +13,7 @@ import models.Placeable;
 import models.Shop;
 import models.*;
 
+import java.util.Map;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -67,6 +69,9 @@ public class RequestHandler extends Thread {
                 break;
             case CUSTOM_CARD:
                 customCard(request);
+                break;
+            case MAP:
+                handleMapRequest(request);
         }
     }
 
@@ -312,6 +317,20 @@ public class RequestHandler extends Thread {
         Placeable customCard = request.getCustomCard();
         instance.getCards().add(customCard);
         instance.getRemainingCard().put(customCard.getName(), Shop.primaryCardNumber);
+    }
+
+    private void handleMapRequest(Request request){
+        String s = request.getOuthToken();
+        for (Map.Entry<String,Account> entry :Game.getInstance().getOnlineAccounts().entrySet()) {
+            if (entry.getKey().equals(s))
+                continue;
+            Response response = new Response(Environment.MAP);
+            response.setResponseType(ResponseType.CHAT);
+            response.setMessage(request.getMessage());
+            response.setSender(entry.getValue().getUsername());
+            RequestSender.getInstance().sendRequest(request);
+        }
+
     }
 
 }

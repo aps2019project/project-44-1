@@ -38,7 +38,8 @@ public enum ResponseType {
     ENTER_WAIT_PAGE(""),
     //main menu responses
     SHOW_MATCH_HISTORY("show match history"),
-    LOG_OUT("");
+    LOG_OUT(""),
+    CHAT(""),
 
 
 

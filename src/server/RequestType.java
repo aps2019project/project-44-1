@@ -30,6 +30,7 @@ public enum RequestType {
     ACCOUNT_MONEY,
     GET_SHOP_CARDS,
     ENTER_SHOP,
+    CHAT,
     ;
 
 }

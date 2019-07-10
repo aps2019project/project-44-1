@@ -7,5 +7,6 @@ public enum Environment {
     BATTLE,
     LEADER_BOARD,
     MAIN_MENU,
-    CUSTOM_CARD
+    CUSTOM_CARD,
+    MAP
 }

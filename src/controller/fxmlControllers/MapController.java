@@ -1,5 +1,6 @@
 package controller.fxmlControllers;
 
+import client.RequestSender;
 import controller.logicController.BattleController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -11,6 +12,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import models.Card;
+import server.Environment;
+import server.Request;
+import server.RequestType;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -55,6 +59,7 @@ public class MapController implements Initializable {
             if (keyEvent.getCode().equals(KeyCode.ENTER))
                 applyCheat(cheat.getText());
         });
+        send.setOnAction(actionEvent -> chat());
     }
 
     private void deletePastRecord() {
@@ -137,6 +142,16 @@ public class MapController implements Initializable {
 
     private void applyCheat(String s) {
 
+    }
+
+    private void chat() {
+        String text = message.getText();
+        if (text.equals(""))
+            return;
+        Request request = new Request(Environment.MAP);
+        request.setRequestType(RequestType.CHAT);
+        request.setMessage(text);
+        RequestSender.getInstance().sendRequest(request);
     }
 
 }

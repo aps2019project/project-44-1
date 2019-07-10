@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import models.*;
 import server.Response;
 import server.ResponseType;
@@ -77,6 +78,9 @@ public class ResponseHandler extends Thread {
                 break;
             case MAIN_MENU:
                 handleMainMenu();
+                break;
+            case MAP:
+                handleMap();
         }
     }
 
@@ -218,6 +222,21 @@ public class ResponseHandler extends Thread {
         Platform.runLater(() -> MainMenuController.loadPage("/view/fxmls/battleMenu.fxml"));
     }
 
+    private void handleMap() {
+        switch (response.getResponseType()) {
+            case CHAT:
+                Platform.runLater(this::craftMessageBox);
+        }
+    }
+
+    private void craftMessageBox() {
+        HBox hBox = new HBox();
+        if (response.getSender().equals("-1"))
+            hBox.getChildren().addAll(new Label(response.getMessage()), new Label("YOU"));
+        else hBox.getChildren().addAll(new Label(response.getSender()), new Label(response.getMessage()));
+        mapController.chatBox.getChildren().add(hBox);
+    }
+
     //=============================================================SHOP
     private void handleShopResponse() {
         switch (response.getResponseType()) {
@@ -309,4 +328,5 @@ public class ResponseHandler extends Thread {
     public void setMainMenuController(MainMenuController mainMenuController) {
         this.mainMenuController = mainMenuController;
     }
+
 }

@@ -31,6 +31,8 @@ public class Response {
     private ErrorType shopErrorType;
     private ArrayList<Account> accounts;
     private HashMap<String, Account> onlineAccounts;
+    private String message;
+    private String sender = "-1";
 
     public Response(Environment environment) {
         this.environment = environment;
@@ -211,4 +213,21 @@ public class Response {
     public void setOnlineAccounts(HashMap<String, Account> onlineAccounts) {
         this.onlineAccounts = onlineAccounts;
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
 }

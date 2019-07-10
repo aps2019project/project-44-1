@@ -29,6 +29,7 @@ public class Request {
     private int flagNumbers;
     private int state;
     private Placeable customCard;
+    private String message;
 
     public Request(Environment environment) {
         this.environment = environment;
@@ -216,6 +217,14 @@ public class Request {
 
     public Placeable getCustomCard() {
         return customCard;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
 }
