@@ -16,7 +16,7 @@
          <Font size="21.0" />
       </font>
    </Label>
-   <Button fx:id="cancel" layoutX="218.0" layoutY="356.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="322.0" text="start">
+   <Button fx:id="cancel" layoutX="218.0" layoutY="356.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="322.0" style="-fx-text-fill: black" text="start">
       <font>
          <Font name="System Bold Italic" size="20.0" />
       </font>

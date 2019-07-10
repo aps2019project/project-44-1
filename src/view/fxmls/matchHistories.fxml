@@ -20,5 +20,5 @@
           <Font name="System Bold" size="17.0" />
         </font>
     </Label>
-   <Button fx:id="back" layoutX="418.0" layoutY="21.0" mnemonicParsing="false" text="back" />
+   <Button fx:id="back" layoutX="418.0" layoutY="21.0" mnemonicParsing="false" style="-fx-text-fill: black" text="back" />
 </AnchorPane>
