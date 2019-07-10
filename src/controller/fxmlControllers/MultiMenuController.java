@@ -84,6 +84,7 @@ public class MultiMenuController implements Initializable {
     private void action() {
         if (cancel.getText().equals(canc)) {
             regret();
+            return;
         }
         if (choice.getSelectionModel().getSelectedItem() == null)
             return;
@@ -112,6 +113,9 @@ public class MultiMenuController implements Initializable {
         choice.setDisable(false);
         back.setDisable(false);
         Request request = new Request(Environment.BATTLE);
+        request.setBattleMode(getBattleMode());
+        if (getBattleMode().equals(CAPTURE_FLAG_2))
+            request.setFlagNumbers(Integer.parseInt(number.getText()));
         request.setRequestType(RequestType.REGRETED);
         RequestSender.getInstance().sendRequest(request);
     }

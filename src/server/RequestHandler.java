@@ -150,11 +150,9 @@ public class RequestHandler extends Thread {
                 break;
             case REGRETED:
                 accountController.setRegreted(true);
+                OpponentFinder.deleteFromWaitingAccounts(request);
                 break;
             case WAIT_FOR_SECOND_PLAYER:
-                Response response = new Response(Environment.BATTLE);
-                response.setResponseType(ResponseType.ENTER_WAIT_PAGE);
-                responseSender.sendResponse(response);
                 OpponentFinder.addToWaitingAccounts(request, responseSender);
 
         }
