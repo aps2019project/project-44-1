@@ -92,4 +92,12 @@ public class OpponentFinder extends Thread {
         responseSenders.remove(account);
     }
 
+    public static synchronized void deleteLogOutAccount(Account account){
+        waitingAccountsForDeathMatch.remove(account);
+        waitingAccountsForSaveFlag.remove(account);
+        for (int i = 1; i < 10; i++) {
+            waitingAccountsForCaptureFlag.get(i).remove(account);
+        }
+    }
+
 }

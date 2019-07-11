@@ -95,14 +95,18 @@ public class RequestHandler extends Thread {
 
     private void closeConnection(Request request) {
         try {
+            if (request.getOuthToken() != null)
+                OpponentFinder.deleteLogOutAccount(Main.getOnlineAccounts().get(request.getOuthToken()));
             this.interrupt();
             responseSender.closeBufferedWriter();
             currentSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
+            if (request.getOuthToken() != null)
+                Main.removeFromOnlineAccounts(request.getOuthToken());
             Main.getSockets().remove(currentSocket);
-            Main.removeFromOnlineAccounts(request.getOuthToken());
+
         }
 
     }
@@ -319,9 +323,9 @@ public class RequestHandler extends Thread {
         instance.getRemainingCard().put(customCard.getName(), Shop.primaryCardNumber);
     }
 
-    private void handleMapRequest(Request request){
+    private void handleMapRequest(Request request) {
         String s = request.getOuthToken();
-        for (Map.Entry<String,Account> entry :Game.getInstance().getOnlineAccounts().entrySet()) {
+        for (Map.Entry<String, Account> entry : Game.getInstance().getOnlineAccounts().entrySet()) {
             if (entry.getKey().equals(s))
                 continue;
             Response response = new Response(Environment.MAP);
