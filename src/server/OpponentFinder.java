@@ -1,6 +1,5 @@
 package server;
 
-import client.ResponseHandler;
 import models.Account;
 import models.Battle;
 import models.Enums.BattleKind;
@@ -63,7 +62,7 @@ public class OpponentFinder extends Thread {
         responseSenders.get(first).setBattle(battle);
         responseSenders.get(second).setBattle(battle);
         Response response = new Response(Environment.BATTLE);
-        response.setResponseType(ResponseType.ENTER_BATTEL_MAP);
+        response.setResponseType(ResponseType.ENTER_MULTI_BATTEL_MAP);
         response.setMap(battle.getMap());
         //set account of the response to the first account and send response to first one
         response.setPlayer(battle.getFirstPlayer());

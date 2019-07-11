@@ -6,7 +6,6 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonStreamParser;
 import controller.fxmlControllers.*;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -36,6 +35,7 @@ public class ResponseHandler extends Thread {
     private ShopFxmlController shopFxmlController;
     private MainMenuController mainMenuController;
     private MapController mapController;
+    private MultiMapController multiMapController;
 
     public static ResponseHandler getInstance() {
         return RESPONSE_HANDLER;
@@ -216,9 +216,9 @@ public class ResponseHandler extends Thread {
             case ENTER_MAP:
                 Platform.runLater(() -> MainMenuController.loadPage("/view/fxmls/map.fxml"));
                 break;
-            case ENTER_BATTEL_MAP:
-                MapController.setPlayer(response.getPlayer());
-                MapController.setLogicMap(response.getMap());
+            case ENTER_MULTI_BATTEL_MAP:
+                MultiMapController.setPlayer(response.getPlayer());
+                MultiMapController.setLogicMap(response.getMap());
                 loadBattleMap();
         }
     }
@@ -227,10 +227,10 @@ public class ResponseHandler extends Thread {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/map.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/multiMap.fxml"));
                 try {
                     Main.getStage().getScene().setRoot(loader.load());
-                    mapController = loader.getController();
+                    multiMapController = loader.getController();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

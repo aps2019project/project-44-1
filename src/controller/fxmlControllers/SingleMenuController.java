@@ -49,8 +49,6 @@ public class SingleMenuController implements Initializable {
         request.setState(state);
         request.setRequestType(RequestType.SINGLE_PLAYER);
         RequestSender.getInstance().sendRequest(request);
-        ResponseHandler.getInstance().setMapController(controller);
-        loadScreen();
     }
 
     private void loadScreen() {
