@@ -151,7 +151,7 @@ public class RequestHandler extends Thread {
 //                break;
             case SINGLE_PLAYER:
                 accountController.setState(request.getState());
-                accountController.setAccount(Game.getInstance().getOnlineAccounts().get(request.getOuthToken()));
+                accountController.setAccount(Main.getOnlineAccounts().get(request.getOuthToken()));
                 accountController.storyGame();
                 break;
             case REGRETED:
