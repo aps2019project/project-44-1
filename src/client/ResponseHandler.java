@@ -223,13 +223,19 @@ public class ResponseHandler extends Thread {
     }
 
     private void loadBattleMap() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/map.fxml"));
-        try {
-            Main.getStage().getScene().setRoot(loader.load());
-            mapController = loader.getController();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/map.fxml"));
+                try {
+                    Main.getStage().getScene().setRoot(loader.load());
+                    mapController = loader.getController();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
     private void loadBattleMenu() {

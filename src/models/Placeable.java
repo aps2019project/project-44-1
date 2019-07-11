@@ -6,7 +6,7 @@ public class Placeable implements Comparable<Placeable> {
     private int ID;
     private String name;
     private int cost;
-    transient private String path;
+    private String path;
 
 
     public void setPath(String path) {

@@ -11,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import models.Account;
 import models.Card;
 import models.Map;
 import models.Player;
@@ -104,8 +103,8 @@ public class MapController implements Initializable {
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-        System.out.println(Arrays.toString(battleController.getBattle().getCurrentPlayer().getHand()));
-        System.out.println(battleController.getBattle().getCurrentPlayer().getNextCardInHand());
+        System.out.println(Arrays.toString(player.getHand()));
+        System.out.println(player.getNextCardInHand());
         setHandImages(player.getHand(),
                 player.getNextCardInHand());
     }
@@ -117,6 +116,12 @@ public class MapController implements Initializable {
         third.setImage(new Image(cards[2].getPath().substring(4)));
         fourth.setImage(new Image(cards[3].getPath().substring(4)));
         fifth.setImage(new Image(cards[4].getPath().substring(4)));
+//        nextInHand.setImage(new Image(player.getNextCardInHand().getPath()));
+//        first.setImage(new Image(player.getHand()[0].getPath()));
+//        second.setImage(new Image(player.getHand()[1].getPath()));
+//        third.setImage(new Image(player.getHand()[2].getPath()));
+//        fourth.setImage(new Image(player.getHand()[3].getPath()));
+//        fifth.setImage(new Image(player.getHand()[4].getPath()));
     }
 
     private void screenShot() {
