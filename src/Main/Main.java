@@ -14,11 +14,7 @@ import server.Request;
 import server.RequestType;
 
 import javax.sound.sampled.*;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.InetAddress;
+import java.io.*;
 import java.net.Socket;
 
 public class Main extends Application {
@@ -38,8 +34,15 @@ public class Main extends Application {
 
     private static void connectToServer() {
         try {
-            InetAddress ip = InetAddress.getByName("localhost");
-            Socket socket = new Socket(ip, 8000);
+            String ip;
+            int port;
+            FileReader reader = new FileReader("src/client/config");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            ip = bufferedReader.readLine().split(":")[1];
+            port = Integer.parseInt(bufferedReader.readLine().split(":")[1]);
+            bufferedReader.close();
+            reader.close();
+            Socket socket = new Socket(ip, port);
             ResponseHandler responseHandler = ResponseHandler.getInstance();
             ResponseHandler.getInstance().setJsonStreamParser(socket.getInputStream());
             clientResponseHandler = responseHandler;

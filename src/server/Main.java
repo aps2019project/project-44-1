@@ -3,6 +3,8 @@ package server;
 import models.Account;
 import models.Game;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -15,7 +17,13 @@ public class Main {
     private static HashMap<String, Account> onlineAccounts = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
-        ServerSocket server = new ServerSocket(8000);
+        int port;
+        FileReader reader = new FileReader("src/server/config");
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        port = Integer.parseInt(bufferedReader.readLine().split(":")[1]);
+        bufferedReader.close();
+        reader.close();
+        ServerSocket server = new ServerSocket(port);
         Socket socket;
         System.out.println("server is running...");
         OpponentFinder opponentFinder = new OpponentFinder();
