@@ -4,8 +4,4 @@
 AP PROJECT.iml
 lib/
 out/
-project-44-1.iml
-src/models/tests/
-/src/view/images/resources/
-src/view/record
-!src/view/record/Shot0.jpg.gitkeep
+#src/view/record

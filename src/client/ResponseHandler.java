@@ -6,13 +6,12 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonStreamParser;
 import controller.fxmlControllers.*;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import models.*;
+import models.Placeable;
 import server.Response;
 import server.ResponseType;
 
@@ -236,7 +235,6 @@ public class ResponseHandler extends Thread {
                 }
             }
         });
-
     }
 
     private void loadBattleMenu() {
