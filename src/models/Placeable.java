@@ -1,12 +1,12 @@
 package models;
 
 public class Placeable implements Comparable<Placeable> {
-    private Cell cell;
+    transient private Cell cell;
     private int neededMana;
     private int ID;
     private String name;
     private int cost;
-    private String path;
+    transient private String path;
 
 
     public void setPath(String path) {

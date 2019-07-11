@@ -33,7 +33,7 @@ public class RequestHandler extends Thread {
         try {
             currentSocket = socket;
             parser = new JsonStreamParser(new BufferedReader(new InputStreamReader(socket.getInputStream())));
-            responseSender = new ResponseSender(socket.getOutputStream());
+            responseSender = new ResponseSender(socket.getOutputStream(),this.gson);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -11,7 +11,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import models.Account;
 import models.Card;
+import models.Map;
+import models.Player;
 import server.Environment;
 import server.Request;
 import server.RequestType;
@@ -48,6 +51,8 @@ public class MapController implements Initializable {
     public TitledPane gChat;
     private boolean playing = true;
     private BattleController battleController = BattleController.getInstance();
+    private static Player player;
+    private static Map logicMap;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -101,8 +106,8 @@ public class MapController implements Initializable {
         }
         System.out.println(Arrays.toString(battleController.getBattle().getCurrentPlayer().getHand()));
         System.out.println(battleController.getBattle().getCurrentPlayer().getNextCardInHand());
-//        setHandImages(battleController.getBattle().getCurrentPlayer().getHand(),
-//                battleController.getBattle().getCurrentPlayer().getNextCardInHand());
+        setHandImages(player.getHand(),
+                player.getNextCardInHand());
     }
 
     private void setHandImages(Card[] cards, Card next) {
@@ -154,4 +159,19 @@ public class MapController implements Initializable {
         RequestSender.getInstance().sendRequest(request);
     }
 
+    public static Player getPlayer() {
+        return player;
+    }
+
+    public static void setPlayer(Player player) {
+        MapController.player = player;
+    }
+
+    public static Map getLogicMap() {
+        return logicMap;
+    }
+
+    public static void setLogicMap(Map logicMap) {
+        MapController.logicMap = logicMap;
+    }
 }

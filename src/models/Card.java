@@ -1,5 +1,6 @@
 package models;
 
+import com.google.gson.annotations.Expose;
 import models.Enums.AttackType;
 import models.Enums.SpecialPowerActivation;
 import models.Enums.State;
@@ -12,7 +13,7 @@ public class Card extends Placeable implements Fight, Cloneable {
     private AttackType attackType;
     private int range;
     private SpecialPowerActivation specialPowerActivation;
-    private Player owner;
+    transient private Player owner;
     private boolean[] state = {true, false, false, false};
 
     void setOwner(Player owner) {

@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 public class Player implements Move {
     private Card[] hand = new Card[5];
     private int mana;
-    private Deck deck;
+    transient private Deck deck;
     private int turnsFlagSaved;
     private int flagsCaptured;
     public static final int[] turnBeginMana = {2, 3, 4, 5, 6, 7, 8, 9};

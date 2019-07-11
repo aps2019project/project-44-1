@@ -1,9 +1,7 @@
 package server;
 
-import models.Account;
-import models.Collection;
+import models.*;
 import models.Enums.ErrorType;
-import models.Placeable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,6 +31,8 @@ public class Response {
     private HashMap<String, Account> onlineAccounts;
     private String message;
     private String sender = "-1";
+    private Map map;
+    private Player player;
 
     public Response(Environment environment) {
         this.environment = environment;
@@ -230,4 +230,19 @@ public class Response {
         this.sender = sender;
     }
 
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 }

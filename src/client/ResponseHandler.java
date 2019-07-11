@@ -215,6 +215,20 @@ public class ResponseHandler extends Thread {
             case ENTER_MAP:
                 Platform.runLater(() -> MainMenuController.loadPage("/view/fxmls/map.fxml"));
                 break;
+            case ENTER_BATTEL_MAP:
+                MapController.setPlayer(response.getPlayer());
+                MapController.setLogicMap(response.getMap());
+                loadBattleMap();
+        }
+    }
+
+    private void loadBattleMap() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/map.fxml"));
+        try {
+            Main.getStage().getScene().setRoot(loader.load());
+            mapController = loader.getController();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

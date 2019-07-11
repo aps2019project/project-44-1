@@ -1,5 +1,6 @@
 package server;
 
+import client.ResponseHandler;
 import models.Account;
 import models.Battle;
 import models.Enums.BattleKind;
@@ -54,14 +55,21 @@ public class OpponentFinder extends Thread {
         this.startBattle(first, second, battleMode, 0);
     }
 
+
+
     private void startBattle(Account first, Account second, BattleMode battleMode, int flagNumber) {
+        //todo set prize
         Battle battle = new Battle(BattleKind.MULTI_PLAYER,battleMode,first,second,flagNumber);
         responseSenders.get(first).setBattle(battle);
         responseSenders.get(second).setBattle(battle);
         Response response = new Response(Environment.BATTLE);
         response.setResponseType(ResponseType.ENTER_BATTEL_MAP);
-        //todo set required information to start a battle
+        response.setMap(battle.getMap());
+        //set account of the response to the first account and send response to first one
+        response.setPlayer(battle.getFirstPlayer());
         responseSenders.get(first).getResponseSender().sendResponse(response);
+        //set account of the response to the second account and send response to second one
+        response.setPlayer(battle.getSecondPlayer());
         responseSenders.get(second).getResponseSender().sendResponse(response);
         responseSenders.remove(first);
         responseSenders.remove(second);
