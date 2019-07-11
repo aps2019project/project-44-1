@@ -1,107 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
-<BorderPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" stylesheets="@../styleSheets/map.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <GridPane fx:id="map" gridLinesVisible="true" prefHeight="311.0" prefWidth="848.0" BorderPane.alignment="CENTER">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
-   </center>
-   <left>
-       <Pane prefHeight="311.0" prefWidth="118.0" BorderPane.alignment="CENTER">
-           <Button fx:id="exit" layoutX="1.0" layoutY="227.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="117.0" styleClass="intro" text="exit" textFill="#e2fa07">
-              <font>
-                  <Font size="14.0" />
-              </font>
-           </Button>
-           <Button fx:id="save" layoutY="135.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="119.0" styleClass="intro" text="save" textFill="#e5fd0a">
-              <font>
-                  <Font size="14.0" />
-              </font>
-           </Button>
-       </Pane>
-   </left>
-   <right>
-       <Pane prefHeight="314.0" prefWidth="159.0" BorderPane.alignment="CENTER">
-           <Button fx:id="graveyard" layoutX="14.0" layoutY="131.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="134.0" styleClass="intro" text="graveyard" textFill="#e5f507">
-              <font>
-                  <Font size="14.0" />
-              </font>
-           </Button>
-           <Button fx:id="endTurn" layoutX="15.0" layoutY="215.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="132.0" styleClass="intro" text="end turn" textFill="#cee80c">
-              <font>
-                  <Font size="14.0" />
-              </font>
-           </Button>
-       </Pane>
-   </right>
-   <bottom>
-       <Pane prefHeight="100.0" prefWidth="850.0" BorderPane.alignment="CENTER">
-           <HBox prefHeight="103.0" prefWidth="850.0">
-               <ImageView fx:id="nextInHand" fitHeight="103.0" fitWidth="140.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" />
-               <ImageView fx:id="first" fitHeight="100.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
-               <ImageView fx:id="second" fitHeight="99.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
-               <ImageView fx:id="third" fitHeight="100.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
-               <ImageView fx:id="fourth" fitHeight="101.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
-               <ImageView fx:id="fifth" fitHeight="100.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
-           </HBox>
-       </Pane>
-   </bottom>
-   <top>
-       <Pane prefHeight="86.0" prefWidth="850.0" BorderPane.alignment="CENTER">
-           <TitledPane fx:id="cheatBox" alignment="CENTER" animated="false" contentDisplay="CENTER" expanded="false" layoutX="425.0" layoutY="-1.0" prefHeight="89.0" prefWidth="202.0" text="cheat box">
-               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                   <TextField fx:id="cheat" layoutY="15.0" prefHeight="33.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
-               </AnchorPane>
-           </TitledPane>
-           <ImageView fx:id="firstPlayer" fitHeight="132.0" fitWidth="162.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true" />
-           <ImageView fx:id="secondPlayer" fitHeight="117.0" fitWidth="170.0" layoutX="680.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
-         <TitledPane fx:id="gChat" alignment="CENTER" animated="false" expanded="false" layoutX="196.0" prefHeight="222.0" prefWidth="229.0" text="GLOBAL CHAT">
-           <content>
-             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="62.0" prefWidth="201.0">
-                  <children>
-                     <ScrollPane layoutX="1.0" layoutY="-2.0" prefHeight="155.0" prefWidth="226.0">
-                        <content>
-                           <VBox fx:id="chatBox" prefHeight="161.0" prefWidth="227.0" />
-                        </content>
-                     </ScrollPane>
-                     <TextField fx:id="message" layoutX="-2.0" layoutY="153.0" prefHeight="42.0" prefWidth="176.0" promptText="YOU'R MESSAGE..." AnchorPane.bottomAnchor="-205.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="44.400000000000006" AnchorPane.topAnchor="153.0" />
-                     <Button fx:id="send" layoutX="175.0" layoutY="153.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="52.0" text="SEND" AnchorPane.bottomAnchor="-205.0" AnchorPane.leftAnchor="165.4" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="153.0" />
-                  </children>
-               </AnchorPane>
-           </content>
-         </TitledPane>
-       </Pane>
-   </top>
+<BorderPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="500.0" prefWidth="850.0" stylesheets="@../styleSheets/map.css"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <center>
+        <GridPane fx:id="map" gridLinesVisible="true" prefHeight="311.0" prefWidth="848.0"
+                  BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+        </GridPane>
+    </center>
+    <left>
+        <Pane prefHeight="311.0" prefWidth="118.0" BorderPane.alignment="CENTER">
+            <Button fx:id="exit" layoutX="1.0" layoutY="227.0" mnemonicParsing="false" prefHeight="44.0"
+                    prefWidth="117.0" styleClass="intro" text="exit" textFill="#e2fa07">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Button>
+            <Button fx:id="save" layoutY="135.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="119.0"
+                    styleClass="intro" text="save" textFill="#e5fd0a">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Button>
+        </Pane>
+    </left>
+    <right>
+        <Pane prefHeight="314.0" prefWidth="159.0" BorderPane.alignment="CENTER">
+            <Button fx:id="graveyard" layoutX="14.0" layoutY="131.0" mnemonicParsing="false" prefHeight="51.0"
+                    prefWidth="134.0" styleClass="intro" text="graveyard" textFill="#e5f507">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Button>
+            <Button fx:id="endTurn" layoutX="15.0" layoutY="215.0" mnemonicParsing="false" prefHeight="51.0"
+                    prefWidth="132.0" styleClass="intro" text="end turn" textFill="#cee80c">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Button>
+        </Pane>
+    </right>
+    <bottom>
+        <Pane prefHeight="100.0" prefWidth="850.0" BorderPane.alignment="CENTER">
+            <HBox prefHeight="103.0" prefWidth="850.0">
+                <ImageView fx:id="nextInHand" fitHeight="103.0" fitWidth="140.0" opacity="0.5" pickOnBounds="true"
+                           preserveRatio="true"/>
+                <ImageView fx:id="first" fitHeight="100.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true"/>
+                <ImageView fx:id="second" fitHeight="99.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true"/>
+                <ImageView fx:id="third" fitHeight="100.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true"/>
+                <ImageView fx:id="fourth" fitHeight="101.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true"/>
+                <ImageView fx:id="fifth" fitHeight="100.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true"/>
+            </HBox>
+        </Pane>
+    </bottom>
+    <top>
+        <Pane prefHeight="86.0" prefWidth="850.0" BorderPane.alignment="CENTER">
+            <TitledPane fx:id="cheatBox" alignment="CENTER" animated="false" contentDisplay="CENTER" expanded="false"
+                        layoutX="425.0" layoutY="-1.0" prefHeight="89.0" prefWidth="202.0" text="cheat box">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <TextField fx:id="cheat" layoutY="15.0" prefHeight="33.0" prefWidth="200.0"
+                               AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                               AnchorPane.topAnchor="15.0"/>
+                </AnchorPane>
+            </TitledPane>
+            <ImageView fx:id="firstPlayer" fitHeight="132.0" fitWidth="162.0" layoutX="1.0" pickOnBounds="true"
+                       preserveRatio="true"/>
+            <ImageView fx:id="secondPlayer" fitHeight="117.0" fitWidth="170.0" layoutX="680.0" layoutY="1.0"
+                       pickOnBounds="true" preserveRatio="true"/>
+            <TitledPane fx:id="gChat" alignment="CENTER" animated="false" layoutX="196.0" prefHeight="222.0"
+                        prefWidth="229.0" text="GLOBAL CHAT">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="62.0" prefWidth="201.0">
+                    <ScrollPane layoutX="1.0" layoutY="-2.0" prefHeight="156.0" prefWidth="226.0">
+                        <VBox fx:id="chatBox" prefHeight="157.0" prefWidth="227.0"/>
+                    </ScrollPane>
+                    <TextField fx:id="message" layoutX="32.6" layoutY="164.6" prefHeight="44.0"
+                               prefWidth="124.0" promptText="YOU'R MESSAGE..." AnchorPane.bottomAnchor="-3.0"
+                               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="55.0"
+                               AnchorPane.topAnchor="150.0"/>
+                    <Button fx:id="send" layoutX="149.0" layoutY="149.0" mnemonicParsing="false"
+                            prefHeight="65.0" prefWidth="86.0" style="-fx-background-color: red;" text="SEND"
+                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="160.0"
+                            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0"/>
+                </AnchorPane>
+            </TitledPane>
+        </Pane>
+    </top>
 </BorderPane>

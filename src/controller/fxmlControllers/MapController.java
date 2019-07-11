@@ -138,7 +138,7 @@ public class MapController implements Initializable {
                     BufferedImage Image = r.createScreenCapture(capture);
                     ImageIO.write(Image, "jpg", new File("src\\view\\record\\Shot"
                             + (index++) + ".jpg"));
-                    r.setAutoDelay(100);
+                    r.setAutoDelay(500);
                 } catch (AWTException | IOException ex) {
                     ex.printStackTrace();
                 }
