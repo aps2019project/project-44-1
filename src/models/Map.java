@@ -6,6 +6,7 @@ public class Map {
 
     private Cell[][] cells = new Cell[5][9];
     private ArrayList<Item> flags = new ArrayList<>();
+    private boolean isSeconPlayer;
 
     Map() {
         for (int i = 0; i < 5; i++) {
@@ -128,5 +129,7 @@ public class Map {
         }
         return cards;
     }
+
+
 
 }

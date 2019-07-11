@@ -219,6 +219,7 @@ public class ResponseHandler extends Thread {
             case ENTER_MULTI_BATTEL_MAP:
                 MultiMapController.setPlayer(response.getPlayer());
                 MultiMapController.setLogicMap(response.getMap());
+                MultiMapController.setSecondPlayerName(response.getSecondPlayerName());
                 loadBattleMap();
         }
     }

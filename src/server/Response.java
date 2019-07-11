@@ -33,6 +33,7 @@ public class Response {
     private String sender = "-1";
     private Map map;
     private Player player;
+    private String secondPlayerName;
 
     public Response(Environment environment) {
         this.environment = environment;
@@ -245,4 +246,14 @@ public class Response {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
+    public String getSecondPlayerName() {
+        return secondPlayerName;
+    }
+
+    public void setSecondPlayerName(String secondPlayerName) {
+        this.secondPlayerName = secondPlayerName;
+    }
+
+
 }

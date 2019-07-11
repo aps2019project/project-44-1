@@ -66,6 +66,7 @@ public class OpponentFinder extends Thread {
         response.setMap(battle.getMap());
         //set account of the response to the first account and send response to first one
         response.setPlayer(battle.getFirstPlayer());
+        response.setSecondPlayerName(second.getUsername());
         responseSenders.get(first).getResponseSender().sendResponse(response);
         //set account of the response to the second account and send response to second one
         response.setPlayer(battle.getSecondPlayer());

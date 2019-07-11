@@ -13,6 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import models.Card;
+import models.Cell;
 import models.Map;
 import models.Player;
 import server.Environment;
@@ -54,6 +55,7 @@ public class MultiMapController implements Initializable {
     private static Player player;
     private static Map logicMap;
     private CardBuilder cardBuilder = new CardBuilder();
+    private static String secondPlayerName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -66,6 +68,22 @@ public class MultiMapController implements Initializable {
                 applyCheat(cheat.getText());
         });
         send.setOnAction(actionEvent -> chat());
+        showCardsInMap();
+    }
+
+    private void showCardsInMap() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
+                Card card = logicMap.getCells()[i][j].getCard();
+                if (card != null && cardBuilder.getCard(card.getName()).getPath() != null) {
+                    ImageView imageView = new ImageView(new Image(cardBuilder.getCard(card.getName()).getPath()));
+                    if (card.getInGameID().split("_")[0].equals(secondPlayerName))
+                        imageView.setScaleX(-1);
+                    map.add(imageView, j, i);
+                }
+
+            }
+        }
     }
 
     private void deletePastRecord() {
@@ -174,5 +192,13 @@ public class MultiMapController implements Initializable {
 
     public static void setLogicMap(Map logicMap) {
         MultiMapController.logicMap = logicMap;
+    }
+
+    public static String getSecondPlayerName() {
+        return secondPlayerName;
+    }
+
+    public static void setSecondPlayerName(String secondPlayerName) {
+        MultiMapController.secondPlayerName = secondPlayerName;
     }
 }
