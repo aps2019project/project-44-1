@@ -40,6 +40,7 @@ public enum ResponseType {
     SHOW_MATCH_HISTORY("show match history"),
     LOG_OUT(""),
     CHAT(""),
+    EXPORT_DECK("")
 
 
 
