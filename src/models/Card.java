@@ -161,4 +161,13 @@ public class Card extends Placeable implements Fight, Cloneable {
         return this.getName();
     }
 
+    @Override
+    public String getPath() {
+        return super.getPath();
+    }
+
+    @Override
+    public void setPath(String path) {
+        super.setPath(path);
+    }
 }

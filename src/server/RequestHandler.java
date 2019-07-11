@@ -150,9 +150,9 @@ public class RequestHandler extends Thread {
     private void handleBattleRequest(Request request) {
         AccountController accountController = new AccountController();
         switch (request.getRequestType()) {
-            case MULTI_PLAYER:
-                multiRequest(request);
-                break;
+//            case MULTI_PLAYER:
+//                multiRequest(request);
+//                break;
             case SINGLE_PLAYER:
                 accountController.setState(request.getState());
                 accountController.setAccount(Game.getInstance().getOnlineAccounts().get(request.getOuthToken()));

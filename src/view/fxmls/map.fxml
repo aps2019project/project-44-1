@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" stylesheets="@../styleSheets/map.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" stylesheets="@../styleSheets/map.css" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.fxmlControllers.MapController" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <GridPane fx:id="map" gridLinesVisible="true" prefHeight="311.0" prefWidth="848.0" BorderPane.alignment="CENTER">
         <columnConstraints>

@@ -1,5 +1,6 @@
 package controller.fxmlControllers;
 
+import client.CardBuilder;
 import client.RequestSender;
 import controller.logicController.BattleController;
 import javafx.fxml.Initializable;
@@ -52,11 +53,12 @@ public class MapController implements Initializable {
     private BattleController battleController = BattleController.getInstance();
     private static Player player;
     private static Map logicMap;
+    private CardBuilder cardBuilder = new CardBuilder();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        deletePastRecord();
-        screenShot();
+//        deletePastRecord();
+//        screenShot();
         initializeButtons();
         setImages();
         cheat.setOnKeyPressed(keyEvent -> {
@@ -110,18 +112,12 @@ public class MapController implements Initializable {
     }
 
     private void setHandImages(Card[] cards, Card next) {
-        nextInHand.setImage(new Image(next.getPath().substring(4)));
-        first.setImage(new Image(cards[0].getPath().substring(4)));
-        second.setImage(new Image(cards[1].getPath().substring(4)));
-        third.setImage(new Image(cards[2].getPath().substring(4)));
-        fourth.setImage(new Image(cards[3].getPath().substring(4)));
-        fifth.setImage(new Image(cards[4].getPath().substring(4)));
-//        nextInHand.setImage(new Image(player.getNextCardInHand().getPath()));
-//        first.setImage(new Image(player.getHand()[0].getPath()));
-//        second.setImage(new Image(player.getHand()[1].getPath()));
-//        third.setImage(new Image(player.getHand()[2].getPath()));
-//        fourth.setImage(new Image(player.getHand()[3].getPath()));
-//        fifth.setImage(new Image(player.getHand()[4].getPath()));
+        nextInHand.setImage(new Image(cardBuilder.getCard(next.getName()).getPath()));
+        first.setImage(new Image(cardBuilder.getCard(cards[0].getName()).getPath()));
+        second.setImage(new Image(cardBuilder.getCard(cards[1].getName()).getPath()));
+        third.setImage(new Image(cardBuilder.getCard(cards[2].getName()).getPath()));
+        fourth.setImage(new Image(cardBuilder.getCard(cards[3].getName()).getPath()));
+        fifth.setImage(new Image(cardBuilder.getCard(cards[4].getName()).getPath()));
     }
 
     private void screenShot() {
