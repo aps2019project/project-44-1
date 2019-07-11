@@ -35,7 +35,7 @@ public class Main extends Application {
         System.out.println("server is running...");
         OpponentFinder opponentFinder = new OpponentFinder();
         opponentFinder.start();
-        launch(args);
+//        launch(args);
         while (true) {
             socket = server.accept();
             sockets.add(socket);

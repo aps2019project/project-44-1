@@ -32,6 +32,7 @@ public enum RequestType {
     ENTER_SHOP,
     CHAT,
     MOVE_CARD,
+    CHEAT
     ;
 
 }

@@ -34,6 +34,7 @@ public class Request {
     private int startRow;
     private int endColumn;
     private int endRow;
+    private String cheat;
 
 
     public Request(Environment environment) {
@@ -254,4 +255,13 @@ public class Request {
         this.endColumn = endColumn;
         this.endRow = endRow;
     }
+
+    public String getCheat() {
+        return cheat;
+    }
+
+    public void setCheat(String cheat) {
+        this.cheat = cheat;
+    }
+
 }
