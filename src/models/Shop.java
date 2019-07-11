@@ -1,9 +1,11 @@
 package models;
 
 import com.google.gson.stream.JsonReader;
+import com.sun.media.jfxmedia.events.PlayerEvent;
 import models.Enums.ErrorType;
 import com.google.gson.*;
 
+import javax.lang.model.util.SimpleAnnotationValueVisitor6;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -100,6 +102,15 @@ public class Shop {
 
     public ArrayList<Placeable> getCards() {
         return cards;
+    }
+
+    public ArrayList<Placeable> getShopCards() {
+        ArrayList<Placeable> placeables = new ArrayList<>();
+        for (Placeable placeable : cards) {
+            if (placeable.getCost() != -1)
+                placeables.add(placeable);
+        }
+        return placeables;
     }
 
     public void setAccount(Account account) {

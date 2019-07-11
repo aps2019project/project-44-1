@@ -7,6 +7,7 @@ public class Placeable implements Comparable<Placeable> {
     private String name;
     private int cost;
     protected String path;
+    private int number;
 
 
     public void setPath(String path) {
@@ -74,4 +75,12 @@ public class Placeable implements Comparable<Placeable> {
         return path;
     }
 
+    public int getNumber() {
+        return Shop.getInstance().getRemainingCard().get(name);
+
+    }
+
+    public void setNumber() {
+        this.number =  Shop.getInstance().getRemainingCard().get(name);
+    }
 }

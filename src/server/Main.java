@@ -1,9 +1,14 @@
 package server;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.Account;
 import models.Game;
+import models.Placeable;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -30,6 +35,7 @@ public class Main extends Application {
         System.out.println("server is running...");
         OpponentFinder opponentFinder = new OpponentFinder();
         opponentFinder.start();
+        launch(args);
         while (true) {
             socket = server.accept();
             sockets.add(socket);
@@ -58,6 +64,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/server/shopInServer.fxml"));
+        Parent root = fxmlLoader.load();
+        primaryStage.setScene(new Scene(root));
 
+        primaryStage.show();
     }
 }

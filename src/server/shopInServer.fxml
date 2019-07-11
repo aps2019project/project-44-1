@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.ShopInServerController">
+   <children>
+      <TableView fx:id="table" prefHeight="404.0" prefWidth="602.0">
+        <columns>
+          <TableColumn fx:id="cardNameColumn" prefWidth="188.66666162014008" text="name" />
+            <TableColumn fx:id="costColumn" minWidth="0.0" prefWidth="229.33335876464844" text="cost" />
+          <TableColumn fx:id="numberColumn" prefWidth="183.33340454101562" text="number" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
