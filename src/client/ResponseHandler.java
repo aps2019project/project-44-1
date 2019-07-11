@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import models.Placeable;
 import server.Response;
-import server.ResponseType;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,7 +23,7 @@ import java.util.TimerTask;
 
 import static models.Enums.ErrorType.ALL_CARDS_HAVE_BEEN_SOLD;
 import static models.Enums.ErrorType.NO_ERROR;
-import static server.ResponseType.*;
+import static server.ResponseType.SUCCESSFUL_SIGN_IN;
 
 public class ResponseHandler extends Thread {
     private static ResponseHandler RESPONSE_HANDLER = new ResponseHandler();
@@ -162,20 +161,37 @@ public class ResponseHandler extends Thread {
     private void handleCollectionResponse() {
         if (response.getCollection() != null)
             CollectionFxmlController.setCollection(response.getCollection());
-        if (CREATE_DECK_SUCCESSFULLY.equals(response.getResponseType())) {
-            Platform.runLater(() -> collectionController.decks.getItems().add(response.getDeckToAdd()));
-        } else if (SUCCESSFULLY_REMOVE_DECK.equals(response.getResponseType())) {
-            removeDeck(response.getDeckToRemove());
-        } else if (DUPLICATE_DECK.equals(response.getResponseType())) {
-            Platform.runLater(() -> collectionController.makeAlert("Error while making deck", "This name was used before!", Alert.AlertType.ERROR));
-        } else if (MORE_THAN_ONE_HERO_ERROR.equals(response.getResponseType()) || MORE_THAN_20_NORMAL_CARD_ERROR.equals(response.getResponseType()) || MORE_THAN_ONE_ITEM_ERROR.equals(response.getResponseType())) {
-            Platform.runLater(() -> collectionController.makeAlert("Error while adding cards to deck", ((ResponseType) response.getResponseType()).getMessage(), Alert.AlertType.ERROR));
-        } else if (SUCCESSFULLY_MOVE_CARD_TO_DECK.equals(response.getResponseType()) || SUCCESSFULLY_REMOVE_CARD_FROM_DECK.equals(response.getResponseType())) {
-            Platform.runLater(() -> collectionController.updateDeckCards());
-        } else if (MAIN_DECK_SELECTED.equals(response.getResponseType())) {
-            Platform.runLater(() -> collectionController.makeAlert("new main deck selected", null, Alert.AlertType.INFORMATION));
-        } else if (ENTER_COLLECTION.equals(response.getResponseType())) {
-            loadCollection();
+        switch (response.getResponseType()) {
+            case CREATE_DECK_SUCCESSFULLY:
+                Platform.runLater(() -> collectionController.decks.getItems().add(response.getDeckToAdd()));
+                break;
+            case SUCCESSFULLY_REMOVE_DECK:
+                removeDeck(response.getDeckToRemove());
+                break;
+            case DUPLICATE_DECK:
+                Platform.runLater(() -> collectionController.makeAlert("Error while making deck", "This name was used before!", Alert.AlertType.ERROR));
+                break;
+            case MORE_THAN_ONE_HERO_ERROR:
+            case MORE_THAN_20_NORMAL_CARD_ERROR:
+            case MORE_THAN_ONE_ITEM_ERROR:
+                Platform.runLater(() -> collectionController.makeAlert("Error while adding cards to deck",
+                        response.getResponseType().getMessage(), Alert.AlertType.ERROR));
+                break;
+            case SUCCESSFULLY_MOVE_CARD_TO_DECK:
+            case SUCCESSFULLY_REMOVE_CARD_FROM_DECK:
+                Platform.runLater(() -> collectionController.updateDeckCards());
+                break;
+            case MAIN_DECK_SELECTED:
+                Platform.runLater(() -> collectionController.makeAlert("new main deck selected", null,
+                        Alert.AlertType.INFORMATION));
+                break;
+            case ENTER_COLLECTION:
+                loadCollection();
+                break;
+            case EXPORT_DECK:
+                Platform.runLater(() -> collectionController.makeAlert("deck exported", response.getResponseType().getMessage(),
+                        Alert.AlertType.INFORMATION));
+                break;
         }
     }
 

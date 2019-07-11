@@ -6,7 +6,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
-import models.*;
+import models.Card;
+import models.Collection;
+import models.Deck;
+import models.Placeable;
 import server.Environment;
 import server.Request;
 import server.RequestType;
@@ -27,11 +30,12 @@ public class CollectionFxmlController implements Initializable {
     public Button backButton;
     public Button addCardToDeckButton;
     public ComboBox<String> decks;
-    private static Collection collection;
     public ScrollPane deckCardsScrollPane;
     public TextField searchBox;
+    public Button exportDeckButton;
     private ArrayList<CardContainer> deckCards;
     private ArrayList<CardContainer> collectionCards;
+    private static Collection collection;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -44,6 +48,7 @@ public class CollectionFxmlController implements Initializable {
         addCardToDeckBtn();
         createDeckBtnOnAction();
         craftSearchBox();
+        export();
     }
 
     private void craftSearchBox() {
@@ -199,7 +204,6 @@ public class CollectionFxmlController implements Initializable {
         ShopFxmlController.backAction();
     }
 
-
     public void makeAlert(String headerText, String contentText, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle("Error");
@@ -212,5 +216,16 @@ public class CollectionFxmlController implements Initializable {
         return collection;
     }
 
+    private void export() {
+        String selectedItem = decks.getSelectionModel().getSelectedItem();
+        if (selectedItem == null)
+            return;
+        exportDeckButton.setOnAction(actionEvent -> {
+            Request request = new Request(Environment.COLLECTION);
+            request.setRequestType(RequestType.EXPORT_DECK);
+            request.setExportedDeck(selectedItem);
+            RequestSender.getInstance().sendRequest(request);
+        });
+    }
 
 }
