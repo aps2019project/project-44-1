@@ -11,7 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import models.*;
+import models.Placeable;
 import server.Response;
 import server.ResponseType;
 
@@ -236,7 +236,6 @@ public class ResponseHandler extends Thread {
                 }
             }
         });
-
     }
 
     private void loadBattleMenu() {

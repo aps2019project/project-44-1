@@ -3,17 +3,12 @@ package server;
 import client.RequestSender;
 import com.google.gson.Gson;
 import com.google.gson.JsonStreamParser;
-import controller.logicController.CollectionController;
 import controller.logicController.AccountController;
+import controller.logicController.CollectionController;
 import controller.logicController.GameController;
-import models.Collection;
-import models.Enums.ErrorType;
-import models.Game;
-import models.Placeable;
-import models.Shop;
 import models.*;
+import models.Enums.ErrorType;
 
-import java.util.Map;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,6 +16,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class RequestHandler extends Thread {
     private JsonStreamParser parser;
@@ -353,4 +349,5 @@ public class RequestHandler extends Thread {
     public void setResponseSender(ResponseSender responseSender) {
         this.responseSender = responseSender;
     }
+
 }

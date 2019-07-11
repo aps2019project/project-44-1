@@ -22,10 +22,10 @@ import server.RequestType;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -57,8 +57,8 @@ public class MapController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        deletePastRecord();
-//        screenShot();
+        deletePastRecord();
+        screenShot();
         initializeButtons();
         setImages();
         cheat.setOnKeyPressed(keyEvent -> {
@@ -72,11 +72,11 @@ public class MapController implements Initializable {
         File folder = new File("src\\view\\record");
         try {
             if (folder.listFiles() != null) {
-                for (File f : Objects.requireNonNull(folder.listFiles())) {
+                for (File f : folder.listFiles()) {
                     if (!f.delete())
                         throw new IOException();
                 }
-            } else folder.mkdir();
+            }
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
@@ -99,7 +99,7 @@ public class MapController implements Initializable {
         Random random = new Random();
         int x = random.nextInt(5);
         try {
-            firstPlayer.setImage(new Image(Objects.requireNonNull(listOfFiles)[x].getPath().substring(4)));
+            firstPlayer.setImage(new Image(listOfFiles[x].getPath().substring(4)));
             x = random.nextInt(5);
             secondPlayer.setImage(new Image(listOfFiles[x].getPath().substring(4)));
         } catch (NullPointerException e) {
@@ -112,12 +112,18 @@ public class MapController implements Initializable {
     }
 
     private void setHandImages(Card[] cards, Card next) {
-        nextInHand.setImage(new Image(cardBuilder.getCard(next.getName()).getPath()));
-        first.setImage(new Image(cardBuilder.getCard(cards[0].getName()).getPath()));
-        second.setImage(new Image(cardBuilder.getCard(cards[1].getName()).getPath()));
-        third.setImage(new Image(cardBuilder.getCard(cards[2].getName()).getPath()));
-        fourth.setImage(new Image(cardBuilder.getCard(cards[3].getName()).getPath()));
-        fifth.setImage(new Image(cardBuilder.getCard(cards[4].getName()).getPath()));
+        nextInHand.setImage(new Image(next.getPath().substring(4)));
+        first.setImage(new Image(cards[0].getPath().substring(4)));
+        second.setImage(new Image(cards[1].getPath().substring(4)));
+        third.setImage(new Image(cards[2].getPath().substring(4)));
+        fourth.setImage(new Image(cards[3].getPath().substring(4)));
+        fifth.setImage(new Image(cards[4].getPath().substring(4)));
+//        nextInHand.setImage(new Image(player.getNextCardInHand().getPath()));
+//        first.setImage(new Image(player.getHand()[0].getPath()));
+//        second.setImage(new Image(player.getHand()[1].getPath()));
+//        third.setImage(new Image(player.getHand()[2].getPath()));
+//        fourth.setImage(new Image(player.getHand()[3].getPath()));
+//        fifth.setImage(new Image(player.getHand()[4].getPath()));
     }
 
     private void screenShot() {
@@ -175,4 +181,5 @@ public class MapController implements Initializable {
     public static void setLogicMap(Map logicMap) {
         MapController.logicMap = logicMap;
     }
+
 }
