@@ -30,6 +30,11 @@ public class Request {
     private int state;
     private Placeable customCard;
     private String message;
+    private int startColumn;
+    private int startRow;
+    private int endColumn;
+    private int endRow;
+
 
     public Request(Environment environment) {
         this.environment = environment;
@@ -227,4 +232,26 @@ public class Request {
         this.message = message;
     }
 
+    public int getStartColumn() {
+        return startColumn;
+    }
+
+    public int getStartRow() {
+        return startRow;
+    }
+
+    public int getEndColumn() {
+        return endColumn;
+    }
+
+    public int getEndRow() {
+        return endRow;
+    }
+
+    public void setCoordinate(int startColumn, int startRow, int endColumn, int endRow) {
+        this.startColumn = startColumn;
+        this.startRow = startRow;
+        this.endColumn = endColumn;
+        this.endRow = endRow;
+    }
 }

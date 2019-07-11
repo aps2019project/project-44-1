@@ -121,7 +121,7 @@ public class Battle implements Goal, Fight {
 
     //-----------------------------------------getter & setter & constructing ^_^
 
-    static void relater(Placeable card, Cell cell) {
+    public static void relater(Placeable card, Cell cell) {
         card.setCell(cell);
         if (card instanceof Card)
             cell.setPlaceable((Card) card);
@@ -141,7 +141,7 @@ public class Battle implements Goal, Fight {
         increaseTurnsFlagSaved();
     }
 
-    private void increaseTurnsFlagSaved() {
+    public void increaseTurnsFlagSaved() {
         if (battleMode.equals(BattleMode.CAPTURE_FLAG_1)) {
             for (Item f : map.getFlags()) {
                 Player player = f.getCarrier().getOwner();
@@ -200,7 +200,7 @@ public class Battle implements Goal, Fight {
         ArrayList<Card> effectedCards = map.getEffectedCards(x, y, spell);
     }
 
-    private void manaHandler() {
+    public void manaHandler() {
         if (turn > 14) {
             getCurrentPlayer().setMana(9);
             return;
@@ -215,7 +215,7 @@ public class Battle implements Goal, Fight {
         }
     }
 
-    Hero getFirstPlayerHero() {
+    public Hero getFirstPlayerHero() {
         for (Card card : map.getPlayerCardsInMap(getFirstPlayer().getName())) {
             if (card instanceof Hero) {
                 return (Hero) card;
@@ -224,7 +224,7 @@ public class Battle implements Goal, Fight {
         return null;
     }
 
-    Hero getSecondPlayerHero() {
+    public Hero getSecondPlayerHero() {
         for (Card card : map.getPlayerCardsInMap(getSecondPlayer().getName())) {
             if (card instanceof Hero) {
                 return (Hero) card;

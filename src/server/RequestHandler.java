@@ -160,6 +160,16 @@ public class RequestHandler extends Thread {
                 break;
             case WAIT_FOR_SECOND_PLAYER:
                 OpponentFinder.addToWaitingAccounts(request, this);
+                break;
+            case MOVE_CARD:
+                if (battle.getCurrentPlayer().getName().equals(Main.getOnlineAccounts().get(request.getOuthToken()).getUsername())) {
+                    battle.getCurrentPlayer().setSelectedCard(battle.getMap().getCells()[request.getStartRow()][request.getStartColumn()].getCard());
+                    battle.getCurrentPlayer().move(request.getEndRow(),request.getEndColumn());
+                    Response response = new Response(Environment.BATTLE);
+                    response.setResponseType(ResponseType.MOVE_CARD);
+                    response.setMap(battle.getMap());
+                    responseSender.sendResponse(response);
+                }
 
         }
     }

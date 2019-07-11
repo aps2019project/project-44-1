@@ -1,5 +1,7 @@
 package server;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
 import models.Account;
 import models.Game;
 
@@ -11,7 +13,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Main {
+public class Main extends Application {
 
     private static ArrayList<Socket> sockets = new ArrayList<>();
     private static HashMap<String, Account> onlineAccounts = new HashMap<>();
@@ -54,4 +56,8 @@ public class Main {
         onlineAccounts.remove(outhToken);
     }
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+    }
 }

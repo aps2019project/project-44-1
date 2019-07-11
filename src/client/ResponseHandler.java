@@ -237,6 +237,10 @@ public class ResponseHandler extends Thread {
                 MultiMapController.setLogicMap(response.getMap());
                 MultiMapController.setSecondPlayerName(response.getSecondPlayerName());
                 loadBattleMap();
+                break;
+            case MOVE_CARD:
+                MultiMapController.setLogicMap(response.getMap());
+                multiMapController.updateMap();
         }
     }
 

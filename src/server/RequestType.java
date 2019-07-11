@@ -31,6 +31,7 @@ public enum RequestType {
     GET_SHOP_CARDS,
     ENTER_SHOP,
     CHAT,
+    MOVE_CARD,
     ;
 
 }

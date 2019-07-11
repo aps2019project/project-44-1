@@ -182,4 +182,7 @@ public class Player implements Move {
         return flag;
     }
 
+    public void setSelectedCard(Card selectedCard) {
+        this.selectedCard = selectedCard;
+    }
 }
