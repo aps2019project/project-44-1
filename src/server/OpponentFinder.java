@@ -1,6 +1,8 @@
 package server;
 
 import models.Account;
+import models.Battle;
+import models.Enums.BattleKind;
 import models.Enums.BattleMode;
 
 import java.util.HashMap;
@@ -11,7 +13,7 @@ public class OpponentFinder extends Thread {
     private static final Queue<Account> waitingAccountsForDeathMatch = new LinkedList<>();
     private static final Queue<Account> waitingAccountsForSaveFlag = new LinkedList<>();
     private static final HashMap<Integer, Queue<Account>> waitingAccountsForCaptureFlag = new HashMap<>();
-    private static HashMap<Account, ResponseSender> responseSenders = new HashMap<>();
+    private static HashMap<Account, RequestHandler> responseSenders = new HashMap<>();
 
     static {
         for (int i = 1; i < 10; i++) {
@@ -53,16 +55,19 @@ public class OpponentFinder extends Thread {
     }
 
     private void startBattle(Account first, Account second, BattleMode battleMode, int flagNumber) {
+        Battle battle = new Battle(BattleKind.MULTI_PLAYER,battleMode,first,second,flagNumber);
+        responseSenders.get(first).setBattle(battle);
+        responseSenders.get(second).setBattle(battle);
         Response response = new Response(Environment.BATTLE);
         response.setResponseType(ResponseType.ENTER_BATTEL_MAP);
         //todo set required information to start a battle
-        responseSenders.get(first).sendResponse(response);
-        responseSenders.get(second).sendResponse(response);
+        responseSenders.get(first).getResponseSender().sendResponse(response);
+        responseSenders.get(second).getResponseSender().sendResponse(response);
         responseSenders.remove(first);
         responseSenders.remove(second);
     }
 
-    public static synchronized void addToWaitingAccounts(Request request, ResponseSender responseSender) {
+    public static synchronized void addToWaitingAccounts(Request request, RequestHandler requestHandler) {
         Account account = Main.getOnlineAccounts().get(request.getOuthToken());
         switch (request.getBattleMode()) {
             case DEATH_MATCH:
@@ -74,7 +79,7 @@ public class OpponentFinder extends Thread {
             case CAPTURE_FLAG_2:
                 waitingAccountsForCaptureFlag.get(request.getFlagNumbers()).add(account);
         }
-        responseSenders.put(account, responseSender);
+        responseSenders.put(account, requestHandler);
     }
 
     public static synchronized void deleteFromWaitingAccounts(Request request) {

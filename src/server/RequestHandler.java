@@ -27,6 +27,7 @@ public class RequestHandler extends Thread {
     private ResponseSender responseSender;
     private Gson gson = new Gson();
     private Socket currentSocket;
+    private Battle battle;
 
     public RequestHandler(Socket socket) {
         try {
@@ -162,7 +163,7 @@ public class RequestHandler extends Thread {
                 OpponentFinder.deleteFromWaitingAccounts(request);
                 break;
             case WAIT_FOR_SECOND_PLAYER:
-                OpponentFinder.addToWaitingAccounts(request, responseSender);
+                OpponentFinder.addToWaitingAccounts(request, this);
 
         }
     }
@@ -337,4 +338,19 @@ public class RequestHandler extends Thread {
 
     }
 
+    public Battle getBattle() {
+        return battle;
+    }
+
+    public void setBattle(Battle battle) {
+        this.battle = battle;
+    }
+
+    public ResponseSender getResponseSender() {
+        return responseSender;
+    }
+
+    public void setResponseSender(ResponseSender responseSender) {
+        this.responseSender = responseSender;
+    }
 }
