@@ -4,6 +4,7 @@ import Main.Main;
 import client.CardBuilder;
 import client.RequestSender;
 import client.ResponseHandler;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -19,9 +20,11 @@ import models.*;
 import server.Environment;
 import server.Request;
 import server.RequestType;
+import view.fxmls.wrapperClasses.CardContainer;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ShopFxmlController implements Initializable {
@@ -33,8 +36,24 @@ public class ShopFxmlController implements Initializable {
     public Label message;
     public ScrollPane shop;
     public TextField search;
+    public FlowPane auctionPane;
     private static Account account;
     private CardBuilder builder = new CardBuilder();
+    private ArrayList<CardContainer> auctionCards = new ArrayList<>();
+
+    public void selfDistructCardContainer(int id) {
+        CardContainer cardContainer = null;
+        for (CardContainer cardContainer1 : auctionCards){
+            if (cardContainer1.getId() == id) {
+                cardContainer = cardContainer1;
+                break;
+            }
+        }
+        auctionPane.getChildren().remove(cardContainer);
+        auctionCards.remove(cardContainer);
+
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -159,5 +178,25 @@ public class ShopFxmlController implements Initializable {
             e.printStackTrace();
         }
     }
+    public void addToAuctionCards(Placeable placeable,int id){
+
+    }
+
+    public void addToAuctionCards(String  name,int id){
+
+    }
+
+    private void setCardContainer(Placeable card, FlowPane cardsFlowPane, ArrayList<CardContainer> cards) {
+        CardContainer cardContainer;
+        if (card == null)
+            return;
+        if (card instanceof Card)
+            cardContainer = new CardContainer((Card) card );
+        else
+            cardContainer = new CardContainer(card);
+        cardsFlowPane.getChildren().add(cardContainer.getAnchorPane());
+        cards.add(cardContainer);
+    }
+
 
 }

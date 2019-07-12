@@ -42,6 +42,10 @@ public enum ResponseType {
     CHAT(""),
     EXPORT_DECK(""),
     MOVE_CARD(""),
+    REMOVE_AUCTION_CARD_FROM_COLLECTION(""),
+    NEW_AUCTION_CARD_ADDED_TO_SHOP(""),
+    SUCCESSFUL_SELL_AUCTION(""),
+    SUCCESSFUL_BUY_AUCTION(""),
 
 
 

@@ -30,6 +30,7 @@ public class RequestHandler extends Thread {
             currentSocket = socket;
             parser = new JsonStreamParser(new BufferedReader(new InputStreamReader(socket.getInputStream())));
             responseSender = new ResponseSender(socket.getOutputStream(),this.gson);
+            Main.addToResponseSenders(responseSender);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -101,7 +102,7 @@ public class RequestHandler extends Thread {
             e.printStackTrace();
         } finally {
             if (request.getOuthToken() != null)
-                Main.removeFromOnlineAccounts(request.getOuthToken());
+                Main.removeFromOnlineAccounts(request.getOuthToken(),responseSender);
             Main.getSockets().remove(currentSocket);
 
         }
@@ -228,6 +229,19 @@ public class RequestHandler extends Thread {
                 break;
             case SELL:
                 sell(request, response, shop, account);
+                break;
+            case SUGGEST_NEW_COST:
+
+
+                break;
+            case AUCTION_CARD:
+                AuctionCard card = new AuctionCard(request.getAuctionCard(),Main.getOnlineAccounts().get(request.getOuthToken()),responseSender);
+                card.start();
+                shop.addToAuctionCardHashMap(card);
+                response.setResponseType(ResponseType.REMOVE_AUCTION_CARD_FROM_COLLECTION);
+                response.setPaneToRemoveID(request.getPaneToSellID());
+                response.setCardToSell(request.getAuctionCard().getName());
+
         }
         responseSender.sendResponse(response);
     }
@@ -294,7 +308,7 @@ public class RequestHandler extends Thread {
     private void logout(Request request) {
         Response response = new Response(Environment.MAIN_MENU);
         response.setResponseType(ResponseType.LOG_OUT);
-        Main.removeFromOnlineAccounts(request.getOuthToken());
+        Main.removeFromOnlineAccounts(request.getOuthToken(),responseSender);
         responseSender.sendResponse(response);
     }
 

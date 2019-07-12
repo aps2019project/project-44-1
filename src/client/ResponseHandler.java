@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import models.Placeable;
 import server.Response;
+import view.fxmls.wrapperClasses.CardContainer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -104,6 +105,7 @@ public class ResponseHandler extends Thread {
         try {
             Main.getStage().getScene().setRoot(loader.load());
             shopFxmlController = loader.getController();
+            CardContainer.setShopFxmlController(shopFxmlController);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -296,6 +298,16 @@ public class ResponseHandler extends Thread {
                 Platform.runLater(this::sold);
                 Platform.runLater(() -> shopFxmlController.money.setText(response.getMoney()));
                 break;
+            case REMOVE_AUCTION_CARD_FROM_COLLECTION:
+                removeCardFromShopCollection();
+                break;
+            case SUCCESSFUL_BUY_AUCTION:
+                Platform.runLater(this::bought);
+                Platform.runLater(() -> shopFxmlController.money.setText(response.getMoney()));
+                break;
+            case SUCCESSFUL_SELL_AUCTION:
+                viewMessage("you sold\n" + response.getCardToSell());
+                break;
             default:
                 if (response.getShopErrorType() != null && !response.getShopErrorType().equals(NO_ERROR))
                     Platform.runLater(() -> viewMessage(response.getShopErrorType().getMessage()));
@@ -312,6 +324,10 @@ public class ResponseHandler extends Thread {
 
     private void sold() {
         viewMessage("you sold\n" + response.getCardToSell());
+        removeCardFromShopCollection();
+    }
+
+    private void removeCardFromShopCollection() {
         for (Node n : shopFxmlController.collectionPane.getChildren()) {
             if (n.getId().equals(response.getPaneToRemoveID())) {
                 shopFxmlController.collectionPane.getChildren().remove(n);

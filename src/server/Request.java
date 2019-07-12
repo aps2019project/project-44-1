@@ -34,6 +34,9 @@ public class Request {
     private int startRow;
     private int endColumn;
     private int endRow;
+    private int suggestedPrice;
+    private int auctionCardId;
+    private Placeable auctionCard;
 
 
     public Request(Environment environment) {
@@ -253,5 +256,29 @@ public class Request {
         this.startRow = startRow;
         this.endColumn = endColumn;
         this.endRow = endRow;
+    }
+
+    public int getSuggestedPrice() {
+        return suggestedPrice;
+    }
+
+    public void setSuggestedPrice(int suggestedPrice) {
+        this.suggestedPrice = suggestedPrice;
+    }
+
+    public int getAuctionCardId() {
+        return auctionCardId;
+    }
+
+    public void setAuctionCardId(int auctionCardId) {
+        this.auctionCardId = auctionCardId;
+    }
+
+    public Placeable getAuctionCard() {
+        return auctionCard;
+    }
+
+    public void setAuctionCard(Placeable auctionCard) {
+        this.auctionCard = auctionCard;
     }
 }

@@ -51,7 +51,7 @@ public class MultiMapController implements Initializable {
     public TextField message;
     public TitledPane gChat;
     private boolean playing = true;
-    private BattleController battleController = BattleController.getInstance();
+    private BattleController battleController;
     private static Player player;
     private static Map logicMap;
     private CardBuilder cardBuilder = new CardBuilder();
@@ -63,8 +63,9 @@ public class MultiMapController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        deletePastRecord();
-//        screenShot();
+        battleController = BattleController.getInstance();
+        deletePastRecord();
+        screenShot();
         initializeButtons();
         setImages();
         cheat.setOnKeyPressed(keyEvent -> {
@@ -173,11 +174,11 @@ public class MultiMapController implements Initializable {
         File folder = new File("src\\view\\record");
         try {
             if (folder.listFiles() != null) {
-                for (File f : Objects.requireNonNull(folder.listFiles())) {
+                for (File f : folder.listFiles()) {
                     if (!f.delete())
                         throw new IOException();
                 }
-            } else folder.mkdir();
+            }
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
@@ -187,7 +188,7 @@ public class MultiMapController implements Initializable {
         exit.setOnAction(actionEvent -> {
             playing = false;
             battleController.gameHistory();
-            MainMenuController.loadPage("/view/fxmls/mainMenu.fxml");
+            MainMenuController.loadPage("/view/fxmls/record.fxml");
         });
         save.setOnAction(actionEvent -> battleController.save());
         graveyard.setOnAction(actionEvent -> battleController.enterGraveyard());
@@ -233,7 +234,7 @@ public class MultiMapController implements Initializable {
                     BufferedImage Image = r.createScreenCapture(capture);
                     ImageIO.write(Image, "jpg", new File("src\\view\\record\\Shot"
                             + (index++) + ".jpg"));
-                    r.setAutoDelay(100);
+                    r.setAutoDelay(500);
                 } catch (AWTException | IOException ex) {
                     ex.printStackTrace();
                 }
@@ -245,20 +246,6 @@ public class MultiMapController implements Initializable {
 
     public synchronized void setPlaying(boolean playing) {
         this.playing = playing;
-    }
-
-    private void applyCheat(String s) {
-
-    }
-
-    private void chat() {
-        String text = message.getText();
-        if (text.equals(""))
-            return;
-        Request request = new Request(Environment.MAP);
-        request.setRequestType(RequestType.CHAT);
-        request.setMessage(text);
-        RequestSender.getInstance().sendRequest(request);
     }
 
     public static Player getPlayer() {
@@ -300,6 +287,20 @@ public class MultiMapController implements Initializable {
     public void setSelectedCell(int selectedRow, int selectedColumn) {
         this.selectedColumn = selectedColumn;
         this.selectedRow = selectedRow;
+    }
+
+    private void applyCheat(String s) {
+
+    }
+
+    private void chat() {
+        String text = message.getText();
+        if (text.equals(""))
+            return;
+        Request request = new Request(Environment.MAP);
+        request.setRequestType(RequestType.CHAT);
+        request.setMessage(text);
+        RequestSender.getInstance().sendRequest(request);
     }
 
     private boolean isSelected() {

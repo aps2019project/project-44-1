@@ -1,12 +1,21 @@
 package view.fxmls.wrapperClasses;
 
 import client.CardBuilder;
+import client.RequestSender;
+import controller.fxmlControllers.ShopFxmlController;
+import javafx.animation.AnimationTimer;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import models.*;
+import server.Environment;
+import server.Request;
+import server.RequestType;
+
+import java.util.Optional;
 
 public class CardContainer {
     private AnchorPane anchorPane = new AnchorPane();
@@ -14,10 +23,14 @@ public class CardContainer {
     private Label attackPointLabel;
     private Label healthPointLabel;
     private Label nameLabel;
+    private Label buyer;
+    private Label cost;
     private ImageView imageView;
     private CheckBox checkBox;
     private Placeable card;
     private static CardBuilder builder = new CardBuilder();
+    private int id;
+    private static ShopFxmlController shopFxmlController;
 
     {
         anchorPane.setStyle("-fx-background-image: url('/view/images/neutral_unit@2x.png'),url('/view/images/icon_mana.png');" +
@@ -117,4 +130,90 @@ public class CardContainer {
 
     }
 
+    public CardContainer(Placeable placeable, int id) {
+        this(placeable);
+        this.id = id;
+        setForAuction(placeable);
+    }
+
+    public CardContainer(Card card, int id) {
+        this(card);
+        this.id = id;
+        setForAuction(card);
+    }
+
+
+    private void setForAuction(Placeable placeable) {
+        anchorPane.getChildren().remove(checkBox);
+        anchorPane.setOnMouseClicked(event -> {
+            if (event.isPrimaryButtonDown()) {
+                showDialogBox();
+            }
+        });
+        buyer = new Label("Buyer : ");
+        buyer.setPrefSize(267, 29);
+        buyer.setLayoutX(21);
+        buyer.setLayoutY(385);
+        cost = new Label("Cost : " + placeable.getCost());
+        cost.setPrefSize(267, 29);
+        cost.setLayoutX(21);
+        cost.setLayoutY(411);
+        Label timerLabel = new Label("03:00");
+        timerLabel.relocate(100, 300);
+        anchorPane.getChildren().add(timerLabel);
+        AnimationTimer animationTimer = new AnimationTimer() {
+            private long lastTime = 0;
+            private double time = 0;
+            private long second = 1000000000;
+
+            @Override
+            public void handle(long now) {
+                if (lastTime == 0) {
+                    lastTime = now;
+                }
+                if (now > lastTime + second / 10) {
+                    lastTime = now;
+                    time += 1;
+                    timerLabel.setText("0" + ((300 - (time / 10)) / 60) + ":" + ((300 - (time / 10)) % 60));
+                }
+                if (time>=3000)
+                    shopFxmlController.selfDistructCardContainer(id);
+            }
+        };
+        animationTimer.start();
+    }
+
+    private void showDialogBox() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Buy card");
+        dialog.setContentText("Please enter your Proposed price:");
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(this::sendProposedCostToServer);
+    }
+
+    private void sendProposedCostToServer(String cost) {
+        try {
+            int price = Integer.parseInt(cost);
+            Request request = new Request(Environment.SHOP);
+            request.setRequestType(RequestType.SUGGEST_NEW_COST);
+            request.setSuggestedPrice(price);
+            request.setAuctionCardId(this.id);
+            RequestSender.getInstance().sendRequest(request);
+        } catch (Exception ignored) {
+
+        }
+    }
+
+    public void updateAuctionCard(int newPrice, String newBuyer) {
+        buyer.setText("Buyer : " + newBuyer);
+        cost.setText("Cost : " + newPrice);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public static void setShopFxmlController(ShopFxmlController shopFxmlController) {
+        CardContainer.shopFxmlController = shopFxmlController;
+    }
 }

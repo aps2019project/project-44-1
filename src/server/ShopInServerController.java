@@ -32,5 +32,8 @@ public class ShopInServerController implements Initializable {
     }
 
 
-
+    public void updateTable() {
+        list.addAll(Shop.getInstance().getShopCards());
+        table.setItems(list);
+    }
 }

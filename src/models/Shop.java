@@ -4,6 +4,7 @@ import com.google.gson.stream.JsonReader;
 import com.sun.media.jfxmedia.events.PlayerEvent;
 import models.Enums.ErrorType;
 import com.google.gson.*;
+import server.AuctionCard;
 
 import javax.lang.model.util.SimpleAnnotationValueVisitor6;
 import java.io.FileNotFoundException;
@@ -18,6 +19,7 @@ public class Shop {
     private Account account;
     private HashMap<String, Integer> remainingCard = new HashMap<>();
     public static final int primaryCardNumber = 10;
+    private HashMap<Integer, AuctionCard> auctionCardHashMap = new HashMap<>();
 
     private Shop() {
         for (Placeable c : cards) {
@@ -138,4 +140,11 @@ public class Shop {
         return remainingCard;
     }
 
+    public HashMap<Integer, AuctionCard> getAuctionCardHashMap() {
+        return auctionCardHashMap;
+    }
+
+    public void addToAuctionCardHashMap(AuctionCard auctionCard) {
+        auctionCardHashMap.put(auctionCard.getCardId(), auctionCard);
+    }
 }

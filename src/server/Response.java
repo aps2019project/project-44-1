@@ -34,6 +34,9 @@ public class Response {
     private Map map;
     private Player player;
     private String secondPlayerName;
+    private int suggestedPrice;
+    private int auctionCardId;
+    private String auctionCard;
 
     public Response(Environment environment) {
         this.environment = environment;
@@ -255,5 +258,27 @@ public class Response {
         this.secondPlayerName = secondPlayerName;
     }
 
+    public int getSuggestedPrice() {
+        return suggestedPrice;
+    }
 
+    public void setSuggestedPrice(int suggestedPrice) {
+        this.suggestedPrice = suggestedPrice;
+    }
+
+    public int getAuctionCardId() {
+        return auctionCardId;
+    }
+
+    public void setAuctionCardId(int auctionCardId) {
+        this.auctionCardId = auctionCardId;
+    }
+
+    public String getAuctionCard() {
+        return auctionCard;
+    }
+
+    public void setAuctionCard(String auctionCard) {
+        this.auctionCard = auctionCard;
+    }
 }

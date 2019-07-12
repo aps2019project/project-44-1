@@ -22,8 +22,11 @@ public class Main extends Application {
 
     private static ArrayList<Socket> sockets = new ArrayList<>();
     private static HashMap<String, Account> onlineAccounts = new HashMap<>();
+    private static ArrayList<ResponseSender> responseSenders = new ArrayList<>();
+    private static  ShopInServerController controller;
 
     public static void main(String[] args) throws IOException {
+
         int port;
         FileReader reader = new FileReader("src/server/config");
         BufferedReader bufferedReader = new BufferedReader(reader);
@@ -35,7 +38,9 @@ public class Main extends Application {
         System.out.println("server is running...");
         OpponentFinder opponentFinder = new OpponentFinder();
         opponentFinder.start();
-        launch(args);
+//        launch(args);
+//        Thread thread = new Thread(() -> controller.updateTable());
+//        thread.start();
         while (true) {
             socket = server.accept();
             sockets.add(socket);
@@ -57,8 +62,9 @@ public class Main extends Application {
         Game.getInstance().addToOnlineAccounts(account);
     }
 
-    public static void removeFromOnlineAccounts(String outhToken) {
+    public static void removeFromOnlineAccounts(String outhToken,ResponseSender responseSender) {
         Game.getInstance().removeFromOnlineAccounts(onlineAccounts.get(outhToken));
+        responseSenders.remove(responseSender);
         onlineAccounts.remove(outhToken);
     }
 
@@ -66,8 +72,21 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/server/shopInServer.fxml"));
         Parent root = fxmlLoader.load();
+        controller = fxmlLoader.getController();
         primaryStage.setScene(new Scene(root));
 
         primaryStage.show();
+    }
+
+    public static ArrayList<ResponseSender> getResponseSenders() {
+        return responseSenders;
+    }
+
+    public static void addToResponseSenders(ResponseSender responseSender) {
+        Main.responseSenders.add(responseSender);
+    }
+
+    public static void removeFromResponseSenders(ResponseSender responseSender) {
+        Main.responseSenders.remove(responseSender);
     }
 }
