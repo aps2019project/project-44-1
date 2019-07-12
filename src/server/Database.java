@@ -14,7 +14,7 @@ public class Database {
 
     public static void makeNewDataBase(String name) {
         final String path = "init_DB";
-        HttpResponse<String> response = null;
+        HttpResponse<String> response;
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("name", name);
         try {

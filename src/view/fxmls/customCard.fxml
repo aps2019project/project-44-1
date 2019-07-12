@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" stylesheets="@../styleSheets/customCard.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.fxmlControllers.CustomCardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" stylesheets="@../styleSheets/customCard.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.fxmlControllers.CustomCardController">
    <Button fx:id="back" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" />
    <Button fx:id="finish" layoutX="280.0" layoutY="430.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="242.0" text="save &amp; add to shop" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="280.0" AnchorPane.rightAnchor="328.0" AnchorPane.topAnchor="430.0" />
    <Label alignment="CENTER" layoutX="238.0" prefHeight="49.0" prefWidth="374.0" text="select your willing features here" textFill="WHITE" AnchorPane.bottomAnchor="451.0" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="238.0" AnchorPane.topAnchor="0.0">

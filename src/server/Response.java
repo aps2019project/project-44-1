@@ -281,4 +281,5 @@ public class Response {
     public void setAuctionCard(String auctionCard) {
         this.auctionCard = auctionCard;
     }
+
 }

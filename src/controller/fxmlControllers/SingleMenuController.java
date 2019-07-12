@@ -2,7 +2,6 @@ package controller.fxmlControllers;
 
 import Main.Main;
 import client.RequestSender;
-import client.ResponseHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -44,11 +43,12 @@ public class SingleMenuController implements Initializable {
         back.setOnAction(actionEvent -> MainMenuController.loadPage("/view/fxmls/battleMenu.fxml"));
     }
 
-    private void startBattle(int state){
+    private void startBattle(int state) {
         Request request = new Request(Environment.BATTLE);
         request.setState(state);
         request.setRequestType(RequestType.SINGLE_PLAYER);
         RequestSender.getInstance().sendRequest(request);
+        loadScreen();
     }
 
     private void loadScreen() {

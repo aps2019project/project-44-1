@@ -1,6 +1,5 @@
 package server;
 
-import client.CardBuilder;
 import models.Account;
 import models.Placeable;
 import models.Shop;
@@ -24,34 +23,45 @@ public class AuctionCard extends Thread {
 
     @Override
     public void run() {
-        Response response = new Response(Environment.SHOP);
-        response.setResponseType(ResponseType.NEW_AUCTION_CARD_ADDED_TO_SHOP);
-        response.setAuctionCard(placeable.getName());
-        response.setAuctionCardId(this.cardId);
+        Response response = getResponse();
         Main.getResponseSenders().forEach(responseSender1 -> responseSender1.sendResponse(response));
         new java.util.Timer().schedule(
                 new java.util.TimerTask() {
                     @Override
                     public void run() {
-                        if (buyer==null){
+                        if (buyer == null) {
                             Shop.getInstance().sell(owner.getCollection().getCardIDInCollection(placeable.getName()), owner);
                         } else {
-                            buyer.getCollection().getCollectionCards().add(Shop.getInstance().getCard(placeable.getName()));
-                            response.setResponseType(ResponseType.SUCCESSFUL_BUY_AUCTION);
-                            response.setCardToBuy(Shop.getInstance().getCard(placeable.getName()));
-                            response.setMoney(Integer.toString(buyer.getMoney()));
-                            buyerResPonseSender.sendResponse(response);
-
+                            buy(response);
                         }
-                        response.setResponseType(ResponseType.SUCCESSFUL_SELL_AUCTION);
-                        response.setCardToSell(placeable.getName());
-                        response.setMoney(Integer.toString(owner.getMoney()));
-                        responseSender.sendResponse(response);
+                        successful(response);
                     }
                 },
                 180000
         );
+    }
 
+    private void successful(Response response) {
+        response.setResponseType(ResponseType.SUCCESSFUL_SELL_AUCTION);
+        response.setCardToSell(placeable.getName());
+        response.setMoney(Integer.toString(owner.getMoney()));
+        responseSender.sendResponse(response);
+    }
+
+    private void buy(Response response) {
+        buyer.getCollection().getCollectionCards().add(Shop.getInstance().getCard(placeable.getName()));
+        response.setResponseType(ResponseType.SUCCESSFUL_BUY_AUCTION);
+        response.setCardToBuy(Shop.getInstance().getCard(placeable.getName()));
+        response.setMoney(Integer.toString(buyer.getMoney()));
+        buyerResPonseSender.sendResponse(response);
+    }
+
+    private Response getResponse() {
+        Response response = new Response(Environment.SHOP);
+        response.setResponseType(ResponseType.NEW_AUCTION_CARD_ADDED_TO_SHOP);
+        response.setAuctionCard(placeable.getName());
+        response.setAuctionCardId(this.cardId);
+        return response;
     }
 
     public Placeable getPlaceable() {
@@ -109,4 +119,5 @@ public class AuctionCard extends Thread {
     public void setBuyerResPonseSender(ResponseSender buyerResPonseSender) {
         this.buyerResPonseSender = buyerResPonseSender;
     }
+
 }

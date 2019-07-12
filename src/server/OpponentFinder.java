@@ -54,11 +54,9 @@ public class OpponentFinder extends Thread {
         this.startBattle(first, second, battleMode, 0);
     }
 
-
-
     private void startBattle(Account first, Account second, BattleMode battleMode, int flagNumber) {
         //todo set prize
-        Battle battle = new Battle(BattleKind.MULTI_PLAYER,battleMode,first,second,flagNumber);
+        Battle battle = new Battle(BattleKind.MULTI_PLAYER, battleMode, first, second, flagNumber);
         responseSenders.get(first).setBattle(battle);
         responseSenders.get(second).setBattle(battle);
         Response response = new Response(Environment.BATTLE);
@@ -105,7 +103,7 @@ public class OpponentFinder extends Thread {
         responseSenders.remove(account);
     }
 
-    public static synchronized void deleteLogOutAccount(Account account){
+    public static synchronized void deleteLogOutAccount(Account account) {
         waitingAccountsForDeathMatch.remove(account);
         waitingAccountsForSaveFlag.remove(account);
         for (int i = 1; i < 10; i++) {

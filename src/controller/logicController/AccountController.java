@@ -6,9 +6,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.stream.JsonReader;
 import javafx.scene.Node;
-import models.*;
+import models.Account;
+import models.ArtificialIntelligence;
+import models.Battle;
 import models.Enums.BattleKind;
 import models.Enums.BattleMode;
+import models.Game;
 import server.Environment;
 import server.Request;
 import view.fxmls.wrapperClasses.Serial;
@@ -18,7 +21,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class AccountController{
+public class AccountController {
     private static AccountController accountController = new AccountController();
     private Account account;
     private Account opponent = null;
@@ -27,46 +30,45 @@ public class AccountController{
     private static final int MULTI2 = 22;
     private boolean regreted = false;
 
-//    private AccountController() {
-//    }
-
     public static AccountController getInstance() {
         return accountController;
     }
 
     //------------------------------------------------------------Battle
     public void modeHandler() {
+        BattleController battleController = new BattleController();
         switch (state) {
             case MULTI1:
-                BattleController.getInstance().setBattle(new Battle(BattleKind.MULTI_PLAYER,
+                battleController.setBattle(new Battle(BattleKind.MULTI_PLAYER,
                         BattleMode.DEATH_MATCH, account, opponent, 0));
                 break;
             case MULTI2:
-                BattleController.getInstance().setBattle(new Battle(BattleKind.MULTI_PLAYER,
+                battleController.setBattle(new Battle(BattleKind.MULTI_PLAYER,
                         BattleMode.CAPTURE_FLAG_1, account, opponent, 1));
                 break;
             default:
-                BattleController.getInstance().setBattle(new Battle(BattleKind.MULTI_PLAYER,
+                battleController.setBattle(new Battle(BattleKind.MULTI_PLAYER,
                         BattleMode.CAPTURE_FLAG_2, account, opponent, state - MULTI1));
         }
     }
 
-    public void storyGame() {// TODO: 7/10/2019 edit here
+    public void storyGame() {
+        BattleController battleController = new BattleController();
         int level = state;
         ArtificialIntelligence artificialIntelligence = new ArtificialIntelligence();
         Account ai_player = artificialIntelligence.getAccount(level);
         RequestType type = artificialIntelligence.getType(level);
         switch (type) {
             case CAPTURE_FLAG1:
-                BattleController.getInstance().setBattle(new Battle(BattleKind.SINGLE_PLAYER,
+                battleController.setBattle(new Battle(BattleKind.SINGLE_PLAYER,
                         BattleMode.CAPTURE_FLAG_1, account, ai_player, 1, 1000));
                 break;
             case DEATH_MATCH:
-                BattleController.getInstance().setBattle(new Battle(BattleKind.SINGLE_PLAYER,
+                battleController.setBattle(new Battle(BattleKind.SINGLE_PLAYER,
                         BattleMode.DEATH_MATCH, account, ai_player, 0, 500));
                 break;
             case CAPTURE_FLAG2:
-                BattleController.getInstance().setBattle(new Battle(BattleKind.SINGLE_PLAYER,
+                battleController.setBattle(new Battle(BattleKind.SINGLE_PLAYER,
                         BattleMode.CAPTURE_FLAG_2, account, ai_player, 5, 500));     //must "ASK"
         }
     }

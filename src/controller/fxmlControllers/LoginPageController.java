@@ -27,7 +27,6 @@ public class LoginPageController implements Initializable {
     public Button leaderboard;
     private static final int DISAPPEARING_LABEL_DELAY = 1000;
 
-
     /**
      * incredibly runs twice!!!
      */
@@ -73,6 +72,5 @@ public class LoginPageController implements Initializable {
         request.setRequestType(RequestType.SHOW_LEADER_BOARD);
         RequestSender.getInstance().sendRequest(request);
     }
-
 
 }
