@@ -34,24 +34,26 @@ public class Main extends Application {
 
     private static void connectToServer() {
         try {
-            String ip;
-            int port;
             FileReader reader = new FileReader("src/client/config");
             BufferedReader bufferedReader = new BufferedReader(reader);
-            ip = bufferedReader.readLine().split(":")[1];
-            port = Integer.parseInt(bufferedReader.readLine().split(":")[1]);
+            String ip = bufferedReader.readLine().split(":")[1];
+            int port = Integer.parseInt(bufferedReader.readLine().split(":")[1]);
             bufferedReader.close();
             reader.close();
-            Socket socket = new Socket(ip, port);
-            ResponseHandler responseHandler = ResponseHandler.getInstance();
-            ResponseHandler.getInstance().setJsonStreamParser(socket.getInputStream());
-            clientResponseHandler = responseHandler;
-            RequestSender.getInstance().setBufferedWriter(socket.getOutputStream());
-            responseHandler.setDaemon(true);
-            responseHandler.start();
+            handleResponseStart(ip, port);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void handleResponseStart(String ip, int port) throws IOException {
+        Socket socket = new Socket(ip, port);
+        ResponseHandler responseHandler = ResponseHandler.getInstance();
+        ResponseHandler.getInstance().setJsonStreamParser(socket.getInputStream());
+        clientResponseHandler = responseHandler;
+        RequestSender.getInstance().setBufferedWriter(socket.getOutputStream());
+        responseHandler.setDaemon(true);
+        responseHandler.start();
     }
 
     @Override

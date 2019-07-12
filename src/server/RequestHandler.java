@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Map;
 
 public class RequestHandler extends Thread {
@@ -29,7 +27,7 @@ public class RequestHandler extends Thread {
         try {
             currentSocket = socket;
             parser = new JsonStreamParser(new BufferedReader(new InputStreamReader(socket.getInputStream())));
-            responseSender = new ResponseSender(socket.getOutputStream(),this.gson);
+            responseSender = new ResponseSender(socket.getOutputStream(), this.gson);
             Main.addToResponseSenders(responseSender);
         } catch (IOException e) {
             e.printStackTrace();
@@ -102,7 +100,7 @@ public class RequestHandler extends Thread {
             e.printStackTrace();
         } finally {
             if (request.getOuthToken() != null)
-                Main.removeFromOnlineAccounts(request.getOuthToken(),responseSender);
+                Main.removeFromOnlineAccounts(request.getOuthToken(), responseSender);
             Main.getSockets().remove(currentSocket);
 
         }
@@ -147,9 +145,6 @@ public class RequestHandler extends Thread {
     private void handleBattleRequest(Request request) {
         AccountController accountController = new AccountController();
         switch (request.getRequestType()) {
-//            case MULTI_PLAYER:
-//                multiRequest(request);
-//                break;
             case SINGLE_PLAYER:
                 accountController.setState(request.getState());
                 accountController.setAccount(Main.getOnlineAccounts().get(request.getOuthToken()));
@@ -165,7 +160,7 @@ public class RequestHandler extends Thread {
             case MOVE_CARD:
                 if (battle.getCurrentPlayer().getName().equals(Main.getOnlineAccounts().get(request.getOuthToken()).getUsername())) {
                     battle.getCurrentPlayer().setSelectedCard(battle.getMap().getCells()[request.getStartRow()][request.getStartColumn()].getCard());
-                    battle.getCurrentPlayer().move(request.getEndRow(),request.getEndColumn());
+                    battle.getCurrentPlayer().move(request.getEndRow(), request.getEndColumn());
                     Response response = new Response(Environment.BATTLE);
                     response.setResponseType(ResponseType.MOVE_CARD);
                     response.setMap(battle.getMap());
@@ -173,39 +168,6 @@ public class RequestHandler extends Thread {
                 }
 
         }
-    }
-
-    private void multiRequest(Request request) {
-        LinkedList<Request> requestedForBattle = Game.getInstance().getRequestedForBattle();
-        if (startBattle(requestedForBattle, request)) {
-            Response response = new Response(Environment.BATTLE);
-            response.setResponseType(ResponseType.ENTER_MAP);
-            responseSender.sendResponse(response);
-        }
-    }
-
-    private boolean startBattle(LinkedList<Request> requestLinkedList, Request request) {
-        if (requestLinkedList.size() == 0) {
-            requestLinkedList.add(request);
-            return false;
-        }
-        Iterator<Request> iterator = requestLinkedList.iterator();
-        while (iterator.hasNext()) {
-            Request next = iterator.next();
-//            if (next.getState() == request.getState()) {
-//                AccountController instance = AccountController.getInstance();
-//                if (instance.isRegreted())
-//                    return false;
-//                instance.setState(request.getState());
-//                instance.setOpponent(Game.getInstance().getOnlineAccounts().get(next.getOuthToken()));
-//                iterator.remove();
-//                instance. modeHandler();
-//                return true;
-//            }
-        }
-        if (!requestLinkedList.offer(request))
-            throw new RuntimeException("could't offer to requested for battle linked list");
-        return false;
     }
 
     private void handleShopRequest(Request request) {
@@ -223,7 +185,6 @@ public class RequestHandler extends Thread {
                     response.setResponseType(ResponseType.UNSUCCESSFUL_BUY);
                 else
                     response.setResponseType(ResponseType.BUY_CARD);
-
                 response.setMoney(Integer.toString(account.getMoney()));
                 response.setCardToBuy(shop.getCard(cardName));
                 break;
@@ -235,7 +196,7 @@ public class RequestHandler extends Thread {
 
                 break;
             case AUCTION_CARD:
-                AuctionCard card = new AuctionCard(request.getAuctionCard(),Main.getOnlineAccounts().get(request.getOuthToken()),responseSender);
+                AuctionCard card = new AuctionCard(request.getAuctionCard(), Main.getOnlineAccounts().get(request.getOuthToken()), responseSender);
                 card.start();
                 shop.addToAuctionCardHashMap(card);
                 response.setResponseType(ResponseType.REMOVE_AUCTION_CARD_FROM_COLLECTION);
@@ -308,7 +269,7 @@ public class RequestHandler extends Thread {
     private void logout(Request request) {
         Response response = new Response(Environment.MAIN_MENU);
         response.setResponseType(ResponseType.LOG_OUT);
-        Main.removeFromOnlineAccounts(request.getOuthToken(),responseSender);
+        Main.removeFromOnlineAccounts(request.getOuthToken(), responseSender);
         responseSender.sendResponse(response);
     }
 
@@ -345,7 +306,7 @@ public class RequestHandler extends Thread {
     }
 
     private void handleMapRequest(Request request) {
-        switch (request.getRequestType()){
+        switch (request.getRequestType()) {
             case CHAT:
                 chat(request);
                 break;
@@ -357,7 +318,7 @@ public class RequestHandler extends Thread {
 
     }
 
-    private void cheat(String s){
+    private void cheat(String s) {
 
     }
 

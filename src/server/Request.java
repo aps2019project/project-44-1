@@ -267,7 +267,6 @@ public class Request {
         this.cheat = cheat;
     }
 
-
     public int getSuggestedPrice() {
         return suggestedPrice;
     }
@@ -291,4 +290,5 @@ public class Request {
     public void setAuctionCard(Placeable auctionCard) {
         this.auctionCard = auctionCard;
     }
+
 }

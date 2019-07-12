@@ -1,14 +1,12 @@
 package server;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.Account;
 import models.Game;
-import models.Placeable;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,7 +21,7 @@ public class Main extends Application {
     private static ArrayList<Socket> sockets = new ArrayList<>();
     private static HashMap<String, Account> onlineAccounts = new HashMap<>();
     private static ArrayList<ResponseSender> responseSenders = new ArrayList<>();
-    private static  ShopInServerController controller;
+    private static ShopInServerController controller;
 
     public static void main(String[] args) throws IOException {
         int port;
@@ -37,9 +35,6 @@ public class Main extends Application {
         System.out.println("server is running...");
         OpponentFinder opponentFinder = new OpponentFinder();
         opponentFinder.start();
-//        launch(args);
-//        Thread thread = new Thread(() -> controller.updateTable());
-//        thread.start();
         while (true) {
             socket = server.accept();
             sockets.add(socket);
@@ -61,7 +56,7 @@ public class Main extends Application {
         Game.getInstance().addToOnlineAccounts(account);
     }
 
-    public static void removeFromOnlineAccounts(String outhToken,ResponseSender responseSender) {
+    public static void removeFromOnlineAccounts(String outhToken, ResponseSender responseSender) {
         Game.getInstance().removeFromOnlineAccounts(onlineAccounts.get(outhToken));
         responseSenders.remove(responseSender);
         onlineAccounts.remove(outhToken);
@@ -88,4 +83,5 @@ public class Main extends Application {
     public static void removeFromResponseSenders(ResponseSender responseSender) {
         Main.responseSenders.remove(responseSender);
     }
+
 }

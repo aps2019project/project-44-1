@@ -4,7 +4,6 @@ import Main.Main;
 import client.CardBuilder;
 import client.RequestSender;
 import client.ResponseHandler;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -15,7 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import models.*;
 import server.Environment;
 import server.Request;
@@ -43,7 +43,7 @@ public class ShopFxmlController implements Initializable {
 
     public void selfDistructCardContainer(int id) {
         CardContainer cardContainer = null;
-        for (CardContainer cardContainer1 : auctionCards){
+        for (CardContainer cardContainer1 : auctionCards) {
             if (cardContainer1.getId() == id) {
                 cardContainer = cardContainer1;
                 break;
@@ -51,8 +51,6 @@ public class ShopFxmlController implements Initializable {
         }
         auctionPane.getChildren().remove(cardContainer);
         auctionCards.remove(cardContainer);
-
-
     }
 
     @Override
@@ -178,11 +176,12 @@ public class ShopFxmlController implements Initializable {
             e.printStackTrace();
         }
     }
-    public void addToAuctionCards(Placeable placeable,int id){
+
+    public void addToAuctionCards(Placeable placeable, int id) {
 
     }
 
-    public void addToAuctionCards(String  name,int id){
+    public void addToAuctionCards(String name, int id) {
 
     }
 
@@ -191,12 +190,11 @@ public class ShopFxmlController implements Initializable {
         if (card == null)
             return;
         if (card instanceof Card)
-            cardContainer = new CardContainer((Card) card );
+            cardContainer = new CardContainer((Card) card);
         else
             cardContainer = new CardContainer(card);
         cardsFlowPane.getChildren().add(cardContainer.getAnchorPane());
         cards.add(cardContainer);
     }
-
 
 }

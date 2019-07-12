@@ -9,50 +9,50 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0"
-            prefWidth="768.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.fxmlControllers.ShopFxmlController">
-    <TitledPane animated="false" layoutX="5.0" layoutY="67.0" prefHeight="406.0" prefWidth="352.0" text="shop">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.fxmlControllers.ShopFxmlController">
+    <TitledPane animated="false" layoutX="5.0" layoutY="80.0" prefHeight="393.0" prefWidth="352.0" text="shop">
         <ScrollPane fx:id="shop" prefHeight="378.0" prefWidth="296.0">
-            <FlowPane fx:id="pane" alignment="CENTER" prefHeight="375.0" prefWidth="345.0"/>
+            <FlowPane fx:id="pane" alignment="CENTER" prefHeight="362.0" prefWidth="346.0" />
         </ScrollPane>
     </TitledPane>
-    <Button id="backButton" fx:id="back" layoutX="-2.0" layoutY="-5.0" mnemonicParsing="false" prefHeight="74.0"
-            prefWidth="81.0" stylesheets="@../styleSheets/collection.css"/>
-    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="203.0" layoutY="15.0" prefHeight="35.0" prefWidth="318.0"
-           text="click on cards that you want to sell or buy" textAlignment="CENTER" textFill="#42cd65">
+    <Button id="backButton" fx:id="back" layoutX="-2.0" layoutY="-5.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="81.0" stylesheets="@../styleSheets/collection.css" />
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="203.0" layoutY="15.0" prefHeight="35.0" prefWidth="318.0" text="click on cards that you want to sell or buy" textAlignment="CENTER" textFill="#42cd65">
         <font>
-            <Font name="System Bold Italic" size="16.0"/>
+            <Font name="System Bold Italic" size="16.0" />
         </font>
     </Label>
-    <Label fx:id="money" alignment="CENTER" layoutX="682.0" layoutY="407.0" prefHeight="58.0" prefWidth="71.0"
-           text="15000" textAlignment="CENTER" textFill="#f74300">
+    <Label fx:id="money" alignment="CENTER" layoutX="682.0" layoutY="407.0" prefHeight="58.0" prefWidth="71.0" text="15000" textAlignment="CENTER" textFill="#f74300">
         <font>
-            <Font name="System Bold" size="15.0"/>
+            <Font name="System Bold" size="15.0" />
         </font>
     </Label>
-    <TitledPane layoutX="365.0" layoutY="67.0" prefHeight="406.0" prefWidth="318.0" text="collection">
+    <TitledPane layoutX="365.0" layoutY="79.0" prefHeight="394.0" prefWidth="318.0" text="collection">
         <ScrollPane prefHeight="407.0" prefWidth="317.0">
-            <FlowPane fx:id="collectionPane" prefHeight="374.0" prefWidth="314.0"/>
+            <FlowPane fx:id="collectionPane" prefHeight="361.0" prefWidth="314.0" />
         </ScrollPane>
     </TitledPane>
-    <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" layoutX="160.0" layoutY="159.0" prefHeight="219.0"
-           prefWidth="414.0" style="-fx-background-color: orange;" text="hghg" textAlignment="CENTER" textFill="blue"
-           visible="false">
+    <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" layoutX="160.0" layoutY="159.0" prefHeight="219.0" prefWidth="414.0" style="-fx-background-color: orange;" text="hghg" textAlignment="CENTER" textFill="blue" visible="false">
         <font>
-            <Font name="System Bold" size="20.0"/>
+            <Font name="System Bold" size="20.0" />
         </font>
     </Label>
-    <Label alignment="CENTER" layoutX="683.0" layoutY="378.0" prefHeight="58.0" prefWidth="87.0" text="your money"
-           textAlignment="CENTER" textFill="#df0715">
+    <Label alignment="CENTER" layoutX="683.0" layoutY="378.0" prefHeight="58.0" prefWidth="87.0" text="your money" textAlignment="CENTER" textFill="#df0715">
         <font>
-            <Font name="System Bold" size="14.0"/>
+            <Font name="System Bold" size="14.0" />
         </font>
     </Label>
-    <TextField fx:id="search" layoutX="609.0" layoutY="20.0" promptText="search shop" AnchorPane.bottomAnchor="435.0"
-               AnchorPane.leftAnchor="609.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="20.0">
+    <TextField fx:id="search" layoutX="609.0" layoutY="20.0" promptText="search shop" AnchorPane.bottomAnchor="435.0" AnchorPane.leftAnchor="609.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="20.0">
         <font>
-            <Font name="System Bold" size="16.0"/>
+            <Font name="System Bold" size="16.0" />
         </font>
     </TextField>
+   <TitledPane animated="false" expanded="false" layoutX="191.0" layoutY="45.0" prefHeight="282.0" prefWidth="352.0" text="auction">
+      <content>
+         <ScrollPane fx:id="shop1" prefHeight="378.0" prefWidth="296.0">
+            <content>
+               <FlowPane fx:id="auctionPane" alignment="CENTER" prefHeight="255.0" prefWidth="346.0" />
+            </content>
+         </ScrollPane>
+      </content>
+   </TitledPane>
 </AnchorPane>
