@@ -2,7 +2,6 @@ package controller.fxmlControllers;
 
 import Main.Main;
 import client.ResponseHandler;
-import controller.logicController.AccountController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +11,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Account;
-import models.Game;
 import view.fxmls.wrapperClasses.History;
 
 import java.io.IOException;
@@ -56,4 +54,5 @@ public class MatchHistoriesController implements Initializable {
             e.printStackTrace();
         }
     }
+
 }
