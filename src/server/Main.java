@@ -26,7 +26,6 @@ public class Main extends Application {
     private static  ShopInServerController controller;
 
     public static void main(String[] args) throws IOException {
-
         int port;
         FileReader reader = new FileReader("src/server/config");
         BufferedReader bufferedReader = new BufferedReader(reader);

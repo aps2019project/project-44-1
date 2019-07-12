@@ -153,7 +153,10 @@ public class MapController implements Initializable {
     }
 
     private void applyCheat(String s) {
-
+        Request request = new Request(Environment.MAP);
+        request.setRequestType(RequestType.CHEAT);
+        request.setCheat(s);
+        RequestSender.getInstance().sendRequest(request);
     }
 
     private void chat() {

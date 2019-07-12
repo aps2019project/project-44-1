@@ -34,6 +34,7 @@ public class Request {
     private int startRow;
     private int endColumn;
     private int endRow;
+    private String cheat;
     private int suggestedPrice;
     private int auctionCardId;
     private Placeable auctionCard;
@@ -257,6 +258,15 @@ public class Request {
         this.endColumn = endColumn;
         this.endRow = endRow;
     }
+
+    public String getCheat() {
+        return cheat;
+    }
+
+    public void setCheat(String cheat) {
+        this.cheat = cheat;
+    }
+
 
     public int getSuggestedPrice() {
         return suggestedPrice;

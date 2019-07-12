@@ -345,6 +345,23 @@ public class RequestHandler extends Thread {
     }
 
     private void handleMapRequest(Request request) {
+        switch (request.getRequestType()){
+            case CHAT:
+                chat(request);
+                break;
+            case CHEAT:
+                cheat(request.getCheat());
+                break;
+        }
+
+
+    }
+
+    private void cheat(String s){
+
+    }
+
+    private void chat(Request request) {
         String s = request.getOuthToken();
         for (Map.Entry<String, Account> entry : Game.getInstance().getOnlineAccounts().entrySet()) {
             if (entry.getKey().equals(s))
@@ -355,7 +372,6 @@ public class RequestHandler extends Thread {
             response.setSender(entry.getValue().getUsername());
             RequestSender.getInstance().sendRequest(request);
         }
-
     }
 
     public Battle getBattle() {
