@@ -1,5 +1,7 @@
 package controller.logicController;
 
+import javafx.scene.chart.PieChart;
+import models.Account;
 import models.Game;
 import server.*;
 
@@ -18,6 +20,7 @@ public class GameController {
     public void signIn(String username, String password, ResponseSender responseSender) {
         Game game = Game.getInstance();
         Response response = new Response(Environment.LOGIN_PAGE);
+        Account account = (Account) Database.getValue("Accounts",username,Account.class);
         if (!game.isUsedUsername(username))
             response.setResponseType(ResponseType.INVALID_USERNAME);
         else {

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import server.Database;
 import server.Request;
 
 import java.io.FileReader;
@@ -39,7 +40,10 @@ public class Game {
     }
 
     public void createAccount(String username, String password) {
-        accounts.add(new Account(username, password));
+        Account account = new Account(username, password);
+        accounts.add(account);
+        Database.putElement("Accounts", username, account);
+
     }
 
     public ArrayList<Account> getSortedAccounts() {

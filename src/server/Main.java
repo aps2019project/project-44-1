@@ -95,6 +95,8 @@ public class Main extends Application {
 
         });
         thread.start();
+        Database.makeNewDataBase("Accounts");
+        Database.makeNewDataBase("OnlineAccounts");
 
         Thread updater = new Thread(() -> Platform.runLater(() -> controller.updateTable()));
         updater.start();
