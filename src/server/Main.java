@@ -1,6 +1,7 @@
 package server;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,18 +25,9 @@ public class Main extends Application {
     private static ShopInServerController controller;
 
     public static void main(String[] args) throws IOException {
-        int port = getPort();
-        ServerSocket server = new ServerSocket(port);
-        Socket socket;
-        System.out.println("server is running...");
-        OpponentFinder opponentFinder = new OpponentFinder();
-        opponentFinder.start();
-        while (true) {
-            socket = server.accept();
-            sockets.add(socket);
-            System.out.println("new client connected\nonline clients: " + sockets.size());
-            new ClientHandler(socket);
-        }
+
+        launch(args);
+
     }
 
     private static int getPort() throws IOException {
@@ -72,7 +64,40 @@ public class Main extends Application {
         Parent root = fxmlLoader.load();
         controller = fxmlLoader.getController();
         primaryStage.setScene(new Scene(root));
+        Thread thread = new Thread(() -> {
+            int port = 0;
+            try {
+                port = getPort();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ServerSocket server = null;
+            try {
+                server = new ServerSocket(port);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Socket socket;
+            System.out.println("server is running...");
+            OpponentFinder opponentFinder = new OpponentFinder();
+            opponentFinder.start();
+            while (true) {
+                try {
+                    socket = server.accept();
+                    sockets.add(socket);
+                    System.out.println("new client connected\nonline clients: " + sockets.size());
+                    new ClientHandler(socket);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
+            }
+
+        });
+        thread.start();
+
+        Thread updater = new Thread(() -> Platform.runLater(() -> controller.updateTable()));
+        updater.start();
         primaryStage.show();
     }
 
