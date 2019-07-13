@@ -48,7 +48,8 @@ public class MapController implements Initializable {
     public VBox chatBox;
     public TextField message;
     private boolean playing = true;
-    private BattleController battleController = BattleController.getInstance();
+//    private BattleController battleController = BattleController.getInstance();
+    private BattleController battleController;
     private static Player player;
     private static Map logicMap;
 
