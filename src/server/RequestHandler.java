@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class RequestHandler extends Thread {
@@ -192,16 +194,20 @@ public class RequestHandler extends Thread {
                 sell(request, response, shop, account);
                 break;
             case SUGGEST_NEW_COST:
-
-
+                AuctionCard auctionCard = Shop.getInstance().getAuctionCardHashMap().get(request.getAuctionCardId());
+                auctionCard.updatePrice(request.getSuggestedPrice(),Main.getOnlineAccounts().get(request.getOuthToken()),responseSender);
                 break;
             case AUCTION_CARD:
-                AuctionCard card = new AuctionCard(request.getAuctionCard(), Main.getOnlineAccounts().get(request.getOuthToken()), responseSender);
+                String auctionCardName = request.getAuctionCard().split("\n")[0];
+                AuctionCard card = new AuctionCard(Shop.getInstance().getCard(auctionCardName),Main.getOnlineAccounts().get(request.getOuthToken()),responseSender);
                 card.start();
+                Response response1 = new Response(Environment.SHOP);
                 shop.addToAuctionCardHashMap(card);
-                response.setResponseType(ResponseType.REMOVE_AUCTION_CARD_FROM_COLLECTION);
-                response.setPaneToRemoveID(request.getPaneToSellID());
-                response.setCardToSell(request.getAuctionCard().getName());
+                response1.setResponseType(ResponseType.REMOVE_AUCTION_CARD_FROM_COLLECTION);
+                response1.setPaneToRemoveID(request.getPaneToSellID());
+                response1.setAuctionCard(auctionCardName);
+                responseSender.sendResponse(response1);
+                return;
 
         }
         responseSender.sendResponse(response);

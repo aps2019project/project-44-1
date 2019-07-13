@@ -31,6 +31,7 @@ public class CardContainer {
     private static CardBuilder builder = new CardBuilder();
     private int id;
     private static ShopFxmlController shopFxmlController;
+    private int remainedTime;
 
     {
         anchorPane.setStyle("-fx-background-image: url('/view/images/neutral_unit@2x.png'),url('/view/images/icon_mana.png');" +
@@ -130,37 +131,37 @@ public class CardContainer {
 
     }
 
-    public CardContainer(Placeable placeable, int id) {
+    public CardContainer(Placeable placeable, int id, int remainedTime) {
         this(placeable);
         this.id = id;
-        setForAuction(placeable);
+        setForAuction(placeable, remainedTime);
     }
 
-    public CardContainer(Card card, int id) {
+    public CardContainer(Card card, int id, int remainedTime) {
         this(card);
         this.id = id;
-        setForAuction(card);
+        setForAuction(card, remainedTime);
     }
 
 
-    private void setForAuction(Placeable placeable) {
+    private void setForAuction(Placeable placeable, int remainedTime) {
+        this.remainedTime = remainedTime;
         anchorPane.getChildren().remove(checkBox);
-        anchorPane.setOnMouseClicked(event -> {
-            if (event.isPrimaryButtonDown()) {
-                showDialogBox();
-            }
-        });
+        anchorPane.setOnMouseClicked(event -> showDialogBox());
         buyer = new Label("Buyer : ");
+        buyer.setStyle("-fx-text-fill: black;-fx-font-size: 12px");
         buyer.setPrefSize(267, 29);
         buyer.setLayoutX(21);
         buyer.setLayoutY(385);
         cost = new Label("Cost : " + placeable.getCost());
+        cost.setStyle("-fx-text-fill: black;-fx-font-size: 12px");
         cost.setPrefSize(267, 29);
         cost.setLayoutX(21);
         cost.setLayoutY(411);
-        Label timerLabel = new Label("03:00");
-        timerLabel.relocate(100, 300);
-        anchorPane.getChildren().add(timerLabel);
+        Label timerLabel = new Label("0" + remainedTime / 60 + ":" + remainedTime % 60);
+        timerLabel.relocate(20, 300);
+        timerLabel.setStyle("-fx-text-fill: red");
+        anchorPane.getChildren().addAll(buyer, cost, timerLabel);
         AnimationTimer animationTimer = new AnimationTimer() {
             private long lastTime = 0;
             private double time = 0;
@@ -174,13 +175,15 @@ public class CardContainer {
                 if (now > lastTime + second / 10) {
                     lastTime = now;
                     time += 1;
-                    timerLabel.setText("0" + ((300 - (time / 10)) / 60) + ":" + ((300 - (time / 10)) % 60));
+                    timerLabel.setText("0" + (int) (remainedTime - time / 10) / 60 + ":" + (int) (remainedTime - time / 10) % 60);
                 }
-                if (time>=3000)
+                if (remainedTime - time / 10 < 0) {
                     shopFxmlController.selfDistructCardContainer(id);
+                }
             }
         };
         animationTimer.start();
+
     }
 
     private void showDialogBox() {

@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.Button?>
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="440.0" prefWidth="297.0" stylesheets="@../styleSheets/cardInShop.css"
             xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
@@ -34,4 +35,6 @@
     </Label>
     <ImageView fx:id="imageView" fitHeight="191.0" fitWidth="235.0" layoutX="58.0" layoutY="10.0" pickOnBounds="true"
                preserveRatio="true"/>
+    <Button fx:id="auctionButton" layoutX="26.0" layoutY="386.0" mnemonicParsing="false" prefHeight="33.0"
+            prefWidth="69.0" text="Auction" visible="false" style="-fx-text-fill: black;-fx-font-size: 12px"/>
 </AnchorPane>

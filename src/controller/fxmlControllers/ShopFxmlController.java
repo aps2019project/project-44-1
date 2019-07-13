@@ -14,8 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.*;
 import models.*;
 import server.Environment;
 import server.Request;
@@ -39,7 +38,7 @@ public class ShopFxmlController implements Initializable {
     public FlowPane auctionPane;
     private static Account account;
     private CardBuilder builder = new CardBuilder();
-    private ArrayList<CardContainer> auctionCards = new ArrayList<>();
+    private static ArrayList<CardContainer> auctionCards = new ArrayList<>();
 
     public void selfDistructCardContainer(int id) {
         CardContainer cardContainer = null;
@@ -62,6 +61,11 @@ public class ShopFxmlController implements Initializable {
         }
         for (Placeable c : account.getCollection().getCollectionCards()) {
             fillPanes(builder.getCard(c.getName()), collectionPane, false);
+        }
+        if (ShopFxmlController.auctionCards != null) {
+            for (CardContainer cardContainer : ShopFxmlController.auctionCards) {
+                auctionPane.getChildren().add(cardContainer.getAnchorPane());
+            }
         }
 
         search.setOnKeyPressed(actionEvent -> {
@@ -90,6 +94,7 @@ public class ShopFxmlController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxmls/cardInShop.fxml"));
             loader.setController(inShopController);
             AnchorPane anchorPane = loader.load();
+            inShopController.auctionButton.setVisible(!buy);
             specifyImageAndText((Card) c, anchorPane, c instanceof Spell);
             flowPane.getChildren().add(anchorPane);
         } catch (Exception e) {
@@ -177,24 +182,36 @@ public class ShopFxmlController implements Initializable {
         }
     }
 
-    public void addToAuctionCards(Placeable placeable, int id) {
 
+    public void addToAuctionCards(String name, int id, int remainedTimeOfAuction) {
+        setCardContainer(builder.getCard(name), auctionPane, auctionCards, id, remainedTimeOfAuction);
     }
 
-    public void addToAuctionCards(String name, int id) {
-
-    }
-
-    private void setCardContainer(Placeable card, FlowPane cardsFlowPane, ArrayList<CardContainer> cards) {
+    private void setCardContainer(Placeable card, FlowPane cardsFlowPane, ArrayList<CardContainer> cards, int id, int remaindedTime) {
         CardContainer cardContainer;
         if (card == null)
             return;
         if (card instanceof Card)
-            cardContainer = new CardContainer((Card) card);
+            cardContainer = new CardContainer((Card) card, id, remaindedTime);
         else
-            cardContainer = new CardContainer(card);
+            cardContainer = new CardContainer(card, id, remaindedTime);
         cardsFlowPane.getChildren().add(cardContainer.getAnchorPane());
         cards.add(cardContainer);
     }
 
+    public ArrayList<CardContainer> getAuctionCards() {
+        return auctionCards;
+    }
+
+    public void setAuctionCards(ArrayList<CardContainer> auctionCards) {
+        this.auctionCards = auctionCards;
+    }
+
+    public CardContainer getAuctionCard(int id) {
+        for (CardContainer cardContainer : auctionCards) {
+            if (cardContainer.getId() == id)
+                return cardContainer;
+        }
+        return null;
+    }
 }

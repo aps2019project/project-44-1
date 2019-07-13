@@ -36,7 +36,9 @@ public class Response {
     private String secondPlayerName;
     private int suggestedPrice;
     private int auctionCardId;
+    private String  newBuyer;
     private String auctionCard;
+    private int remainedTimeOfAuction;
 
     public Response(Environment environment) {
         this.environment = environment;
@@ -280,5 +282,21 @@ public class Response {
 
     public void setAuctionCard(String auctionCard) {
         this.auctionCard = auctionCard;
+    }
+
+    public String getNewBuyer() {
+        return newBuyer;
+    }
+
+    public void setNewBuyer(String newBuyer) {
+        this.newBuyer = newBuyer;
+    }
+
+    public int getRemainedTimeOfAuction() {
+        return remainedTimeOfAuction;
+    }
+
+    public void setRemainedTimeOfAuction(int remainedTimeOfAuction) {
+        this.remainedTimeOfAuction = remainedTimeOfAuction;
     }
 }

@@ -129,7 +129,7 @@ public class Collection implements Comparable<Placeable> {
         return sortedDecks;
     }
 
-    void deleteCardFromCollection(int cardID) {
+    public void deleteCardFromCollection(int cardID) {
         Placeable card = getCard(cardID);
         cardHashMap.remove(cardID);
         deleteCardFromDeck(card);

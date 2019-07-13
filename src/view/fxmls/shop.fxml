@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.fxmlControllers.ShopFxmlController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.fxmlControllers.ShopFxmlController">
     <TitledPane animated="false" layoutX="5.0" layoutY="80.0" prefHeight="393.0" prefWidth="352.0" text="shop">
         <ScrollPane fx:id="shop" prefHeight="378.0" prefWidth="296.0">
             <FlowPane fx:id="pane" alignment="CENTER" prefHeight="362.0" prefWidth="346.0" />
@@ -46,7 +46,7 @@
             <Font name="System Bold" size="16.0" />
         </font>
     </TextField>
-   <TitledPane animated="false" expanded="false" layoutX="191.0" layoutY="45.0" prefHeight="282.0" prefWidth="352.0" text="auction">
+   <TitledPane animated="false" expanded="false" layoutX="690.0" layoutY="79.0" prefHeight="282.0" prefWidth="352.0" text="auction">
       <content>
          <ScrollPane fx:id="shop1" prefHeight="378.0" prefWidth="296.0">
             <content>

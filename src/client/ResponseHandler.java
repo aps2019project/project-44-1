@@ -53,14 +53,14 @@ public class ResponseHandler extends Thread {
         try {
             while (jsonStreamParser.hasNext()) {
                 this.response = gson.fromJson(jsonStreamParser.next(), Response.class);
-                new Thread(this::handleResponse).start();
+                new Thread(() -> handleResponse(response)).start();
             }
         } catch (JsonIOException ignored) {
 
         }
     }
 
-    private void handleResponse() {
+    private void handleResponse(Response response) {
         switch (response.getEnvironment()) {
             case LOGIN_PAGE:
                 handleLoginPageResponse();
@@ -72,7 +72,7 @@ public class ResponseHandler extends Thread {
                 handleBattleResponse();
                 break;
             case SHOP:
-                handleShopResponse();
+                handleShopResponse(response);
                 break;
             case LEADER_BOARD:
                 handleLeaderboardResponse();
@@ -281,7 +281,7 @@ public class ResponseHandler extends Thread {
     }
 
     //=============================================================SHOP
-    private void handleShopResponse() {
+    private void handleShopResponse(Response response) {
         switch (response.getResponseType()) {
             case BUY_CARD:
                 if (response.getShopErrorType().equals(ALL_CARDS_HAVE_BEEN_SOLD)) {
@@ -295,11 +295,11 @@ public class ResponseHandler extends Thread {
                 Platform.runLater(() -> shopFxmlController.shop.setVvalue(response.getvValue()));
                 break;
             case SUCCESSFUL_SELL:
-                Platform.runLater(this::sold);
+                Platform.runLater(() -> sold(response));
                 Platform.runLater(() -> shopFxmlController.money.setText(response.getMoney()));
                 break;
             case REMOVE_AUCTION_CARD_FROM_COLLECTION:
-                removeCardFromShopCollection();
+                Platform.runLater(() -> removeCardFromShopCollection(response));
                 break;
             case SUCCESSFUL_BUY_AUCTION:
                 Platform.runLater(this::bought);
@@ -308,6 +308,14 @@ public class ResponseHandler extends Thread {
             case SUCCESSFUL_SELL_AUCTION:
                 viewMessage("you sold\n" + response.getCardToSell());
                 break;
+            case UPDATE_ACCOUNT_MONEY:
+                Platform.runLater(() -> shopFxmlController.money.setText(response.getMoney()));
+                break;
+            case UPDATE_AUCTION_CARD_PRICE:
+                Platform.runLater(() -> shopFxmlController.getAuctionCard(response.getAuctionCardId()).updateAuctionCard(response.getSuggestedPrice(), response.getNewBuyer()));
+                break;
+            case NEW_AUCTION_CARD_ADDED_TO_SHOP:
+                Platform.runLater(() -> shopFxmlController.addToAuctionCards(response.getAuctionCard(), response.getAuctionCardId(),response.getRemainedTimeOfAuction()));
             default:
                 if (response.getShopErrorType() != null && !response.getShopErrorType().equals(NO_ERROR))
                     Platform.runLater(() -> viewMessage(response.getShopErrorType().getMessage()));
@@ -322,12 +330,12 @@ public class ResponseHandler extends Thread {
         shopFxmlController.money.setText(String.valueOf(response.getMoney()));
     }
 
-    private void sold() {
+    private void sold(Response response) {
         viewMessage("you sold\n" + response.getCardToSell());
-        removeCardFromShopCollection();
+        removeCardFromShopCollection(response);
     }
 
-    private void removeCardFromShopCollection() {
+    private void removeCardFromShopCollection(Response response) {
         for (Node n : shopFxmlController.collectionPane.getChildren()) {
             if (n.getId().equals(response.getPaneToRemoveID())) {
                 shopFxmlController.collectionPane.getChildren().remove(n);

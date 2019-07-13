@@ -53,7 +53,7 @@ public class Account implements Comparable<Account> {
         this.money += addedMoney;
     }
 
-    void decreaseMoney(int decreasedMoney) {
+    public void decreaseMoney(int decreasedMoney) {
         this.money -= decreasedMoney;
     }
 

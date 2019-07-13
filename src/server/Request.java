@@ -37,7 +37,7 @@ public class Request {
     private String cheat;
     private int suggestedPrice;
     private int auctionCardId;
-    private Placeable auctionCard;
+    private String auctionCard;
 
 
     public Request(Environment environment) {
@@ -283,11 +283,11 @@ public class Request {
         this.auctionCardId = auctionCardId;
     }
 
-    public Placeable getAuctionCard() {
+    public String getAuctionCard() {
         return auctionCard;
     }
 
-    public void setAuctionCard(Placeable auctionCard) {
+    public void setAuctionCard(String auctionCard) {
         this.auctionCard = auctionCard;
     }
 
