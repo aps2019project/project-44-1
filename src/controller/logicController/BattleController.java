@@ -9,16 +9,8 @@ import view.View;
 import static models.Enums.ErrorType.DEST_IS_UNAVAILABLE_FOR_ATTACK;
 
 public class BattleController {
-    private static BattleController battleController = new BattleController();
     private Battle battle;
     private View view = View.getInstance();
-
-    private BattleController() {
-    }
-
-    public static BattleController getInstance() {
-        return battleController;
-    }
 
     public void setBattle(Battle battle) {
         this.battle = battle;

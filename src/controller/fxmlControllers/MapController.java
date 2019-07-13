@@ -1,6 +1,5 @@
 package controller.fxmlControllers;
 
-import client.CardBuilder;
 import client.RequestSender;
 import controller.logicController.BattleController;
 import javafx.fxml.Initializable;
@@ -48,12 +47,10 @@ public class MapController implements Initializable {
     public Button send;
     public VBox chatBox;
     public TextField message;
-    public TitledPane gChat;
     private boolean playing = true;
     private BattleController battleController = BattleController.getInstance();
     private static Player player;
     private static Map logicMap;
-    private CardBuilder cardBuilder = new CardBuilder();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -105,10 +102,9 @@ public class MapController implements Initializable {
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-        System.out.println(Arrays.toString(player.getHand()));
-        System.out.println(player.getNextCardInHand());
-        setHandImages(player.getHand(),
-                player.getNextCardInHand());
+//        System.out.println(Arrays.toString(player.getHand()));
+//        System.out.println(player.getNextCardInHand());
+//        setHandImages(player.getHand(), player.getNextCardInHand());
     }
 
     private void setHandImages(Card[] cards, Card next) {
@@ -138,7 +134,7 @@ public class MapController implements Initializable {
                     BufferedImage Image = r.createScreenCapture(capture);
                     ImageIO.write(Image, "jpg", new File("src\\view\\record\\Shot"
                             + (index++) + ".jpg"));
-                    r.setAutoDelay(500);
+                    r.setAutoDelay(2000);
                 } catch (AWTException | IOException ex) {
                     ex.printStackTrace();
                 }
@@ -160,13 +156,14 @@ public class MapController implements Initializable {
     }
 
     private void chat() {
-        String text = message.getText();
-        if (text.equals(""))
-            return;
-        Request request = new Request(Environment.MAP);
-        request.setRequestType(RequestType.CHAT);
-        request.setMessage(text);
-        RequestSender.getInstance().sendRequest(request);
+        System.out.println("MapController.chat");
+//        String text = message.getText();
+//        if (text.equals(""))
+//            return;
+//        Request request = new Request(Environment.MAP);
+//        request.setRequestType(RequestType.CHAT);
+//        request.setMessage(text);
+//        RequestSender.getInstance().sendRequest(request);
     }
 
     public static Player getPlayer() {

@@ -24,12 +24,7 @@ public class Main extends Application {
     private static ShopInServerController controller;
 
     public static void main(String[] args) throws IOException {
-        int port;
-        FileReader reader = new FileReader("src/server/config");
-        BufferedReader bufferedReader = new BufferedReader(reader);
-        port = Integer.parseInt(bufferedReader.readLine().split(":")[1]);
-        bufferedReader.close();
-        reader.close();
+        int port = getPort();
         ServerSocket server = new ServerSocket(port);
         Socket socket;
         System.out.println("server is running...");
@@ -41,6 +36,15 @@ public class Main extends Application {
             System.out.println("new client connected\nonline clients: " + sockets.size());
             new ClientHandler(socket);
         }
+    }
+
+    private static int getPort() throws IOException {
+        FileReader reader = new FileReader("src/server/config");
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        int port = Integer.parseInt(bufferedReader.readLine().split(":")[1]);
+        bufferedReader.close();
+        reader.close();
+        return port;
     }
 
     public static ArrayList<Socket> getSockets() {
